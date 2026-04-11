@@ -1,0 +1,56 @@
+---
+layout: layout.njk
+title: Project Gallery
+permalink: /project/index.html
+---
+
+<div class="py-12">
+    <div class="flex justify-between items-end mb-10">
+        <div>
+            <h2 class="text-3xl font-bold text-white">Project Gallery</h2>
+            <p class="text-gray-400 mt-2">Kumpulan semua live wallpaper yang tersedia di repository.</p>
+        </div>
+        <span class="bg-blue-900/30 text-blue-400 px-4 py-1 rounded-full text-sm border border-blue-800">
+            {{ wallpapers | length }} Items
+        </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for wp in wallpapers %}
+        <div class="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500 transition-all duration-300 shadow-2xl">
+            <div class="relative overflow-hidden aspect-video bg-gray-800">
+                <img src="{{ wp.preview }}" 
+                     alt="{{ wp.name }}" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                     onerror="this.src='https://via.placeholder.com/400x225?text=Preview+Coming+Soon'">
+                
+                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <a href="{{ wp.url }}" target="_blank" class="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm">
+                        Source Code
+                    </a>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <h3 class="text-xl font-bold text-white capitalize">{{ wp.name }}</h3>
+                <p class="text-gray-500 text-sm mt-1">Folder: <code>/wallpapers/{{ wp.folderName }}</code></p>
+                
+                <div class="mt-5 pt-4 border-t border-gray-800 flex items-center justify-between">
+                    <span class="text-xs text-gray-400">Status: <span class="text-green-500">Ready</span></span>
+                    <a href="https://github.com/flessan/html-kde-live-wallpaper/archive/refs/heads/main.zip" class="text-blue-400 hover:text-white text-sm font-medium flex items-center gap-1">
+                        Download 
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-span-full py-20 text-center bg-gray-900/50 rounded-2xl border border-dashed border-gray-800">
+            <p class="text-gray-500 italic text-lg">Belum ada wallpaper yang terdeteksi di API GitHub.</p>
+            <p class="text-gray-600 text-sm mt-2">Pastikan folder 'wallpapers/' di root repo sudah ada isinya.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
