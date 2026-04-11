@@ -4,10 +4,1046 @@ title: Welcome to HTMLWallarper
 permalink: /landing-pages/index.html
 ---
 
-<header class="text-center py-16">
-    <h2 class="text-4xl font-extrabold text-white mb-4">Ubah Desktopmu Menjadi Hidup</h2>
-    <p class="text-gray-400 text-lg">Koleksi wallpaper HTML statis yang ringan untuk KDE Plasma.</p>
-    <div class="mt-8">
-        <a href="/project/" class="bg-blue-600 px-6 py-3 rounded-lg text-white font-bold hover:bg-blue-700">Lihat Galeri</a>
+<style>
+  /* ===== BASE OVERRIDES ===== */
+  body { background: #000; overflow-x: hidden; }
+
+  /* ===== SCROLL PROGRESS ===== */
+  #scrollProgress {
+    position: fixed; top: 0; left: 0; height: 2px; z-index: 10001;
+    background: linear-gradient(90deg, #2563EB, #22D3EE, #2563EB);
+    background-size: 200% 100%;
+    animation: progressShimmer 2s linear infinite;
+    width: 0%; transition: width 0.05s linear;
+  }
+  @keyframes progressShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+  /* ===== STICKY NAV ===== */
+  #stickyNav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+    padding: 0.75rem 1.5rem;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transform: translateY(-100%);
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.3s;
+  }
+  #stickyNav.visible { transform: translateY(0); }
+  #stickyNav.scrolled { background: rgba(0,0,0,0.85); }
+
+  /* ===== HERO ===== */
+  #heroCanvas {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  }
+  .hero-gradient-text {
+    background: linear-gradient(135deg, #60A5FA, #22D3EE, #A78BFA, #F472B6, #60A5FA);
+    background-size: 300% 300%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 6s ease infinite;
+  }
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ===== HERO LIVE PREVIEW WINDOWS ===== */
+  .preview-window {
+    position: absolute;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(37,99,235,0.08);
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease;
+  }
+  .preview-window .window-bar {
+    height: 28px; background: rgba(13,17,23,0.9); border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; padding: 0 10px; gap: 5px;
+  }
+  .preview-window .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .preview-window .dot.r { background: #EF4444; }
+  .preview-window .dot.y { background: #F59E0B; }
+  .preview-window .dot.g { background: #22C55E; }
+
+  /* ===== SECTION REVEAL ===== */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ===== FEATURE CARDS ===== */
+  .feature-card {
+    background: #0A0A0A; border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 1.25rem; padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(37,99,235,0.06), transparent 40%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-card:hover {
+    border-color: rgba(37,99,235,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(37,99,235,0.05);
+  }
+
+  /* ===== CAROUSEL ===== */
+  .carousel-track {
+    display: flex; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .carousel-slide { min-width: 100%; }
+  .carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15);
+    cursor: pointer; transition: all 0.3s;
+  }
+  .carousel-dot.active { background: #2563EB; width: 24px; border-radius: 4px; }
+
+  /* ===== INSTALL STEPS ===== */
+  .step-connector {
+    width: 2px; height: 3rem;
+    background: linear-gradient(to bottom, rgba(37,99,235,0.5), rgba(37,99,235,0.05));
+    margin: 0 auto;
+  }
+  .step-number {
+    width: 2.5rem; height: 2.5rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.875rem;
+    background: rgba(37,99,235,0.1); border: 2px solid rgba(37,99,235,0.3);
+    color: #60A5FA; transition: all 0.4s;
+  }
+  .step-item.active .step-number {
+    background: #2563EB; border-color: #2563EB; color: #fff;
+    box-shadow: 0 0 20px rgba(37,99,235,0.4);
+  }
+  .step-item.completed .step-number {
+    background: #22C55E; border-color: #22C55E; color: #fff;
+  }
+  .code-block {
+    background: #0d1117; border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 0.75rem; padding: 1rem 1.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8125rem; color: #9CA3AF;
+    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    transition: border-color 0.3s;
+  }
+  .code-block:hover { border-color: rgba(37,99,235,0.3); }
+  .code-block .cmd-key { color: #60A5FA; }
+  .code-block .cmd-flag { color: #22D3EE; }
+  .code-block .cmd-path { color: #F59E0B; }
+  .copy-btn {
+    padding: 0.375rem 0.75rem; border-radius: 0.5rem;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: #6B7280; font-size: 0.6875rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .copy-btn:hover { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.3); color: #60A5FA; }
+  .copy-btn.copied { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3); color: #22C55E; }
+
+  /* ===== COUNTER ===== */
+  .counter-value {
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 30px rgba(37,99,235,0.3);
+  }
+
+  /* ===== FAQ ===== */
+  .faq-item {
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 1rem; overflow: hidden;
+    background: #0A0A0A;
+    transition: border-color 0.3s;
+  }
+  .faq-item.open { border-color: rgba(37,99,235,0.2); }
+  .faq-question {
+    padding: 1.25rem 1.5rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    font-weight: 600; color: #D1D5DB; transition: color 0.3s;
+  }
+  .faq-item.open .faq-question { color: #fff; }
+  .faq-chevron {
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    color: #4B5563;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); color: #2563EB; }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), padding 0.3s;
+    padding: 0 1.5rem;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding: 0 1.5rem 1.25rem;
+  }
+
+  /* ===== CTA GLOW ===== */
+  .cta-glow {
+    position: relative;
+  }
+  .cta-glow::before {
+    content: ''; position: absolute; inset: -2px;
+    background: linear-gradient(135deg, #2563EB, #22D3EE, #A78BFA, #2563EB);
+    background-size: 300% 300%;
+    border-radius: inherit; z-index: -1; opacity: 0;
+    filter: blur(12px);
+    animation: gradientShift 4s ease infinite;
+    transition: opacity 0.4s;
+  }
+  .cta-glow:hover::before { opacity: 0.6; }
+
+  /* ===== TOAST ===== */
+  .toast-container {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99999;
+    display: flex; flex-direction: column; gap: 0.5rem; pointer-events: none;
+  }
+  .toast {
+    pointer-events: auto; padding: 0.75rem 1.25rem; border-radius: 0.75rem;
+    font-size: 0.8125rem; font-weight: 600; color: #fff;
+    backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);
+    animation: toastIn 0.35s cubic-bezier(0.16,1,0.3,1), toastOut 0.3s ease 2.2s forwards;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+  .toast.success { background: rgba(16,185,129,0.9); }
+  .toast.info    { background: rgba(37,99,235,0.9); }
+  .toast.warn    { background: rgba(245,158,11,0.9); color: #1a1a1a; }
+  @keyframes toastIn { from { opacity:0; transform: translateY(1rem) scale(0.95); } to { opacity:1; transform: translateY(0) scale(1); } }
+  @keyframes toastOut { to { opacity:0; transform: translateY(-0.5rem) scale(0.95); } }
+
+  /* ===== FLOATING SHAPES ===== */
+  .float-shape {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    filter: blur(80px); opacity: 0.15;
+  }
+
+  /* ===== COMPARISON SLIDER ===== */
+  .comparison-container {
+    position: relative; overflow: hidden; border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: col-resize; user-select: none;
+  }
+  .comparison-container .comp-layer {
+    position: absolute; inset: 0;
+  }
+  .comparison-container .comp-slider {
+    position: absolute; top: 0; bottom: 0; width: 3px;
+    background: #2563EB; z-index: 10;
+    box-shadow: 0 0 12px rgba(37,99,235,0.5);
+  }
+  .comparison-container .comp-handle {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #2563EB; border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(37,99,235,0.4);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #555; }
+</style>
+
+<!-- ===== SCROLL PROGRESS BAR ===== -->
+<div id="scrollProgress"></div>
+
+<!-- ===== STICKY NAV ===== -->
+<nav id="stickyNav">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5 group">
+      <div class="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <span class="text-white font-bold text-sm tracking-tight">HTMLWallarper</span>
+    </a>
+    <div class="hidden sm:flex items-center gap-6">
+      <a href="#features" class="text-gray-400 text-xs font-medium hover:text-white transition-colors">Fitur</a>
+      <a href="#preview" class="text-gray-400 text-xs font-medium hover:text-white transition-colors">Preview</a>
+      <a href="#install" class="text-gray-400 text-xs font-medium hover:text-white transition-colors">Install</a>
+      <a href="#faq" class="text-gray-400 text-xs font-medium hover:text-white transition-colors">FAQ</a>
+      <a href="/project/" class="px-4 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-500 transition-colors shadow-[0_0_15px_rgba(37,99,235,0.2)]">Buka Galeri</a>
     </div>
-</header>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
+  <!-- Canvas particles -->
+  <canvas id="heroCanvas"></canvas>
+
+  <!-- Floating gradient blobs -->
+  <div class="float-shape w-[500px] h-[500px] bg-blue-600 -top-40 -left-40" style="position:absolute"></div>
+  <div class="float-shape w-[400px] h-[400px] bg-cyan-500 -bottom-32 -right-32" style="position:absolute"></div>
+  <div class="float-shape w-[300px] h-[300px] bg-violet-600 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="position:absolute; opacity:0.08"></div>
+
+  <!-- Floating preview windows (decorative) -->
+  <div class="preview-window hidden lg:block" style="width:280px; height:158px; top:12%; right:8%; transform: rotate(3deg);">
+    <div class="window-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="w-full h-[calc(100%-28px)] bg-gradient-to-br from-blue-900/40 to-cyan-900/30 flex items-center justify-center">
+      <div class="w-16 h-16 rounded-full border-2 border-blue-400/30 animate-ping"></div>
+    </div>
+  </div>
+  <div class="preview-window hidden lg:block" style="width:220px; height:124px; bottom:18%; left:6%; transform: rotate(-2deg);">
+    <div class="window-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="w-full h-[calc(100%-28px)] bg-gradient-to-tr from-violet-900/40 to-pink-900/30 flex items-center justify-center">
+      <div class="space-y-1.5"><div class="w-12 h-1.5 bg-violet-400/30 rounded"></div><div class="w-8 h-1.5 bg-violet-400/20 rounded"></div><div class="w-16 h-1.5 bg-violet-400/25 rounded"></div></div>
+    </div>
+  </div>
+  <div class="preview-window hidden xl:block" style="width:180px; height:101px; top:22%; left:10%; transform: rotate(5deg); opacity:0.6;">
+    <div class="window-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="w-full h-[calc(100%-28px)] bg-gradient-to-br from-emerald-900/40 to-teal-900/30"></div>
+  </div>
+
+  <!-- Hero content -->
+  <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+    <!-- Badge -->
+    <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-sm">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+      </span>
+      <span class="text-xs text-gray-300 font-medium">Open Source • KDE Plasma 6 Compatible</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="reveal reveal-delay-1 text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">
+      <span class="text-white">Ubah Desktopmu</span><br>
+      <span class="hero-gradient-text">Menjadi Hidup</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="reveal reveal-delay-2 mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+      Koleksi wallpaper HTML statis yang ringan, animatif, dan cantik — dibuat khusus untuk KDE Plasma. Tanpa daemon, tanpa beban CPU.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="reveal reveal-delay-3 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="/project/" class="cta-glow relative inline-flex items-center gap-2 px-8 py-3.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.3)] text-sm">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        Lihat Galeri
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white/5 text-gray-300 font-bold rounded-xl hover:bg-white/10 hover:text-white transition-all border border-white/10 text-sm">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+
+    <!-- Keyboard hint -->
+    <p class="reveal reveal-delay-4 mt-6 text-[11px] text-gray-600 font-mono">
+      Press <kbd class="px-1.5 py-0.5 bg-white/5 rounded border border-white/10 text-gray-500">G</kbd> to open gallery
+    </p>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce">
+    <span class="text-[10px] text-gray-600 uppercase tracking-widest font-medium">Scroll</span>
+    <svg class="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+  </div>
+</section>
+
+<!-- ===== LIVE PREVIEW CAROUSEL ===== -->
+<section class="py-24 px-4 relative" id="preview">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="reveal inline-block text-[11px] uppercase tracking-[0.2em] text-blue-400 font-bold mb-3">Live Preview</span>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl font-black text-white tracking-tight">Jangan Hanya Dengar, Lihat Sendiri</h2>
+      <p class="reveal reveal-delay-2 text-gray-500 mt-3 max-w-lg mx-auto">Setiap wallpaper adalah file HTML murni — langsung render di browser tanpa server.</p>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <!-- Carousel -->
+      <div class="relative rounded-2xl overflow-hidden border border-white/5 bg-[#0A0A0A] shadow-[0_20px_80px_rgba(0,0,0,0.5)]">
+        <!-- Slide area -->
+        <div class="overflow-hidden aspect-video bg-black">
+          <div class="carousel-track" id="carouselTrack">
+            {% for wp in wallpapers %}
+            <div class="carousel-slide">
+              <div class="w-full h-full flex items-center justify-center">
+                <iframe src="{{ wp.htmlUrl }}" 
+                        class="absolute w-[1280px] h-[720px] origin-center scale-[0.3125]"
+                        frameborder="0" scrolling="no" loading="lazy"></iframe>
+              </div>
+            </div>
+            {% else %}
+            <div class="carousel-slide">
+              <div class="w-full h-full bg-gradient-to-br from-blue-950 to-cyan-950 flex items-center justify-center">
+                <div class="text-center">
+                  <div class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  </div>
+                  <p class="text-gray-400 font-medium">Wallpaper previews will appear here</p>
+                  <a href="/project/" class="text-blue-400 text-sm mt-2 inline-block hover:underline">Visit Gallery →</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Carousel controls -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <button onclick="carouselPrev()" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-colors cursor-pointer">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button onclick="carouselNext()" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-colors cursor-pointer">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-2" id="carouselDots"></div>
+          <div class="flex items-center gap-2">
+            <button id="carouselPlayBtn" onclick="toggleCarouselAutoplay()" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-colors cursor-pointer">
+              <svg class="w-4 h-4" id="playIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="py-24 px-4 relative" id="features">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-[11px] uppercase tracking-[0.2em] text-cyan-400 font-bold mb-3">Kenapa HTMLWallarper?</span>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl font-black text-white tracking-tight">Bukan Wallpaper Biasa</h2>
+      <p class="reveal reveal-delay-2 text-gray-500 mt-3 max-w-lg mx-auto">Setiap detail dirancang agar desktop-mu terasa premium tanpa mengorbankan performa.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Feature 1 -->
+      <div class="feature-card reveal">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        </div>
+        <h3 class="text-white font-bold text-lg mb-2">Zero CPU Overhead</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">HTML statis murni — tidak ada JavaScript runtime, tidak ada daemon. CPU-mu bebas untuk hal penting.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+        </div>
+        <h3 class="text-white font-bold text-lg mb-2">Fully Customizable</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Edit warna, kecepatan animasi, dan layout langsung di file HTML. CSS murni, tanpa build step.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+        </div>
+        <h3 class="text-white font-bold text-lg mb-2">CSS-Only Animations</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Smooth 60fps animation menggunakan CSS keyframes. Hardware-accelerated dan hemat resource.</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        </div>
+        <h3 class="text-white font-bold text-lg mb-2">No Tracking, No Ads</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">100% open source. Tidak ada telemetry, tidak ada analytics, tidak ada iklan. Privasi dijamin.</p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card reveal reveal-delay-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg>
+        </div>
+        <h3 class="text-white font-bold text-lg mb-2">Plug & Play</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Copy folder, set path di KDE Wallpaper Settings, selesai. Tidak perlu instal dependensi apapun.</p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="feature-card reveal reveal-delay-5">
+        <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+        </div>
+        <h3 class="text-white font-bold text-lg mb-2">Community Driven</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Kontribusi wallpaper baru via Pull Request. Semua orang bisa menambah koleksi untuk dinikmati bersama.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS COUNTER ===== -->
+<section class="py-20 px-4 border-y border-white/5 relative overflow-hidden">
+  <div class="float-shape w-[300px] h-[300px] bg-blue-600 top-0 left-1/4" style="position:absolute; opacity:0.05"></div>
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
+    <div class="text-center reveal">
+      <p class="counter-value text-4xl sm:text-5xl font-black text-white" data-target="{{ wallpapers | length }}" data-suffix="+">0</p>
+      <p class="text-gray-500 text-sm mt-2 font-medium">Wallpapers</p>
+    </div>
+    <div class="text-center reveal reveal-delay-1">
+      <p class="counter-value text-4xl sm:text-5xl font-black text-white" data-target="0" data-suffix=" KB">0</p>
+      <p class="text-gray-500 text-sm mt-2 font-medium">Avg. File Size</p>
+    </div>
+    <div class="text-center reveal reveal-delay-2">
+      <p class="counter-value text-4xl sm:text-5xl font-black text-white" data-target="0" data-suffix="%">0</p>
+      <p class="text-gray-500 text-sm mt-2 font-medium">CPU Usage</p>
+    </div>
+    <div class="text-center reveal reveal-delay-3">
+      <p class="counter-value text-4xl sm:text-5xl font-black text-white" data-target="100" data-suffix="%">0</p>
+      <p class="text-gray-500 text-sm mt-2 font-medium">Open Source</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BEFORE / AFTER COMPARISON ===== -->
+<section class="py-24 px-4 relative" id="comparison">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="reveal inline-block text-[11px] uppercase tracking-[0.2em] text-violet-400 font-bold mb-3">Perbandingan</span>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl font-black text-white tracking-tight">Statis vs Hidup</h2>
+      <p class="reveal reveal-delay-2 text-gray-500 mt-3">Geser slider untuk melihat perbedaan.</p>
+    </div>
+
+    <div class="reveal reveal-delay-2 comparison-container aspect-video" id="compContainer">
+      <!-- Before (static) -->
+      <div class="comp-layer bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center" id="compBefore" style="clip-path: inset(0 50% 0 0);">
+        <div class="text-center">
+          <svg class="w-16 h-16 text-gray-700 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <p class="text-gray-600 font-bold">Wallpaper Statis</p>
+          <p class="text-gray-700 text-sm mt-1">Membosankan...</p>
+        </div>
+      </div>
+      <!-- After (animated) -->
+      <div class="comp-layer bg-gradient-to-br from-blue-950 via-indigo-900 to-cyan-950 flex items-center justify-center overflow-hidden" id="compAfter">
+        <div class="relative">
+          <div class="w-20 h-20 rounded-full border-2 border-blue-400/30 animate-ping absolute"></div>
+          <div class="w-20 h-20 rounded-full border-2 border-cyan-400/40 animate-spin absolute" style="animation-duration:3s"></div>
+          <div class="w-10 h-10 rounded-lg bg-blue-500/20 relative z-10"></div>
+        </div>
+        <div class="absolute bottom-6 left-0 right-0 text-center">
+          <p class="text-blue-300 font-bold">HTMLWallarper ✨</p>
+          <p class="text-blue-400/60 text-sm mt-1">Animasi CSS 60fps</p>
+        </div>
+      </div>
+      <!-- Slider -->
+      <div class="comp-slider" id="compSlider" style="left: 50%;">
+        <div class="comp-handle">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+        </div>
+      </div>
+      <!-- Labels -->
+      <div class="absolute top-3 left-3 px-2.5 py-1 bg-black/60 backdrop-blur-sm rounded-md text-[10px] font-bold text-gray-400 uppercase tracking-wider">Before</div>
+      <div class="absolute top-3 right-3 px-2.5 py-1 bg-blue-600/60 backdrop-blur-sm rounded-md text-[10px] font-bold text-white uppercase tracking-wider">After</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTALLATION ===== -->
+<section class="py-24 px-4 relative" id="install">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-[11px] uppercase tracking-[0.2em] text-emerald-400 font-bold mb-3">Instalasi</span>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl font-black text-white tracking-tight">3 Langkah, 30 Detik</h2>
+      <p class="reveal reveal-delay-2 text-gray-500 mt-3">Semudah copy-paste. Tidak perlu terminal, tidak perlu compile.</p>
+    </div>
+
+    <div class="space-y-0">
+      <!-- Step 1 -->
+      <div class="step-item reveal" data-step="1">
+        <div class="flex items-start gap-5">
+          <div class="flex flex-col items-center">
+            <div class="step-number">1</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="flex-1 pb-8">
+            <h3 class="text-white font-bold text-lg mb-1">Download Repository</h3>
+            <p class="text-gray-500 text-sm mb-4">Clone atau download ZIP dari GitHub.</p>
+            <div class="code-block">
+              <code><span class="cmd-key">git</span> clone <span class="cmd-path">https://github.com/flessan/HTMLWallarper.git</span></code>
+              <button class="copy-btn" onclick="copyCode(this, 'git clone https://github.com/flessan/HTMLWallarper.git')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-item reveal reveal-delay-1" data-step="2">
+        <div class="flex items-start gap-5">
+          <div class="flex flex-col items-center">
+            <div class="step-number">2</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="flex-1 pb-8">
+            <h3 class="text-white font-bold text-lg mb-1">Buka KDE Wallpaper Settings</h3>
+            <p class="text-gray-500 text-sm mb-4">Klik kanan di desktop → Configure Desktop and Wallpaper → Wallpaper.</p>
+            <div class="code-block">
+              <code>Desktop <span class="cmd-flag">→</span> Configure Wallpaper <span class="cmd-flag">→</span> Wallpaper Type: <span class="cmd-path">HTML Wallpaper</span></code>
+              <button class="copy-btn" style="pointer-events:none; opacity:0.3; cursor:default;">Info</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-item reveal reveal-delay-2" data-step="3">
+        <div class="flex items-start gap-5">
+          <div class="flex flex-col items-center">
+            <div class="step-number">3</div>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-white font-bold text-lg mb-1">Set Wallpaper Folder Path</h3>
+            <p class="text-gray-500 text-sm mb-4">Arahkan ke folder wallpaper yang kamu inginkan.</p>
+            <div class="code-block">
+              <code><span class="cmd-key">/path/to/HTMLWallarper/wallpapers/</span><span class="cmd-path">nama-wallpaper</span>/</code>
+              <button class="copy-btn" onclick="copyCode(this, '/path/to/HTMLWallarper/wallpapers/nama-wallpaper/')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download all button -->
+    <div class="reveal reveal-delay-3 mt-12 text-center">
+      <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" 
+         class="cta-glow relative inline-flex items-center gap-2 px-8 py-3.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.3)] text-sm">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Download ZIP Langsung
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="py-24 px-4 relative" id="faq">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="reveal inline-block text-[11px] uppercase tracking-[0.2em] text-amber-400 font-bold mb-3">FAQ</span>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl font-black text-white tracking-tight">Pertanyaan Umum</h2>
+    </div>
+
+    <div class="space-y-3">
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Apakah kompatibel dengan KDE Plasma 6?</span>
+          <svg class="faq-chevron w-5 h-5 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="text-gray-500 text-sm leading-relaxed">Ya! Semua wallpaper menggunakan HTML statis murni yang didukung oleh KDE Plasma Wallpaper plugin sejak Plasma 5. Kelebihannya, karena tidak ada JS runtime, semakin tinggi versi Plasma semakin ringan.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-1" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Berapa CPU/RAM yang dipakai?</span>
+          <svg class="faq-chevron w-5 h-5 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="text-gray-500 text-sm leading-relaxed">Hampir <strong class="text-gray-300">0% CPU</strong> saat idle. Karena animasi menggunakan CSS keyframes yang di-offload ke GPU, beban CPU minimal. RAM usage sekitar 5-15MB per wallpaper (sama seperti wallpaper gambar statis).</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-2" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Bisa buat wallpaper sendiri?</span>
+          <svg class="faq-chevron w-5 h-5 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="text-gray-500 text-sm leading-relaxed">Tentu! Cukup buat folder baru di <code class="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded text-xs">wallpapers/</code>, buat file <code class="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded text-xs">index.html</code>, dan gunakan CSS animation. Lihat wallpaper yang ada sebagai referensi. Pull Request sangat welcome!</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-3" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Kenapa tidak pakai JavaScript?</span>
+          <svg class="faq-chevron w-5 h-5 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="text-gray-500 text-sm leading-relaxed">Keputusan desain. CSS keyframes sudah cukup powerful untuk membuat animasi yang indah — gradient shifts, morphing shapes, particle-like effects — tanpa overhead JavaScript engine. Ini menjadikan wallpaper benar-benar "set and forget".</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-4" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Bisa dipakai di GNOME atau desktop lain?</span>
+          <svg class="faq-chevron w-5 h-5 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="text-gray-500 text-sm leading-relaxed">Secara teknis file HTML-nya bisa dibuka di browser manapun. Tapi fitur "set as wallpaper" khusus KDE Plasma yang mendukung HTML wallpaper plugin. Untuk GNOME, kamu bisa menggunakan extension pihak ketiga seperti "Web Wallpaper" atau menjalankannya sebagai widget.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="py-32 px-4 relative overflow-hidden">
+  <div class="float-shape w-[600px] h-[600px] bg-blue-600 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="position:absolute; opacity:0.06"></div>
+  <div class="max-w-3xl mx-auto text-center relative z-10">
+    <div class="reveal">
+      <div class="inline-flex p-4 rounded-full bg-blue-500/5 border border-blue-500/10 mb-8">
+        <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+      </div>
+    </div>
+    <h2 class="reveal reveal-delay-1 text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+      Desktopmu Layak<br>Dapat Lebih Baik
+    </h2>
+    <p class="reveal reveal-delay-2 text-gray-400 mt-5 text-lg max-w-lg mx-auto">
+      Gratis, open source, dan siap pakai. Upgrade tampilan KDE Plasma-mu sekarang.
+    </p>
+    <div class="reveal reveal-delay-3 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="/project/" class="cta-glow relative inline-flex items-center gap-2.5 px-10 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-500 transition-all shadow-[0_0_40px_rgba(37,99,235,0.3)] text-base">
+        Mulai Sekarang
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 text-gray-400 font-bold rounded-xl hover:text-white transition-all text-sm group">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        Star di GitHub
+        <svg class="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="border-t border-white/5 py-10 px-4">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
+      <div class="w-6 h-6 rounded-md bg-blue-600 flex items-center justify-center">
+        <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <span class="text-gray-500 text-sm">HTMLWallarper — Open Source KDE Plasma Wallpapers</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="/project/" class="text-gray-600 text-xs hover:text-gray-400 transition-colors">Gallery</a>
+      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="text-gray-600 text-xs hover:text-gray-400 transition-colors">GitHub</a>
+      <span class="text-gray-700 text-xs">© 2025</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+(function() {
+
+  // ===== CANVAS PARTICLE SYSTEM =====
+  const canvas = document.getElementById('heroCanvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: -1000, y: -1000 };
+    let animId;
+
+    function resize() {
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    canvas.parentElement.addEventListener('mousemove', (e) => {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    canvas.parentElement.addEventListener('mouseleave', () => {
+      mouse.x = -1000; mouse.y = -1000;
+    });
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.4 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        // Mouse repulsion
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          const force = (120 - dist) / 120 * 0.8;
+          this.x += (dx / dist) * force;
+          this.y += (dy / dist) * force;
+        }
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(96, 165, 250, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+    for (let i = 0; i < count; i++) particles.push(new Particle());
+
+    function drawLines() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 140) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.08 * (1 - dist / 140)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      drawLines();
+      animId = requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // ===== SCROLL PROGRESS =====
+  const progressBar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  });
+
+  // ===== STICKY NAV =====
+  const stickyNav = document.getElementById('stickyNav');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 500) {
+      stickyNav.classList.add('visible');
+      if (scrollY > 800) stickyNav.classList.add('scrolled');
+      else stickyNav.classList.remove('scrolled');
+    } else {
+      stickyNav.classList.remove('visible', 'scrolled');
+    }
+    lastScroll = scrollY;
+  });
+
+  // ===== SMOOTH SCROLL FOR NAV LINKS =====
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ===== SCROLL REVEAL =====
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ===== FEATURE CARD MOUSE GLOW =====
+  document.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+      card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+    });
+  });
+
+  // ===== ANIMATED COUNTERS =====
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const duration = 2000;
+        const start = performance.now();
+
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+          el.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
+
+  // ===== CAROUSEL =====
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+  let currentSlide = 0;
+  let totalSlides = track ? track.children.length : 0;
+  let autoplayInterval = null;
+  let isAutoplay = true;
+
+  // Create dots
+  if (dotsContainer && totalSlides > 0) {
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function goToSlide(index) {
+    if (!track || totalSlides === 0) return;
+    currentSlide = ((index % totalSlides) + totalSlides) % totalSlides;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  window.carouselNext = () => goToSlide(currentSlide + 1);
+  window.carouselPrev = () => goToSlide(currentSlide - 1);
+
+  function startAutoplay() {
+    stopAutoplay();
+    if (totalSlides > 1) {
+      autoplayInterval = setInterval(carouselNext, 5000);
+    }
+  }
+  function stopAutoplay() {
+    if (autoplayInterval) { clearInterval(autoplayInterval); autoplayInterval = null; }
+  }
+
+  window.toggleCarouselAutoplay = function() {
+    isAutoplay = !isAutoplay;
+    const icon = document.getElementById('playIcon');
+    if (isAutoplay) {
+      startAutoplay();
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+    } else {
+      stopAutoplay();
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+    }
+  };
+
+  if (totalSlides > 0) startAutoplay();
+
+  // ===== COMPARISON SLIDER =====
+  const compContainer = document.getElementById('compContainer');
+  const compSlider = document.getElementById('compSlider');
+  const compBefore = document.getElementById('compBefore');
+  if (compContainer && compSlider && compBefore) {
+    let isDragging = false;
+
+    function updateComp(x) {
+      const rect = compContainer.getBoundingClientRect();
+      let pos = (x - rect.left) / rect.width;
+      pos = Math.max(0.05, Math.min(0.95, pos));
+      compSlider.style.left = (pos * 100) + '%';
+      compBefore.style.clipPath = `inset(0 ${((1 - pos) * 100).toFixed(1)}% 0 0)`;
+    }
+
+    compContainer.addEventListener('mousedown', (e) => { isDragging = true; updateComp(e.clientX); });
+    window.addEventListener('mousemove', (e) => { if (isDragging) updateComp(e.clientX); });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    compContainer.addEventListener('touchstart', (e) => { isDragging = true; updateComp(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove', (e) => { if (isDragging) updateComp(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend', () => { isDragging = false; });
+  }
+
+  // ===== INSTALL STEP ANIMATION =====
+  const stepObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.step-item').forEach(el => stepObserver.observe(el));
+
+  // ===== FAQ ACCORDION =====
+  window.toggleFaq = function(item) {
+    const wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+    // Toggle clicked
+    if (!wasOpen) item.classList.add('open');
+  };
+
+  // ===== COPY CODE =====
+  window.copyCode = function(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      btn.textContent = 'Copied!';
+      showToast('Copied to clipboard!', 'success');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.textContent = 'Copy';
+      }, 2000);
+    }).catch(() => {
+      showToast('Failed to copy', 'warn');
+    });
+  };
+
+  // ===== TOAST =====
+  window.showToast = function(msg, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = msg;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 2600);
+  };
+
+  // ===== KEYBOARD SHORTCUTS =====
+  document.addEventListener('keydown', (e) => {
+    // G -> go to gallery
+    if (e.key === 'g' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      window.location.href = '/project/';
+    }
+    // Escape -> close any open FAQ
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+    }
+    // Arrow keys in carousel area
+    if (e.key === 'ArrowLeft' && isCarouselInViewport()) carouselPrev();
+    if (e.key === 'ArrowRight' && isCarouselInViewport()) carouselNext();
+  });
+
+  function isCarouselInViewport() {
+    if (!track) return false;
+    const rect = track.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }
+
+})();
+</script>
