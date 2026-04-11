@@ -12,7 +12,7 @@ module.exports = async function() {
       .map(folder => ({
         name: folder.name,
         folderName: folder.name,
-        preview: `https://raw.githubusercontent.com/flessan/HTMLWallarper/main/wallpapers/${folder.name}/preview.png`,
+        preview: `https://raw.githubusercontent.com/flessan/HTMLWallarper/main/wallpapers/${folder.name}/gambar.png`,
         url: folder.html_url
       }));
   } catch (e) {
