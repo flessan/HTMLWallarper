@@ -1,28 +1,21 @@
-const fs = require("fs");
-const path = require("path");
+const fetch = require("node-fetch");
 
-module.exports = function() {
-  // Kita mundur satu tingkat dari /website ke root, lalu masuk ke /wallpapers
-  const folderPath = path.resolve(__dirname, "../../wallpapers");
+module.exports = async function() {
+  const url = `https://api.github.com/repos/flessan/HTMLWallarper/contents/wallpapers`;
   
   try {
-    // Membaca semua isi folder /wallpapers
-    const dirents = fs.readdirSync(folderPath, { withFileTypes: true });
+    const response = await fetch(url);
+    const data = await response.json();
     
-    // Filter hanya yang berupa folder
-    return dirents
-      .filter(dirent => dirent.isDirectory())
-      .map(dirent => {
-        return {
-          name: dirent.name,
-          folderName: dirent.name,
-          // Path untuk preview mengarah ke folder wallpapers di root
-          preview: `/wallpapers/${dirent.name}/gambar.png`,
-          url: `https://github.com/flessan/HTMLWallarper/tree/main/wallpapers/${dirent.name}`
-        };
-      });
+    return data
+      .filter(item => item.type === "dir")
+      .map(folder => ({
+        name: folder.name,
+        folderName: folder.name,
+        preview: `https://raw.githubusercontent.com/flessan/HTMLWallarper/main/wallpapers/${folder.name}/preview.png`,
+        url: folder.html_url
+      }));
   } catch (e) {
-    console.error("Gagal membaca folder wallpapers:", e);
     return [];
   }
 };
