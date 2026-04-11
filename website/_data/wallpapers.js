@@ -8,13 +8,14 @@ module.exports = async function() {
     const data = await response.json();
     
     return data
-      .filter(item => item.type === "dir")
-      .map(folder => ({
-        name: folder.name,
-        folderName: folder.name,
-        preview: `https://raw.githubusercontent.com/flessan/HTMLWallarper/main/wallpapers/${folder.name}/gambar.png`,
-        url: folder.html_url
-      }));
+  .filter(item => item.type === "dir")
+  .map(folder => ({
+    name: folder.name,
+    folderName: folder.name,
+    // URL untuk memuat file HTML di iframe
+    htmlUrl: `https://flessan.github.io/HTMLWallarper/wallpapers/${folder.name}/index.html`,
+    url: folder.html_url
+  }));
   } catch (e) {
     return [];
   }
