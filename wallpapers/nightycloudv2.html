@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Live Wallpaper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-top: #080a12;
+            --bg-mid: #0c0e1a;
+            --bg-bottom: #110f18;
+            --accent: #f8a4b8;
+            --accent-warm: #e8c4a0;
+            --text: #ede8f0;
+            --text-dim: rgba(237,232,240,0.28);
+            --text-faint: rgba(237,232,240,0.13);
+            --text-micro: rgba(237,232,240,0.10);
+            --cloud-color: rgba(200,195,225,0.025);
+            --bar-bg: rgba(255,255,255,0.035);
+            --bar-fill-a: rgba(248,164,184,0.35);
+            --bar-fill-b: rgba(232,196,160,0.30);
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html,body{height:100%;overflow:hidden;font-family:'Nunito',sans-serif;color:var(--text);cursor:default}
+        body{background:linear-gradient(175deg,var(--bg-top) 0%,var(--bg-mid) 35%,var(--bg-bottom) 100%)}
+
+        /* === Canvas === */
+        #sky{position:fixed;inset:0;z-index:0}
+
+        /* === Bulan === */
+        .moon-wrap{position:fixed;top:8%;right:12%;z-index:1;pointer-events:none}
+        .moon{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 38% 33%,#f5e6d3 0%,#e0cbb8 55%,#c9b09a 100%);box-shadow:0 0 22px rgba(245,230,211,.13),0 0 60px rgba(245,230,211,.06),0 0 120px rgba(245,230,211,.03);position:relative}
+        .moon::after{content:'';position:absolute;top:9px;left:13px;width:12px;height:12px;border-radius:50%;background:rgba(175,150,125,.17);box-shadow:22px 15px 0 6px rgba(175,150,125,.11),5px 29px 0 3px rgba(175,150,125,.08),30px 27px 0 3px rgba(175,150,125,.06)}
+        .moon-glow{position:absolute;top:50%;left:50%;width:300px;height:300px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(245,230,211,.05) 0%,rgba(245,230,211,.018) 40%,transparent 68%);animation:moon-breathe 9s ease-in-out infinite}
+        @keyframes moon-breathe{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}}
+
+        /* === Awan 3 lapis === */
+        .cloud{position:fixed;border-radius:999px;background:var(--cloud-color);pointer-events:none;will-change:transform}
+        .cf1{width:160px;height:40px;top:16%;left:-210px;z-index:2;opacity:.5;box-shadow:30px -19px 0 12px var(--cloud-color),-20px -13px 0 8px var(--cloud-color),58px -8px 0 5px var(--cloud-color);animation:drift-r 44s linear infinite}
+        .cf2{width:120px;height:32px;top:41%;right:-165px;z-index:2;opacity:.35;box-shadow:24px -14px 0 9px var(--cloud-color),-14px -10px 0 6px var(--cloud-color);animation:drift-l 38s linear infinite 9s}
+        .cm1{width:180px;height:48px;top:57%;left:-225px;z-index:3;opacity:.7;box-shadow:36px -22px 0 14px var(--cloud-color),-26px -16px 0 10px var(--cloud-color),70px -11px 0 7px var(--cloud-color),-50px -8px 0 5px var(--cloud-color);animation:drift-r 34s linear infinite 5s}
+        .cm2{width:140px;height:38px;top:27%;right:-185px;z-index:3;opacity:.5;box-shadow:28px -16px 0 11px var(--cloud-color),-18px -12px 0 7px var(--cloud-color),54px -6px 0 5px var(--cloud-color);animation:drift-l 30s linear infinite 13s}
+        .cm3{width:100px;height:28px;top:73%;left:-140px;z-index:3;opacity:.4;box-shadow:22px -12px 0 8px var(--cloud-color),-13px -8px 0 5px var(--cloud-color);animation:drift-r 37s linear infinite 18s}
+        .cn1{width:225px;height:55px;top:81%;left:-285px;z-index:4;opacity:1;box-shadow:46px -28px 0 18px var(--cloud-color),-30px -20px 0 12px var(--cloud-color),90px -14px 0 9px var(--cloud-color),-60px -10px 0 6px var(--cloud-color),120px -6px 0 4px var(--cloud-color);animation:drift-r 25s linear infinite 2s}
+        .cn2{width:170px;height:44px;top:47%;right:-225px;z-index:4;opacity:.8;box-shadow:36px -20px 0 14px var(--cloud-color),-22px -14px 0 9px var(--cloud-color),68px -8px 0 6px var(--cloud-color);animation:drift-l 28s linear infinite 11s}
+        .cn3{width:110px;height:30px;top:14%;left:-155px;z-index:4;opacity:.6;box-shadow:24px -14px 0 9px var(--cloud-color),-15px -10px 0 6px var(--cloud-color);animation:drift-r 23s linear infinite 19s}
+        @keyframes drift-r{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 310px))}}
+        @keyframes drift-l{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 310px))}}
+
+        /* === Vignette === */
+        .atmosphere{position:fixed;inset:0;z-index:6;pointer-events:none;background:linear-gradient(to bottom,rgba(8,10,18,.5) 0%,transparent 18%),linear-gradient(to top,rgba(8,10,18,.7) 0%,transparent 28%)}
+
+        /* === Glow jam === */
+        .clock-glow{position:fixed;top:50%;left:50%;width:500px;height:500px;transform:translate(-50%,-54%);border-radius:50%;background:radial-gradient(circle,rgba(248,164,184,.05) 0%,rgba(248,164,184,.022) 28%,transparent 62%);z-index:5;pointer-events:none;animation:glow-pulse 13s ease-in-out infinite}
+        @keyframes glow-pulse{0%,100%{opacity:.5;transform:translate(-50%,-54%) scale(1)}50%{opacity:1;transform:translate(-50%,-54%) scale(1.15)}}
+
+        /* === Info mikro — pojok === */
+        .top-left{position:fixed;top:1.6rem;left:1.8rem;z-index:10;pointer-events:none;display:flex;flex-direction:column;gap:.3rem}
+        .top-right{position:fixed;top:1.6rem;right:1.8rem;z-index:10;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:.35rem;margin-top:6.2rem}
+        .info-micro{font-size:.56rem;font-weight:400;letter-spacing:.08em;color:var(--text-micro);white-space:nowrap}
+        .moon-phase-row{display:flex;align-items:center;gap:.55rem}
+        #moonPhase{display:block;opacity:.55}
+        .phase-name{font-size:.6rem;letter-spacing:.1em;color:var(--text-micro);text-transform:uppercase}
+        .sun-row{display:flex;align-items:center;gap:.4rem}
+        .sun-dot{width:4px;height:4px;border-radius:50%;flex-shrink:0}
+        .sun-dot.rise{background:var(--accent-warm);opacity:.3}
+        .sun-dot.set{background:var(--accent);opacity:.25}
+
+        /* === Konten utama === */
+        .main{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;pointer-events:none}
+        .greeting{font-size:clamp(.72rem,1.7vw,1rem);font-weight:300;color:var(--accent);opacity:.45;letter-spacing:.24em;text-transform:uppercase;margin-bottom:.55rem}
+        .clock{font-size:clamp(4rem,13.5vw,9.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;display:flex;align-items:baseline;user-select:none;text-shadow:0 0 80px rgba(248,164,184,.05)}
+        .clock .seg{display:inline-block;min-width:.62em;text-align:center}
+        .clock .colon{opacity:.2;font-weight:700;margin:0 -.03em;animation:colon-blink 2s ease-in-out infinite}
+        @keyframes colon-blink{0%,100%{opacity:.2}50%{opacity:.04}}
+        .clock .sec{font-size:.28em;font-weight:200;opacity:.18;margin-left:.2em;vertical-align:super;letter-spacing:.02em}
+        .date{font-size:clamp(.68rem,1.6vw,.92rem);font-weight:300;color:var(--text-dim);margin-top:.95rem;letter-spacing:.2em;text-transform:uppercase}
+        .divider{width:26px;height:1.5px;border-radius:1px;background:var(--accent);opacity:.18;margin:1.2rem 0}
+        .breath-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:.5rem}
+        .breath-ring{width:14px;height:14px;border-radius:50%;border:1px solid rgba(248,164,184,.15);animation:breath-cycle 8s ease-in-out infinite}
+        @keyframes breath-cycle{0%,100%{transform:scale(.5);opacity:.1}25%{transform:scale(1.1);opacity:.3}50%{transform:scale(.5);opacity:.1}75%{transform:scale(1.1);opacity:.3}}
+        .breath-label{font-size:.48rem;letter-spacing:.15em;color:var(--text-micro);margin-left:.5rem;text-transform:uppercase}
+        .quote-wrap{max-width:330px;text-align:center}
+        .quote-mark{font-size:1.3rem;font-weight:700;color:var(--accent);opacity:.15;line-height:1;display:block;margin-bottom:.15rem}
+        .quote{font-size:clamp(.72rem,1.4vw,.86rem);font-weight:300;color:var(--text-dim);line-height:1.75;transition:opacity .6s ease}
+
+        /* === Bottom info bar === */
+        .bottom-info{position:fixed;bottom:0;left:0;right:0;z-index:10;pointer-events:none;padding:0 2rem 1.6rem;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+        .bottom-col{display:flex;flex-direction:column;gap:.65rem}
+        .bottom-center{align-items:center;flex-direction:row;gap:1.6rem;flex-wrap:wrap;justify-content:center}
+        .bottom-right{align-items:flex-end}
+        .info-label{font-size:.5rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-micro);margin-bottom:.1rem}
+        .info-value{font-size:.72rem;font-weight:400;color:var(--text-dim);letter-spacing:.04em}
+        .progress-bar{width:115px;height:2px;border-radius:2px;background:var(--bar-bg);overflow:hidden;margin-top:.15rem}
+        .progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--bar-fill-a),var(--bar-fill-b));transition:width 1s linear}
+        .info-chip{display:flex;flex-direction:column;align-items:center;gap:.15rem}
+        .info-chip .info-label{margin-bottom:0}
+        .info-chip .info-value{font-size:.74rem;font-weight:600;color:var(--text);opacity:.25}
+
+        /* === Responsif === */
+        @media(max-width:720px){
+            .moon{width:50px;height:50px}
+            .moon-glow{width:200px;height:200px}
+            .moon-wrap{top:5%;right:7%}
+            .top-right{margin-top:5rem}
+            .clock-glow{width:320px;height:320px}
+            .bottom-info{padding:0 1.2rem 1.2rem}
+            .progress-bar{width:90px}
+            .bottom-center{gap:1rem}
+        }
+        @media(max-width:500px){
+            .top-left,.top-right{display:none}
+            .bottom-center{gap:.7rem}
+            .info-chip .info-label{font-size:.44rem}
+            .info-chip .info-value{font-size:.65rem}
+        }
+        @media(max-width:360px){
+            .bottom-center{display:none}
+            .bottom-info{flex-direction:column;align-items:flex-start;gap:.5rem}
+            .bottom-right{align-items:flex-start}
+        }
+        @media(prefers-reduced-motion:reduce){
+            .cloud,.moon-glow,.clock-glow,.clock .colon,.breath-ring{animation:none!important}
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<div class="moon-wrap" aria-hidden="true">
+    <div class="moon-glow"></div>
+    <div class="moon"></div>
+</div>
+
+<div class="cloud cf1" aria-hidden="true"></div>
+<div class="cloud cf2" aria-hidden="true"></div>
+<div class="cloud cm1" aria-hidden="true"></div>
+<div class="cloud cm2" aria-hidden="true"></div>
+<div class="cloud cm3" aria-hidden="true"></div>
+<div class="cloud cn1" aria-hidden="true"></div>
+<div class="cloud cn2" aria-hidden="true"></div>
+<div class="cloud cn3" aria-hidden="true"></div>
+
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="clock-glow" aria-hidden="true"></div>
+
+<!-- Pojok kiri atas -->
+<div class="top-left" aria-hidden="true">
+    <div class="info-micro" id="hijri"></div>
+    <div class="info-micro" id="unix"></div>
+</div>
+
+<!-- Pojok kanan atas -->
+<div class="top-right" aria-hidden="true">
+    <div class="moon-phase-row">
+        <canvas id="moonPhase" width="32" height="32"></canvas>
+        <span class="phase-name" id="phaseName"></span>
+    </div>
+    <div class="sun-row"><span class="sun-dot rise"></span><span class="info-micro" id="sunrise"></span></div>
+    <div class="sun-row"><span class="sun-dot set"></span><span class="info-micro" id="sunset"></span></div>
+    <div class="info-micro" id="daylight"></div>
+</div>
+
+<!-- Konten utama -->
+<main class="main" role="main" aria-label="Live wallpaper">
+    <div class="greeting" id="greeting"></div>
+    <div class="clock" aria-live="polite" aria-label="Jam digital">
+        <span class="seg" id="h">00</span><span class="colon">:</span><span class="seg" id="m">00</span><span class="seg sec" id="s">00</span>
+    </div>
+    <div class="date" id="date"></div>
+    <div class="divider" aria-hidden="true"></div>
+    <div class="breath-wrap" aria-hidden="true">
+        <span class="breath-ring"></span>
+        <span class="breath-label">tarik &middot; hembuskan</span>
+    </div>
+    <div class="quote-wrap">
+        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+        <p class="quote" id="quote"></p>
+    </div>
+</main>
+
+<!-- Info bar bawah -->
+<div class="bottom-info" aria-hidden="true">
+    <div class="bottom-col bottom-left">
+        <div>
+            <div class="info-label">Progres Hari</div>
+            <div class="info-value" id="dayPct"></div>
+            <div class="progress-bar"><div class="progress-fill" id="dayBar"></div></div>
+        </div>
+        <div>
+            <div class="info-label">Progres Tahun</div>
+            <div class="info-value" id="yearPct"></div>
+            <div class="progress-bar"><div class="progress-fill" id="yearBar"></div></div>
+        </div>
+        <div>
+            <div class="info-label">Minggu ke</div>
+            <div class="info-value" id="weekNum"></div>
+        </div>
+    </div>
+    <div class="bottom-col bottom-center">
+        <div class="info-chip"><span class="info-label">Kuartal</span><span class="info-value" id="quarter"></span></div>
+        <div class="info-chip"><span class="info-label">Zodiak</span><span class="info-value" id="zodiac"></span></div>
+        <div class="info-chip"><span class="info-label">Musim</span><span class="info-value" id="season"></span></div>
+        <div class="info-chip"><span class="info-label">Weekend</span><span class="info-value" id="weekend"></span></div>
+    </div>
+    <div class="bottom-col bottom-right">
+        <div>
+            <div class="info-label">Hari ke</div>
+            <div class="info-value" id="dayOfYear"></div>
+        </div>
+        <div>
+            <div class="info-label">Sisa Tahun</div>
+            <div class="info-value" id="daysLeft"></div>
+        </div>
+        <div>
+            <div class="info-label">Sudah Berjalan</div>
+            <div class="info-value" id="elapsed"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ===========================
+   Canvas — bintang & kunang-kunang
+   =========================== */
+var canvas=document.getElementById('sky'),ctx=canvas.getContext('2d'),W,H,stars=[],fireflies=[],time=0;
+
+function initStars(){
+    stars=[];
+    var c=Math.min(150,Math.round(W*H/9500));
+    for(var i=0;i<c;i++) stars.push({x:Math.random()*W,y:Math.random()*H*.78,r:Math.random()*1.05+.3,sp:Math.random()*.015+.005,off:Math.random()*Math.PI*2});
+}
+function initFireflies(){
+    fireflies=[];
+    var c=Math.min(22,Math.round(W*H/58000));
+    for(var i=0;i<c;i++) fireflies.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*1.6+1.1,sp:Math.random()*.01+.004,off:Math.random()*Math.PI*2,warm:Math.random()>.45});
+}
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;initStars();initFireflies()}
+addEventListener('resize',resize);
+
+function renderCanvas(){
+    ctx.clearRect(0,0,W,H);
+    var i,s,a,f,p,gr,gd;
+    for(i=0;i<stars.length;i++){
+        s=stars[i];a=.18+.82*(.5+.5*Math.sin(time*s.sp*60+s.off));
+        ctx.beginPath();ctx.arc(s.x,s.y,Math.max(.3,s.r),0,Math.PI*2);
+        ctx.fillStyle='rgba(248,240,225,'+(a*.45).toFixed(3)+')';ctx.fill();
+    }
+    for(i=0;i<fireflies.length;i++){
+        f=fireflies[i];
+        f.vx+=(Math.random()-.5)*.013;f.vy+=(Math.random()-.5)*.013;
+        f.vx*=.993;f.vy*=.993;f.x+=f.vx;f.y+=f.vy;
+        if(f.x<-30)f.x=W+30;if(f.x>W+30)f.x=-30;
+        if(f.y<-30)f.y=H+30;if(f.y>H+30)f.y=-30;
+        p=.18+.82*(.5+.5*Math.sin(time*f.sp*60+f.off));
+        gr=Math.max(.5,f.r)*5;
+        gd=ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,gr);
+        if(f.warm){
+            gd.addColorStop(0,'rgba(232,196,160,'+(p*.4).toFixed(3)+')');
+            gd.addColorStop(.45,'rgba(232,196,160,'+(p*.09).toFixed(3)+')');
+            gd.addColorStop(1,'rgba(232,196,160,0)');
+        }else{
+            gd.addColorStop(0,'rgba(248,164,184,'+(p*.3).toFixed(3)+')');
+            gd.addColorStop(.45,'rgba(248,164,184,'+(p*.07).toFixed(3)+')');
+            gd.addColorStop(1,'rgba(248,164,184,0)');
+        }
+        ctx.fillStyle=gd;ctx.fillRect(f.x-gr,f.y-gr,gr*2,gr*2);
+        ctx.beginPath();ctx.arc(f.x,f.y,Math.max(.3,f.r*.4),0,Math.PI*2);
+        ctx.fillStyle='rgba(255,250,238,'+(p*.45).toFixed(3)+')';ctx.fill();
+    }
+    time+=.016;requestAnimationFrame(renderCanvas);
+}
+
+/* ===========================
+   Utilitas
+   =========================== */
+var pad=function(n){return String(n).padStart(2,'0')};
+var toRad=function(d){return d*Math.PI/180};
+var toDeg=function(r){return r*180/Math.PI};
+var namaHari=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+var namaBulan=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+function getGreeting(h){
+    if(h<5)return'Selamat Malam';if(h<11)return'Selamat Pagi';
+    if(h<15)return'Selamat Siang';if(h<18)return'Selamat Sore';return'Selamat Malam';
+}
+function getWeekNumber(d){
+    var t=new Date(d.valueOf()),dn=(d.getDay()+6)%7;
+    t.setDate(t.getDate()-dn+3);var ft=t.valueOf();
+    t.setMonth(0,1);if(t.getDay()!==4)t.setMonth(0,1+((4-t.getDay())+7)%7);
+    return 1+Math.ceil((ft-t)/604800000);
+}
+function getDayOfYear(d){var s=new Date(d.getFullYear(),0,0);return Math.floor((d-s)/864e5)}
+function isLeap(y){return(y%4===0&&(y%100!==0||y%400===0))}
+function getZodiac(d){
+    var day=d.getDate(),m=d.getMonth(),
+    s=[[20,'Aquarius'],[19,'Pisces'],[20,'Aries'],[20,'Taurus'],[21,'Gemini'],[21,'Cancer'],[22,'Leo'],[23,'Virgo'],[23,'Libra'],[23,'Scorpio'],[22,'Sagittarius'],[22,'Capricorn']];
+    return day<s[m][0]?s[(m+11)%12][1]:s[m][1];
+}
+function getSeason(m){if(m>=2&&m<=4)return'Kemarau';if(m>=5&&m<=9)return'Hujan';return'Peralihan'}
+function getQuarter(d){return'Q'+(Math.floor(d.getMonth()/3)+1)}
+
+/* Weekend countdown */
+function getWeekendCountdown(d){
+    var dn=d.getDay();
+    if(dn===0)return'Hari ini';if(dn===6)return'Hari ini';
+    return(6-dn)+' hari';
+}
+
+/* Waktu sudah berjalan */
+function getElapsed(h,m,s){
+    var parts=[];
+    if(h>0)parts.push(h+'j');
+    if(m>0||h>0)parts.push(m+'m');
+    parts.push(s+'d');
+    return parts.join(' ');
+}
+
+/* ===========================
+   Fase Bulan
+   =========================== */
+function getMoonPhase(date){
+    var ref=new Date(2000,0,6,18,14,0);
+    var diff=(date-ref)/864e5;
+    return((diff%29.53059)+29.53059)%29.53059;
+}
+function getMoonPhaseName(phase){
+    var p=phase/29.53;
+    if(p<.03||p>=.97)return'Bulan Baru';
+    if(p<.22)return'Sabit Awal';if(p<.28)return'Separuh Awal';
+    if(p<.47)return'Cembung Awal';if(p<.53)return'Purnama';
+    if(p<.72)return'Cembung Akhir';if(p<.78)return'Separuh Akhir';
+    return'Sabit Akhir';
+}
+function drawMoonPhase(phase){
+    var cvs=document.getElementById('moonPhase'),c=cvs.getContext('2d'),
+    s=cvs.width,r=s/2-1,cx=s/2,cy=s/2,p=phase/29.53,t;
+    c.clearRect(0,0,s,s);
+
+    /* Piringan bulan */
+    c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);
+    c.fillStyle='#ddd0bc';c.fill();
+
+    /* Detail permukaan halus */
+    c.globalAlpha=.12;
+    c.beginPath();c.arc(cx-r*.22,cy-r*.18,r*.13,0,Math.PI*2);c.fillStyle='#b0a090';c.fill();
+    c.beginPath();c.arc(cx+r*.28,cy+r*.22,r*.09,0,Math.PI*2);c.fill();
+    c.beginPath();c.arc(cx-r*.06,cy+r*.38,r*.065,0,Math.PI*2);c.fill();
+    c.globalAlpha=1;
+
+    /* Hitung posisi terminator */
+    if(p<=.5)t=(1-p*4)*r;else t=(p*4-3)*r;
+    var absT=Math.max(.1,Math.abs(t));
+
+    c.save();
+    c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.clip();
+    c.beginPath();
+
+    if(p<=.5){
+        /* Waxing: bayangan di kiri */
+        c.arc(cx,cy,r,Math.PI*.5,Math.PI*1.5,false);
+        c.ellipse(cx,cy,absT,r,0,-Math.PI*.5,Math.PI*.5,t<0);
+    }else{
+        /* Waning: bayangan di kanan */
+        c.arc(cx,cy,r,-Math.PI*.5,Math.PI*.5,false);
+        c.ellipse(cx,cy,absT,r,0,Math.PI*.5,-Math.PI*.5,t>0);
+    }
+    c.fillStyle='#0a0c14';c.fill();
+    c.restore();
+
+    /* Glow tipis di tepi terang */
+    c.beginPath();c.arc(cx,cy,r+.5,0,Math.PI*2);
+    c.strokeStyle='rgba(220,210,190,.06)';c.lineWidth=.5;c.stroke();
+}
+
+/* ===========================
+   Matahari — terbit/terbenam (Jakarta)
+   =========================== */
+function getSunTimes(date){
+    var doy=getDayOfYear(date),lat=-6.2,lng=106.8;
+    var decl=-23.45*Math.cos(toRad(360/365*(doy+10)));
+    var B=toRad(360/365*(doy-81));
+    var EoT=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B);
+    var latR=toRad(lat),declR=toRad(decl);
+    var cosH=(Math.sin(toRad(-.833))-Math.sin(latR)*Math.sin(declR))/(Math.cos(latR)*Math.cos(declR));
+    if(cosH>1||cosH<-1)return{rise:'--:--',set:'--:--',dur:'--'};
+    var H=toDeg(Math.acos(cosH));
+    var noon=12-lng/15+7+EoT/60;
+    var rise=noon-H/15,set=noon+H/15;
+    var durH=set-rise,durM=(durH-Math.floor(durH))*60;
+    return{
+        rise:pad(Math.floor(rise))+'.'+pad(Math.round((rise-Math.floor(rise))*60)),
+        set:pad(Math.floor(set))+'.'+pad(Math.round((set-Math.floor(set))*60)),
+        dur:Math.floor(durH)+'j '+pad(Math.round(durM))+'m'
+    };
+}
+
+/* ===========================
+   Tanggal Hijriah (aproksimasi)
+   =========================== */
+function getHijri(date){
+    var d=date.getDate(),m=date.getMonth()+1,y=date.getFullYear();
+    if(m<=2){y-=1;m+=12}
+    var A=Math.floor(y/100),B=2-A+Math.floor(A/4);
+    var jd=Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524;
+    jd=Math.floor(jd)+.5;
+    var l=jd-1948439.5+10632;
+    var n=Math.floor((l-1)/10631);l=l-10631*n+354;
+    var j=Math.floor((10985-l)/5316)*Math.floor((50*l)/17719)+Math.floor(l/5670)*Math.floor((43*l)/15238);
+    l=l-Math.floor((30-j)/15)*Math.floor((17719*j)/50)-Math.floor(j/16)*Math.floor((15238*j)/43)+29;
+    var hm=Math.floor((24*l)/709),hd=l-Math.floor((709*hm)/24),hy=30*n+j-30;
+    var months=['Muharram','Safar','Rabi\'ul Awal','Rabi\'ul Akhir','Jumadil Awal','Jumadil Akhir','Rajab','Sya\'ban','Ramadhan','Syawal','Dzulqa\'dah','Dzulhijjah'];
+    return hd+' '+months[hm-1]+' '+hy+' H';
+}
+
+/* ===========================
+   Kutipan
+   =========================== */
+var quotes=[
+    "Hidup ini seperti secangkir kopi, kadang pahit tapi bikin melek.",
+    "Jangan terlalu serius, kamu bukan spreadsheet.",
+    "Tidur itu penting. Ingat pesan ini saat jam 3 pagi.",
+    "Kamu sudah cukup baik, jangan ditambah-tambah.",
+    "Bahagia itu simpel: WiFi cepat, baterai penuh, makanan enak.",
+    "Hari ini kamu sudah hebat hanya dengan bangun.",
+    "Kata orang sabar itu emas, tapi kalau lapar ya makan dulu.",
+    "Error 404: motivasi tidak ditemukan. Coba lagi besok.",
+    "Kalau kamu lelah, istirahat. Bukan berhenti.",
+    "Kamu unik, kayak error yang nggak bisa di-fix.",
+    "Jangan bandingkan diri. Bandingkan dengan kemarin saja.",
+    "Satu langkah kecil tetaplah langkah, bukan nol.",
+    "Waktu tidak menunggu, tapi kamu juga tidak harus berlari.",
+    "Fokus pada proses, hasilnya akan mengikuti.",
+    "Hari yang buruk bukan berarti hidup yang buruk."
+];
+var elQuote=document.getElementById('quote'),qi=0;
+function nextQuote(){
+    elQuote.style.opacity='0';
+    setTimeout(function(){qi=(qi+1)%quotes.length;elQuote.textContent=quotes[qi];elQuote.style.opacity='1'},600);
+}
+
+/* ===========================
+   DOM refs
+   =========================== */
+var elH=document.getElementById('h'),elM=document.getElementById('m'),elS=document.getElementById('s');
+var elDate=document.getElementById('date'),elGreeting=document.getElementById('greeting');
+var elDayPct=document.getElementById('dayPct'),elDayBar=document.getElementById('dayBar');
+var elYearPct=document.getElementById('yearPct'),elYearBar=document.getElementById('yearBar');
+var elWeekNum=document.getElementById('weekNum');
+var elQuarter=document.getElementById('quarter'),elZodiac=document.getElementById('zodiac');
+var elSeason=document.getElementById('season'),elWeekend=document.getElementById('weekend');
+var elDayOfYear=document.getElementById('dayOfYear'),elDaysLeft=document.getElementById('daysLeft');
+var elElapsed=document.getElementById('elapsed');
+var elHijri=document.getElementById('hijri'),elUnix=document.getElementById('unix');
+var elPhaseName=document.getElementById('phaseName');
+var elSunrise=document.getElementById('sunrise'),elSunset=document.getElementById('sunset');
+var elDaylight=document.getElementById('daylight');
+
+/* ===========================
+   Tick utama — update semua info
+   =========================== */
+var lastPhaseDrawn=-1;
+
+function tick(){
+    var now=new Date(),h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();
+
+    /* Jam */
+    elH.textContent=pad(h);elM.textContent=pad(m);elS.textContent=pad(s);
+
+    /* Sapaan */
+    elGreeting.textContent=getGreeting(h);
+
+    /* Tanggal Masehi */
+    elDate.textContent=namaHari[now.getDay()]+', '+now.getDate()+' '+namaBulan[now.getMonth()]+' '+now.getFullYear();
+
+    /* Progres hari */
+    var daySec=h*3600+m*60+s,dayPct=daySec/86400*100;
+    elDayPct.textContent=dayPct.toFixed(1)+'%';
+    elDayBar.style.width=dayPct.toFixed(2)+'%';
+
+    /* Progres tahun */
+    var doy=getDayOfYear(now),totalDays=isLeap(now.getFullYear())?366:365;
+    var yearPct=doy/totalDays*100;
+    elYearPct.textContent=yearPct.toFixed(1)+'%';
+    elYearBar.style.width=yearPct.toFixed(2)+'%';
+
+    /* Info statis */
+    elWeekNum.textContent=getWeekNumber(now);
+    elDayOfYear.textContent=doy;
+    elDaysLeft.textContent=(totalDays-doy)+' hari';
+    elQuarter.textContent=getQuarter(now);
+    elZodiac.textContent=getZodiac(now);
+    elSeason.textContent=getSeason(now.getMonth());
+    elWeekend.textContent=getWeekendCountdown(now);
+    elElapsed.textContent=getElapsed(h,m,s);
+
+    /* Hijriah */
+    elHijri.textContent=getHijri(now);
+
+    /* Unix timestamp */
+    elUnix.textContent=Math.floor(now.getTime()/1000);
+
+    /* Fase bulan (gambar hanya jika hari berganti) */
+    var phaseDay=Math.floor(getMoonPhase(now)*10);
+    if(phaseDay!==lastPhaseDrawn){
+        lastPhaseDrawn=phaseDay;
+        var phase=getMoonPhase(now);
+        drawMoonPhase(phase);
+        elPhaseName.textContent=getMoonPhaseName(phase);
+    }
+
+    /* Matahari (gambar hanya jika hari berganti) */
+    if(!tick._lastSunDay||tick._lastSunDay!==now.getDate()){
+        tick._lastSunDay=now.getDate();
+        var sun=getSunTimes(now);
+        elSunrise.textContent='Terbit '+sun.rise;
+        elSunset.textContent='Terbenam '+sun.set;
+        elDaylight.textContent='Siang '+sun.dur;
+    }
+}
+
+/* ===========================
+   Mulai
+   =========================== */
+resize();
+tick();
+elQuote.textContent=quotes[0];
+setInterval(tick,1000);
+setInterval(nextQuote,12000);
+renderCanvas();
+
+})();
+</script>
+</body>
+</html>
