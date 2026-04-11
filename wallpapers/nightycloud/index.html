@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Live Wallpaper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- Token warna --- */
+        :root {
+            --bg-top: #1b1b27;
+            --bg-bottom: #242436;
+            --accent: #f8a4b8;
+            --accent-soft: rgba(248, 164, 184, 0.12);
+            --text: #eeeaf0;
+            --text-muted: rgba(238, 234, 240, 0.45);
+            --cloud-fill: rgba(255, 255, 255, 0.05);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+        }
+
+        body {
+            background: linear-gradient(170deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================
+           Awan — murni CSS, GPU-composited
+           ============================ */
+        .cloud {
+            position: fixed;
+            border-radius: 999px;
+            background: var(--cloud-fill);
+            z-index: 1;
+            will-change: transform;
+            pointer-events: none;
+        }
+        /* Bentuk awan pakai pseudo-element */
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        /* Awan 1 — besar, atas kiri */
+        .c1 { width: 130px; height: 48px; top: 10%; animation: drift-r 28s ease-in-out infinite; }
+        .c1::before { width: 65px; height: 62px; top: -28px; left: 22px; }
+        .c1::after  { width: 82px; height: 56px; top: -22px; right: 14px; }
+
+        /* Awan 2 — sedang, tengah */
+        .c2 { width: 105px; height: 38px; top: 32%; animation: drift-l 34s ease-in-out infinite; opacity: .7; }
+        .c2::before { width: 52px; height: 50px; top: -22px; left: 16px; }
+        .c2::after  { width: 66px; height: 44px; top: -18px; right: 10px; }
+
+        /* Awan 3 — kecil, bawah */
+        .c3 { width: 88px; height: 32px; bottom: 22%; animation: drift-r 30s ease-in-out infinite 4s; opacity: .5; }
+        .c3::before { width: 44px; height: 42px; top: -18px; left: 12px; }
+        .c3::after  { width: 56px; height: 38px; top: -14px; right: 8px; }
+
+        /* Awan 4 — mini, kanan bawah */
+        .c4 { width: 68px; height: 24px; bottom: 42%; animation: drift-l 24s ease-in-out infinite 2s; opacity: .35; }
+        .c4::before { width: 34px; height: 32px; top: -14px; left: 10px; }
+        .c4::after  { width: 44px; height: 28px; top: -10px; right: 6px; }
+
+        /* Awan 5 — besar, bawah kiri */
+        .c5 { width: 150px; height: 54px; top: 62%; animation: drift-r 38s ease-in-out infinite 6s; opacity: .25; }
+        .c5::before { width: 74px; height: 68px; top: -30px; left: 28px; }
+        .c5::after  { width: 94px; height: 62px; top: -24px; right: 20px; }
+
+        /* Awan 6 — mini atas kanan */
+        .c6 { width: 56px; height: 20px; top: 18%; right: 5%; animation: drift-l 20s ease-in-out infinite 3s; opacity: .3; }
+        .c6::before { width: 28px; height: 28px; top: -12px; left: 8px; }
+        .c6::after  { width: 36px; height: 24px; top: -10px; right: 5px; }
+
+        /* Keyframe drift — hanya transform, GPU compositor handle */
+        @keyframes drift-r {
+            0%, 100% { transform: translateX(-18vw) translateY(0); }
+            50%      { transform: translateX(105vw) translateY(-12px); }
+        }
+        @keyframes drift-l {
+            0%, 100% { transform: translateX(105vw) translateY(0); }
+            50%      { transform: translateX(-18vw) translateY(10px); }
+        }
+
+        /* ============================
+           Titik dekoratif kecil
+           ============================ */
+        .dot {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+            z-index: 1;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+        .d1 { top: 14%; left: 9%;  animation: blink 4.5s ease-in-out infinite; }
+        .d2 { top: 72%; right: 12%; animation: blink 5.2s ease-in-out infinite 1.2s; }
+        .d3 { top: 38%; left: 88%; animation: blink 3.8s ease-in-out infinite .6s; }
+        .d4 { bottom: 14%; left: 18%; animation: blink 4.8s ease-in-out infinite 2.1s; }
+        .d5 { top: 22%; right: 28%; animation: blink 5.8s ease-in-out infinite 1.6s; }
+        .d6 { bottom: 30%; right: 35%; animation: blink 6.2s ease-in-out infinite .3s; }
+
+        @keyframes blink {
+            0%, 100% { opacity: .08; transform: scale(1); }
+            50%      { opacity: .3;  transform: scale(2); }
+        }
+
+        /* ============================
+           Glow lembut di belakang jam
+           ============================ */
+        .glow {
+            position: fixed;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            animation: breathe 10s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: .5;  transform: scale(1); }
+            50%      { opacity: .9;  transform: scale(1.18); }
+        }
+
+        /* ============================
+           Konten utama
+           ============================ */
+        .main {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Jam digital */
+        .clock {
+            font-size: clamp(3.8rem, 13vw, 8.5rem);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0;
+        }
+        .clock .seg {
+            display: inline-block;
+            min-width: .65em;
+            text-align: center;
+        }
+        .clock .colon {
+            opacity: .3;
+            font-weight: 700;
+            margin: 0 -.02em;
+            animation: colon-pulse 2s ease-in-out infinite;
+        }
+        @keyframes colon-pulse {
+            0%, 100% { opacity: .3; }
+            50%      { opacity: .08; }
+        }
+
+        /* Detik — sedikit lebih kecil dan transparan */
+        .clock .sec {
+            font-size: .42em;
+            font-weight: 400;
+            opacity: .35;
+            margin-left: .12em;
+            vertical-align: super;
+        }
+
+        /* Tanggal */
+        .date {
+            font-size: clamp(.82rem, 2vw, 1.1rem);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: .85rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        /* Garis pembatas */
+        .divider {
+            width: 36px;
+            height: 2.5px;
+            border-radius: 2px;
+            background: var(--accent);
+            opacity: .5;
+            margin: 1.6rem auto;
+        }
+
+        /* Kutipan */
+        .quote {
+            font-size: clamp(.8rem, 1.7vw, 1rem);
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 340px;
+            margin: 0 auto;
+            line-height: 1.65;
+            transition: opacity .55s ease;
+        }
+
+        /* ============================
+           Reduced motion
+           ============================ */
+        @media (prefers-reduced-motion: reduce) {
+            .cloud, .dot, .glow, .clock .colon {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dekorasi latar -->
+    <div class="glow" aria-hidden="true"></div>
+    <div class="cloud c1" aria-hidden="true"></div>
+    <div class="cloud c2" aria-hidden="true"></div>
+    <div class="cloud c3" aria-hidden="true"></div>
+    <div class="cloud c4" aria-hidden="true"></div>
+    <div class="cloud c5" aria-hidden="true"></div>
+    <div class="cloud c6" aria-hidden="true"></div>
+    <div class="dot d1" aria-hidden="true"></div>
+    <div class="dot d2" aria-hidden="true"></div>
+    <div class="dot d3" aria-hidden="true"></div>
+    <div class="dot d4" aria-hidden="true"></div>
+    <div class="dot d5" aria-hidden="true"></div>
+    <div class="dot d6" aria-hidden="true"></div>
+
+    <!-- Konten -->
+    <main class="main" role="main" aria-label="Live wallpaper dengan jam dan kutipan">
+        <div class="clock" aria-live="polite" aria-label="Jam digital">
+            <span class="seg" id="h">00</span><span class="colon">:</span><span class="seg" id="m">00</span><span class="seg sec" id="s">00</span>
+        </div>
+        <div class="date" id="date" aria-label="Tanggal"></div>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="quote" id="quote" aria-label="Kutipan motivasi"></p>
+    </main>
+
+    <script>
+        /* ====== Kutipan lucu ====== */
+        const quotes = [
+            "Hidup ini seperti secangkir kopi, kadang pahit tapi bikin melek.",
+            "Jangan terlalu serius, kamu bukan spreadsheet.",
+            "Tidur itu penting. Ingat pesan ini saat jam 3 pagi.",
+            "Kamu sudah cukup baik, jangan ditambah-tambah.",
+            "Bahagia itu simpel: WiFi cepat, baterai penuh, makanan enak.",
+            "Hari ini kamu sudah hebat hanya dengan bangun.",
+            "Kata orang sabar itu emas, tapi kalau lapar ya makan dulu.",
+            "Error 404: motivasi tidak ditemukan. Coba lagi besok.",
+            "Kalau kamu lelah, istirahat. Bukan berhenti.",
+            "Kamu unik, kayak error yang nggak bisa di-fix.",
+            "Jangan bandingkan diri. Bandingkan dengan kemarin saja.",
+            "Satu langkah kecil tetaplah langkah, bukan nol.",
+        ];
+
+        /* ====== Elemen DOM ====== */
+        const elH = document.getElementById('h');
+        const elM = document.getElementById('m');
+        const elS = document.getElementById('s');
+        const elDate = document.getElementById('date');
+        const elQuote = document.getElementById('quote');
+
+        /* ====== Lokal Indonesia ====== */
+        const namaHari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+        const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni',
+                           'Juli','Agustus','September','Oktober','November','Desember'];
+
+        /* ====== Padding helper ====== */
+        const pad = n => String(n).padStart(2, '0');
+
+        /* ====== Update jam & tanggal ====== */
+        function tick() {
+            const now = new Date();
+            elH.textContent = pad(now.getHours());
+            elM.textContent = pad(now.getMinutes());
+            elS.textContent = pad(now.getSeconds());
+            elDate.textContent = `${namaHari[now.getDay()]}, ${now.getDate()} ${namaBulan[now.getMonth()]} ${now.getFullYear()}`;
+        }
+
+        /* ====== Ganti kutipan dengan fade ====== */
+        let qi = 0;
+        function nextQuote() {
+            elQuote.style.opacity = '0';
+            setTimeout(() => {
+                qi = (qi + 1) % quotes.length;
+                elQuote.textContent = quotes[qi];
+                elQuote.style.opacity = '1';
+            }, 550);
+        }
+
+        /* ====== Mulai ====== */
+        tick();
+        elQuote.textContent = quotes[0];
+        setInterval(tick, 1000);       // jam: 1x per detik
+        setInterval(nextQuote, 12000);  // kutipan: setiap 12 detik
+    </script>
+</body>
+</html>
