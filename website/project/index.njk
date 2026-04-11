@@ -4,42 +4,66 @@ title: Project Gallery
 permalink: /project/index.html
 ---
 
-<div class="py-12">
-    <div class="flex justify-between items-end mb-10">
+<div class="py-12 px-4 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
         <div>
-            <h2 class="text-3xl font-bold text-white">Project Gallery</h2>
-            <p class="text-gray-400 mt-2">Kumpulan semua live wallpaper yang tersedia di repository.</p>
+            <h2 class="text-4xl font-black text-white tracking-tight">HTMLWallarper</h2>
+            <p class="text-gray-400 mt-2 text-lg">Live preview of all static HTML works for KDE Plasma.</p>
         </div>
-        <span class="bg-blue-900/30 text-blue-400 px-4 py-1 rounded-full text-sm border border-blue-800">
-            {{ wallpapers | length }} Items
-        </span>
+        <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-500 font-mono">STATUS: ON-the-LINE</span>
+            <span class="bg-blue-600/20 text-blue-400 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-500/30 shadow-[0_0_15px_rgba(37,99,235,0.2)]">
+                {{ wallpapers | length }} Koleksi
+            </span>
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {% for wp in wallpapers %}
-        <div class="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500 transition-all duration-300 shadow-2xl">
-            <div class="relative overflow-hidden aspect-video bg-gray-800">
-                <img src="{{ wp.preview }}" 
-                     alt="{{ wp.name }}" 
-                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                     onerror="this.src='https://via.placeholder.com/400x225?text=Preview+Coming+Soon'">
-                
-                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                    <a href="{{ wp.url }}" target="_blank" class="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm">
-                        Source Code
+        <div class="group relative bg-[#0d1117] border border-gray-800 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+            
+            <div class="relative aspect-video bg-black overflow-hidden border-b border-gray-800">
+                <div class="absolute inset-0 pointer-events-none">
+                    <iframe src="{{ wp.htmlUrl }}" 
+                            class="w-[1280px] h-[720px] origin-top-left scale-[0.3125] md:scale-[0.28] lg:scale-[0.3125] opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                            frameborder="0" 
+                            scrolling="no"
+                            loading="lazy">
+                    </iframe>
+                </div>
+
+                <div class="absolute inset-0 z-10 bg-transparent"></div>
+
+                <div class="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-3">
+                    <a href="{{ wp.htmlUrl }}" target="_blank" class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-blue-500 shadow-lg">
+                        Live Preview Full
+                    </a>
+                    <a href="{{ wp.url }}" target="_blank" class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 hover:bg-gray-700 border border-gray-700">
+                        View Source
                     </a>
                 </div>
             </div>
 
-            <div class="p-5">
-                <h3 class="text-xl font-bold text-white capitalize">{{ wp.name }}</h3>
-                <p class="text-gray-500 text-sm mt-1">Folder: <code>/wallpapers/{{ wp.folderName }}</code></p>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors capitalize">{{ wp.name }}</h3>
+                    <div class="flex gap-1">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    </div>
+                </div>
                 
-                <div class="mt-5 pt-4 border-t border-gray-800 flex items-center justify-between">
-                    <span class="text-xs text-gray-400">Status: <span class="text-green-500">Ready</span></span>
-                    <a href="https://github.com/flessan/html-kde-live-wallpaper/archive/refs/heads/main.zip" class="text-blue-400 hover:text-white text-sm font-medium flex items-center gap-1">
-                        Download 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="space-y-3">
+                    <div class="flex items-center text-xs font-mono text-gray-500 bg-gray-900/50 p-2 rounded">
+                        <span class="text-blue-500 mr-2">path:</span>
+                        <span class="truncate">/wallpapers/{{ wp.folderName }}</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-gray-800/50 flex items-center justify-between">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-600 font-bold">KDE Plasma Support</p>
+                    <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" 
+                       class="group/btn p-2 rounded-lg bg-gray-900 hover:bg-blue-600/10 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                     </a>
@@ -47,9 +71,14 @@ permalink: /project/index.html
             </div>
         </div>
         {% else %}
-        <div class="col-span-full py-20 text-center bg-gray-900/50 rounded-2xl border border-dashed border-gray-800">
-            <p class="text-gray-500 italic text-lg">Belum ada wallpaper yang terdeteksi di API GitHub.</p>
-            <p class="text-gray-600 text-sm mt-2">Pastikan folder 'wallpapers/' di root repo sudah ada isinya.</p>
+        <div class="col-span-full py-32 text-center bg-gray-900/20 rounded-3xl border-2 border-dashed border-gray-800">
+            <div class="inline-flex p-6 rounded-full bg-gray-900/50 mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+            </div>
+            <p class="text-gray-400 font-medium text-xl">Gudang masih kosong melompong.</p>
+            <p class="text-gray-600 mt-2">Pastikan folder wallpapers di root repo sudah ada isinya dan terintegrasi API.</p>
         </div>
         {% endfor %}
     </div>
