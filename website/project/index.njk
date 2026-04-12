@@ -4,451 +4,560 @@ title: Project Gallery
 permalink: /project/index.html
 ---
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  /* === Custom styles for gallery enhancements === */
-
-  /* Toast notification */
-  .toast-container {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    pointer-events: none;
+  :root {
+    --bg: #FEF6E8; --bg-alt: #FFF0DB; --bg-dot: #F0D9B5;
+    --card: #FFFFFF; --card-border: #E8CFA8; --card-border-hover: #E8A85C;
+    --text: #3D2C1E; --text-muted: #8B7355; --text-light: #A89279;
+    --primary: #FF7043; --primary-hover: #FF5722; --primary-light: #FFCCBC;
+    --secondary: #26A69A; --secondary-light: #B2DFDB;
+    --accent: #FFD54F; --accent-light: #FFF8E1; --accent-dark: #F57F17;
+    --purple: #CE93D8; --purple-light: #F3E5F5;
+    --pink: #F48FB1; --pink-light: #FCE4EC; --pink-dark: #E91E63;
+    --sky: #81D4FA; --sky-light: #E1F5FE; --sky-dark: #0288D1;
+    --green: #81C784; --green-light: #E8F5E9; --green-dark: #2E7D32;
+    --shadow-card: 0 3px 0 0 var(--card-border), 0 5px 16px rgba(61,44,30,0.06);
+    --shadow-card-hover: 0 3px 0 0 var(--card-border-hover), 0 8px 24px rgba(255,112,67,0.1);
+    --radius-sm: 0.625rem; --radius-md: 0.875rem; --radius-lg: 1.125rem; --radius-xl: 1.5rem;
+    --bounce: cubic-bezier(0.68,-0.4,0.265,1.4); --smooth: cubic-bezier(0.4,0,0.2,1);
+    --nav-h: 56px;
   }
-  .toast {
-    pointer-events: auto;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.75rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: #fff;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    animation: toastIn 0.35s cubic-bezier(0.16,1,0.3,1), toastOut 0.3s ease 2.2s forwards;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  }
-  .toast.success { background: rgba(16,185,129,0.9); }
-  .toast.info    { background: rgba(37,99,235,0.9); }
-  .toast.warn    { background: rgba(245,158,11,0.9); color: #1a1a1a; }
-
-  @keyframes toastIn {
-    from { opacity: 0; transform: translateY(1rem) scale(0.95); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  @keyframes toastOut {
-    to { opacity: 0; transform: translateY(-0.5rem) scale(0.95); }
+  [data-theme="dark"] {
+    --bg: #1A192B; --bg-alt: #22213A; --bg-dot: #2D2C4A;
+    --card: #272643; --card-border: #3A3960; --card-border-hover: #FF8A65;
+    --text: #F0E6D6; --text-muted: #9E93A8; --text-light: #6E6585;
+    --primary: #FF8A65; --primary-hover: #FFAB91; --primary-light: rgba(255,138,101,0.14);
+    --secondary: #4DB6AC; --secondary-light: rgba(77,182,172,0.14);
+    --accent: #FFE082; --accent-light: rgba(255,224,130,0.1); --accent-dark: #FFB300;
+    --purple: #CE93D8; --purple-light: rgba(206,147,216,0.12);
+    --pink: #F48FB1; --pink-light: rgba(244,143,177,0.12); --pink-dark: #FF80AB;
+    --sky: #81D4FA; --sky-light: rgba(129,212,250,0.12); --sky-dark: #4FC3F7;
+    --green: #81C784; --green-light: rgba(129,199,132,0.12); --green-dark: #66BB6A;
+    --shadow-card: 0 3px 0 0 var(--card-border), 0 5px 16px rgba(0,0,0,0.18);
+    --shadow-card-hover: 0 3px 0 0 var(--card-border-hover), 0 8px 24px rgba(255,138,101,0.08);
   }
 
-  /* Card entrance animation */
-  .card-animate {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
-  }
-  .card-animate.visible {
-    opacity: 1;
-    transform: translateY(0);
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .5s var(--smooth),color .5s var(--smooth);line-height:1.6}
+  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(var(--bg-dot) 1px,transparent 1px);background-size:22px 22px;opacity:.4;transition:opacity .5s}
+  h1,h2,h3,h4{font-family:'Fredoka',sans-serif;line-height:1.2}
+  a{text-decoration:none;color:inherit}
+  :focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:4px}
+
+  /* ===== SCROLL PROGRESS ===== */
+  #scrollProgress{position:fixed;top:0;left:0;height:4px;z-index:10001;background:linear-gradient(90deg,var(--primary),var(--accent),var(--secondary),var(--primary));background-size:300% 100%;animation:progressSlide 4s linear infinite;width:0%;border-radius:0 4px 4px 0;transition:width .06s linear}
+  @keyframes progressSlide{to{background-position:300% 0}}
+
+  /* ===== SUBPAGE NAV ===== */
+  .sub-nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:var(--nav-h);background:var(--bg);border-bottom:2.5px solid var(--card-border);transition:background .4s var(--smooth),border-color .4s,box-shadow .3s}
+  .sub-nav.scrolled{box-shadow:0 2px 8px rgba(61,44,30,0.06)}
+  .sub-nav-inner{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem}
+  .sub-nav-left{display:flex;align-items:center;gap:.625rem}
+  .sub-nav-back{width:32px;height:32px;border-radius:var(--radius-sm);background:var(--card);border:2px solid var(--card-border);box-shadow:1px 1px 0 var(--card-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);transition:all .25s var(--bounce)}
+  .sub-nav-back:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--card-border-hover);color:var(--primary);border-color:var(--card-border-hover)}
+  .sub-nav-logo{width:30px;height:30px;border-radius:var(--radius-sm);background:var(--primary);border:2px solid var(--text);display:flex;align-items:center;justify-content:center;box-shadow:1px 1px 0 var(--text);flex-shrink:0}
+  .sub-nav-title{font-family:'Fredoka',sans-serif;font-weight:600;font-size:.9rem;color:var(--text);transition:color .4s}
+  .sub-nav-sep{color:var(--text-light);font-size:.8rem;font-weight:700;transition:color .4s}
+  .theme-toggle{width:36px;height:36px;border-radius:50%;background:var(--accent-light);border:2.5px solid var(--card-border);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s var(--bounce);position:relative;overflow:hidden;flex-shrink:0}
+  .theme-toggle:hover{transform:scale(1.1) rotate(12deg);border-color:var(--accent-dark)}
+  .theme-toggle .sun,.theme-toggle .moon{position:absolute;transition:all .45s var(--bounce)}
+  .theme-toggle .sun{opacity:1;transform:scale(1) rotate(0)}
+  .theme-toggle .moon{opacity:0;transform:scale(.4) rotate(-90deg)}
+  [data-theme="dark"] .theme-toggle .sun{opacity:0;transform:scale(.4) rotate(90deg)}
+  [data-theme="dark"] .theme-toggle .moon{opacity:1;transform:scale(1) rotate(0)}
+
+  /* ===== DECORATIONS ===== */
+  .cartoon-deco{position:absolute;pointer-events:none;z-index:0}
+  .deco-star{width:18px;height:18px;background:var(--accent);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:twinkle 3s ease-in-out infinite}
+  .deco-heart{width:16px;height:14px;background:var(--pink);transform:rotate(-45deg);border-radius:0 50% 0 50%;animation:floatHeart 4s ease-in-out infinite}
+  .deco-heart::before{content:'';position:absolute;width:16px;height:14px;background:var(--pink);border-radius:50% 50% 0 0;top:-7px;left:0}
+  .deco-bubble{border-radius:50%;border:2.5px solid var(--card-border);background:var(--card);box-shadow:2px 2px 0 var(--card-border);animation:floatBubble 6s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{transform:scale(1) rotate(0);opacity:.7}50%{transform:scale(1.2) rotate(10deg);opacity:1}}
+  @keyframes floatHeart{0%,100%{transform:rotate(-45deg) translateY(0) scale(1)}50%{transform:rotate(-45deg) translateY(-7px) scale(1.1)}}
+  @keyframes floatBubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  /* ===== GALLERY ROOT ===== */
+  .gallery-root{position:relative;z-index:1;padding:calc(var(--nav-h) + 2rem) 1.25rem 3rem;max-width:1200px;margin:0 auto}
+
+  /* ===== GALLERY HEADER ===== */
+  .gallery-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:1.5rem}
+  .gallery-header-left{display:flex;align-items:center;gap:.75rem}
+  .gallery-header-icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--primary);border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s var(--bounce)}
+  .gallery-header-icon:hover{transform:rotate(-6deg) scale(1.08)}
+  .gallery-header h2{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;color:var(--text);transition:color .4s}
+  .gallery-header-right{display:flex;align-items:center;gap:.625rem;flex-wrap:wrap}
+  .live-badge{display:flex;align-items:center;gap:.375rem;font-size:.7rem;font-weight:700;color:var(--text-muted);transition:color .4s}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);border:2px solid var(--text);animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+  .count-badge{padding:.3rem .75rem;border-radius:999px;font-size:.7rem;font-weight:800;background:var(--primary-light);border:2px solid var(--primary);color:var(--primary);box-shadow:1px 1px 0 var(--primary);transition:all .4s}
+
+  /* ===== STATS BAR ===== */
+  .stats-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:.625rem;margin-bottom:1.5rem}
+  @media(min-width:640px){.stats-bar{grid-template-columns:repeat(4,1fr)}}
+  .stat-card{background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-lg);padding:.75rem;display:flex;align-items:center;gap:.625rem;box-shadow:var(--shadow-card);transition:all .3s var(--bounce)}
+  .stat-card:hover{transform:translateY(-2px) rotate(-.5deg)}
+  .stat-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;border:2px solid;flex-shrink:0;box-shadow:1px 1px 0 currentColor}
+  .si-primary{background:var(--primary-light);border-color:var(--primary);color:var(--primary)}
+  .si-pink{background:var(--pink-light);border-color:var(--pink);color:var(--pink)}
+  .si-green{background:var(--green-light);border-color:var(--green);color:var(--green)}
+  .si-accent{background:var(--accent-light);border-color:var(--accent-dark);color:var(--accent-dark)}
+  .stat-info-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--text-light);transition:color .4s}
+  .stat-info-value{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text);line-height:1.2;transition:color .4s}
+  .stat-info-value.sv-green{color:var(--green-dark)}
+
+  /* ===== TOOLBAR ===== */
+  .toolbar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem;align-items:center}
+  .toolbar-search{position:relative;flex:1;min-width:180px}
+  .toolbar-search svg{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none;transition:color .4s}
+  .toolbar-search input{width:100%;background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-md);padding:.6rem .75rem .6rem 2.25rem;font-family:'Nunito',sans-serif;font-size:.8125rem;font-weight:600;color:var(--text);outline:none;box-shadow:2px 2px 0 var(--card-border);transition:all .25s var(--bounce)}
+  .toolbar-search input::placeholder{color:var(--text-light)}
+  .toolbar-search input:focus{border-color:var(--primary);box-shadow:2px 2px 0 var(--primary);transform:translate(-1px,-1px)}
+  .toolbar-select{appearance:none;background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-md);padding:.6rem 2rem .6rem .75rem;font-family:'Nunito',sans-serif;font-size:.8125rem;font-weight:600;color:var(--text);outline:none;cursor:pointer;box-shadow:2px 2px 0 var(--card-border);transition:all .25s var(--bounce)}
+  .toolbar-select:focus{border-color:var(--primary);box-shadow:2px 2px 0 var(--primary)}
+  .toolbar-btn{display:inline-flex;align-items:center;gap:.375rem;background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-md);padding:.6rem .75rem;font-family:'Nunito',sans-serif;font-size:.8125rem;font-weight:700;color:var(--text-muted);cursor:pointer;box-shadow:2px 2px 0 var(--card-border);transition:all .25s var(--bounce);white-space:nowrap}
+  .toolbar-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--card-border-hover);color:var(--text)}
+  .toolbar-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--card-border)}
+  .toolbar-btn.active{background:var(--pink-light);border-color:var(--pink);color:var(--pink-dark);box-shadow:2px 2px 0 var(--pink)}
+  .view-toggle{display:flex;border-radius:var(--radius-md);overflow:hidden;border:2.5px solid var(--card-border);box-shadow:2px 2px 0 var(--card-border)}
+  .view-toggle-btn{padding:.5rem .625rem;background:var(--card);color:var(--text-light);cursor:pointer;border:none;border-right:2px solid var(--card-border);transition:all .2s;display:flex;align-items:center}
+  .view-toggle-btn:last-child{border-right:none}
+  .view-toggle-btn.active{background:var(--primary-light);color:var(--primary)}
+  .view-toggle-btn:hover:not(.active){color:var(--text-muted)}
+
+  /* ===== RESULTS BAR ===== */
+  .results-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:.5rem}
+  .results-count{font-size:.68rem;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;transition:color .4s}
+  .clear-favs-btn{font-size:.68rem;font-weight:700;color:var(--text-light);cursor:pointer;background:none;border:none;font-family:'Nunito',sans-serif;transition:color .2s}
+  .clear-favs-btn:hover{color:var(--pink-dark)}
+
+  /* ===== GALLERY GRID ===== */
+  .gallery-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+  @media(min-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}
+  .gallery-grid.list-view{grid-template-columns:1fr}
+
+  /* ===== WALLPAPER CARD ===== */
+  .wallpaper-card{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .6s var(--bounce),transform .6s var(--bounce)}
+  .wallpaper-card.visible{opacity:1;transform:translateY(0) scale(1)}
+  .wallpaper-card.hidden-by-filter{display:none}
+
+  .card-inner{background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);transition:border-color .35s var(--smooth),box-shadow .35s var(--smooth),background .4s;position:relative}
+  .card-inner:hover{border-color:var(--card-border-hover);box-shadow:var(--shadow-card-hover)}
+
+  /* Preview area */
+  .preview-area{position:relative;aspect-ratio:16/9;background:var(--bg-alt);overflow:hidden;border-bottom:2.5px solid var(--card-border);transition:background .4s,border-color .4s}
+  .preview-area iframe{position:absolute;left:50%;top:50%;width:1280px;height:720px;margin-left:-640px;margin-top:-360px;transform:scale(.3125);border:none;pointer-events:none;opacity:.75;transition:opacity .5s var(--smooth)}
+  .card-inner:hover .preview-area iframe{opacity:1}
+
+  /* Hover overlay */
+  .hover-overlay{position:absolute;inset:0;z-index:20;background:color-mix(in srgb, var(--bg) 80%, transparent);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+  .card-inner:hover .hover-overlay{opacity:1}
+  .overlay-btn{padding:.5rem 1.25rem;border-radius:999px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;border:2.5px solid;transition:all .25s var(--bounce);transform:translateY(8px);opacity:0}
+  .card-inner:hover .overlay-btn{transform:translateY(0);opacity:1}
+  .card-inner:hover .overlay-btn:nth-child(2){transition-delay:.05s}
+  .card-inner:hover .overlay-btn:nth-child(3){transition-delay:.1s}
+  .overlay-btn-primary{background:var(--primary);color:#fff;border-color:var(--text);box-shadow:2px 2px 0 var(--text)}
+  .overlay-btn-primary:hover{transform:translateY(-1px) !important;box-shadow:3px 3px 0 var(--text);background:var(--primary-hover)}
+  .overlay-btn-secondary{background:var(--card);color:var(--text-muted);border-color:var(--card-border);box-shadow:2px 2px 0 var(--card-border)}
+  .overlay-btn-secondary:hover{transform:translateY(-1px) !important;box-shadow:3px 3px 0 var(--card-border-hover);border-color:var(--card-border-hover)}
+
+  /* Index badge */
+  .index-badge{position:absolute;top:.5rem;left:.5rem;z-index:30;padding:.15rem .5rem;border-radius:999px;font-size:.6rem;font-weight:800;background:var(--card);border:2px solid var(--card-border);color:var(--text-muted);box-shadow:1px 1px 0 var(--card-border);transition:all .4s}
+
+  /* Fav button */
+  .fav-btn{position:absolute;top:.5rem;right:.5rem;z-index:30;width:32px;height:32px;border-radius:50%;background:var(--card);border:2.5px solid var(--card-border);box-shadow:1px 1px 0 var(--card-border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s var(--bounce)}
+  .fav-btn:hover{transform:scale(1.15);border-color:var(--pink);box-shadow:1px 1px 0 var(--pink)}
+  .fav-btn.active{background:var(--pink-light);border-color:var(--pink);box-shadow:1px 1px 0 var(--pink)}
+  .fav-btn.active svg{fill:var(--pink-dark);color:var(--pink-dark)}
+  .fav-btn.bounce{animation:favBounce .4s var(--bounce)}
+  @keyframes favBounce{0%{transform:scale(1)}30%{transform:scale(1.35)}60%{transform:scale(.9)}100%{transform:scale(1)}}
+
+  /* Card body */
+  .card-body{padding:1rem 1.125rem}
+  .card-body-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.625rem;gap:.5rem}
+  .card-body h3{font-size:1rem;font-weight:600;color:var(--text);transition:color .4s;text-transform:capitalize}
+  .card-inner:hover .card-body h3{color:var(--primary)}
+  .live-tag{display:flex;align-items:center;gap:.25rem;flex-shrink:0}
+  .live-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+  .live-tag span{font-size:.55rem;font-weight:800;color:var(--green-dark);letter-spacing:.05em;transition:color .4s}
+
+  /* Path row */
+  .path-row{display:flex;align-items:center;font-size:.7rem;font-weight:600;color:var(--text-muted);background:var(--bg-alt);padding:.5rem .625rem;border-radius:var(--radius-sm);border:2px solid var(--card-border);cursor:pointer;transition:all .2s;gap:.375rem}
+  .path-row:hover{border-color:var(--primary);background:var(--primary-light)}
+  .path-row svg{flex-shrink:0;color:var(--primary);transition:color .4s}
+  .path-row .path-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'Courier New',monospace;font-size:.65rem}
+  .path-row .copy-icon{flex-shrink:0;color:var(--text-light);transition:color .2s}
+  .path-row:hover .copy-icon{color:var(--primary)}
+  .path-row .copy-icon.copied{color:var(--green-dark)}
+
+  /* Card footer */
+  .card-footer{margin-top:.75rem;padding-top:.625rem;border-top:2px solid color-mix(in srgb, var(--card-border) 40%, transparent);display:flex;align-items:center;justify-content:space-between;transition:border-color .4s}
+  .card-footer-left{display:flex;align-items:center;gap:.375rem}
+  .card-footer-left svg{color:var(--text-light);transition:color .4s}
+  .card-footer-left span{font-size:.55rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--text-light);transition:color .4s}
+  .card-dl-btn{width:28px;height:28px;border-radius:var(--radius-sm);background:var(--bg-alt);border:2px solid var(--card-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-light);transition:all .25s var(--bounce);box-shadow:1px 1px 0 var(--card-border)}
+  .card-dl-btn:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--primary);color:var(--primary);border-color:var(--primary)}
+
+  /* ===== LIST VIEW OVERRIDES ===== */
+  .list-view .wallpaper-card{grid-column:1/-1}
+  .list-view .card-inner{display:grid;grid-template-columns:320px 1fr}
+  .list-view .preview-area{aspect-ratio:auto;height:100%;min-height:200px;border-bottom:none;border-right:2.5px solid var(--card-border)}
+  .list-view .card-body{display:flex;flex-direction:column;justify-content:center}
+  @media(max-width:640px){.list-view .card-inner{grid-template-columns:1fr}.list-view .preview-area{aspect-ratio:16/9;height:auto;min-height:0;border-bottom:2.5px solid var(--card-border);border-right:none}}
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox-overlay{position:fixed;inset:0;z-index:9000;background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s var(--smooth)}
+  .lightbox-overlay.active{opacity:1;pointer-events:auto}
+  .lightbox-content{width:90vw;height:75vh;max-width:1400px;border-radius:var(--radius-xl);overflow:hidden;border:3px solid var(--card-border);box-shadow:4px 4px 0 var(--card-border),0 16px 48px rgba(0,0,0,.15);transform:scale(.92);transition:transform .4s var(--bounce),border-color .4s}
+  .lightbox-overlay.active .lightbox-content{transform:scale(1)}
+  .lightbox-content iframe{width:100%;height:100%;border:none}
+  .lightbox-bar{position:absolute;top:0;left:0;right:0;padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,color-mix(in srgb, var(--bg) 85%, transparent),transparent);z-index:5}
+  .lightbox-bar-left{display:flex;align-items:center;gap:.5rem}
+  .lightbox-bar-left span:first-child{font-family:'Fredoka',sans-serif;font-weight:600;font-size:.875rem;color:var(--text);transition:color .4s}
+  .lightbox-bar-left span:last-child{font-size:.65rem;font-weight:700;color:var(--text-light);font-family:'Courier New',monospace;transition:color .4s}
+  .lightbox-bar-right{display:flex;align-items:center;gap:.375rem}
+  .lb-btn{padding:.35rem .625rem;border-radius:var(--radius-sm);background:var(--card);border:2px solid var(--card-border);box-shadow:1px 1px 0 var(--card-border);cursor:pointer;font-family:'Nunito',sans-serif;font-size:.7rem;font-weight:700;color:var(--text-muted);transition:all .25s var(--bounce)}
+  .lb-btn:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--card-border-hover);color:var(--text)}
+  .lb-close{width:32px;height:32px;border-radius:var(--radius-sm);background:var(--card);border:2.5px solid var(--card-border);box-shadow:1px 1px 0 var(--card-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);transition:all .25s var(--bounce);padding:0}
+  .lb-close:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--pink);color:var(--pink);border-color:var(--pink)}
+  .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--card);border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:all .25s var(--bounce);z-index:5}
+  .lightbox-nav:hover{transform:translateY(-50%) translate(-1px,-1px);box-shadow:3px 3px 0 var(--text)}
+  .lightbox-nav:active{transform:translateY(-50%) translate(1px,1px);box-shadow:1px 1px 0 var(--text)}
+  .lightbox-nav.prev{left:1rem}
+  .lightbox-nav.next{right:1rem}
+
+  /* ===== EMPTY / NO RESULTS ===== */
+  .empty-state{grid-column:1/-1;padding:3rem 1rem;text-align:center;background:var(--card);border:3px dashed var(--card-border);border-radius:var(--radius-xl);transition:all .4s}
+  .empty-icon{display:inline-flex;width:64px;height:64px;border-radius:50%;background:var(--bg-alt);border:2.5px solid var(--card-border);align-items:center;justify-content:center;margin-bottom:1rem;animation:emptyBounce 2.5s ease-in-out infinite}
+  @keyframes emptyBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .empty-state p:first-of-type{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text);margin-bottom:.25rem;transition:color .4s}
+  .empty-state p:last-of-type{font-size:.8125rem;color:var(--text-muted);transition:color .4s}
+
+  /* ===== TOAST ===== */
+  .toast-container{position:fixed;bottom:4.5rem;right:1.25rem;z-index:99999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
+  .toast{pointer-events:auto;padding:.5rem .875rem;border-radius:var(--radius-sm);font-size:.75rem;font-weight:700;border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);animation:toastIn .4s var(--bounce),toastOut .3s ease 2.2s forwards}
+  .toast.success{background:var(--green);color:var(--green-dark);border-color:var(--green-dark);box-shadow:2px 2px 0 var(--green-dark)}
+  .toast.info{background:var(--sky);color:var(--sky-dark);border-color:var(--sky-dark);box-shadow:2px 2px 0 var(--sky-dark)}
+  .toast.warn{background:var(--accent);color:var(--accent-dark);border-color:var(--accent-dark);box-shadow:2px 2px 0 var(--accent-dark)}
+  @keyframes toastIn{from{opacity:0;transform:translateY(.75rem) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes toastOut{to{opacity:0;transform:translateY(-.5rem) scale(.9)}}
+
+  /* ===== SPARKLE ===== */
+  .sparkle{position:fixed;pointer-events:none;z-index:99997;width:6px;height:6px;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:sparkleFade .5s ease-out forwards}
+  @keyframes sparkleFade{0%{opacity:1;transform:scale(1) rotate(0)}100%{opacity:0;transform:scale(0) rotate(70deg)}}
+
+  /* ===== MASCOT ===== */
+  #mascot{position:fixed;bottom:1.25rem;left:1.25rem;z-index:9989;width:48px;height:48px;border-radius:50% 50% 50% 45%;background:var(--primary);border:3px solid var(--text);box-shadow:2px 2px 0 var(--text);cursor:pointer;overflow:hidden;transition:transform .4s var(--bounce),background .4s}
+  #mascot:hover{transform:scale(1.1) rotate(-5deg)}
+  #mascot .eye{position:absolute;width:6px;height:8px;background:var(--text);border-radius:50%;top:15px;transition:background .4s}
+  #mascot .eye.left{left:11px}#mascot .eye.right{right:11px}
+  #mascot .eye::after{content:'';position:absolute;width:2.5px;height:2.5px;background:#fff;border-radius:50%;top:1px;right:0}
+  #mascot .mouth{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:8px;height:4px;border-bottom:2px solid var(--text);border-radius:0 0 50% 50%;transition:border-color .4s}
+  #mascot .blush{position:absolute;width:8px;height:4px;background:var(--pink);border-radius:50%;top:26px;opacity:.4;transition:background .4s}
+  #mascot .blush.left{left:3px}#mascot .blush.right{right:3px}
+  #mascot.bounce{animation:mBounce .4s var(--bounce)}
+  @keyframes mBounce{0%{transform:scale(1)}30%{transform:scale(1.2) rotate(7deg)}60%{transform:scale(.93) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+  #mascotTip{position:fixed;bottom:3.75rem;left:1.25rem;z-index:9989;background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-sm);padding:.35rem .625rem;font-size:.68rem;font-weight:700;color:var(--text-muted);box-shadow:2px 2px 0 var(--card-border);opacity:0;transform:translateY(5px);pointer-events:none;transition:all .3s var(--bounce);white-space:nowrap}
+  #mascotTip.show{opacity:1;transform:translateY(0)}
+  #mascotTip::after{content:'';position:absolute;bottom:-5px;left:.875rem;width:8px;height:8px;background:var(--card);border-right:2.5px solid var(--card-border);border-bottom:2.5px solid var(--card-border);transform:rotate(45deg)}
+  @media(max-width:768px){#mascot,#mascotTip{display:none}}
+
+  /* ===== BACK TO TOP ===== */
+  #backToTop{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9990;width:42px;height:42px;border-radius:50%;background:var(--primary);border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:all .3s var(--bounce),background .4s;opacity:0;transform:translateY(14px) scale(.8);pointer-events:none}
+  #backToTop.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+  #backToTop:hover{transform:translateY(-2px) scale(1.06);box-shadow:3px 3px 0 var(--text)}
+  #backToTop:active{transform:translateY(1px) scale(.95);box-shadow:1px 1px 0 var(--text)}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:640px){
+    .gallery-header{flex-direction:column;align-items:flex-start}
+    .gallery-header-right{width:100%}
+    .toolbar{flex-direction:column}
+    .toolbar-search{min-width:0;width:100%}
+    .toolbar .toolbar-select,.toolbar .toolbar-btn{flex:1}
+    .view-toggle{align-self:stretch}
+    .view-toggle-btn{flex:1;justify-content:center}
+    .list-view .card-inner{grid-template-columns:1fr}
+    .list-view .preview-area{aspect-ratio:16/9;height:auto;min-height:0;border-bottom:2.5px solid var(--card-border);border-right:none}
+    .lightbox-nav{width:32px;height:32px}
+    .lightbox-nav.prev{left:.5rem}
+    .lightbox-nav.next{right:.5rem}
+    .lightbox-content{width:96vw;height:60vh}
   }
 
-  /* List view card overrides */
-  .list-view .wallpaper-card {
-    grid-column: 1 / -1;
-  }
-  .list-view .wallpaper-card .card-inner {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-  }
-  .list-view .wallpaper-card .preview-area {
-    aspect-ratio: auto;
-    height: 100%;
-    min-height: 200px;
-    border-bottom: none !important;
-    border-right: 1px solid rgba(255,255,255,0.06);
-  }
-  .list-view .wallpaper-card .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  /* ===== REDUCED MOTION ===== */
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.15ms!important}.sparkle{display:none!important}}
 
-  /* Lightbox */
-  .lightbox-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9000;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  .lightbox-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .lightbox-overlay .lightbox-content {
-    width: 90vw;
-    height: 80vh;
-    max-width: 1400px;
-    border-radius: 1rem;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 80px rgba(37,99,235,0.15);
-    transform: scale(0.92);
-    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-  }
-  .lightbox-overlay.active .lightbox-content {
-    transform: scale(1);
-  }
-  .lightbox-overlay .lightbox-content iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  .lightbox-overlay .lightbox-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
-  }
-  .lightbox-overlay .lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3rem;
-    height: 3rem;
-    border-radius: 9999px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .lightbox-overlay .lightbox-nav:hover {
-    background: rgba(37,99,235,0.3);
-    border-color: rgba(37,99,235,0.5);
-  }
-  .lightbox-overlay .lightbox-nav.prev { left: 1.5rem; }
-  .lightbox-overlay .lightbox-nav.next { right: 1.5rem; }
-
-  /* Favorite heart */
-  .fav-btn {
-    transition: transform 0.2s cubic-bezier(0.16,1,0.3,1);
-  }
-  .fav-btn:hover { transform: scale(1.2); }
-  .fav-btn.active svg { fill: #f43f5e; color: #f43f5e; }
-
-  /* Search input glow */
-  .search-input:focus {
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.3), 0 0 20px rgba(37,99,235,0.1);
-  }
-
-  /* Stat counter pulse */
-  .stat-glow {
-    animation: statPulse 3s ease-in-out infinite;
-  }
-  @keyframes statPulse {
-    0%, 100% { text-shadow: 0 0 8px rgba(37,99,235,0.3); }
-    50%      { text-shadow: 0 0 16px rgba(37,99,235,0.6); }
-  }
-
-  /* Hide card when filtered out */
-  .wallpaper-card.hidden-by-filter {
-    display: none;
-  }
-
-  /* No-results animation */
-  @keyframes emptyBounce {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-8px); }
-  }
-  .empty-icon {
-    animation: emptyBounce 2s ease-in-out infinite;
-  }
-
-  /* Scrollbar styling */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #0a0a0a; }
-  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #555; }
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar{width:7px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--card-border);border-radius:4px;border:2px solid var(--bg)}::-webkit-scrollbar-thumb:hover{background:var(--primary)}
 </style>
 
-<div class="py-12 px-4 max-w-7xl mx-auto" id="galleryRoot">
+<!-- ===== SCROLL PROGRESS ===== -->
+<div id="scrollProgress"></div>
 
-  <!-- ===== HEADER ===== -->
-  <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
-    <div>
-      <div class="flex items-center gap-3 mb-1">
-        <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-        </div>
-        <h2 class="text-4xl font-black text-white tracking-tight">HTMLWallarper</h2>
+<!-- ===== SUBPAGE NAV ===== -->
+<nav class="sub-nav" id="subNav">
+  <div class="sub-nav-inner">
+    <div class="sub-nav-left">
+      <a href="/" class="sub-nav-back" aria-label="Back to home">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </a>
+      <div class="sub-nav-logo">
+        <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
       </div>
-      <p class="text-gray-400 mt-2 text-lg ml-11">Live preview of all static HTML works for KDE Plasma.</p>
+      <span class="sub-nav-title">HTMLWallarper</span>
+      <span class="sub-nav-sep">·</span>
+      <span class="sub-nav-title" style="color:var(--primary)">Gallery</span>
     </div>
-    <div class="flex items-center gap-3 ml-11 md:ml-0">
-      <span class="flex items-center gap-2 text-sm text-gray-500 font-mono">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-        </span>
-        ON-the-LINE
-      </span>
-      <span class="bg-blue-600/20 text-blue-400 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-500/30 shadow-[0_0_15px_rgba(37,99,235,0.2)] stat-glow">
-        {{ wallpapers | length }} Koleksi
-      </span>
-    </div>
-  </div>
-
-  <!-- ===== QUICK STATS BAR ===== -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-    <div class="bg-[#0d1117] border border-gray-800/60 rounded-xl px-4 py-3 flex items-center gap-3">
-      <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center">
-        <svg class="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-      </div>
-      <div>
-        <p class="text-xs text-gray-500 uppercase tracking-wider font-medium">Total</p>
-        <p class="text-white font-bold text-lg leading-none mt-0.5">{{ wallpapers | length }}</p>
-      </div>
-    </div>
-    <div class="bg-[#0d1117] border border-gray-800/60 rounded-xl px-4 py-3 flex items-center gap-3">
-      <div class="w-9 h-9 rounded-lg bg-rose-500/10 flex items-center justify-center">
-        <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-      </div>
-      <div>
-        <p class="text-xs text-gray-500 uppercase tracking-wider font-medium">Favorites</p>
-        <p class="text-white font-bold text-lg leading-none mt-0.5" id="favCount">0</p>
-      </div>
-    </div>
-    <div class="bg-[#0d1117] border border-gray-800/60 rounded-xl px-4 py-3 flex items-center gap-3">
-      <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-        <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      </div>
-      <div>
-        <p class="text-xs text-gray-500 uppercase tracking-wider font-medium">Status</p>
-        <p class="text-emerald-400 font-bold text-lg leading-none mt-0.5">Active</p>
-      </div>
-    </div>
-    <div class="bg-[#0d1117] border border-gray-800/60 rounded-xl px-4 py-3 flex items-center gap-3">
-      <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center">
-        <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-      </div>
-      <div>
-        <p class="text-xs text-gray-500 uppercase tracking-wider font-medium">Platform</p>
-        <p class="text-white font-bold text-sm leading-none mt-0.5">KDE Plasma</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== TOOLBAR: Search / Sort / View ===== -->
-  <div class="flex flex-col sm:flex-row gap-3 mb-8">
-    <!-- Search -->
-    <div class="relative flex-1">
-      <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-      <input type="text" id="searchInput" placeholder="Search wallpapers..." 
-             class="search-input w-full bg-[#0d1117] border border-gray-800 text-white text-sm rounded-xl pl-10 pr-4 py-2.5 outline-none focus:border-blue-500/50 transition-all placeholder:text-gray-600">
-    </div>
-
-    <!-- Sort -->
-    <div class="relative">
-      <select id="sortSelect" class="appearance-none bg-[#0d1117] border border-gray-800 text-white text-sm rounded-xl pl-4 pr-10 py-2.5 outline-none focus:border-blue-500/50 transition-all cursor-pointer">
-        <option value="default">Default Order</option>
-        <option value="az">Name A → Z</option>
-        <option value="za">Name Z → A</option>
-      </select>
-      <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-    </div>
-
-    <!-- Filter favs -->
-    <button id="filterFavBtn" class="flex items-center gap-2 bg-[#0d1117] border border-gray-800 text-gray-400 text-sm rounded-xl px-4 py-2.5 outline-none hover:border-rose-500/50 hover:text-rose-400 transition-all">
-      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-      <span>Favs Only</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+      <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
     </button>
+  </div>
+</nav>
 
-    <!-- View toggle -->
-    <div class="flex bg-[#0d1117] border border-gray-800 rounded-xl overflow-hidden">
-      <button id="viewGrid" class="view-btn p-2.5 text-blue-400 bg-blue-500/10 transition-colors" title="Grid view">
+<!-- ===== GALLERY ===== -->
+<div class="gallery-root" id="galleryRoot">
+
+  <!-- Decorations -->
+  <div class="cartoon-deco deco-star" style="top:calc(var(--nav-h) + .5rem);right:5%;animation-delay:.3s"></div>
+  <div class="cartoon-deco deco-heart" style="top:calc(var(--nav-h) + 2rem);left:3%;animation-delay:1.5s"></div>
+  <div class="cartoon-deco deco-bubble" style="top:calc(var(--nav-h) + 6rem);right:2%;width:14px;height:14px;animation-delay:1s"></div>
+  <div class="cartoon-deco deco-star" style="top:calc(var(--nav-h) + 12rem);left:6%;width:14px;height:14px;background:var(--secondary);animation-delay:2s"></div>
+
+  <!-- Header -->
+  <div class="gallery-header">
+    <div class="gallery-header-left">
+      <div class="gallery-header-icon">
+        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <div>
+        <h2>Project Gallery</h2>
+        <p style="font-size:.8125rem;color:var(--text-muted);margin-top:.125rem;transition:color .4s">Live preview of all static HTML works for KDE Plasma.</p>
+      </div>
+    </div>
+    <div class="gallery-header-right">
+      <span class="live-badge"><span class="live-dot"></span>ON-THE-LINE</span>
+      <span class="count-badge">{{ wallpapers | length }} Koleksi</span>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-icon si-primary"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+      <div><p class="stat-info-label">Total</p><p class="stat-info-value">{{ wallpapers | length }}</p></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon si-pink"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
+      <div><p class="stat-info-label">Favorites</p><p class="stat-info-value" id="favCount">0</p></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon si-green"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+      <div><p class="stat-info-label">Status</p><p class="stat-info-value sv-green">Active</p></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon si-accent"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
+      <div><p class="stat-info-label">Platform</p><p class="stat-info-value" style="font-size:.85rem">KDE Plasma</p></div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-search">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input type="text" id="searchInput" placeholder="Search wallpapers...">
+    </div>
+    <select id="sortSelect" class="toolbar-select">
+      <option value="default">Default Order</option>
+      <option value="az">Name A → Z</option>
+      <option value="za">Name Z → A</option>
+    </select>
+    <button id="filterFavBtn" class="toolbar-btn">
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      Favs Only
+    </button>
+    <div class="view-toggle">
+      <button id="viewGrid" class="view-toggle-btn active" title="Grid view">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
       </button>
-      <button id="viewList" class="view-btn p-2.5 text-gray-500 hover:text-gray-300 transition-colors" title="List view">
+      <button id="viewList" class="view-toggle-btn" title="List view">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- ===== RESULTS COUNT ===== -->
-  <div class="flex items-center justify-between mb-6">
-    <p class="text-xs text-gray-600 font-mono uppercase tracking-wider" id="resultsCount">Showing {{ wallpapers | length }} results</p>
-    <button id="clearFavsBtn" class="text-xs text-gray-600 hover:text-rose-400 transition-colors hidden">
-      <svg class="w-3 h-3 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+  <!-- Results bar -->
+  <div class="results-bar">
+    <p class="results-count" id="resultsCount">Showing {{ wallpapers | length }} results</p>
+    <button id="clearFavsBtn" class="clear-favs-btn" style="display:none">
+      <svg class="w-3 h-3" style="display:inline;vertical-align:middle;margin-right:3px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
       Clear all favorites
     </button>
   </div>
 
-  <!-- ===== GALLERY GRID ===== -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="galleryGrid">
+  <!-- Gallery grid -->
+  <div class="gallery-grid" id="galleryGrid">
     {% for wp in wallpapers %}
-    <div class="wallpaper-card card-animate" data-name="{{ wp.name | lower }}" data-index="{{ loop.index0 }}">
-      <div class="card-inner group relative bg-[#0d1117] border border-gray-800 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-        
-        <!-- Preview area -->
-        <div class="preview-area relative aspect-video bg-black overflow-hidden border-b border-gray-800">
-          <div class="absolute inset-0 z-0 flex items-center justify-center">
-            <iframe src="{{ wp.htmlUrl }}" 
-                    class="absolute w-[1280px] h-[720px] origin-center scale-[0.3125] opacity-80 group-hover:opacity-100 transition-all duration-700"
-                    frameborder="0" 
-                    scrolling="no"
-                    loading="lazy">
-            </iframe>
-          </div>
+    <div class="wallpaper-card" data-name="{{ wp.name | lower }}" data-index="{{ loop.index0 }}">
+      <div class="card-inner">
+        <!-- Preview -->
+        <div class="preview-area">
+          <iframe src="{{ wp.htmlUrl }}" frameborder="0" scrolling="no" loading="lazy"></iframe>
 
           <!-- Hover overlay -->
-          <div class="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-3">
-            <button onclick="openLightbox({{ loop.index0 }})" 
-                    class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-blue-500 shadow-lg cursor-pointer">
-              Live Preview
-            </button>
-            <a href="{{ wp.htmlUrl }}" target="_blank" 
-               class="px-6 py-2 bg-white/10 text-gray-200 rounded-full font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 hover:bg-white/20 border border-white/10 backdrop-blur-sm">
-              Open Fullscreen
-            </a>
-            <a href="{{ wp.url }}" target="_blank" 
-               class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-[600ms] hover:bg-gray-700 border border-gray-700">
-              View Source
-            </a>
+          <div class="hover-overlay">
+            <button onclick="openLightbox({{ loop.index0 }})" class="overlay-btn overlay-btn-primary">Live Preview</button>
+            <a href="{{ wp.htmlUrl }}" target="_blank" class="overlay-btn overlay-btn-secondary">Open Fullscreen</a>
+            <a href="{{ wp.url }}" target="_blank" class="overlay-btn overlay-btn-secondary">View Source</a>
           </div>
 
           <!-- Index badge -->
-          <div class="absolute top-3 left-3 z-30 bg-black/60 backdrop-blur-sm text-gray-400 text-[10px] font-mono px-2 py-1 rounded-md border border-white/5">
-            #{{ loop.index }}
-          </div>
+          <div class="index-badge">#{{ loop.index }}</div>
 
-          <!-- Favorite button -->
-          <button onclick="toggleFav('{{ wp.name }}', this)" 
-                  class="fav-btn absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center border border-white/5 hover:border-rose-500/50 transition-all cursor-pointer"
-                  data-name="{{ wp.name }}">
-            <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          <!-- Fav -->
+          <button onclick="toggleFav('{{ wp.name }}', this)" class="fav-btn" data-name="{{ wp.name }}">
+            <svg class="w-4 h-4" style="color:var(--text-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
           </button>
         </div>
 
-        <!-- Card body -->
-        <div class="card-body p-6">
-          <div class="flex justify-between items-start mb-4">
-            <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors capitalize">{{ wp.name }}</h3>
-            <span class="flex items-center gap-1.5 shrink-0 ml-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-              <span class="text-[10px] text-green-500/70 font-mono">LIVE</span>
-            </span>
+        <!-- Body -->
+        <div class="card-body">
+          <div class="card-body-header">
+            <h3>{{ wp.name }}</h3>
+            <span class="live-tag"><span class="live-tag-dot"></span><span>LIVE</span></span>
           </div>
-          
-          <!-- Path row with copy -->
-          <div class="flex items-center text-xs font-mono text-gray-500 bg-gray-900/50 p-2.5 rounded-lg group/path cursor-pointer" 
-               onclick="copyPath('/wallpapers/{{ wp.folderName }}', this)" title="Click to copy path">
-            <svg class="w-3.5 h-3.5 text-blue-500 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-            <span class="truncate flex-1">/wallpapers/{{ wp.folderName }}</span>
-            <svg class="w-3.5 h-3.5 text-gray-600 group-hover/path:text-blue-400 transition-colors shrink-0 ml-2 copy-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          <div class="path-row" onclick="copyPath('/wallpapers/{{ wp.folderName }}', this)" title="Click to copy path">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+            <span class="path-text">/wallpapers/{{ wp.folderName }}</span>
+            <svg class="copy-icon w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
           </div>
-
-          <!-- Footer -->
-          <div class="mt-5 pt-4 border-t border-gray-800/50 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <svg class="w-3.5 h-3.5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              <span class="text-[10px] uppercase tracking-widest text-gray-600 font-bold">KDE Plasma</span>
+          <div class="card-footer">
+            <div class="card-footer-left">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>KDE Plasma</span>
             </div>
-            <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" 
-               class="group/dl p-2 rounded-lg bg-gray-900 hover:bg-blue-600/10 transition-colors" title="Download all">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover/dl:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
+            <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" class="card-dl-btn" title="Download all">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             </a>
           </div>
         </div>
       </div>
     </div>
     {% else %}
-    <!-- Empty state -->
-    <div class="col-span-full py-32 text-center bg-gray-900/20 rounded-3xl border-2 border-dashed border-gray-800">
-      <div class="inline-flex p-6 rounded-full bg-gray-900/50 mb-6 empty-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-        </svg>
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg class="w-7 h-7" style="color:var(--text-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
       </div>
-      <p class="text-gray-400 font-medium text-xl">Gudang masih kosong melompong.</p>
-      <p class="text-gray-600 mt-2">Pastikan folder wallpapers di root repo sudah ada isinya dan terintegrasi API.</p>
+      <p>Gudang masih kosong melompong.</p>
+      <p>Pastikan folder wallpapers di root repo sudah ada isinya dan terintegrasi API.</p>
     </div>
     {% endfor %}
   </div>
 
-  <!-- ===== NO RESULTS (hidden by default) ===== -->
-  <div id="noResults" class="hidden py-24 text-center">
-    <div class="inline-flex p-6 rounded-full bg-gray-900/50 mb-6 empty-icon">
-      <svg class="w-12 h-12 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-      </svg>
+  <!-- No results -->
+  <div id="noResults" style="display:none">
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg class="w-7 h-7" style="color:var(--text-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+      <p>Tidak ada wallpaper yang cocok.</p>
+      <p>Coba kata kunci lain atau hapus filter favorit.</p>
     </div>
-    <p class="text-gray-400 font-medium text-xl">Tidak ada wallpaper yang cocok.</p>
-    <p class="text-gray-600 mt-2">Coba kata kunci lain atau hapus filter favorit.</p>
   </div>
-
 </div>
 
 <!-- ===== LIGHTBOX ===== -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
   <div class="lightbox-bar">
-    <div class="flex items-center gap-3">
-      <span class="text-white font-bold text-sm" id="lightboxTitle">Preview</span>
-      <span class="text-gray-500 text-xs font-mono" id="lightboxIndex">#1</span>
+    <div class="lightbox-bar-left">
+      <span id="lightboxTitle">Preview</span>
+      <span id="lightboxIndex">#1</span>
     </div>
-    <div class="flex items-center gap-2">
-      <a id="lightboxOpenFull" href="#" target="_blank" class="px-3 py-1.5 bg-white/10 text-gray-300 rounded-lg text-xs font-bold hover:bg-white/20 border border-white/10 transition-colors">
-        Open Fullscreen ↗
-      </a>
-      <button onclick="closeLightbox()" class="p-2 rounded-lg bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white transition-colors cursor-pointer">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    <div class="lightbox-bar-right">
+      <a id="lightboxOpenFull" href="#" target="_blank" class="lb-btn">Open Fullscreen ↗</a>
+      <button onclick="closeLightbox()" class="lb-close" aria-label="Close preview">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
     </div>
   </div>
-  <button class="lightbox-nav prev" onclick="lightboxNav(-1)">
-    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+  <button class="lightbox-nav prev" onclick="lightboxNav(-1)" aria-label="Previous">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
   </button>
   <div class="lightbox-content">
     <iframe id="lightboxFrame" src="" frameborder="0" scrolling="no"></iframe>
   </div>
-  <button class="lightbox-nav next" onclick="lightboxNav(1)">
-    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  <button class="lightbox-nav next" onclick="lightboxNav(1)" aria-label="Next">
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
   </button>
 </div>
 
-<!-- ===== TOAST CONTAINER ===== -->
+<!-- ===== BACK TO TOP ===== -->
+<button id="backToTop" aria-label="Back to top">
+  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<!-- ===== MASCOT ===== -->
+<div id="mascot" aria-hidden="true">
+  <div class="eye left"></div><div class="eye right"></div>
+  <div class="mouth"></div>
+  <div class="blush left"></div><div class="blush right"></div>
+</div>
+<div id="mascotTip">Cari wallpaper favoritmu!</div>
+
+<!-- ===== TOAST ===== -->
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- ===== SCRIPTS ===== -->
 <script>
 (function() {
-  // --- Data ---
-  const cards = Array.from(document.querySelectorAll('.wallpaper-card'));
-  const totalCards = cards.length;
+  'use strict';
 
-  // Wallpaper URLs array for lightbox navigation (extracted from DOM)
-  const wallpaperData = cards.map(card => {
-    const iframe = card.querySelector('.preview-area iframe');
-    const name = card.dataset.name;
+  /* ── Theme ── */
+  var html = document.documentElement;
+  var saved = localStorage.getItem('hw-theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('hw-theme', next);
+    showToast(next === 'dark' ? 'Dark mode activated!' : 'Light mode activated!', 'info');
+  });
+
+  /* ── Scroll progress & nav & back-to-top ── */
+  var progressBar = document.getElementById('scrollProgress');
+  var subNav = document.getElementById('subNav');
+  var backToTopBtn = document.getElementById('backToTop');
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var st = window.scrollY;
+      var dh = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
+      subNav.classList.toggle('scrolled', st > 30);
+      backToTopBtn.classList.toggle('visible', st > 400);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  backToTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* ── Data ── */
+  var cards = Array.from(document.querySelectorAll('.wallpaper-card'));
+  var totalCards = cards.length;
+  var wallpaperData = cards.map(function(card) {
+    var iframe = card.querySelector('.preview-area iframe');
+    var name = card.dataset.name;
     return {
       url: iframe ? iframe.src : '',
       name: name,
@@ -456,194 +565,159 @@ permalink: /project/index.html
     };
   });
 
-  // --- Favorites (localStorage) ---
-  const FAV_KEY = 'htmlwallarper_favs';
-  let favorites = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+  /* ── Favorites ── */
+  var FAV_KEY = 'htmlwallarper_favs';
+  var favorites = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
 
   function saveFavs() {
     localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
     updateFavCount();
   }
-
   function updateFavCount() {
     document.getElementById('favCount').textContent = favorites.length;
-    document.getElementById('clearFavsBtn').classList.toggle('hidden', favorites.length === 0);
+    document.getElementById('clearFavsBtn').style.display = favorites.length > 0 ? '' : 'none';
   }
+  function isFav(name) { return favorites.indexOf(name) !== -1; }
 
-  function isFav(name) {
-    return favorites.includes(name);
-  }
-
-  // Initialize fav button states
   function initFavButtons() {
-    document.querySelectorAll('.fav-btn').forEach(btn => {
-      if (isFav(btn.dataset.name)) {
-        btn.classList.add('active');
-      }
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      if (isFav(btn.dataset.name)) btn.classList.add('active');
     });
     updateFavCount();
   }
 
   window.toggleFav = function(name, btn) {
     if (isFav(name)) {
-      favorites = favorites.filter(f => f !== name);
+      favorites = favorites.filter(function(f) { return f !== name; });
       btn.classList.remove('active');
       showToast('Removed from favorites', 'info');
     } else {
       favorites.push(name);
       btn.classList.add('active');
-      showToast('Added to favorites ❤️', 'success');
+      showToast('Added to favorites', 'success');
     }
+    btn.classList.remove('bounce');
+    void btn.offsetWidth;
+    btn.classList.add('bounce');
     saveFavs();
-    // If favs-only filter is on, re-apply
     if (favFilterOn) applyFilters();
   };
 
-  window.clearAllFavs = function() {
+  document.getElementById('clearFavsBtn').addEventListener('click', function() {
     favorites = [];
     saveFavs();
-    document.querySelectorAll('.fav-btn.active').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.fav-btn.active').forEach(function(b) { b.classList.remove('active'); });
     showToast('All favorites cleared', 'warn');
     if (favFilterOn) applyFilters();
-  };
-  document.getElementById('clearFavsBtn').addEventListener('click', clearAllFavs);
-
-  // --- Search ---
-  const searchInput = document.getElementById('searchInput');
-  let searchTerm = '';
-
-  searchInput.addEventListener('input', function() {
-    searchTerm = this.value.toLowerCase().trim();
-    applyFilters();
   });
 
-  // --- Sort ---
-  const sortSelect = document.getElementById('sortSelect');
-  let sortMode = 'default';
+  /* ── Search ── */
+  var searchInput = document.getElementById('searchInput');
+  var searchTerm = '';
+  searchInput.addEventListener('input', function() { searchTerm = this.value.toLowerCase().trim(); applyFilters(); });
 
-  sortSelect.addEventListener('change', function() {
-    sortMode = this.value;
-    applyFilters();
-  });
+  /* ── Sort ── */
+  var sortSelect = document.getElementById('sortSelect');
+  var sortMode = 'default';
+  sortSelect.addEventListener('change', function() { sortMode = this.value; applyFilters(); });
 
-  // --- Fav filter ---
-  let favFilterOn = false;
-  const filterFavBtn = document.getElementById('filterFavBtn');
-
+  /* ── Fav filter ── */
+  var favFilterOn = false;
+  var filterFavBtn = document.getElementById('filterFavBtn');
   filterFavBtn.addEventListener('click', function() {
     favFilterOn = !favFilterOn;
-    this.classList.toggle('border-rose-500/50', favFilterOn);
-    this.classList.toggle('text-rose-400', favFilterOn);
-    this.classList.toggle('bg-rose-500/5', favFilterOn);
-    this.classList.toggle('border-gray-800', !favFilterOn);
-    this.classList.toggle('text-gray-400', !favFilterOn);
+    this.classList.toggle('active', favFilterOn);
     applyFilters();
   });
 
-  // --- Combined filter & sort ---
+  /* ── Combined filter & sort ── */
   function applyFilters() {
-    let visible = [...cards];
+    var visible = cards.slice();
 
-    // Filter by search
     if (searchTerm) {
-      visible = visible.filter(c => c.dataset.name.includes(searchTerm));
+      visible = visible.filter(function(c) { return c.dataset.name.indexOf(searchTerm) !== -1; });
     }
-
-    // Filter by favs
     if (favFilterOn) {
-      visible = visible.filter(c => isFav(c.dataset.name));
+      visible = visible.filter(function(c) { return isFav(c.dataset.name); });
     }
-
-    // Sort
     if (sortMode === 'az') {
-      visible.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+      visible.sort(function(a, b) { return a.dataset.name.localeCompare(b.dataset.name); });
     } else if (sortMode === 'za') {
-      visible.sort((a, b) => b.dataset.name.localeCompare(a.dataset.name));
+      visible.sort(function(a, b) { return b.dataset.name.localeCompare(a.dataset.name); });
     }
 
-    // Hide all first
-    cards.forEach(c => c.classList.add('hidden-by-filter'));
-
-    // Show & reorder
-    visible.forEach(c => {
+    cards.forEach(function(c) { c.classList.add('hidden-by-filter'); });
+    visible.forEach(function(c) {
       c.classList.remove('hidden-by-filter');
       document.getElementById('galleryGrid').appendChild(c);
     });
 
-    // Update count
-    const count = visible.length;
-    document.getElementById('resultsCount').textContent = 
-      count === totalCards ? `Showing ${count} results` : `Showing ${count} of ${totalCards} results`;
+    var count = visible.length;
+    document.getElementById('resultsCount').textContent =
+      count === totalCards ? 'Showing ' + count + ' results' : 'Showing ' + count + ' of ' + totalCards + ' results';
 
-    // No results
-    document.getElementById('noResults').classList.toggle('hidden', count > 0);
+    var noResults = document.getElementById('noResults');
+    noResults.style.display = count > 0 ? 'none' : '';
   }
 
-  // --- View toggle ---
-  const grid = document.getElementById('galleryGrid');
-  const viewGridBtn = document.getElementById('viewGrid');
-  const viewListBtn = document.getElementById('viewList');
+  /* ── View toggle ── */
+  var grid = document.getElementById('galleryGrid');
+  var viewGridBtn = document.getElementById('viewGrid');
+  var viewListBtn = document.getElementById('viewList');
 
   viewGridBtn.addEventListener('click', function() {
     grid.classList.remove('list-view');
-    grid.classList.remove('grid-cols-1');
-    grid.classList.add('md:grid-cols-2', 'lg:grid-cols-3');
-    this.classList.add('text-blue-400', 'bg-blue-500/10');
-    this.classList.remove('text-gray-500');
-    viewListBtn.classList.remove('text-blue-400', 'bg-blue-500/10');
-    viewListBtn.classList.add('text-gray-500');
+    this.classList.add('active');
+    viewListBtn.classList.remove('active');
   });
-
   viewListBtn.addEventListener('click', function() {
     grid.classList.add('list-view');
-    grid.classList.add('grid-cols-1');
-    grid.classList.remove('md:grid-cols-2', 'lg:grid-cols-3');
-    this.classList.add('text-blue-400', 'bg-blue-500/10');
-    this.classList.remove('text-gray-500');
-    viewGridBtn.classList.remove('text-blue-400', 'bg-blue-500/10');
-    viewGridBtn.classList.add('text-gray-500');
+    this.classList.add('active');
+    viewGridBtn.classList.remove('active');
   });
 
-  // --- Lightbox ---
-  let currentLightboxIndex = -1;
-  const lightbox = document.getElementById('lightbox');
-  const lightboxFrame = document.getElementById('lightboxFrame');
-  const lightboxTitle = document.getElementById('lightboxTitle');
-  const lightboxIndex = document.getElementById('lightboxIndex');
-  const lightboxOpenFull = document.getElementById('lightboxOpenFull');
+  /* ── Lightbox ── */
+  var currentLightboxIndex = -1;
+  var lightbox = document.getElementById('lightbox');
+  var lightboxFrame = document.getElementById('lightboxFrame');
+  var lightboxTitle = document.getElementById('lightboxTitle');
+  var lightboxIndex = document.getElementById('lightboxIndex');
+  var lightboxOpenFull = document.getElementById('lightboxOpenFull');
 
   function getVisibleData() {
-    const visibleCards = Array.from(document.querySelectorAll('.wallpaper-card:not(.hidden-by-filter)'));
-    return visibleCards.map(c => {
-      const idx = parseInt(c.dataset.index);
-      return { ...wallpaperData[idx], cardIndex: idx };
+    var vc = document.querySelectorAll('.wallpaper-card:not(.hidden-by-filter)');
+    return Array.from(vc).map(function(c) {
+      var idx = parseInt(c.dataset.index, 10);
+      var d = wallpaperData[idx] || { url: '', name: '', fullName: '' };
+      return { url: d.url, name: d.name, fullName: d.fullName, cardIndex: idx };
     });
   }
 
   window.openLightbox = function(cardIndex) {
-    const visibleData = getVisibleData();
-    const vIdx = visibleData.findIndex(d => d.cardIndex === cardIndex);
-    if (vIdx === -1) return;
-    showLightboxAt(vIdx, visibleData);
+    var vd = getVisibleData();
+    var vi = -1;
+    for (var i = 0; i < vd.length; i++) { if (vd[i].cardIndex === cardIndex) { vi = i; break; } }
+    if (vi === -1) return;
+    showLightboxAt(vi, vd);
   };
 
-  function showLightboxAt(vIdx, visibleData) {
-    currentLightboxIndex = vIdx;
-    const data = visibleData[vIdx];
-    lightboxFrame.src = data.url;
-    lightboxTitle.textContent = data.fullName;
-    lightboxIndex.textContent = `#${vIdx + 1} / ${visibleData.length}`;
-    lightboxOpenFull.href = data.url;
+  function showLightboxAt(vi, vd) {
+    currentLightboxIndex = vi;
+    var d = vd[vi];
+    lightboxFrame.src = d.url;
+    lightboxTitle.textContent = d.fullName;
+    lightboxIndex.textContent = '#' + (vi + 1) + ' / ' + vd.length;
+    lightboxOpenFull.href = d.url;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   window.lightboxNav = function(dir) {
-    const visibleData = getVisibleData();
-    let newIdx = currentLightboxIndex + dir;
-    if (newIdx < 0) newIdx = visibleData.length - 1;
-    if (newIdx >= visibleData.length) newIdx = 0;
-    showLightboxAt(newIdx, visibleData);
+    var vd = getVisibleData();
+    var ni = currentLightboxIndex + dir;
+    if (ni < 0) ni = vd.length - 1;
+    if (ni >= vd.length) ni = 0;
+    showLightboxAt(ni, vd);
   };
 
   window.closeLightbox = function() {
@@ -652,11 +726,8 @@ permalink: /project/index.html
     document.body.style.overflow = '';
   };
 
-  window.closeLightboxOnBg = function(e) {
-    if (e.target === lightbox) closeLightbox();
-  };
+  window.closeLightboxOnBg = function(e) { if (e.target === lightbox) closeLightbox(); };
 
-  // Keyboard nav
   document.addEventListener('keydown', function(e) {
     if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
@@ -664,55 +735,117 @@ permalink: /project/index.html
     if (e.key === 'ArrowRight') lightboxNav(1);
   });
 
-  // --- Copy path ---
+  /* ── Copy path ── */
   window.copyPath = function(path, el) {
-    navigator.clipboard.writeText(path).then(() => {
-      showToast(`Copied: ${path}`, 'success');
-      const icon = el.querySelector('.copy-icon');
+    var doCopy = function() {
+      var icon = el.querySelector('.copy-icon');
       if (icon) {
         icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>';
-        icon.classList.add('text-emerald-400');
-        setTimeout(() => {
+        icon.classList.add('copied');
+        setTimeout(function() {
           icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>';
-          icon.classList.remove('text-emerald-400');
+          icon.classList.remove('copied');
         }, 1500);
       }
-    }).catch(() => {
-      showToast('Failed to copy', 'warn');
-    });
+      showToast('Copied: ' + path, 'success');
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(path).then(doCopy).catch(function() {
+        fallbackCopy(path); doCopy();
+      });
+    } else {
+      fallbackCopy(path); doCopy();
+    }
   };
 
-  // --- Toast ---
-  window.showToast = function(msg, type = 'info') {
-    const container = document.getElementById('toastContainer');
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.textContent = msg;
-    container.appendChild(toast);
-    setTimeout(() => toast.remove(), 2600);
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+
+  /* ── Toast ── */
+  window.showToast = function(msg, type) {
+    var c = document.getElementById('toastContainer');
+    var t = document.createElement('div');
+    t.className = 'toast ' + (type || 'info');
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(function() { if (t.parentNode) t.remove(); }, 2600);
   };
 
-  // --- Entrance animations (Intersection Observer) ---
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+  /* ── Entrance animation ── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        var idx = cards.indexOf(entry.target);
+        var delay = Math.min(idx * 50, 400);
+        setTimeout(function() { entry.target.classList.add('visible'); }, delay);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.03, rootMargin: '0px 0px -30px 0px' });
+  cards.forEach(function(c) { observer.observe(c); });
 
-  cards.forEach(c => observer.observe(c));
-
-  // --- Keyboard shortcut: focus search with / ---
+  /* ── Keyboard: / to focus search ── */
   document.addEventListener('keydown', function(e) {
-    if (e.key === '/' && document.activeElement !== searchInput) {
-      e.preventDefault();
-      searchInput.focus();
+    if (e.key === '/' && document.activeElement !== searchInput && !lightbox.classList.contains('active')) {
+      e.preventDefault(); searchInput.focus();
     }
   });
 
-  // --- Init ---
+  /* ── Sparkle cursor ── */
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lastSparkle = 0;
+  var sparkleColors = ['#FFD54F','#FF7043','#26A69A','#F48FB1','#CE93D8','#81D4FA','#81C784'];
+
+  if (!reducedMotion) {
+    document.addEventListener('mousemove', function(e) {
+      var now = Date.now();
+      if (now - lastSparkle < 60) return;
+      lastSparkle = now;
+      var s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = (e.clientX - 3) + 'px';
+      s.style.top = (e.clientY - 3) + 'px';
+      s.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+      document.body.appendChild(s);
+      setTimeout(function() { if (s.parentNode) s.remove(); }, 520);
+    });
+  }
+
+  /* ── Mascot ── */
+  var mascot = document.getElementById('mascot');
+  var mascotTip = document.getElementById('mascotTip');
+  var mascotTimer = null;
+  var mascotIdx = 0;
+  var mascotMsgs = ['Cari wallpaper favoritmu!','Klik hati ya!','Zero CPU lho!','Coba dark mode!','Grid atau List?','Sort by nama bisa'];
+
+  function showMascotTip() {
+    mascotTip.textContent = mascotMsgs[mascotIdx % mascotMsgs.length];
+    mascotIdx++;
+    mascotTip.classList.add('show');
+    clearTimeout(mascotTimer);
+    mascotTimer = setTimeout(function() { mascotTip.classList.remove('show'); }, 3000);
+  }
+
+  if (mascot) {
+    mascot.addEventListener('click', function() {
+      mascot.classList.remove('bounce'); void mascot.offsetWidth; mascot.classList.add('bounce');
+      showMascotTip();
+    });
+    var lastMS = 0;
+    window.addEventListener('scroll', function() {
+      var y = window.scrollY;
+      if (Math.abs(y - lastMS) > 300) { lastMS = y; mascot.classList.remove('bounce'); void mascot.offsetWidth; mascot.classList.add('bounce'); }
+    }, { passive: true });
+    setTimeout(showMascotTip, 2500);
+  }
+
+  /* ── Init ── */
   initFavButtons();
 })();
 </script>
