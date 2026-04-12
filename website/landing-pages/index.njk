@@ -5,1113 +5,1074 @@ permalink: /landing-pages/index.html
 ---
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-  /* ===== THEME VARIABLES ===== */
+  /* ===== CSS VARIABLES ===== */
   :root {
-    --bg-body: #FFF5EE;
-    --bg-card: #FFFFFF;
-    --bg-card-hover: #FFFAF7;
-    --bg-nav: rgba(255,245,238,0.85);
-    --bg-input: #FFF0E8;
-    --bg-badge: #FFF0F5;
-    --text-primary: #4A3456;
-    --text-secondary: #7B6888;
-    --text-muted: #B0A0BC;
-    --border: #F0E0D8;
-    --border-strong: #E8D0C4;
-    --accent-pink: #FF7EB3;
-    --accent-pink-soft: #FFD6E8;
-    --accent-mint: #6EC6B8;
-    --accent-mint-soft: #D0F0EA;
-    --accent-yellow: #FFB830;
-    --accent-yellow-soft: #FFF0D0;
-    --accent-lavender: #A78BDB;
-    --accent-lavender-soft: #E8DFF8;
-    --accent-peach: #FFAB91;
-    --accent-peach-soft: #FFE0D4;
-    --shadow-sm: 0 2px 8px rgba(74,52,86,0.06);
-    --shadow-md: 0 4px 20px rgba(74,52,86,0.08);
-    --shadow-lg: 0 8px 40px rgba(74,52,86,0.10);
-    --shadow-pink: 0 6px 24px rgba(255,126,179,0.18);
-    --shadow-mint: 0 6px 24px rgba(110,198,184,0.18);
-    --radius: 1.25rem;
-    --radius-lg: 1.75rem;
-    --radius-pill: 9999px;
+    --bg: #FEF6E8;
+    --bg-alt: #FFF0DB;
+    --bg-dot: #F0D9B5;
+    --card: #FFFFFF;
+    --card-border: #E8CFA8;
+    --card-border-hover: #E8A85C;
+    --text: #3D2C1E;
+    --text-muted: #8B7355;
+    --text-light: #A89279;
+    --primary: #FF7043;
+    --primary-hover: #FF5722;
+    --primary-light: #FFCCBC;
+    --secondary: #26A69A;
+    --secondary-light: #B2DFDB;
+    --accent: #FFD54F;
+    --accent-light: #FFF8E1;
+    --accent-dark: #F57F17;
+    --purple: #CE93D8;
+    --purple-light: #F3E5F5;
+    --pink: #F48FB1;
+    --pink-light: #FCE4EC;
+    --sky: #81D4FA;
+    --sky-light: #E1F5FE;
+    --sky-dark: #0288D1;
+    --green: #81C784;
+    --green-light: #E8F5E9;
+    --green-dark: #2E7D32;
+    --shadow-sm: 0 2px 8px rgba(61,44,30,0.06);
+    --shadow-card: 0 4px 0 0 var(--card-border), 0 6px 20px rgba(61,44,30,0.07);
+    --shadow-card-hover: 0 4px 0 0 var(--card-border-hover), 0 10px 30px rgba(255,112,67,0.12);
     --radius-sm: 0.75rem;
-    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-    --smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    --radius-md: 1rem;
+    --radius-lg: 1.25rem;
+    --radius-xl: 1.75rem;
+    --bounce: cubic-bezier(0.68, -0.4, 0.265, 1.4);
+    --smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --nav-h: 64px;
   }
 
   [data-theme="dark"] {
-    --bg-body: #2A2640;
-    --bg-card: #353150;
-    --bg-card-hover: #3D3960;
-    --bg-nav: rgba(42,38,64,0.88);
-    --bg-input: #3D3960;
-    --bg-badge: #3D2848;
-    --text-primary: #F2ECFF;
-    --text-secondary: #C0B4D4;
-    --text-muted: #7E72A0;
-    --border: #4A4468;
-    --border-strong: #5A5478;
-    --accent-pink: #FF8FAB;
-    --accent-pink-soft: #3D2035;
-    --accent-mint: #80D8CC;
-    --accent-mint-soft: #203835;
-    --accent-yellow: #FFCC55;
-    --accent-yellow-soft: #383018;
-    --accent-lavender: #BBA0E8;
-    --accent-lavender-soft: #2E2848;
-    --accent-peach: #FFBFA8;
-    --accent-peach-soft: #3D2820;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.15);
-    --shadow-md: 0 4px 20px rgba(0,0,0,0.2);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.25);
-    --shadow-pink: 0 6px 24px rgba(255,143,171,0.12);
-    --shadow-mint: 0 6px 24px rgba(128,216,204,0.12);
+    --bg: #1A192B;
+    --bg-alt: #22213A;
+    --bg-dot: #2D2C4A;
+    --card: #272643;
+    --card-border: #3A3960;
+    --card-border-hover: #FF8A65;
+    --text: #F0E6D6;
+    --text-muted: #9E93A8;
+    --text-light: #6E6585;
+    --primary: #FF8A65;
+    --primary-hover: #FFAB91;
+    --primary-light: rgba(255,138,101,0.14);
+    --secondary: #4DB6AC;
+    --secondary-light: rgba(77,182,172,0.14);
+    --accent: #FFE082;
+    --accent-light: rgba(255,224,130,0.1);
+    --accent-dark: #FFB300;
+    --purple: #CE93D8;
+    --purple-light: rgba(206,147,216,0.12);
+    --pink: #F48FB1;
+    --pink-light: rgba(244,143,177,0.12);
+    --sky: #81D4FA;
+    --sky-light: rgba(129,212,250,0.12);
+    --sky-dark: #4FC3F7;
+    --green: #81C784;
+    --green-light: rgba(129,199,132,0.12);
+    --green-dark: #66BB6A;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.18);
+    --shadow-card: 0 4px 0 0 var(--card-border), 0 6px 20px rgba(0,0,0,0.2);
+    --shadow-card-hover: 0 4px 0 0 var(--card-border-hover), 0 10px 30px rgba(255,138,101,0.1);
   }
 
   /* ===== BASE ===== */
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
     font-family: 'Nunito', sans-serif;
-    background: var(--bg-body);
-    color: var(--text-primary);
+    background: var(--bg);
+    color: var(--text);
     overflow-x: hidden;
-    transition: background 0.4s, color 0.4s;
+    transition: background 0.5s var(--smooth), color 0.5s var(--smooth);
+    line-height: 1.6;
   }
-  a { text-decoration: none; color: inherit; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; }
-  ::selection { background: var(--accent-pink-soft); color: var(--accent-pink); }
 
-  /* ===== SCROLLBAR ===== */
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: var(--bg-body); }
-  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+  /* Dot pattern */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(var(--bg-dot) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: 0.45;
+    transition: opacity 0.5s;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; line-height: 1.2; }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+  code, .code-block code { font-family: 'Courier New', Courier, monospace; }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 
   /* ===== SCROLL PROGRESS ===== */
   #scrollProgress {
     position: fixed; top: 0; left: 0; height: 4px; z-index: 10001;
-    background: linear-gradient(90deg, var(--accent-pink), var(--accent-yellow), var(--accent-mint), var(--accent-lavender));
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary), var(--primary));
     background-size: 300% 100%;
-    animation: progressRainbow 4s linear infinite;
-    width: 0%; transition: width 0.08s linear;
-    border-radius: 0 2px 2px 0;
+    animation: progressSlide 4s linear infinite;
+    width: 0%;
+    border-radius: 0 4px 4px 0;
+    transition: width 0.06s linear;
   }
-  @keyframes progressRainbow { 0%{background-position:0% 0} 100%{background-position:300% 0} }
+  @keyframes progressSlide { to { background-position: 300% 0; } }
 
-  /* ===== CUTE FLOATING DECORATIONS ===== */
-  .cute-deco {
-    position: absolute; pointer-events: none; z-index: 0;
-  }
-  .cute-star {
-    width: 18px; height: 18px;
-    animation: floatStar 6s ease-in-out infinite;
-  }
-  .cute-star svg { width: 100%; height: 100%; }
-  .cute-heart {
-    width: 14px; height: 14px;
-    animation: floatHeart 5s ease-in-out infinite;
-  }
-  .cute-heart svg { width: 100%; height: 100%; }
-  .cute-cloud {
-    width: 60px; height: 30px; opacity: 0.3;
-    animation: driftCloud 20s linear infinite;
-  }
-  .cute-cloud svg { width: 100%; height: 100%; }
-  .cute-sparkle {
-    width: 8px; height: 8px; border-radius: 50%;
-    animation: twinkle 2s ease-in-out infinite;
-  }
-  @keyframes floatStar {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(20deg); }
-  }
-  @keyframes floatHeart {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-20px) scale(1.15); }
-  }
-  @keyframes driftCloud {
-    0% { transform: translateX(-100px); }
-    100% { transform: translateX(calc(100vw + 100px)); }
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
-  }
-
-  /* ===== MOBILE MENU ===== */
-  #mobileMenu {
-    position: fixed; inset: 0; z-index: 10002;
-    background: var(--bg-body);
-    transform: translateX(100%);
-    transition: transform 0.45s var(--spring);
-    display: flex; flex-direction: column;
-  }
-  #mobileMenu.open { transform: translateX(0); }
-  #mobileMenu .menu-header {
-    padding: 1.25rem 1.5rem;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 2px solid var(--border);
-  }
-  #mobileMenu .menu-links {
-    flex: 1; display: flex; flex-direction: column;
-    padding: 2rem 1.5rem; gap: 0.5rem;
-  }
-  #mobileMenu .menu-links a {
-    font-size: 1.25rem; font-weight: 700; padding: 0.875rem 1rem;
-    border-radius: var(--radius-sm);
-    transition: background 0.2s, color 0.2s;
-    color: var(--text-primary);
-  }
-  #mobileMenu .menu-links a:hover {
-    background: var(--accent-pink-soft);
-    color: var(--accent-pink);
-  }
-  #menuOverlay {
-    position: fixed; inset: 0; z-index: 10001;
-    background: rgba(74,52,86,0.3); backdrop-filter: blur(4px);
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s;
-  }
-  #menuOverlay.visible { opacity: 1; pointer-events: auto; }
-
-  /* ===== STICKY NAV ===== */
-  #stickyNav {
+  /* ===== NAVIGATION ===== */
+  #mainNav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-    padding: 0.625rem 1.25rem;
-    background: var(--bg-nav);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border-bottom: 2px solid var(--border);
-    transform: translateY(-100%);
-    transition: transform 0.4s var(--spring), background 0.3s, border-color 0.3s;
+    height: var(--nav-h);
+    background: var(--bg);
+    border-bottom: 2.5px solid var(--card-border);
+    transition: background 0.4s var(--smooth), border-color 0.4s, box-shadow 0.3s;
   }
-  #stickyNav.visible { transform: translateY(0); }
+  #mainNav.scrolled {
+    background: var(--bg);
+    box-shadow: var(--shadow-sm);
+  }
   .nav-inner {
-    max-width: 72rem; margin: 0 auto;
+    max-width: 1080px; margin: 0 auto; height: 100%;
     display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem;
   }
   .nav-logo {
-    display: flex; align-items: center; gap: 0.625rem;
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.05rem;
+    color: var(--text); transition: color 0.4s;
   }
   .nav-logo-icon {
-    width: 2.25rem; height: 2.25rem; border-radius: 0.75rem;
-    background: var(--accent-pink);
+    width: 34px; height: 34px; border-radius: var(--radius-sm);
+    background: var(--primary); border: 2.5px solid var(--text);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: var(--shadow-pink);
-    transition: transform 0.3s var(--spring);
+    box-shadow: 2px 2px 0 var(--text);
+    transition: transform 0.3s var(--bounce), box-shadow 0.3s, background 0.4s;
   }
   .nav-logo:hover .nav-logo-icon { transform: rotate(-8deg) scale(1.08); }
-  .nav-logo-icon svg { width: 1.125rem; height: 1.125rem; color: #fff; }
-  .nav-logo-text { font-weight: 900; font-size: 1rem; color: var(--text-primary); }
-  .nav-links { display: none; align-items: center; gap: 0.25rem; }
-  @media(min-width:640px) { .nav-links { display: flex; } }
+
+  .nav-links { display: flex; align-items: center; gap: 0.2rem; }
   .nav-links a {
-    padding: 0.5rem 0.875rem; border-radius: var(--radius-pill);
-    font-size: 0.8125rem; font-weight: 700; color: var(--text-secondary);
-    transition: all 0.25s;
+    padding: 0.45rem 0.75rem; border-radius: var(--radius-sm);
+    font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
+    transition: all 0.2s var(--smooth); border: 2px solid transparent;
   }
-  .nav-links a:hover { background: var(--accent-pink-soft); color: var(--accent-pink); }
-  .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
-  .nav-btn {
-    width: 2.25rem; height: 2.25rem; border-radius: 0.75rem;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-secondary); transition: all 0.25s;
-    border: 2px solid transparent;
-  }
-  .nav-btn:hover { background: var(--accent-lavender-soft); color: var(--accent-lavender); border-color: var(--accent-lavender-soft); }
-  .nav-btn svg { width: 1.125rem; height: 1.125rem; }
+  .nav-links a:hover { color: var(--primary); background: var(--primary-light); }
+
   .nav-cta {
-    padding: 0.5rem 1rem; border-radius: var(--radius-pill);
-    background: var(--accent-pink); color: #fff;
-    font-size: 0.8125rem; font-weight: 800;
-    box-shadow: var(--shadow-pink);
-    transition: all 0.3s var(--spring);
-    display: none;
+    padding: 0.45rem 1rem !important;
+    background: var(--primary) !important; color: #fff !important;
+    border: 2.5px solid var(--text) !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: 2px 2px 0 var(--text);
+    transition: all 0.25s var(--bounce) !important;
   }
-  @media(min-width:640px) { .nav-cta { display: inline-flex; align-items: center; gap: 0.375rem; } }
-  .nav-cta:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 28px rgba(255,126,179,0.3); }
-  .nav-cta svg { width: 0.875rem; height: 0.875rem; }
-  .hamburger { display: flex; }
-  @media(min-width:640px) { .hamburger { display: none; } }
+  .nav-cta:hover {
+    background: var(--primary-hover) !important;
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--text) !important;
+  }
+  .nav-cta:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--text) !important; }
 
-  /* ===== HERO ===== */
-  .hero {
-    position: relative; min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; padding: 6rem 1.25rem 4rem;
+  /* Theme toggle */
+  .theme-toggle {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--accent-light); border: 2.5px solid var(--card-border);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s var(--bounce); position: relative; overflow: hidden;
+    flex-shrink: 0;
   }
-  .hero-bg-pattern {
-    position: absolute; inset: 0; z-index: 0; opacity: 0.4;
-    background-image:
-      radial-gradient(circle at 20% 30%, var(--accent-pink-soft) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, var(--accent-mint-soft) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, var(--accent-yellow-soft) 0%, transparent 60%);
+  .theme-toggle:hover { transform: scale(1.12) rotate(15deg); border-color: var(--accent-dark); }
+  .theme-toggle .sun, .theme-toggle .moon {
+    position: absolute; transition: all 0.45s var(--bounce);
   }
-  .hero-content {
-    position: relative; z-index: 1;
-    text-align: center; max-width: 52rem;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.5rem 1rem; border-radius: var(--radius-pill);
-    background: var(--bg-card); border: 2px solid var(--border);
-    font-size: 0.75rem; font-weight: 700; color: var(--text-secondary);
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 2rem;
-  }
-  .hero-badge .pulse-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent-mint); position: relative;
-  }
-  .hero-badge .pulse-dot::after {
-    content: ''; position: absolute; inset: -3px;
-    border-radius: 50%; background: var(--accent-mint);
-    animation: pulse-ring 2s ease-out infinite; opacity: 0;
-  }
-  @keyframes pulse-ring { 0%{transform:scale(0.8);opacity:0.6} 100%{transform:scale(2);opacity:0} }
+  .theme-toggle .sun { opacity: 1; transform: scale(1) rotate(0deg); }
+  .theme-toggle .moon { opacity: 0; transform: scale(0.4) rotate(-90deg); }
+  [data-theme="dark"] .theme-toggle .sun { opacity: 0; transform: scale(0.4) rotate(90deg); }
+  [data-theme="dark"] .theme-toggle .moon { opacity: 1; transform: scale(1) rotate(0deg); }
 
-  .hero h1 {
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    font-weight: 900; line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
+  /* Hamburger */
+  .hamburger {
+    display: none; width: 38px; height: 38px; border-radius: var(--radius-sm);
+    background: var(--primary-light); border: 2.5px solid var(--card-border);
+    cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    flex-shrink: 0;
   }
-  .hero h1 .highlight {
-    background: linear-gradient(135deg, var(--accent-pink), var(--accent-lavender), var(--accent-mint));
-    background-size: 200% 200%;
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientMove 5s ease infinite;
+  .hamburger span {
+    display: block; width: 17px; height: 2.5px; background: var(--text);
+    border-radius: 2px; transition: all 0.3s var(--bounce); transform-origin: center;
   }
-  @keyframes gradientMove { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
 
-  .hero-sub {
-    margin-top: 1.5rem; font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--text-secondary); line-height: 1.7;
-    max-width: 40rem; margin-left: auto; margin-right: auto;
+  /* Mobile menu */
+  .mobile-menu {
+    display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+    background: var(--bg); border-bottom: 3px solid var(--card-border);
+    padding: 0.75rem; z-index: 9999;
+    transform: translateY(-8px); opacity: 0; pointer-events: none;
+    transition: all 0.35s var(--bounce);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   }
-  .hero-buttons {
-    margin-top: 2.5rem;
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.875rem;
+  .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mobile-menu a {
+    display: block; padding: 0.7rem 1rem; border-radius: var(--radius-sm);
+    font-weight: 700; font-size: 0.9rem; color: var(--text-muted);
+    transition: all 0.2s;
   }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.875rem 2rem; border-radius: var(--radius-pill);
-    background: var(--accent-pink); color: #fff;
-    font-weight: 800; font-size: 0.9375rem;
-    box-shadow: var(--shadow-pink);
-    transition: all 0.3s var(--spring);
-    border: 2px solid transparent;
-  }
-  .btn-primary:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 32px rgba(255,126,179,0.35); }
-  .btn-primary:active { transform: translateY(0) scale(0.97); }
-  .btn-primary svg { width: 1.125rem; height: 1.125rem; }
+  .mobile-menu a:hover { background: var(--primary-light); color: var(--primary); }
 
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.875rem 2rem; border-radius: var(--radius-pill);
-    background: var(--bg-card); color: var(--text-primary);
-    font-weight: 800; font-size: 0.9375rem;
-    border: 2px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s var(--spring);
-  }
-  .btn-secondary:hover { border-color: var(--accent-lavender); color: var(--accent-lavender); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-  .btn-secondary svg { width: 1.125rem; height: 1.125rem; }
-
-  .hero-hint {
-    margin-top: 1.5rem; font-size: 0.6875rem;
-    color: var(--text-muted); font-family: 'Nunito', monospace;
-  }
-  .hero-hint kbd {
-    padding: 0.125rem 0.5rem; border-radius: 0.375rem;
-    background: var(--bg-card); border: 1.5px solid var(--border);
-    font-weight: 700; color: var(--text-secondary);
+  @media (max-width: 768px) {
+    .nav-links { display: none !important; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
   }
 
-  .hero-scroll {
-    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-    z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    animation: gentleBounce 2.5s ease-in-out infinite;
-  }
-  .hero-scroll span { font-size: 0.625rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); }
-  .hero-scroll svg { width: 1rem; height: 1rem; color: var(--text-muted); }
-  @keyframes gentleBounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
+  /* ===== CARTOON DECORATIONS ===== */
+  .cartoon-deco { position: absolute; pointer-events: none; z-index: 0; }
 
-  /* ===== SECTION COMMON ===== */
-  .section { padding: 5rem 1.25rem; position: relative; }
-  .section-inner { max-width: 72rem; margin: 0 auto; }
-  .section-label {
-    display: inline-block; font-size: 0.6875rem; font-weight: 800;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    padding: 0.375rem 0.875rem; border-radius: var(--radius-pill);
-    margin-bottom: 0.875rem;
+  .deco-cloud {
+    width: 72px; height: 36px; background: var(--card);
+    border-radius: 36px; border: 2.5px solid var(--card-border);
+    box-shadow: 2px 2px 0 var(--card-border);
+    animation: floatCloud 8s ease-in-out infinite;
+    transition: background 0.4s, border-color 0.4s;
   }
-  .label-pink { background: var(--accent-pink-soft); color: var(--accent-pink); }
-  .label-mint { background: var(--accent-mint-soft); color: var(--accent-mint); }
-  .label-yellow { background: var(--accent-yellow-soft); color: var(--accent-yellow); }
-  .label-lavender { background: var(--accent-lavender-soft); color: var(--accent-lavender); }
-  .label-peach { background: var(--accent-peach-soft); color: var(--accent-peach); }
-  .section-title {
-    font-size: clamp(1.75rem, 4vw, 2.75rem);
-    font-weight: 900; letter-spacing: -0.02em;
-    color: var(--text-primary); line-height: 1.15;
+  .deco-cloud::before {
+    content: ''; position: absolute; width: 32px; height: 32px;
+    background: var(--card); border-radius: 50%;
+    border: 2.5px solid var(--card-border); border-bottom-color: transparent;
+    top: -18px; left: 12px;
   }
-  .section-desc {
-    margin-top: 0.75rem; font-size: 1rem;
-    color: var(--text-secondary); line-height: 1.7;
-    max-width: 36rem;
+  .deco-cloud::after {
+    content: ''; position: absolute; width: 22px; height: 22px;
+    background: var(--card); border-radius: 50%;
+    border: 2.5px solid var(--card-border); border-bottom-color: transparent;
+    top: -10px; left: 38px;
   }
-  .section-header { text-align: center; margin-bottom: 3rem; }
-  .section-header .section-desc { margin-left: auto; margin-right: auto; }
+  @keyframes floatCloud {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-10px) translateX(6px); }
+  }
+
+  .deco-star {
+    width: 20px; height: 20px; background: var(--accent);
+    clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.75; }
+    50% { transform: scale(1.25) rotate(12deg); opacity: 1; }
+  }
+
+  .deco-heart {
+    width: 18px; height: 16px; background: var(--pink);
+    transform: rotate(-45deg); border-radius: 0 50% 0 50%;
+    animation: floatHeart 4s ease-in-out infinite;
+  }
+  .deco-heart::before {
+    content: ''; position: absolute; width: 18px; height: 16px;
+    background: var(--pink); border-radius: 50% 50% 0 0; top: -8px; left: 0;
+  }
+  @keyframes floatHeart {
+    0%, 100% { transform: rotate(-45deg) translateY(0) scale(1); }
+    50% { transform: rotate(-45deg) translateY(-8px) scale(1.12); }
+  }
+
+  .deco-bubble {
+    border-radius: 50%; border: 2.5px solid var(--card-border);
+    background: var(--card); box-shadow: 2px 2px 0 var(--card-border);
+    animation: floatBubble 6s ease-in-out infinite;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  @keyframes floatBubble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
 
   /* ===== REVEAL ===== */
   .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.7s var(--smooth), transform 0.7s var(--spring);
+    opacity: 0; transform: translateY(28px) scale(0.97);
+    transition: opacity 0.65s var(--bounce), transform 0.65s var(--bounce);
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-d1 { transition-delay: 0.08s; }
-  .reveal-d2 { transition-delay: 0.16s; }
-  .reveal-d3 { transition-delay: 0.24s; }
-  .reveal-d4 { transition-delay: 0.32s; }
-  .reveal-d5 { transition-delay: 0.4s; }
-  .reveal-d6 { transition-delay: 0.48s; }
+  .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .reveal-delay-1 { transition-delay: 0.07s; }
+  .reveal-delay-2 { transition-delay: 0.14s; }
+  .reveal-delay-3 { transition-delay: 0.21s; }
+  .reveal-delay-4 { transition-delay: 0.28s; }
+  .reveal-delay-5 { transition-delay: 0.35s; }
 
-  /* ===== GALLERY SECTION ===== */
-  .gallery-toolbar {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem;
-    margin-bottom: 1.5rem;
+  /* ===== SECTION LABEL ===== */
+  .section-label {
+    display: inline-block; padding: 0.3rem 0.875rem;
+    border-radius: 999px; font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border: 2px solid; margin-bottom: 0.625rem;
+    transition: background 0.4s, color 0.4s, border-color 0.4s;
   }
-  .gallery-search {
-    flex: 1; min-width: 200px; position: relative;
-  }
-  .gallery-search input {
-    width: 100%; padding: 0.75rem 1rem 0.75rem 2.75rem;
-    border-radius: var(--radius-pill); border: 2px solid var(--border);
-    background: var(--bg-input); color: var(--text-primary);
-    font-family: inherit; font-size: 0.875rem; font-weight: 600;
-    outline: none; transition: all 0.25s;
-  }
-  .gallery-search input::placeholder { color: var(--text-muted); }
-  .gallery-search input:focus { border-color: var(--accent-pink); box-shadow: 0 0 0 4px var(--accent-pink-soft); }
-  .gallery-search svg {
-    position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
-    width: 1rem; height: 1rem; color: var(--text-muted); pointer-events: none;
-  }
-  .gallery-filters {
-    display: flex; gap: 0.375rem; flex-wrap: wrap;
-  }
-  .filter-pill {
-    padding: 0.5rem 1rem; border-radius: var(--radius-pill);
-    font-size: 0.75rem; font-weight: 700;
-    border: 2px solid var(--border); background: var(--bg-card);
-    color: var(--text-secondary); transition: all 0.25s var(--spring);
-    white-space: nowrap;
-  }
-  .filter-pill:hover { border-color: var(--accent-pink); color: var(--accent-pink); }
-  .filter-pill.active { background: var(--accent-pink); border-color: var(--accent-pink); color: #fff; box-shadow: var(--shadow-pink); }
-  .gallery-actions { display: flex; gap: 0.375rem; }
-  .view-btn {
-    width: 2.25rem; height: 2.25rem; border-radius: 0.625rem;
+  .label-primary { color: var(--primary); background: var(--primary-light); border-color: var(--primary); }
+  .label-secondary { color: var(--secondary); background: var(--secondary-light); border-color: var(--secondary); }
+  .label-purple { color: var(--purple); background: var(--purple-light); border-color: var(--purple); }
+  .label-pink { color: var(--pink); background: var(--pink-light); border-color: var(--pink); }
+  .label-accent { color: var(--accent-dark); background: var(--accent-light); border-color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero-section {
+    position: relative; min-height: 100vh;
     display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--border); background: var(--bg-card);
-    color: var(--text-muted); transition: all 0.2s;
+    padding: calc(var(--nav-h) + 2rem) 1.25rem 4rem;
+    overflow: hidden;
   }
-  .view-btn:hover, .view-btn.active { border-color: var(--accent-lavender); color: var(--accent-lavender); background: var(--accent-lavender-soft); }
-  .view-btn svg { width: 1rem; height: 1rem; }
+  .hero-bg-blob {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    filter: blur(70px); opacity: 0.2; transition: background 0.6s;
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 680px; margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 0.9rem; border-radius: 999px;
+    background: var(--card); border: 2.5px solid var(--card-border);
+    box-shadow: 2px 2px 0 var(--card-border);
+    font-size: 0.72rem; font-weight: 700; color: var(--text-muted);
+    margin-bottom: 1.5rem; transition: all 0.4s;
+  }
+  .dot-live {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green); border: 2px solid var(--text);
+    animation: pulse 2s ease-in-out infinite; flex-shrink: 0;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-  /* ===== WALLPAPER CARDS ===== */
-  .gallery-grid {
-    display: grid; gap: 1.25rem;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  .hero-title {
+    font-size: clamp(2.4rem, 6.5vw, 4rem); font-weight: 700;
+    color: var(--text); margin-bottom: 0.875rem;
+    transition: color 0.4s;
   }
-  .gallery-grid.view-list { grid-template-columns: 1fr; }
-  .gallery-grid.view-list .wp-card { flex-direction: row; }
-  .gallery-grid.view-list .wp-card-preview { width: 200px; min-height: 120px; flex-shrink: 0; }
-  .gallery-grid.view-list .wp-card-info { flex: 1; }
+  .hero-title-accent {
+    color: var(--primary); position: relative; display: inline-block;
+    transition: color 0.4s;
+  }
+  .hero-title-accent::after {
+    content: ''; position: absolute; bottom: 2px; left: -3px; right: -3px;
+    height: 7px; background: var(--accent); border-radius: 4px;
+    z-index: -1; opacity: 0.55; transition: background 0.4s;
+  }
+  .hero-sub {
+    font-size: clamp(0.95rem, 2.2vw, 1.125rem); color: var(--text-muted);
+    line-height: 1.75; max-width: 520px; margin: 0 auto 2rem;
+    transition: color 0.4s;
+  }
+  .hero-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
 
-  .wp-card {
-    background: var(--bg-card); border: 2px solid var(--border);
-    border-radius: var(--radius-lg); overflow: hidden;
-    display: flex; flex-direction: column;
-    transition: all 0.35s var(--spring);
-    position: relative;
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.5rem; border-radius: var(--radius-md);
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem;
+    cursor: pointer; border: 2.5px solid var(--text);
+    transition: all 0.25s var(--bounce);
+    text-decoration: none; position: relative; overflow: hidden;
   }
-  .wp-card:hover {
-    border-color: var(--accent-pink);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg), var(--shadow-pink);
+  .btn:active { transform: translate(1px, 1px) !important; }
+  .btn-primary {
+    background: var(--primary); color: #fff;
+    box-shadow: 3px 3px 0 var(--text);
   }
-  .wp-card-preview {
-    position: relative; width: 100%; aspect-ratio: 16/9;
-    background: var(--bg-input); overflow: hidden; cursor: pointer;
+  .btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--text);
   }
-  .wp-card-preview iframe {
-    position: absolute; width: 1280px; height: 720px;
-    origin: center; pointer-events: none;
-    transform: scale(calc(min(100%, 280px) / 1280));
+  .btn-secondary {
+    background: var(--card); color: var(--text);
+    box-shadow: 3px 3px 0 var(--card-border);
+    transition: all 0.25s var(--bounce), background 0.4s, color 0.4s, border-color 0.4s;
   }
-  .wp-card-preview .preview-overlay {
-    position: absolute; inset: 0; z-index: 2;
-    background: rgba(74,52,86,0.0);
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.3s;
+  .btn-secondary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--card-border-hover);
+    border-color: var(--text);
   }
-  .wp-card-preview:hover .preview-overlay { background: rgba(74,52,86,0.25); }
-  .preview-overlay .play-circle {
-    width: 3rem; height: 3rem; border-radius: 50%;
-    background: var(--bg-card); border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; transform: scale(0.7);
-    transition: all 0.3s var(--spring);
-    box-shadow: var(--shadow-md);
-  }
-  .wp-card-preview:hover .play-circle { opacity: 1; transform: scale(1); }
-  .play-circle svg { width: 1.125rem; height: 1.125rem; color: var(--accent-pink); margin-left: 2px; }
 
-  .wp-card-badges {
-    position: absolute; top: 0.625rem; left: 0.625rem; z-index: 3;
-    display: flex; gap: 0.375rem;
+  .hero-hint {
+    margin-top: 1.125rem; font-size: 0.72rem; color: var(--text-light);
+    font-weight: 600; transition: color 0.4s;
   }
-  .wp-badge {
-    padding: 0.25rem 0.625rem; border-radius: var(--radius-pill);
-    font-size: 0.625rem; font-weight: 800; text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .hero-hint kbd {
+    display: inline-block; padding: 0.1rem 0.45rem;
+    background: var(--card); border: 2px solid var(--card-border);
+    border-radius: 0.3rem; font-family: 'Nunito', sans-serif;
+    font-size: 0.65rem; box-shadow: 1px 1px 0 var(--card-border);
+    color: var(--text-muted); transition: all 0.4s;
   }
-  .badge-new { background: var(--accent-mint); color: #fff; }
-  .badge-popular { background: var(--accent-yellow); color: #4A3456; }
-  .badge-staff { background: var(--accent-lavender); color: #fff; }
 
-  .wp-card-info { padding: 1rem 1.125rem; }
-  .wp-card-name {
-    font-weight: 800; font-size: 0.9375rem;
-    color: var(--text-primary); margin-bottom: 0.375rem;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    animation: scrollBounce 2.2s ease-in-out infinite;
   }
-  .wp-card-meta {
-    display: flex; align-items: center; gap: 0.875rem;
-    font-size: 0.75rem; color: var(--text-muted); font-weight: 600;
+  .scroll-indicator span {
+    font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--text-light);
   }
-  .wp-card-meta span { display: flex; align-items: center; gap: 0.25rem; }
-  .wp-card-meta svg { width: 0.875rem; height: 0.875rem; }
-  .wp-card-actions {
-    display: flex; align-items: center; gap: 0.375rem;
-    margin-top: 0.75rem; padding-top: 0.75rem;
-    border-top: 2px solid var(--border);
+  .scroll-indicator svg { color: var(--text-light); }
+  @keyframes scrollBounce {
+    0%,100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    50% { transform: translateX(-50%) translateY(8px); opacity: 0.5; }
   }
-  .wp-action-btn {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.375rem;
-    padding: 0.5rem; border-radius: var(--radius-sm);
-    font-size: 0.75rem; font-weight: 700;
-    transition: all 0.25s var(--spring);
-    color: var(--text-secondary);
-  }
-  .wp-action-btn svg { width: 0.875rem; height: 0.875rem; }
-  .wp-action-btn:hover { background: var(--accent-pink-soft); color: var(--accent-pink); }
-  .wp-action-btn.liked { background: var(--accent-pink-soft); color: var(--accent-pink); }
-  .wp-action-btn.liked svg { fill: var(--accent-pink); }
-  .wp-action-btn.download:hover { background: var(--accent-mint-soft); color: var(--accent-mint); }
 
-  .wp-card-empty {
-    grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;
-    color: var(--text-muted);
+  /* ===== PREVIEW FLOAT WINDOWS ===== */
+  .preview-float {
+    position: absolute; border-radius: var(--radius-md); overflow: hidden;
+    border: 3px solid var(--card-border);
+    box-shadow: 4px 4px 0 var(--card-border);
+    transition: transform 0.5s var(--bounce), border-color 0.4s, box-shadow 0.4s;
   }
-  .wp-card-empty svg { width: 3rem; height: 3rem; margin-bottom: 1rem; opacity: 0.5; }
-  .wp-card-empty p { font-weight: 700; font-size: 1rem; }
+  .preview-float:hover { transform: rotate(0deg) scale(1.06) !important; }
+  .pw-bar {
+    height: 22px; background: var(--bg-alt); border-bottom: 2px solid var(--card-border);
+    display: flex; align-items: center; padding: 0 7px; gap: 4px;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .pw-dot { width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid var(--text); flex-shrink: 0; }
+  .pw-dot.r { background: #EF5350; }
+  .pw-dot.y { background: #FFC107; }
+  .pw-dot.g { background: #66BB6A; }
+  .pw-body { transition: background 0.4s; }
 
-  /* ===== PREVIEW MODAL ===== */
-  #previewModal {
-    position: fixed; inset: 0; z-index: 10003;
-    display: flex; align-items: center; justify-content: center;
-    padding: 1.5rem;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.35s;
+  /* ===== CAROUSEL ===== */
+  .carousel-wrap {
+    position: relative; border-radius: var(--radius-xl); overflow: hidden;
+    border: 3px solid var(--card-border);
+    box-shadow: 4px 4px 0 var(--card-border);
+    background: var(--card); transition: all 0.4s;
   }
-  #previewModal.open { opacity: 1; pointer-events: auto; }
-  #previewModal .modal-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(42,38,64,0.6); backdrop-filter: blur(8px);
+  .carousel-area {
+    overflow: hidden; position: relative;
+    aspect-ratio: 16/9; background: var(--bg-alt);
+    transition: background 0.4s;
   }
-  #previewModal .modal-content {
-    position: relative; z-index: 1;
-    width: 100%; max-width: 64rem;
-    background: var(--bg-card); border: 2px solid var(--border);
-    border-radius: var(--radius-lg); overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    transform: scale(0.9) translateY(20px);
-    transition: transform 0.4s var(--spring);
+  .carousel-track {
+    display: flex; height: 100%;
+    transition: transform 0.6s var(--bounce);
   }
-  #previewModal.open .modal-content { transform: scale(1) translateY(0); }
-  .modal-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 1.25rem; border-bottom: 2px solid var(--border);
+  .carousel-slide { min-width: 100%; height: 100%; position: relative; }
+  .carousel-slide iframe {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 1280px; height: 720px;
+    margin-left: -640px; margin-top: -360px;
+    transform: scale(0.3125);
+    transform-origin: center center;
+    border: none;
+    pointer-events: none;
   }
-  .modal-header h3 { font-weight: 800; font-size: 1rem; }
-  .modal-close {
-    width: 2rem; height: 2rem; border-radius: 0.5rem;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-muted); transition: all 0.2s;
-    border: 2px solid var(--border);
+  .carousel-controls {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0.75rem; display: flex; align-items: center; justify-content: space-between;
+    z-index: 5;
   }
-  .modal-close:hover { background: var(--accent-pink-soft); color: var(--accent-pink); border-color: var(--accent-pink); }
-  .modal-close svg { width: 1rem; height: 1rem; }
-  .modal-preview { aspect-ratio: 16/9; background: #000; position: relative; }
-  .modal-preview iframe { width: 100%; height: 100%; border: none; }
-  .modal-footer {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 1.25rem; border-top: 2px solid var(--border);
+  .carousel-controls::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.25), transparent);
+    pointer-events: none; z-index: -1;
   }
-  .modal-footer .meta { font-size: 0.8125rem; color: var(--text-muted); font-weight: 600; }
-  .modal-footer .actions { display: flex; gap: 0.5rem; }
-  .modal-btn {
-    display: inline-flex; align-items: center; gap: 0.375rem;
-    padding: 0.5rem 1.25rem; border-radius: var(--radius-pill);
-    font-size: 0.8125rem; font-weight: 700;
-    border: 2px solid var(--border); background: var(--bg-card);
-    color: var(--text-secondary); transition: all 0.25s var(--spring);
+  .carousel-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--card); border: 2.5px solid var(--text);
+    box-shadow: 2px 2px 0 var(--text);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--text); transition: all 0.2s var(--bounce); flex-shrink: 0;
   }
-  .modal-btn:hover { border-color: var(--accent-pink); color: var(--accent-pink); }
-  .modal-btn.primary { background: var(--accent-pink); border-color: var(--accent-pink); color: #fff; }
-  .modal-btn.primary:hover { transform: scale(1.04); box-shadow: var(--shadow-pink); }
-  .modal-btn svg { width: 0.875rem; height: 0.875rem; }
+  .carousel-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--text); }
+  .carousel-btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--text); }
+  .carousel-dots { display: flex; gap: 5px; }
+  .carousel-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); border: 2px solid rgba(255,255,255,0.8);
+    cursor: pointer; transition: all 0.3s var(--bounce);
+  }
+  .carousel-dot.active { background: var(--primary); border-color: #fff; transform: scale(1.25); }
+  .carousel-dot:hover { transform: scale(1.15); }
 
   /* ===== FEATURE CARDS ===== */
-  .features-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem;
+  .feature-card {
+    background: var(--card); border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-lg); padding: 1.625rem;
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.35s var(--smooth), box-shadow 0.35s var(--smooth), background 0.4s;
+    position: relative; overflow: hidden; cursor: default;
+    will-change: transform;
   }
-  .feat-card {
-    background: var(--bg-card); border: 2px solid var(--border);
-    border-radius: var(--radius-lg); padding: 1.75rem;
-    transition: all 0.35s var(--spring);
-    position: relative; overflow: hidden;
+  .feature-card::after {
+    content: ''; position: absolute; top: -10px; right: -10px;
+    width: 60px; height: 60px; border-radius: 50%; opacity: 0.1;
+    transition: opacity 0.3s, background 0.4s;
   }
-  .feat-card::after {
-    content: ''; position: absolute; top: -1rem; right: -1rem;
-    width: 5rem; height: 5rem; border-radius: 50%;
-    opacity: 0; transition: opacity 0.4s;
-  }
-  .feat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .feat-card:hover::after { opacity: 1; }
-  .feat-card.pink::after { background: var(--accent-pink-soft); }
-  .feat-card.mint::after { background: var(--accent-mint-soft); }
-  .feat-card.lavender::after { background: var(--accent-lavender-soft); }
-  .feat-card.yellow::after { background: var(--accent-yellow-soft); }
-  .feat-card.peach::after { background: var(--accent-peach-soft); }
-  .feat-card:hover.pink { border-color: var(--accent-pink); }
-  .feat-card:hover.mint { border-color: var(--accent-mint); }
-  .feat-card:hover.lavender { border-color: var(--accent-lavender); }
-  .feat-card:hover.yellow { border-color: var(--accent-yellow); }
-  .feat-card:hover.peach { border-color: var(--accent-peach); }
+  .feature-card:hover { border-color: var(--card-border-hover); box-shadow: var(--shadow-card-hover); }
+  .feature-card:hover::after { opacity: 0.2; }
+  .feature-card.card-primary::after { background: var(--primary); }
+  .feature-card.card-secondary::after { background: var(--secondary); }
+  .feature-card.card-purple::after { background: var(--purple); }
+  .feature-card.card-accent::after { background: var(--accent); }
+  .feature-card.card-pink::after { background: var(--pink); }
+  .feature-card.card-sky::after { background: var(--sky); }
 
-  .feat-icon {
-    width: 3rem; height: 3rem; border-radius: 0.875rem;
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: var(--radius-sm);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.125rem; transition: transform 0.3s var(--spring);
+    border: 2.5px solid; margin-bottom: 0.875rem;
+    box-shadow: 2px 2px 0 currentColor;
+    transition: background 0.4s, border-color 0.4s;
+    flex-shrink: 0;
   }
-  .feat-card:hover .feat-icon { transform: rotate(-6deg) scale(1.1); }
-  .feat-icon svg { width: 1.375rem; height: 1.375rem; }
-  .feat-icon.pink { background: var(--accent-pink-soft); color: var(--accent-pink); }
-  .feat-icon.mint { background: var(--accent-mint-soft); color: var(--accent-mint); }
-  .feat-icon.lavender { background: var(--accent-lavender-soft); color: var(--accent-lavender); }
-  .feat-icon.yellow { background: var(--accent-yellow-soft); color: var(--accent-yellow); }
-  .feat-icon.peach { background: var(--accent-peach-soft); color: var(--accent-peach); }
-  .feat-card h3 { font-weight: 800; font-size: 1.0625rem; margin-bottom: 0.5rem; color: var(--text-primary); }
-  .feat-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; }
+  .fi-primary { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+  .fi-secondary { background: var(--secondary-light); border-color: var(--secondary); color: var(--secondary); }
+  .fi-purple { background: var(--purple-light); border-color: var(--purple); color: var(--purple); }
+  .fi-accent { background: var(--accent-light); border-color: var(--accent-dark); color: var(--accent-dark); }
+  .fi-pink { background: var(--pink-light); border-color: var(--pink); color: var(--pink); }
+  .fi-sky { background: var(--sky-light); border-color: var(--sky-dark); color: var(--sky-dark); }
+
+  .feature-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text); transition: color 0.4s; }
+  .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; transition: color 0.4s; }
 
   /* ===== STATS ===== */
   .stats-section {
-    border-top: 2px solid var(--border);
-    border-bottom: 2px solid var(--border);
-    background: var(--bg-card);
+    border-top: 3px solid var(--card-border);
+    border-bottom: 3px solid var(--card-border);
+    background: var(--bg-alt); position: relative; overflow: hidden;
+    transition: background 0.4s, border-color 0.4s;
   }
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
+  .stat-card {
+    text-align: center; padding: 1.25rem 0.75rem;
+    background: var(--card); border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 3px 3px 0 var(--card-border);
+    transition: transform 0.3s var(--bounce), background 0.4s, border-color 0.4s;
   }
-  @media(min-width:640px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
-  .stat-item { text-align: center; }
-  .stat-icon {
-    width: 2.75rem; height: 2.75rem; border-radius: 0.75rem;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 0.75rem;
-  }
-  .stat-icon svg { width: 1.25rem; height: 1.25rem; }
+  .stat-card:hover { transform: translateY(-3px) rotate(-1deg); }
   .stat-value {
-    font-size: clamp(2rem, 5vw, 3rem); font-weight: 900;
+    font-family: 'Fredoka', sans-serif;
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem); font-weight: 700;
+    color: var(--primary); transition: color 0.4s;
     font-variant-numeric: tabular-nums;
-    color: var(--text-primary); line-height: 1;
   }
-  .stat-label { font-size: 0.8125rem; color: var(--text-muted); font-weight: 700; margin-top: 0.375rem; }
+  .stat-label { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-top: 0.2rem; transition: color 0.4s; }
 
   /* ===== COMPARISON ===== */
-  .comp-container {
-    position: relative; overflow: hidden; border-radius: var(--radius-lg);
-    border: 2px solid var(--border); cursor: col-resize; user-select: none;
-    aspect-ratio: 16/9;
+  .comparison-container {
+    position: relative; overflow: hidden; border-radius: var(--radius-xl);
+    border: 3px solid var(--card-border);
+    box-shadow: 4px 4px 0 var(--card-border);
+    cursor: col-resize; user-select: none;
+    aspect-ratio: 16/9; transition: border-color 0.4s;
   }
-  .comp-layer { position: absolute; inset: 0; }
+  .comp-layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
   .comp-slider-line {
-    position: absolute; top: 0; bottom: 0; width: 3px;
-    background: var(--accent-pink); z-index: 10;
-    box-shadow: 0 0 12px rgba(255,126,179,0.3);
+    position: absolute; top: 0; bottom: 0; width: 4px;
+    background: var(--primary); z-index: 10;
+    box-shadow: 0 0 0 2px var(--text);
+    transition: background 0.4s;
   }
   .comp-handle {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-    width: 2.5rem; height: 2.5rem; border-radius: 50%;
-    background: var(--accent-pink); border: 3px solid var(--bg-card);
-    box-shadow: var(--shadow-pink);
-    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--primary); border: 3px solid var(--text);
+    box-shadow: 2px 2px 0 var(--text);
+    display: flex; align-items: center; justify-content: center; color: #fff;
+    transition: background 0.4s;
   }
-  .comp-handle svg { width: 0.875rem; height: 0.875rem; color: #fff; }
   .comp-label {
-    position: absolute; top: 0.75rem; padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-pill); font-size: 0.625rem; font-weight: 800;
+    position: absolute; top: 0.625rem; padding: 0.2rem 0.625rem;
+    border-radius: 999px; font-size: 0.6rem; font-weight: 800;
     text-transform: uppercase; letter-spacing: 0.08em;
+    border: 2px solid var(--text); box-shadow: 1px 1px 0 var(--text);
+    z-index: 5; transition: background 0.4s;
   }
-  .comp-label.before { left: 0.75rem; background: var(--bg-card); color: var(--text-muted); border: 2px solid var(--border); }
-  .comp-label.after { right: 0.75rem; background: var(--accent-pink); color: #fff; }
+  .comp-label-before { left: 0.625rem; background: var(--bg-alt); color: var(--text-muted); }
+  .comp-label-after { right: 0.625rem; background: var(--primary); color: #fff; }
 
-  /* ===== INSTALL STEPS ===== */
-  .steps-list { display: flex; flex-direction: column; gap: 0; }
-  .step-item {
-    display: flex; gap: 1.25rem; position: relative;
+  /* ===== INSTALL ===== */
+  .step-connector {
+    width: 3px; height: 2rem; margin: 0.2rem auto;
+    background: var(--card-border); border-radius: 3px;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
   }
-  .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-  .step-num {
-    width: 2.75rem; height: 2.75rem; border-radius: 0.875rem;
+  .step-connector-fill {
+    position: absolute; inset: 0; background: var(--primary);
+    border-radius: 3px; transform: scaleY(0); transform-origin: top;
+    transition: transform 0.6s var(--smooth);
+  }
+  .step-item.completed .step-connector-fill { transform: scaleY(1); }
+
+  .step-number {
+    width: 42px; height: 42px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 0.875rem;
-    background: var(--bg-card); border: 2.5px solid var(--border);
-    color: var(--text-muted); transition: all 0.4s var(--spring);
-    flex-shrink: 0;
+    font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.05rem;
+    background: var(--card); border: 3px solid var(--card-border);
+    color: var(--text-muted); box-shadow: 2px 2px 0 var(--card-border);
+    transition: all 0.4s var(--bounce); flex-shrink: 0;
   }
-  .step-item.active .step-num {
-    background: var(--accent-pink); border-color: var(--accent-pink); color: #fff;
-    box-shadow: var(--shadow-pink); transform: rotate(-4deg) scale(1.08);
+  .step-item.active .step-number {
+    background: var(--primary); border-color: var(--text); color: #fff;
+    box-shadow: 2px 2px 0 var(--text); transform: scale(1.1);
   }
-  .step-item.completed .step-num {
-    background: var(--accent-mint); border-color: var(--accent-mint); color: #fff;
-    box-shadow: var(--shadow-mint);
+  .step-item.completed .step-number {
+    background: var(--green); border-color: var(--text); color: #fff;
+    box-shadow: 2px 2px 0 var(--text);
   }
-  .step-line {
-    width: 2.5px; flex: 1; min-height: 1.5rem;
-    background: linear-gradient(to bottom, var(--border), transparent);
-    margin: 0.5rem 0;
-  }
-  .step-right { flex: 1; padding-bottom: 2rem; }
-  .step-right h3 { font-weight: 800; font-size: 1.0625rem; margin-bottom: 0.25rem; color: var(--text-primary); }
-  .step-right p { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.875rem; }
+
   .code-block {
-    background: var(--bg-input); border: 2px solid var(--border);
-    border-radius: var(--radius-sm); padding: 0.875rem 1rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.8125rem; color: var(--text-secondary);
-    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
-    transition: border-color 0.25s;
+    background: var(--bg-alt); border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-sm); padding: 0.75rem 0.875rem;
+    font-size: 0.78rem; color: var(--text-muted);
+    display: flex; align-items: center; justify-content: space-between; gap: 0.625rem;
+    box-shadow: 2px 2px 0 var(--card-border);
+    transition: border-color 0.3s, background 0.4s;
     overflow-x: auto;
   }
-  .code-block:hover { border-color: var(--accent-lavender); }
-  .code-block .ck { color: var(--accent-pink); }
-  .code-block .cf { color: var(--accent-mint); }
-  .code-block .cp { color: var(--accent-yellow); }
+  .code-block:hover { border-color: var(--primary); }
+  .code-block .ck { color: var(--primary); font-weight: 700; }
+  .code-block .cf { color: var(--secondary); }
+  .code-block .cp { color: var(--accent-dark); }
+
   .copy-btn {
-    padding: 0.375rem 0.75rem; border-radius: var(--radius-pill);
-    background: var(--bg-card); border: 2px solid var(--border);
-    color: var(--text-muted); font-size: 0.6875rem; font-weight: 700;
-    cursor: pointer; transition: all 0.25s; white-space: nowrap;
-    font-family: 'Nunito', sans-serif;
+    padding: 0.3rem 0.6rem; border-radius: var(--radius-sm);
+    background: var(--card); border: 2px solid var(--card-border);
+    color: var(--text-muted); font-size: 0.65rem; font-weight: 800;
+    font-family: 'Nunito', sans-serif; cursor: pointer;
+    transition: all 0.2s var(--bounce);
+    box-shadow: 1px 1px 0 var(--card-border); white-space: nowrap; flex-shrink: 0;
   }
-  .copy-btn:hover { border-color: var(--accent-pink); color: var(--accent-pink); }
-  .copy-btn.copied { border-color: var(--accent-mint); color: var(--accent-mint); background: var(--accent-mint-soft); }
+  .copy-btn:hover { border-color: var(--primary); color: var(--primary); transform: translate(-1px, -1px); }
+  .copy-btn:active { transform: translate(1px, 1px); }
+  .copy-btn.copied { background: var(--green-light); border-color: var(--green); color: var(--green-dark); }
 
   /* ===== FAQ ===== */
-  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
   .faq-item {
-    background: var(--bg-card); border: 2px solid var(--border);
-    border-radius: var(--radius); overflow: hidden;
-    transition: all 0.3s var(--spring);
+    border: 2.5px solid var(--card-border); border-radius: var(--radius-lg);
+    overflow: hidden; background: var(--card);
+    box-shadow: 3px 3px 0 var(--card-border);
+    transition: all 0.3s var(--bounce); cursor: pointer;
   }
-  .faq-item:hover { border-color: var(--border-strong); }
-  .faq-item.open { border-color: var(--accent-lavender); box-shadow: var(--shadow-md); }
-  .faq-q {
-    padding: 1.125rem 1.25rem; cursor: pointer;
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    font-weight: 700; font-size: 0.9375rem; color: var(--text-primary);
-    transition: color 0.2s;
+  .faq-item.open { border-color: var(--primary); box-shadow: 3px 3px 0 var(--primary); }
+  .faq-question {
+    padding: 1rem 1.125rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem;
+    color: var(--text); transition: color 0.3s; gap: 0.75rem;
   }
-  .faq-item.open .faq-q { color: var(--accent-lavender); }
-  .faq-chevron {
-    transition: transform 0.4s var(--spring); flex-shrink: 0;
-    color: var(--text-muted);
-  }
-  .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--accent-lavender); }
-  .faq-chevron svg { width: 1.125rem; height: 1.125rem; }
-  .faq-a {
+  .faq-item.open .faq-question { color: var(--primary); }
+  .faq-chevron { transition: transform 0.4s var(--bounce); color: var(--text-light); flex-shrink: 0; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+  .faq-answer {
     max-height: 0; overflow: hidden;
-    transition: max-height 0.5s var(--smooth), padding 0.3s;
-    padding: 0 1.25rem;
+    transition: max-height 0.45s var(--smooth), padding 0.3s;
+    padding: 0 1.125rem; cursor: default;
   }
-  .faq-item.open .faq-a { max-height: 300px; padding: 0 1.25rem 1.125rem; }
-  .faq-a p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; }
-  .faq-a code {
-    background: var(--accent-lavender-soft); color: var(--accent-lavender);
-    padding: 0.125rem 0.5rem; border-radius: 0.375rem;
-    font-size: 0.8125rem; font-family: ui-monospace, monospace;
+  .faq-item.open .faq-answer { max-height: 280px; padding: 0 1.125rem 1rem; }
+  .faq-answer p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+  .faq-answer code {
+    background: var(--primary-light); color: var(--primary);
+    padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.78rem;
+    font-weight: 700; border: 1.5px solid var(--primary);
   }
-  .faq-a strong { color: var(--text-primary); }
+  .faq-answer strong { color: var(--text); }
 
   /* ===== CTA SECTION ===== */
-  .cta-section { position: relative; overflow: hidden; }
-  .cta-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(circle at 30% 40%, var(--accent-pink-soft) 0%, transparent 50%),
-      radial-gradient(circle at 70% 60%, var(--accent-mint-soft) 0%, transparent 50%),
-      radial-gradient(circle at 50% 80%, var(--accent-yellow-soft) 0%, transparent 40%);
-    opacity: 0.6;
+  .cta-section {
+    position: relative; overflow: hidden;
+    padding: 4.5rem 1.25rem; background: var(--bg-alt);
+    border-top: 3px solid var(--card-border);
+    transition: background 0.4s, border-color 0.4s;
   }
-  .cta-inner { position: relative; z-index: 1; text-align: center; max-width: 36rem; margin: 0 auto; }
-  .cta-icon {
-    width: 4rem; height: 4rem; border-radius: 1.25rem;
-    background: var(--accent-pink-soft); border: 2px solid var(--accent-pink-soft);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 2rem;
-    animation: gentleFloat 3s ease-in-out infinite;
-  }
-  .cta-icon svg { width: 2rem; height: 2rem; color: var(--accent-pink); }
-  @keyframes gentleFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .cta-inner { position: relative; z-index: 2; text-align: center; max-width: 560px; margin: 0 auto; }
+  .cta-section h2 { font-size: clamp(1.85rem, 4.5vw, 2.75rem); font-weight: 700; color: var(--text); margin-bottom: 0.75rem; transition: color 0.4s; }
+  .cta-section p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.75rem; transition: color 0.4s; }
 
   /* ===== FOOTER ===== */
   .site-footer {
-    border-top: 2px solid var(--border); padding: 2rem 1.25rem;
+    border-top: 3px solid var(--card-border); padding: 1.75rem 1.25rem;
+    background: var(--bg); transition: background 0.4s, border-color 0.4s;
   }
   .footer-inner {
-    max-width: 72rem; margin: 0 auto;
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    max-width: 1080px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;
   }
   .footer-logo { display: flex; align-items: center; gap: 0.5rem; }
   .footer-logo-icon {
-    width: 1.75rem; height: 1.75rem; border-radius: 0.5rem;
-    background: var(--accent-pink); display: flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 0.4rem;
+    background: var(--primary); border: 2px solid var(--text);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 1px 1px 0 var(--text);
   }
-  .footer-logo-icon svg { width: 0.875rem; height: 0.875rem; color: #fff; }
-  .footer-logo span { font-weight: 800; font-size: 0.8125rem; color: var(--text-muted); }
+  .footer-logo span { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.78rem; color: var(--text-muted); transition: color 0.4s; }
   .footer-links { display: flex; gap: 1.25rem; }
-  .footer-links a { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); transition: color 0.2s; }
-  .footer-links a:hover { color: var(--accent-pink); }
-  .footer-copy { font-size: 0.6875rem; color: var(--text-muted); font-weight: 600; }
+  .footer-links a { font-size: 0.78rem; font-weight: 700; color: var(--text-light); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--primary); }
+  .footer-copy { font-size: 0.75rem; font-weight: 700; color: var(--text-light); transition: color 0.4s; }
+
+  /* ===== BACK TO TOP ===== */
+  #backToTop {
+    position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 9990;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--primary); border: 2.5px solid var(--text);
+    box-shadow: 2px 2px 0 var(--text); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; color: #fff;
+    transition: all 0.3s var(--bounce), background 0.4s;
+    opacity: 0; transform: translateY(16px) scale(0.8); pointer-events: none;
+  }
+  #backToTop.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  #backToTop:hover { transform: translateY(-2px) scale(1.08); box-shadow: 3px 3px 0 var(--text); }
+  #backToTop:active { transform: translateY(1px) scale(0.95); box-shadow: 1px 1px 0 var(--text); }
 
   /* ===== TOAST ===== */
-  .toast-wrap {
-    position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 99999;
+  .toast-container {
+    position: fixed; bottom: 4.5rem; right: 1.25rem; z-index: 99999;
     display: flex; flex-direction: column; gap: 0.5rem; pointer-events: none;
   }
   .toast {
-    pointer-events: auto; padding: 0.75rem 1.25rem; border-radius: var(--radius-sm);
-    font-size: 0.8125rem; font-weight: 700; color: #fff;
-    border: 2px solid rgba(255,255,255,0.15);
-    animation: toastIn 0.35s var(--spring), toastOut 0.3s ease 2.2s forwards;
-    box-shadow: var(--shadow-lg);
-    display: flex; align-items: center; gap: 0.5rem;
+    pointer-events: auto; padding: 0.6rem 1rem;
+    border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 700;
+    border: 2.5px solid var(--text); box-shadow: 2px 2px 0 var(--text);
+    animation: toastIn 0.4s var(--bounce), toastOut 0.3s ease 2.2s forwards;
   }
-  .toast svg { width: 1rem; height: 1rem; flex-shrink: 0; }
-  .toast.success { background: var(--accent-mint); color: #fff; border-color: rgba(255,255,255,0.2); }
-  .toast.info { background: var(--accent-lavender); }
-  .toast.warn { background: var(--accent-yellow); color: #4A3456; }
-  @keyframes toastIn { from{opacity:0;transform:translateY(1rem) scale(0.9)} to{opacity:1;transform:translateY(0) scale(1)} }
-  @keyframes toastOut { to{opacity:0;transform:translateY(-0.5rem) scale(0.9)} }
+  .toast.success { background: var(--green); color: var(--green-dark); border-color: var(--green-dark); box-shadow: 2px 2px 0 var(--green-dark); }
+  .toast.info { background: var(--sky); color: var(--sky-dark); border-color: var(--sky-dark); box-shadow: 2px 2px 0 var(--sky-dark); }
+  .toast.warn { background: var(--accent); color: var(--accent-dark); border-color: var(--accent-dark); box-shadow: 2px 2px 0 var(--accent-dark); }
+  @keyframes toastIn { from { opacity:0; transform: translateY(0.75rem) scale(0.9); } to { opacity:1; transform: translateY(0) scale(1); } }
+  @keyframes toastOut { to { opacity:0; transform: translateY(-0.5rem) scale(0.9); } }
+
+  /* ===== SPARKLE CURSOR ===== */
+  .sparkle {
+    position: fixed; pointer-events: none; z-index: 99997;
+    width: 7px; height: 7px;
+    clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    animation: sparkleFade 0.55s ease-out forwards;
+  }
+  @keyframes sparkleFade {
+    0% { opacity: 1; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(0) rotate(80deg); }
+  }
+
+  /* ===== CONFETTI ===== */
+  @keyframes confettiBurst {
+    0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+    100% { opacity: 0; transform: translate(var(--cx), var(--cy)) rotate(var(--cr)) scale(0.15); }
+  }
+  .confetti-piece {
+    position: fixed; pointer-events: none; z-index: 99998;
+    animation: confettiBurst 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* ===== MASCOT ===== */
+  #mascot {
+    position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 9989;
+    width: 52px; height: 52px; border-radius: 50% 50% 50% 45%;
+    background: var(--primary); border: 3px solid var(--text);
+    box-shadow: 2px 2px 0 var(--text); cursor: pointer; overflow: hidden;
+    transition: transform 0.4s var(--bounce), background 0.4s;
+  }
+  #mascot:hover { transform: scale(1.12) rotate(-5deg); }
+  #mascot .eye {
+    position: absolute; width: 7px; height: 9px;
+    background: var(--text); border-radius: 50%; top: 17px;
+    transition: background 0.4s;
+  }
+  #mascot .eye.left { left: 13px; }
+  #mascot .eye.right { right: 13px; }
+  #mascot .eye::after {
+    content: ''; position: absolute; width: 3px; height: 3px;
+    background: #fff; border-radius: 50%; top: 1px; right: 0;
+  }
+  #mascot .mouth {
+    position: absolute; bottom: 13px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 5px; border-bottom: 2.5px solid var(--text);
+    border-radius: 0 0 50% 50%; transition: border-color 0.4s;
+  }
+  #mascot .blush {
+    position: absolute; width: 9px; height: 5px;
+    background: var(--pink); border-radius: 50%; top: 29px; opacity: 0.45;
+    transition: background 0.4s;
+  }
+  #mascot .blush.left { left: 4px; }
+  #mascot .blush.right { right: 4px; }
+  #mascot.bounce { animation: mascotBounce 0.45s var(--bounce); }
+  @keyframes mascotBounce {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.25) rotate(8deg); }
+    60% { transform: scale(0.92) rotate(-4deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+
+  #mascotTip {
+    position: fixed; bottom: 4.25rem; left: 1.25rem; z-index: 9989;
+    background: var(--card); border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-sm); padding: 0.4rem 0.75rem;
+    font-size: 0.72rem; font-weight: 700; color: var(--text-muted);
+    box-shadow: 2px 2px 0 var(--card-border);
+    opacity: 0; transform: translateY(6px); pointer-events: none;
+    transition: all 0.3s var(--bounce); white-space: nowrap;
+  }
+  #mascotTip.show { opacity: 1; transform: translateY(0); }
+  #mascotTip::after {
+    content: ''; position: absolute; bottom: -5px; left: 1rem;
+    width: 9px; height: 9px; background: var(--card);
+    border-right: 2.5px solid var(--card-border);
+    border-bottom: 2.5px solid var(--card-border);
+    transform: rotate(45deg);
+  }
+
+  /* ===== UTILITY ANIMATIONS ===== */
+  @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ===== RESPONSIVE ===== */
-  @media(max-width:639px) {
-    .section { padding: 3.5rem 1rem; }
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-toolbar { flex-direction: column; align-items: stretch; }
-    .gallery-filters { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.25rem; -webkit-overflow-scrolling: touch; }
-    .gallery-actions { justify-content: flex-end; }
-    .gallery-grid.view-list .wp-card { flex-direction: column; }
-    .gallery-grid.view-list .wp-card-preview { width: 100%; }
-    .modal-preview { aspect-ratio: 4/3; }
-    .modal-footer { flex-direction: column; gap: 0.75rem; }
-    .modal-footer .actions { width: 100%; }
-    .modal-footer .actions .modal-btn { flex: 1; justify-content: center; }
+  @media (max-width: 640px) {
+    .preview-float { display: none !important; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .btn { width: 100%; max-width: 260px; justify-content: center; }
+    .cta-section .hero-buttons { flex-direction: row; flex-wrap: wrap; }
+    .cta-section .btn { width: auto; max-width: none; }
+    #mascot, #mascotTip { display: none; }
   }
+  @media (min-width: 641px) and (max-width: 768px) {
+    #mascot, #mascotTip { display: none; }
+  }
+
+  /* ===== REDUCED MOTION ===== */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.15ms !important;
+    }
+    .sparkle, .confetti-piece { display: none !important; }
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 7px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 </style>
 
 <!-- ===== SCROLL PROGRESS ===== -->
 <div id="scrollProgress"></div>
 
-<!-- ===== MOBILE MENU OVERLAY ===== -->
-<div id="menuOverlay" onclick="closeMobileMenu()"></div>
-
-<!-- ===== MOBILE MENU ===== -->
-<div id="mobileMenu">
-  <div class="menu-header">
-    <div class="nav-logo">
-      <div class="nav-logo-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-      </div>
-      <span class="nav-logo-text">HTMLWallarper</span>
-    </div>
-    <button class="nav-btn" onclick="closeMobileMenu()" aria-label="Close menu">
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
-  </div>
-  <div class="menu-links">
-    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
-    <a href="#features" onclick="closeMobileMenu()">Features</a>
-    <a href="#install" onclick="closeMobileMenu()">Install</a>
-    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-    <a href="/project/" style="background:var(--accent-pink);color:#fff;border-radius:var(--radius-sm);text-align:center;margin-top:0.5rem;">Open Gallery</a>
-  </div>
-</div>
-
-<!-- ===== STICKY NAV ===== -->
-<nav id="stickyNav">
+<!-- ===== NAV ===== -->
+<nav id="mainNav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
       <div class="nav-logo-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
       </div>
-      <span class="nav-logo-text">HTMLWallarper</span>
+      <span>HTMLWallarper</span>
     </a>
     <div class="nav-links">
-      <a href="#gallery">Gallery</a>
-      <a href="#features">Features</a>
+      <a href="#features">Fitur</a>
+      <a href="#preview">Preview</a>
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
+      <a href="/project/" class="nav-cta">Buka Galeri</a>
     </div>
-    <div class="nav-actions">
-      <button class="nav-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <svg id="themeIconSun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        <svg id="themeIconMoon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    <div style="display:flex;align-items:center;gap:0.5rem;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       </button>
-      <a href="/project/" class="nav-cta">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        Gallery
-      </a>
-      <button class="nav-btn hamburger" onclick="openMobileMenu()" aria-label="Open menu">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </nav>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="hero">
-  <div class="hero-bg-pattern"></div>
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Fitur</a>
+  <a href="#preview">Preview</a>
+  <a href="#install">Install</a>
+  <a href="#faq">FAQ</a>
+  <a href="/project/" style="color:var(--primary);font-weight:800;">Buka Galeri →</a>
+</div>
 
-  <!-- Cute floating decorations -->
-  <div class="cute-deco cute-star" style="top:15%;left:8%;animation-delay:0s">
-    <svg viewBox="0 0 24 24" fill="var(--accent-yellow)"><path d="M12 2l2.09 6.26L20.18 9l-5 4.27L16.82 20 12 16.77 7.18 20l1.64-6.73L3.82 9l6.09-.74L12 2z"/></svg>
+<!-- ===== HERO ===== -->
+<section class="hero-section" id="hero">
+  <div class="hero-bg-blob" style="width:450px;height:450px;background:var(--primary);top:-8%;right:-8%;"></div>
+  <div class="hero-bg-blob" style="width:350px;height:350px;background:var(--secondary);bottom:-4%;left:-6%;"></div>
+  <div class="hero-bg-blob" style="width:250px;height:250px;background:var(--accent);top:45%;left:50%;margin-left:-125px;opacity:0.12;"></div>
+
+  <!-- Decos -->
+  <div class="cartoon-deco deco-cloud" style="top:14%;left:4%;"></div>
+  <div class="cartoon-deco deco-cloud" style="top:24%;right:2%;width:52px;height:26px;animation-delay:2.2s;opacity:0.6;"></div>
+  <div class="cartoon-deco deco-star" style="top:18%;left:18%;animation-delay:0.6s;"></div>
+  <div class="cartoon-deco deco-star" style="top:33%;right:14%;width:14px;height:14px;background:var(--pink);animation-delay:1.6s;"></div>
+  <div class="cartoon-deco deco-star" style="bottom:22%;left:10%;width:16px;height:16px;background:var(--secondary);animation-delay:2.8s;"></div>
+  <div class="cartoon-deco deco-heart" style="top:28%;right:22%;animation-delay:1.2s;"></div>
+  <div class="cartoon-deco deco-heart" style="bottom:28%;right:6%;animation-delay:3.2s;"></div>
+  <div class="cartoon-deco deco-bubble" style="top:16%;right:28%;width:18px;height:18px;animation-delay:1.1s;"></div>
+  <div class="cartoon-deco deco-bubble" style="bottom:18%;left:22%;width:12px;height:12px;animation-delay:2.1s;"></div>
+  <div class="cartoon-deco deco-bubble" style="top:58%;left:4%;width:15px;height:15px;animation-delay:0.6s;"></div>
+
+  <!-- Preview windows -->
+  <div class="preview-float" style="width:220px;height:124px;top:9%;right:5%;transform:rotate(3deg);">
+    <div class="pw-bar"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+    <div class="pw-body" style="width:100%;height:calc(100% - 22px);background:linear-gradient(135deg,var(--primary-light),var(--secondary-light));display:flex;align-items:center;justify-content:center;">
+      <div style="width:36px;height:36px;border-radius:50%;border:3px solid var(--primary);animation:ping 2s infinite;opacity:0.4;"></div>
+    </div>
   </div>
-  <div class="cute-deco cute-star" style="top:25%;right:12%;animation-delay:1.5s;transform:rotate(15deg)">
-    <svg viewBox="0 0 24 24" fill="var(--accent-pink)" style="opacity:0.6"><path d="M12 2l2.09 6.26L20.18 9l-5 4.27L16.82 20 12 16.77 7.18 20l1.64-6.73L3.82 9l6.09-.74L12 2z"/></svg>
+  <div class="preview-float" style="width:165px;height:93px;bottom:18%;left:3%;transform:rotate(-4deg);">
+    <div class="pw-bar"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+    <div class="pw-body" style="width:100%;height:calc(100% - 22px);background:linear-gradient(135deg,var(--purple-light),var(--pink-light));display:flex;align-items:center;justify-content:center;">
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <div style="width:36px;height:4px;background:var(--purple);border-radius:2px;opacity:0.3;"></div>
+        <div style="width:24px;height:4px;background:var(--purple);border-radius:2px;opacity:0.2;"></div>
+        <div style="width:44px;height:4px;background:var(--purple);border-radius:2px;opacity:0.25;"></div>
+      </div>
+    </div>
   </div>
-  <div class="cute-deco cute-heart" style="top:60%;left:5%;animation-delay:0.8s">
-    <svg viewBox="0 0 24 24" fill="var(--accent-pink)" style="opacity:0.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-  </div>
-  <div class="cute-deco cute-heart" style="top:35%;right:6%;animation-delay:2s">
-    <svg viewBox="0 0 24 24" fill="var(--accent-mint)" style="opacity:0.4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-  </div>
-  <div class="cute-deco cute-sparkle" style="top:18%;left:35%;animation-delay:0.3s;background:var(--accent-lavender)"></div>
-  <div class="cute-deco cute-sparkle" style="top:70%;right:20%;animation-delay:1s;background:var(--accent-yellow)"></div>
-  <div class="cute-deco cute-sparkle" style="top:45%;left:20%;animation-delay:1.7s;background:var(--accent-mint)"></div>
-  <div class="cute-deco cute-sparkle" style="bottom:25%;right:35%;animation-delay:0.6s;background:var(--accent-pink)"></div>
-  <div class="cute-deco cute-cloud" style="top:10%;animation-delay:0s;opacity:0.15">
-    <svg viewBox="0 0 64 32" fill="var(--text-muted)"><path d="M52 24H12a10 10 0 010-20c.3 0 .6 0 .9.02A16 16 0 0142 6a12 12 0 0110 18z"/></svg>
-  </div>
-  <div class="cute-deco cute-cloud" style="bottom:15%;animation-delay:-8s;opacity:0.1">
-    <svg viewBox="0 0 64 32" fill="var(--text-muted)"><path d="M52 24H12a10 10 0 010-20c.3 0 .6 0 .9.02A16 16 0 0142 6a12 12 0 0110 18z"/></svg>
+  <div class="preview-float" style="width:130px;height:73px;top:22%;left:10%;transform:rotate(6deg);opacity:0.45;">
+    <div class="pw-bar"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+    <div class="pw-body" style="width:100%;height:calc(100% - 22px);background:linear-gradient(135deg,var(--green-light),var(--sky-light));"></div>
   </div>
 
   <div class="hero-content">
-    <div class="reveal">
-      <div class="hero-badge">
-        <span class="pulse-dot"></span>
-        Open Source &bull; KDE Plasma 6
-      </div>
+    <div class="reveal hero-badge">
+      <span class="dot-live"></span>
+      Open Source &bull; KDE Plasma 6 Compatible
     </div>
-    <h1 class="reveal reveal-d1">
-      Ubah Desktopmu<br><span class="highlight">Menjadi Hidup</span>
+    <h1 class="reveal reveal-delay-1 hero-title">
+      Ubah Desktopmu<br><span class="hero-title-accent">Menjadi Hidup</span>
     </h1>
-    <p class="hero-sub reveal reveal-d2">
-      Koleksi wallpaper HTML yang ringan, animatif, dan cantik — dibuat khusus untuk KDE Plasma. Tanpa daemon, tanpa beban CPU.
+    <p class="reveal reveal-delay-2 hero-sub">
+      Koleksi wallpaper HTML statis yang ringan, animatif, dan cantik — dibuat khusus untuk KDE Plasma. Tanpa daemon, tanpa beban CPU.
     </p>
-    <div class="hero-buttons reveal reveal-d3">
-      <a href="#gallery" class="btn-primary">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+    <div class="reveal reveal-delay-3 hero-buttons">
+      <a href="/project/" class="btn btn-primary confetti-trigger">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         Lihat Galeri
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
       </a>
-      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="btn-secondary">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.125rem;height:1.125rem"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="btn btn-secondary">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
     </div>
-    <p class="hero-hint reveal reveal-d4">Press <kbd>G</kbd> to open gallery</p>
+    <p class="reveal reveal-delay-4 hero-hint">Press <kbd>G</kbd> to open gallery</p>
   </div>
 
-  <div class="hero-scroll">
+  <div class="scroll-indicator">
     <span>Scroll</span>
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
   </div>
 </section>
 
-<!-- ===== WALLPAPER GALLERY ===== -->
-<section class="section" id="gallery">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="reveal"><span class="section-label label-pink">Wallpaper Library</span></div>
-      <h2 class="section-title reveal reveal-d1">Jelajahi Koleksi Kami</h2>
-      <p class="section-desc reveal reveal-d2">Setiap wallpaper adalah file HTML murni — langsung render tanpa server, tanpa JavaScript.</p>
+<!-- ===== PREVIEW CAROUSEL ===== -->
+<section class="py-16 px-4 relative" id="preview" style="z-index:1;">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-8">
+      <span class="reveal section-label label-primary">Live Preview</span>
+      <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:700;color:var(--text);">Jangan Hanya Dengar, Lihat Sendiri</h2>
+      <p class="reveal reveal-delay-2" style="color:var(--text-muted);margin-top:0.375rem;max-width:440px;margin-left:auto;margin-right:auto;font-size:0.9rem;">Setiap wallpaper adalah file HTML murni — langsung render di browser tanpa server.</p>
     </div>
-
-    <!-- Toolbar -->
-    <div class="gallery-toolbar reveal reveal-d2">
-      <div class="gallery-search">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" id="gallerySearch" placeholder="Cari wallpaper..." oninput="filterGallery()">
-      </div>
-      <div class="gallery-filters" id="galleryFilters">
-        <button class="filter-pill active" data-cat="all" onclick="setFilter(this,'all')">Semua</button>
-        <button class="filter-pill" data-cat="abstract" onclick="setFilter(this,'abstract')">Abstract</button>
-        <button class="filter-pill" data-cat="nature" onclick="setFilter(this,'nature')">Nature</button>
-        <button class="filter-pill" data-cat="geometric" onclick="setFilter(this,'geometric')">Geometric</button>
-        <button class="filter-pill" data-cat="minimal" onclick="setFilter(this,'minimal')">Minimal</button>
-        <button class="filter-pill" data-cat="gradient" onclick="setFilter(this,'gradient')">Gradient</button>
-      </div>
-      <div class="gallery-actions">
-        <button class="view-btn active" id="viewGrid" onclick="setView('grid')" title="Grid view">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        </button>
-        <button class="view-btn" id="viewList" onclick="setView('list')" title="List view">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Gallery Grid -->
-    <div class="gallery-grid" id="galleryGrid">
-      {% for wp in wallpapers %}
-      <div class="wp-card reveal" data-name="{{ wp.name | default('Wallpaper ' ~ loop.index) | lower }}" data-cat="{{ wp.category | default(['abstract','nature','geometric','minimal','gradient'] | random) | lower }}">
-        <div class="wp-card-preview" onclick="openPreview('{{ wp.htmlUrl }}', '{{ wp.name | default("Wallpaper " ~ loop.index) }}')">
-          {% if wp.htmlUrl %}
-          <iframe src="{{ wp.htmlUrl }}" frameborder="0" scrolling="no" loading="lazy"></iframe>
-          {% endif %}
-          <div class="preview-overlay">
-            <div class="play-circle">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
+    <div class="reveal reveal-delay-2">
+      <div class="carousel-wrap">
+        <div class="carousel-area">
+          <div class="carousel-track" id="carouselTrack">
+            {% for wp in wallpapers %}
+            <div class="carousel-slide">
+              <iframe src="{{ wp.htmlUrl }}" frameborder="0" scrolling="no" loading="lazy"></iframe>
             </div>
-          </div>
-          <div class="wp-card-badges">
-            {% if loop.index <= 3 %}<span class="wp-badge badge-new">New</span>{% endif %}
-            {% if loop.index == 1 %}<span class="wp-badge badge-staff">Staff Pick</span>{% endif %}
-            {% if loop.index == 2 %}<span class="wp-badge badge-popular">Popular</span>{% endif %}
-          </div>
-        </div>
-        <div class="wp-card-info">
-          <div class="wp-card-name">{{ wp.name | default("Wallpaper " ~ loop.index) }}</div>
-          <div class="wp-card-meta">
-            <span>
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-              <span class="like-count">{{ [12, 28, 45, 7, 19, 33, 8, 22, 15, 41, 6, 30] | random }}</span>
-            </span>
-            <span>
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              {{ [34, 89, 156, 22, 67, 112, 18, 78, 54, 134, 15, 98] | random }}
-            </span>
-            <span>
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-              {{ [210, 445, 890, 123, 567, 345, 89, 678, 234, 765, 45, 534] | random }}
-            </span>
-          </div>
-          <div class="wp-card-actions">
-            <button class="wp-action-btn like-btn" onclick="toggleLike(this, event)">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-              Suka
-            </button>
-            <button class="wp-action-btn download" onclick="showToast('Download dimulai!','success')">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              Download
-            </button>
+            {% else %}
+            <div class="carousel-slide">
+              <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--primary-light),var(--secondary-light));display:flex;align-items:center;justify-content:center;">
+                <div style="text-align:center;">
+                  <div style="width:50px;height:50px;border-radius:var(--radius-sm);background:var(--primary-light);border:2.5px solid var(--primary);display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;box-shadow:2px 2px 0 var(--primary);">
+                    <svg class="w-6 h-6" style="color:var(--primary)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  </div>
+                  <p style="color:var(--text-muted);font-weight:700;font-size:0.9rem;">Wallpaper previews will appear here</p>
+                  <a href="/project/" style="color:var(--primary);font-weight:700;font-size:0.825rem;margin-top:0.375rem;display:inline-block;">Visit Gallery →</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
           </div>
         </div>
+        <div class="carousel-controls">
+          <div style="display:flex;gap:0.4rem;">
+            <button class="carousel-btn" onclick="carouselPrev()" aria-label="Previous slide">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button class="carousel-btn" onclick="carouselNext()" aria-label="Next slide">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <button class="carousel-btn" id="carouselPlayBtn" onclick="toggleCarouselAutoplay()" aria-label="Toggle autoplay">
+            <svg class="w-3.5 h-3.5" id="playIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </button>
+        </div>
       </div>
-      {% else %}
-      <div class="wp-card-empty">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        <p>Belum ada wallpaper. Kunjungi halaman proyek untuk memulai!</p>
-        <a href="/project/" class="btn-primary" style="display:inline-flex;margin-top:1.25rem;font-size:0.875rem;padding:0.625rem 1.5rem;">Ke Galeri</a>
-      </div>
-      {% endfor %}
-    </div>
-
-    <!-- No results message -->
-    <div id="noResults" style="display:none;text-align:center;padding:3rem 1rem;color:var(--text-muted)">
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:2.5rem;height:2.5rem;margin-bottom:0.75rem;opacity:0.5"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
-      <p style="font-weight:700;font-size:0.9375rem">Wallpaper tidak ditemukan</p>
-      <p style="font-size:0.8125rem;margin-top:0.25rem">Coba kata kunci lain atau pilih kategori berbeda</p>
     </div>
   </div>
 </section>
 
 <!-- ===== FEATURES ===== -->
-<section class="section" id="features" style="background:var(--bg-card)">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="reveal"><span class="section-label label-mint">Kenapa HTMLWallarper?</span></div>
-      <h2 class="section-title reveal reveal-d1">Bukan Wallpaper Biasa</h2>
-      <p class="section-desc reveal reveal-d2">Setiap detail dirancang agar desktop-mu terasa premium tanpa mengorbankan performa.</p>
-    </div>
+<section class="py-16 px-4 relative" id="features" style="z-index:1;">
+  <div class="cartoon-deco deco-star" style="top:4%;right:8%;animation-delay:0.4s;"></div>
+  <div class="cartoon-deco deco-heart" style="bottom:8%;left:4%;animation-delay:2.2s;"></div>
+  <div class="cartoon-deco deco-bubble" style="top:38%;right:2%;width:14px;height:14px;animation-delay:1.6s;"></div>
 
-    <div class="features-grid">
-      <div class="feat-card pink reveal">
-        <div class="feat-icon pink">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-        </div>
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="reveal section-label label-secondary">Kenapa HTMLWallarper?</span>
+      <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:700;color:var(--text);">Bukan Wallpaper Biasa</h2>
+      <p class="reveal reveal-delay-2" style="color:var(--text-muted);margin-top:0.375rem;max-width:440px;margin-left:auto;margin-right:auto;font-size:0.9rem;">Setiap detail dirancang agar desktop-mu terasa premium tanpa mengorbankan performa.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="feature-card card-primary reveal" data-tilt>
+        <div class="feature-icon fi-primary"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
         <h3>Zero CPU Overhead</h3>
         <p>HTML statis murni — tidak ada JavaScript runtime, tidak ada daemon. CPU-mu bebas untuk hal penting.</p>
       </div>
-
-      <div class="feat-card mint reveal reveal-d1">
-        <div class="feat-icon mint">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
-        </div>
+      <div class="feature-card card-secondary reveal reveal-delay-1" data-tilt>
+        <div class="feature-icon fi-secondary"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg></div>
         <h3>Fully Customizable</h3>
         <p>Edit warna, kecepatan animasi, dan layout langsung di file HTML. CSS murni, tanpa build step.</p>
       </div>
-
-      <div class="feat-card lavender reveal reveal-d2">
-        <div class="feat-icon lavender">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
-        </div>
+      <div class="feature-card card-purple reveal reveal-delay-2" data-tilt>
+        <div class="feature-icon fi-purple"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg></div>
         <h3>CSS-Only Animations</h3>
         <p>Smooth 60fps animation menggunakan CSS keyframes. Hardware-accelerated dan hemat resource.</p>
       </div>
-
-      <div class="feat-card mint reveal reveal-d3">
-        <div class="feat-icon mint">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-        </div>
+      <div class="feature-card card-accent reveal reveal-delay-3" data-tilt>
+        <div class="feature-icon fi-accent"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
         <h3>No Tracking, No Ads</h3>
         <p>100% open source. Tidak ada telemetry, tidak ada analytics, tidak ada iklan. Privasi dijamin.</p>
       </div>
-
-      <div class="feat-card yellow reveal reveal-d4">
-        <div class="feat-icon yellow">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg>
-        </div>
-        <h3>Plug & Play</h3>
+      <div class="feature-card card-pink reveal reveal-delay-4" data-tilt>
+        <div class="feature-icon fi-pink"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg></div>
+        <h3>Plug &amp; Play</h3>
         <p>Copy folder, set path di KDE Wallpaper Settings, selesai. Tidak perlu instal dependensi apapun.</p>
       </div>
-
-      <div class="feat-card peach reveal reveal-d5">
-        <div class="feat-icon peach">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-        </div>
+      <div class="feature-card card-sky reveal reveal-delay-5" data-tilt>
+        <div class="feature-icon fi-sky"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></div>
         <h3>Community Driven</h3>
         <p>Kontribusi wallpaper baru via Pull Request. Semua orang bisa menambah koleksi untuk dinikmati bersama.</p>
       </div>
@@ -1120,139 +1081,106 @@ permalink: /landing-pages/index.html
 </section>
 
 <!-- ===== STATS ===== -->
-<section class="section stats-section">
-  <div class="section-inner">
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <div class="stat-icon" style="background:var(--accent-pink-soft);color:var(--accent-pink)">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+<section class="stats-section py-14 px-4">
+  <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="stat-card reveal"><p class="stat-value" data-target="{{ wallpapers | length }}" data-suffix="+">0</p><p class="stat-label">Wallpapers</p></div>
+    <div class="stat-card reveal reveal-delay-1"><p class="stat-value" data-target="0" data-suffix=" KB">0</p><p class="stat-label">Avg. File Size</p></div>
+    <div class="stat-card reveal reveal-delay-2"><p class="stat-value" data-target="0" data-suffix="%">0</p><p class="stat-label">CPU Usage</p></div>
+    <div class="stat-card reveal reveal-delay-3"><p class="stat-value" data-target="100" data-suffix="%">0</p><p class="stat-label">Open Source</p></div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section class="py-16 px-4 relative" id="comparison" style="z-index:1;">
+  <div class="cartoon-deco deco-cloud" style="top:6%;left:2%;width:45px;height:23px;animation-delay:1.2s;opacity:0.45;"></div>
+  <div class="cartoon-deco deco-star" style="bottom:12%;right:6%;animation-delay:2.2s;"></div>
+
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+      <span class="reveal section-label label-purple">Perbandingan</span>
+      <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:700;color:var(--text);">Statis vs Hidup</h2>
+      <p class="reveal reveal-delay-2" style="color:var(--text-muted);font-size:0.9rem;">Geser slider untuk melihat perbedaan.</p>
+    </div>
+    <div class="reveal reveal-delay-2 comparison-container" id="compContainer">
+      <div class="comp-layer" id="compBefore" style="clip-path:inset(0 50% 0 0);background:linear-gradient(135deg,var(--bg-alt),var(--bg));">
+        <div style="text-align:center;">
+          <svg style="width:48px;height:48px;color:var(--text-light);margin:0 auto 0.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <p style="font-weight:700;color:var(--text-light);font-size:0.9rem;">Wallpaper Statis</p>
+          <p style="font-size:0.78rem;color:var(--text-light);margin-top:0.2rem;">Membosankan...</p>
         </div>
-        <p class="stat-value" data-target="{{ wallpapers | length }}" data-suffix="+">0</p>
-        <p class="stat-label">Wallpapers</p>
       </div>
-      <div class="stat-item reveal reveal-d1">
-        <div class="stat-icon" style="background:var(--accent-mint-soft);color:var(--accent-mint)">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+      <div class="comp-layer" id="compAfter" style="background:linear-gradient(135deg,var(--primary-light),var(--secondary-light));overflow:hidden;">
+        <div style="position:relative;">
+          <div style="width:50px;height:50px;border-radius:50%;border:3px solid var(--primary);position:absolute;animation:ping 2s infinite;opacity:0.35;"></div>
+          <div style="width:50px;height:50px;border-radius:50%;border:3px solid var(--secondary);position:absolute;animation:spin 3s linear infinite;opacity:0.35;"></div>
+          <div style="width:24px;height:24px;border-radius:var(--radius-sm);background:var(--primary);opacity:0.25;position:relative;z-index:1;"></div>
         </div>
-        <p class="stat-value" data-target="0" data-suffix=" KB">0</p>
-        <p class="stat-label">Avg. File Size</p>
-      </div>
-      <div class="stat-item reveal reveal-d2">
-        <div class="stat-icon" style="background:var(--accent-yellow-soft);color:var(--accent-yellow)">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        <div style="position:absolute;bottom:1.25rem;left:0;right:0;text-align:center;">
+          <p style="font-weight:700;color:var(--primary);font-size:0.9rem;">HTMLWallarper</p>
+          <p style="font-size:0.78rem;color:var(--secondary);margin-top:0.2rem;">Animasi CSS 60fps</p>
         </div>
-        <p class="stat-value" data-target="0" data-suffix="%">0</p>
-        <p class="stat-label">CPU Usage</p>
       </div>
-      <div class="stat-item reveal reveal-d3">
-        <div class="stat-icon" style="background:var(--accent-lavender-soft);color:var(--accent-lavender)">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-        </div>
-        <p class="stat-value" data-target="100" data-suffix="%">0</p>
-        <p class="stat-label">Open Source</p>
-      </div>
+      <div class="comp-slider-line" id="compSlider" style="left:50%;"><div class="comp-handle"><svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg></div></div>
+      <span class="comp-label comp-label-before">Before</span>
+      <span class="comp-label comp-label-after">After</span>
     </div>
   </div>
 </section>
 
-<!-- ===== BEFORE / AFTER ===== -->
-<section class="section" id="comparison">
-  <div class="section-inner" style="max-width:52rem">
-    <div class="section-header">
-      <div class="reveal"><span class="section-label label-lavender">Perbandingan</span></div>
-      <h2 class="section-title reveal reveal-d1">Statis vs Hidup</h2>
-      <p class="section-desc reveal reveal-d2">Geser slider untuk melihat perbedaan.</p>
-    </div>
+<!-- ===== INSTALLATION ===== -->
+<section class="py-16 px-4 relative" id="install" style="z-index:1;">
+  <div class="cartoon-deco deco-star" style="top:4%;right:12%;width:16px;height:16px;background:var(--accent);animation-delay:0.6s;"></div>
+  <div class="cartoon-deco deco-bubble" style="bottom:18%;right:4%;width:18px;height:18px;animation-delay:1.2s;"></div>
 
-    <div class="reveal reveal-d2 comp-container" id="compContainer">
-      <div class="comp-layer" id="compBefore" style="clip-path:inset(0 50% 0 0);background:linear-gradient(135deg, var(--bg-input) 0%, var(--border) 100%);display:flex;align-items:center;justify-content:center">
-        <div style="text-align:center">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" style="width:3rem;height:3rem;color:var(--text-muted);margin:0 auto 0.75rem;opacity:0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <p style="font-weight:800;color:var(--text-muted);font-size:0.9375rem">Wallpaper Statis</p>
-          <p style="font-size:0.8125rem;color:var(--text-muted);opacity:0.7;margin-top:0.25rem">Membosankan...</p>
-        </div>
-      </div>
-      <div class="comp-layer" id="compAfter" style="background:linear-gradient(135deg, #FFE0EC 0%, #D0F0EA 50%, #E8DFF8 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
-        <div style="position:relative">
-          <div style="width:5rem;height:5rem;border-radius:50%;border:3px solid var(--accent-pink);opacity:0.3;position:absolute;animation:ping 2s cubic-bezier(0,0,0.2,1) infinite"></div>
-          <div style="width:4rem;height:4rem;border-radius:50%;border:3px solid var(--accent-mint);opacity:0.4;position:absolute;animation:spin 4s linear infinite"></div>
-          <div style="width:2.5rem;height:2.5rem;border-radius:0.75rem;background:var(--accent-lavender);opacity:0.5;position:relative;z-index:1"></div>
-        </div>
-        <div style="position:absolute;bottom:1.5rem;left:0;right:0;text-align:center">
-          <p style="font-weight:800;color:var(--accent-pink);font-size:0.9375rem">HTMLWallarper</p>
-          <p style="font-size:0.8125rem;color:var(--accent-mint);margin-top:0.125rem;opacity:0.8">Animasi CSS 60fps</p>
-        </div>
-      </div>
-      <div class="comp-slider-line" id="compSlider" style="left:50%">
-        <div class="comp-handle">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
-        </div>
-      </div>
-      <div class="comp-label before">Before</div>
-      <div class="comp-label after">After</div>
+  <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="reveal section-label label-accent">Instalasi</span>
+      <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:700;color:var(--text);">3 Langkah, 30 Detik</h2>
+      <p class="reveal reveal-delay-2" style="color:var(--text-muted);font-size:0.9rem;">Semudah copy-paste. Tidak perlu terminal, tidak perlu compile.</p>
     </div>
-    <style>@keyframes ping{75%,100%{transform:scale(2);opacity:0}}@keyframes spin{to{transform:rotate(360deg)}}</style>
-  </div>
-</section>
-
-<!-- ===== INSTALL ===== -->
-<section class="section" id="install" style="background:var(--bg-card)">
-  <div class="section-inner" style="max-width:40rem">
-    <div class="section-header">
-      <div class="reveal"><span class="section-label label-yellow">Instalasi</span></div>
-      <h2 class="section-title reveal reveal-d1">3 Langkah, 30 Detik</h2>
-      <p class="section-desc reveal reveal-d2">Semudah copy-paste. Tidak perlu terminal, tidak perlu compile.</p>
-    </div>
-
-    <div class="steps-list">
+    <div>
       <div class="step-item reveal" data-step="1">
-        <div class="step-left">
-          <div class="step-num">1</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-right">
-          <h3>Download Repository</h3>
-          <p>Clone atau download ZIP dari GitHub.</p>
-          <div class="code-block">
-            <code><span class="ck">git</span> clone <span class="cp">https://github.com/flessan/HTMLWallarper.git</span></code>
-            <button class="copy-btn" onclick="copyCode(this,'git clone https://github.com/flessan/HTMLWallarper.git')">Copy</button>
+        <div style="display:flex;align-items:flex-start;gap:1.125rem;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="step-number">1</div>
+            <div class="step-connector"><div class="step-connector-fill"></div></div>
+          </div>
+          <div style="flex:1;padding-bottom:1.75rem;">
+            <h3 style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--text);margin-bottom:0.2rem;">Download Repository</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.625rem;">Clone atau download ZIP dari GitHub.</p>
+            <div class="code-block"><code><span class="ck">git</span> clone <span class="cp">https://github.com/flessan/HTMLWallarper.git</span></code><button class="copy-btn" onclick="copyCode(this,'git clone https://github.com/flessan/HTMLWallarper.git')">Copy</button></div>
           </div>
         </div>
       </div>
-
-      <div class="step-item reveal reveal-d1" data-step="2">
-        <div class="step-left">
-          <div class="step-num">2</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-right">
-          <h3>Buka KDE Wallpaper Settings</h3>
-          <p>Klik kanan di desktop → Configure Desktop and Wallpaper → Wallpaper.</p>
-          <div class="code-block">
-            <code>Desktop <span class="cf">→</span> Configure Wallpaper <span class="cf">→</span> Type: <span class="cp">HTML Wallpaper</span></code>
-            <button class="copy-btn" style="pointer-events:none;opacity:0.4;cursor:default">Info</button>
+      <div class="step-item reveal reveal-delay-1" data-step="2">
+        <div style="display:flex;align-items:flex-start;gap:1.125rem;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="step-number">2</div>
+            <div class="step-connector"><div class="step-connector-fill"></div></div>
+          </div>
+          <div style="flex:1;padding-bottom:1.75rem;">
+            <h3 style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--text);margin-bottom:0.2rem;">Buka KDE Wallpaper Settings</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.625rem;">Klik kanan di desktop → Configure Desktop and Wallpaper → Wallpaper.</p>
+            <div class="code-block"><code>Desktop <span class="cf">→</span> Configure Wallpaper <span class="cf">→</span> Type: <span class="cp">HTML Wallpaper</span></code><button class="copy-btn" style="pointer-events:none;opacity:0.35;cursor:default;">Info</button></div>
           </div>
         </div>
       </div>
-
-      <div class="step-item reveal reveal-d2" data-step="3">
-        <div class="step-left">
-          <div class="step-num">3</div>
-        </div>
-        <div class="step-right" style="padding-bottom:0">
-          <h3>Set Wallpaper Folder Path</h3>
-          <p>Arahkan ke folder wallpaper yang kamu inginkan.</p>
-          <div class="code-block">
-            <code><span class="ck">/path/to/HTMLWallarper/wallpapers/</span><span class="cp">nama-wallpaper</span>/</code>
-            <button class="copy-btn" onclick="copyCode(this,'/path/to/HTMLWallarper/wallpapers/nama-wallpaper/')">Copy</button>
+      <div class="step-item reveal reveal-delay-2" data-step="3">
+        <div style="display:flex;align-items:flex-start;gap:1.125rem;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="step-number">3</div>
+          </div>
+          <div style="flex:1;">
+            <h3 style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--text);margin-bottom:0.2rem;">Set Wallpaper Folder Path</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.625rem;">Arahkan ke folder wallpaper yang kamu inginkan.</p>
+            <div class="code-block"><code><span class="ck">/path/to/HTMLWallarper/wallpapers/</span><span class="cp">nama-wallpaper</span>/</code><button class="copy-btn" onclick="copyCode(this,'/path/to/HTMLWallarper/wallpapers/nama-wallpaper/')">Copy</button></div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="reveal reveal-d3" style="text-align:center;margin-top:2.5rem">
-      <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" class="btn-primary">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width:1.125rem;height:1.125rem"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+    <div class="reveal reveal-delay-3" style="text-align:center;margin-top:2rem;">
+      <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" class="btn btn-primary confetti-trigger">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         Download ZIP Langsung
       </a>
     </div>
@@ -1260,88 +1188,63 @@ permalink: /landing-pages/index.html
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="section" id="faq">
-  <div class="section-inner" style="max-width:40rem">
-    <div class="section-header">
-      <div class="reveal"><span class="section-label label-peach">FAQ</span></div>
-      <h2 class="section-title reveal reveal-d1">Pertanyaan Umum</h2>
+<section class="py-16 px-4 relative" id="faq" style="z-index:1;">
+  <div class="cartoon-deco deco-heart" style="top:8%;left:6%;animation-delay:1.8s;"></div>
+  <div class="cartoon-deco deco-cloud" style="bottom:6%;right:4%;width:48px;height:24px;animation-delay:0.8s;opacity:0.35;"></div>
+
+  <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-8">
+      <span class="reveal section-label label-pink">FAQ</span>
+      <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:700;color:var(--text);">Pertanyaan Umum</h2>
     </div>
-
-    <div class="faq-list">
-      <div class="faq-item reveal" onclick="toggleFaq(this)">
-        <div class="faq-q">
-          <span>Apakah kompatibel dengan KDE Plasma 6?</span>
-          <span class="faq-chevron"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
-        </div>
-        <div class="faq-a"><p>Ya! Semua wallpaper menggunakan HTML statis murni yang didukung oleh KDE Plasma Wallpaper plugin sejak Plasma 5. Karena tidak ada JS runtime, semakin tinggi versi Plasma semakin ringan.</p></div>
+    <div style="display:flex;flex-direction:column;gap:0.625rem;">
+      <div class="faq-item reveal" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+        <div class="faq-question"><span>Apakah kompatibel dengan KDE Plasma 6?</span><svg class="faq-chevron w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+        <div class="faq-answer"><p>Ya! Semua wallpaper menggunakan HTML statis murni yang didukung oleh KDE Plasma Wallpaper plugin sejak Plasma 5. Karena tidak ada JS runtime, semakin tinggi versi Plasma semakin ringan.</p></div>
       </div>
-
-      <div class="faq-item reveal reveal-d1" onclick="toggleFaq(this)">
-        <div class="faq-q">
-          <span>Berapa CPU/RAM yang dipakai?</span>
-          <span class="faq-chevron"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
-        </div>
-        <div class="faq-a"><p>Hampir <strong>0% CPU</strong> saat idle. Karena animasi menggunakan CSS keyframes yang di-offload ke GPU, beban CPU minimal. RAM usage sekitar 5-15MB per wallpaper (sama seperti wallpaper gambar statis).</p></div>
+      <div class="faq-item reveal reveal-delay-1" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+        <div class="faq-question"><span>Berapa CPU/RAM yang dipakai?</span><svg class="faq-chevron w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+        <div class="faq-answer"><p>Hampir <strong>0% CPU</strong> saat idle. Karena animasi menggunakan CSS keyframes yang di-offload ke GPU, beban CPU minimal. RAM usage sekitar 5-15MB per wallpaper (sama seperti wallpaper gambar statis).</p></div>
       </div>
-
-      <div class="faq-item reveal reveal-d2" onclick="toggleFaq(this)">
-        <div class="faq-q">
-          <span>Bisa buat wallpaper sendiri?</span>
-          <span class="faq-chevron"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
-        </div>
-        <div class="faq-a"><p>Tentu! Cukup buat folder baru di <code>wallpapers/</code>, buat file <code>index.html</code>, dan gunakan CSS animation. Lihat wallpaper yang ada sebagai referensi. Pull Request sangat welcome!</p></div>
+      <div class="faq-item reveal reveal-delay-2" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+        <div class="faq-question"><span>Bisa buat wallpaper sendiri?</span><svg class="faq-chevron w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+        <div class="faq-answer"><p>Tentu! Cukup buat folder baru di <code>wallpapers/</code>, buat file <code>index.html</code>, dan gunakan CSS animation. Lihat wallpaper yang ada sebagai referensi. Pull Request sangat welcome!</p></div>
       </div>
-
-      <div class="faq-item reveal reveal-d3" onclick="toggleFaq(this)">
-        <div class="faq-q">
-          <span>Kenapa tidak pakai JavaScript?</span>
-          <span class="faq-chevron"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
-        </div>
-        <div class="faq-a"><p>Keputusan desain. CSS keyframes sudah cukup powerful untuk membuat animasi yang indah — gradient shifts, morphing shapes, particle-like effects — tanpa overhead JavaScript engine. Ini menjadikan wallpaper benar-benar "set and forget".</p></div>
+      <div class="faq-item reveal reveal-delay-3" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+        <div class="faq-question"><span>Kenapa tidak pakai JavaScript?</span><svg class="faq-chevron w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+        <div class="faq-answer"><p>Keputusan desain. CSS keyframes sudah cukup powerful untuk membuat animasi yang indah — gradient shifts, morphing shapes, particle-like effects — tanpa overhead JavaScript engine. Ini menjadikan wallpaper benar-benar "set and forget".</p></div>
       </div>
-
-      <div class="faq-item reveal reveal-d4" onclick="toggleFaq(this)">
-        <div class="faq-q">
-          <span>Bisa dipakai di GNOME atau desktop lain?</span>
-          <span class="faq-chevron"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
-        </div>
-        <div class="faq-a"><p>Secara teknis file HTML-nya bisa dibuka di browser manapun. Tapi fitur "set as wallpaper" khusus KDE Plasma. Untuk GNOME, kamu bisa menggunakan extension pihak ketiga seperti "Web Wallpaper" atau menjalankannya sebagai widget.</p></div>
+      <div class="faq-item reveal reveal-delay-4" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+        <div class="faq-question"><span>Bisa dipakai di GNOME atau desktop lain?</span><svg class="faq-chevron w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
+        <div class="faq-answer"><p>Secara teknis file HTML-nya bisa dibuka di browser manapun. Tapi fitur "set as wallpaper" khusus KDE Plasma yang mendukung HTML wallpaper plugin. Untuk GNOME, kamu bisa menggunakan extension pihak ketiga seperti "Web Wallpaper".</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== FINAL CTA ===== -->
-<section class="section cta-section" style="padding:6rem 1.25rem">
-  <div class="cta-bg"></div>
-
-  <!-- Cute decorations -->
-  <div class="cute-deco cute-star" style="top:20%;left:10%;animation-delay:0.5s">
-    <svg viewBox="0 0 24 24" fill="var(--accent-yellow)" style="opacity:0.4"><path d="M12 2l2.09 6.26L20.18 9l-5 4.27L16.82 20 12 16.77 7.18 20l1.64-6.73L3.82 9l6.09-.74L12 2z"/></svg>
-  </div>
-  <div class="cute-deco cute-heart" style="bottom:25%;right:12%;animation-delay:1.2s">
-    <svg viewBox="0 0 24 24" fill="var(--accent-pink)" style="opacity:0.35"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-  </div>
-  <div class="cute-deco cute-sparkle" style="top:30%;right:25%;animation-delay:0.2s;background:var(--accent-mint)"></div>
-  <div class="cute-deco cute-sparkle" style="bottom:35%;left:20%;animation-delay:1.4s;background:var(--accent-lavender)"></div>
+<section class="cta-section">
+  <div class="cartoon-deco deco-star" style="top:12%;left:8%;animation-delay:0.2s;"></div>
+  <div class="cartoon-deco deco-star" style="top:22%;right:10%;width:14px;height:14px;background:var(--pink);animation-delay:1.2s;"></div>
+  <div class="cartoon-deco deco-heart" style="bottom:18%;right:12%;animation-delay:2.2s;"></div>
+  <div class="cartoon-deco deco-bubble" style="top:55%;left:4%;width:16px;height:16px;animation-delay:0.8s;"></div>
+  <div class="cartoon-deco deco-cloud" style="top:8%;right:4%;width:50px;height:25px;animation-delay:1.8s;opacity:0.35;"></div>
 
   <div class="cta-inner">
     <div class="reveal">
-      <div class="cta-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+      <div style="display:inline-flex;width:50px;height:50px;border-radius:50%;background:var(--primary-light);border:2.5px solid var(--primary);align-items:center;justify-content:center;margin-bottom:1.25rem;box-shadow:2px 2px 0 var(--primary);">
+        <svg class="w-6 h-6" style="color:var(--primary)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
       </div>
     </div>
-    <h2 class="section-title reveal reveal-d1" style="font-size:clamp(2rem,5vw,3rem)">Desktopmu Layak<br>Dapat Lebih Baik</h2>
-    <p class="reveal reveal-d2" style="color:var(--text-secondary);margin-top:1.25rem;font-size:1.0625rem;max-width:28rem;margin-left:auto;margin-right:auto;line-height:1.7">
-      Gratis, open source, dan siap pakai. Upgrade tampilan KDE Plasma-mu sekarang.
-    </p>
-    <div class="reveal reveal-d3" style="margin-top:2.5rem;display:flex;flex-wrap:wrap;justify-content:center;gap:0.875rem">
-      <a href="/project/" class="btn-primary" style="padding:1rem 2.5rem;font-size:1rem">
+    <h2 class="reveal reveal-delay-1">Desktopmu Layak<br>Dapat Lebih Baik</h2>
+    <p class="reveal reveal-delay-2">Gratis, open source, dan siap pakai. Upgrade tampilan KDE Plasma-mu sekarang.</p>
+    <div class="reveal reveal-delay-3 hero-buttons">
+      <a href="/project/" class="btn btn-primary confetti-trigger" style="padding:0.875rem 2rem;font-size:1rem;">
         Mulai Sekarang
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width:1.125rem;height:1.125rem"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
       </a>
-      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="btn-secondary" style="padding:1rem 2rem;font-size:0.9375rem">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.125rem;height:1.125rem"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="btn btn-secondary" style="padding:0.875rem 1.75rem;">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         Star di GitHub
       </a>
     </div>
@@ -1352,254 +1255,435 @@ permalink: /landing-pages/index.html
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <div class="footer-logo-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-      </div>
-      <span>HTMLWallarper</span>
+      <div class="footer-logo-icon"><svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+      <span>HTMLWallarper — Open Source KDE Plasma Wallpapers</span>
     </div>
     <div class="footer-links">
-      <a href="#gallery">Gallery</a>
-      <a href="#features">Features</a>
+      <a href="/project/">Gallery</a>
       <a href="https://github.com/flessan/HTMLWallarper" target="_blank">GitHub</a>
+      <span class="footer-copy">© 2025</span>
     </div>
-    <span class="footer-copy">&copy; 2025</span>
   </div>
 </footer>
 
-<!-- ===== PREVIEW MODAL ===== -->
-<div id="previewModal">
-  <div class="modal-backdrop" onclick="closePreview()"></div>
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="modalTitle">Wallpaper Preview</h3>
-      <button class="modal-close" onclick="closePreview()" aria-label="Close">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="modal-preview">
-      <iframe id="modalIframe" src="" frameborder="0" scrolling="no"></iframe>
-    </div>
-    <div class="modal-footer">
-      <div class="meta">CSS-only animation &bull; 60fps</div>
-      <div class="actions">
-        <button class="modal-btn" onclick="closePreview()">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-          Close
-        </button>
-        <button class="modal-btn primary" onclick="showToast('Download dimulai!','success')">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          Download
-        </button>
-      </div>
-    </div>
-  </div>
+<!-- ===== BACK TO TOP ===== -->
+<button id="backToTop" aria-label="Back to top">
+  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<!-- ===== MASCOT ===== -->
+<div id="mascot" aria-hidden="true">
+  <div class="eye left"></div><div class="eye right"></div>
+  <div class="mouth"></div>
+  <div class="blush left"></div><div class="blush right"></div>
 </div>
+<div id="mascotTip">Hai! Aku mascot-nya</div>
 
 <!-- ===== TOAST ===== -->
-<div class="toast-wrap" id="toastWrap"></div>
+<div class="toast-container" id="toastContainer"></div>
 
 <!-- ===== SCRIPTS ===== -->
 <script>
 (function() {
+  'use strict';
 
-  // ===== THEME =====
-  const saved = localStorage.getItem('hw-theme');
-  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-  updateThemeIcons();
+  /* ── Theme ── */
+  var html = document.documentElement;
+  var saved = localStorage.getItem('hw-theme');
+  if (saved) { html.setAttribute('data-theme', saved); }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { html.setAttribute('data-theme', 'dark'); }
 
-  window.toggleTheme = function() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('hw-theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('hw-theme', 'dark');
-    }
-    updateThemeIcons();
-  };
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('hw-theme', next);
+    showToast(next === 'dark' ? 'Dark mode activated!' : 'Light mode activated!', 'info');
+  });
 
-  function updateThemeIcons() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const sun = document.getElementById('themeIconSun');
-    const moon = document.getElementById('themeIconMoon');
-    if (sun && moon) {
-      sun.style.display = isDark ? 'block' : 'none';
-      moon.style.display = isDark ? 'none' : 'block';
-    }
+  /* ── Mobile menu ── */
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileOpen = false;
+
+  function setMobile(open) {
+    mobileOpen = open;
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
   }
 
-  // ===== MOBILE MENU =====
-  window.openMobileMenu = function() {
-    document.getElementById('mobileMenu').classList.add('open');
-    document.getElementById('menuOverlay').classList.add('visible');
-    document.body.style.overflow = 'hidden';
-  };
-  window.closeMobileMenu = function() {
-    document.getElementById('mobileMenu').classList.remove('open');
-    document.getElementById('menuOverlay').classList.remove('visible');
-    document.body.style.overflow = '';
-  };
+  hamburger.addEventListener('click', function() { setMobile(!mobileOpen); });
 
-  // ===== SCROLL PROGRESS =====
-  const bar = document.getElementById('scrollProgress');
-  window.addEventListener('scroll', () => {
-    const st = window.scrollY;
-    const dh = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() { setMobile(false); });
   });
 
-  // ===== STICKY NAV =====
-  const nav = document.getElementById('stickyNav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('visible', window.scrollY > 400);
-  });
-
-  // ===== SMOOTH SCROLL =====
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    });
-  });
-
-  // ===== REVEAL =====
-  const rObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); rObs.unobserve(e.target); } });
-  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
-
-  // ===== GALLERY FILTER =====
-  let currentFilter = 'all';
-  window.setFilter = function(btn, cat) {
-    currentFilter = cat;
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    filterGallery();
-  };
-
-  window.filterGallery = function() {
-    const query = (document.getElementById('gallerySearch').value || '').toLowerCase().trim();
-    const cards = document.querySelectorAll('.wp-card');
-    let visible = 0;
-    cards.forEach(c => {
-      const name = c.dataset.name || '';
-      const cat = c.dataset.cat || '';
-      const matchSearch = !query || name.includes(query);
-      const matchCat = currentFilter === 'all' || cat === currentFilter;
-      const show = matchSearch && matchCat;
-      c.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-    document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
-  };
-
-  // ===== VIEW TOGGLE =====
-  window.setView = function(mode) {
-    const grid = document.getElementById('galleryGrid');
-    grid.classList.toggle('view-list', mode === 'list');
-    document.getElementById('viewGrid').classList.toggle('active', mode === 'grid');
-    document.getElementById('viewList').classList.toggle('active', mode === 'list');
-  };
-
-  // ===== LIKE TOGGLE =====
-  window.toggleLike = function(btn, e) {
-    e.stopPropagation();
-    btn.classList.toggle('liked');
-    const countEl = btn.closest('.wp-card-info').querySelector('.like-count');
-    let count = parseInt(countEl.textContent) || 0;
-    countEl.textContent = btn.classList.contains('liked') ? count + 1 : count - 1;
-    if (btn.classList.contains('liked')) {
-      showToast('Ditambahkan ke favorit!', 'success');
-      btn.style.transform = 'scale(1.2)';
-      setTimeout(() => btn.style.transform = '', 300);
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (mobileOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+      setMobile(false);
     }
-  };
+  });
 
-  // ===== PREVIEW MODAL =====
-  window.openPreview = function(url, name) {
-    document.getElementById('modalIframe').src = url;
-    document.getElementById('modalTitle').textContent = name || 'Wallpaper Preview';
-    document.getElementById('previewModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-  window.closePreview = function() {
-    document.getElementById('previewModal').classList.remove('open');
-    document.getElementById('modalIframe').src = '';
-    document.body.style.overflow = '';
-  };
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileOpen) setMobile(false);
+  });
 
-  // ===== COUNTERS =====
-  const cObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
+  /* ── Scroll ── */
+  var progressBar = document.getElementById('scrollProgress');
+  var mainNav = document.getElementById('mainNav');
+  var backToTopBtn = document.getElementById('backToTop');
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var st = window.scrollY;
+      var dh = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
+      mainNav.classList.toggle('scrolled', st > 50);
+      backToTopBtn.classList.toggle('visible', st > 500);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ── Smooth scroll for anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var t = document.querySelector(a.getAttribute('href'));
+      if (t) {
+        e.preventDefault();
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ── Reveal on scroll ── */
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
       if (e.isIntersecting) {
-        const el = e.target;
-        const target = parseInt(el.dataset.target);
-        const suffix = el.dataset.suffix || '';
-        const start = performance.now();
-        const dur = 1800;
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+  /* ── 3D tilt on feature cards ── */
+  document.querySelectorAll('[data-tilt]').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'translateY(-4px) perspective(600px) rotateY(' + (x * 7) + 'deg) rotateX(' + (-y * 7) + 'deg)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = '';
+    });
+  });
+
+  /* ── Animated counters ── */
+  var counterObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var el = e.target;
+        var target = parseInt(el.dataset.target, 10);
+        var suffix = el.dataset.suffix || '';
+        var start = performance.now();
+        var dur = 1800;
         (function tick(now) {
-          const p = Math.min((now - start) / dur, 1);
-          const ease = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(ease * target) + suffix;
+          var p = Math.min((now - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
           if (p < 1) requestAnimationFrame(tick);
         })(start);
-        cObs.unobserve(el);
+        counterObs.unobserve(el);
       }
     });
   }, { threshold: 0.5 });
-  document.querySelectorAll('.stat-value').forEach(el => cObs.observe(el));
+  document.querySelectorAll('.stat-value').forEach(function(el) { counterObs.observe(el); });
 
-  // ===== COMPARISON SLIDER =====
-  const compC = document.getElementById('compContainer');
-  const compS = document.getElementById('compSlider');
-  const compB = document.getElementById('compBefore');
-  if (compC && compS && compB) {
-    let drag = false;
-    function upd(x) {
-      const r = compC.getBoundingClientRect();
-      let p = Math.max(0.05, Math.min(0.95, (x - r.left) / r.width));
-      compS.style.left = (p * 100) + '%';
-      compB.style.clipPath = 'inset(0 ' + ((1 - p) * 100).toFixed(1) + '% 0 0)';
+  /* ── Carousel ── */
+  var track = document.getElementById('carouselTrack');
+  var dotsBox = document.getElementById('carouselDots');
+  var curSlide = 0;
+  var totalSlides = track ? track.children.length : 0;
+  var autoInterval = null;
+  var isAuto = true;
+
+  if (dotsBox && totalSlides > 0) {
+    for (var i = 0; i < totalSlides; i++) {
+      (function(idx) {
+        var d = document.createElement('div');
+        d.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+        d.addEventListener('click', function() { goSlide(idx); });
+        dotsBox.appendChild(d);
+      })(i);
     }
-    compC.addEventListener('mousedown', e => { drag = true; upd(e.clientX); });
-    window.addEventListener('mousemove', e => { if (drag) upd(e.clientX); });
-    window.addEventListener('mouseup', () => { drag = false; });
-    compC.addEventListener('touchstart', e => { drag = true; upd(e.touches[0].clientX); }, { passive: true });
-    window.addEventListener('touchmove', e => { if (drag) upd(e.touches[0].clientX); }, { passive: true });
-    window.addEventListener('touchend', () => { drag = false; });
   }
 
-  // ===== INSTALL STEPS =====
-  const sObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
-  }, { threshold: 0.4 });
-  document.querySelectorAll('.step-item').forEach(el => sObs.observe(el));
+  function goSlide(idx) {
+    if (!track || !totalSlides) return;
+    curSlide = ((idx % totalSlides) + totalSlides) % totalSlides;
+    track.style.transform = 'translateX(-' + (curSlide * 100) + '%)';
+    var dots = dotsBox.querySelectorAll('.carousel-dot');
+    for (var j = 0; j < dots.length; j++) {
+      dots[j].classList.toggle('active', j === curSlide);
+    }
+  }
+  window.carouselNext = function() { goSlide(curSlide + 1); };
+  window.carouselPrev = function() { goSlide(curSlide - 1); };
 
-  // ===== FAQ =====
+  function startAuto() { stopAuto(); if (totalSlides > 1) autoInterval = setInterval(carouselNext, 5000); }
+  function stopAuto() { if (autoInterval) { clearInterval(autoInterval); autoInterval = null; } }
+
+  window.toggleCarouselAutoplay = function() {
+    isAuto = !isAuto;
+    var icon = document.getElementById('playIcon');
+    if (isAuto) {
+      startAuto();
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+    } else {
+      stopAuto();
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+    }
+  };
+  if (totalSlides > 0) startAuto();
+
+  /* ── Comparison slider ── */
+  var compCont = document.getElementById('compContainer');
+  var compSlider = document.getElementById('compSlider');
+  var compBefore = document.getElementById('compBefore');
+
+  if (compCont && compSlider && compBefore) {
+    var dragging = false;
+
+    function updateComp(clientX) {
+      var r = compCont.getBoundingClientRect();
+      var pos = Math.max(0.04, Math.min(0.96, (clientX - r.left) / r.width));
+      compSlider.style.left = (pos * 100) + '%';
+      compBefore.style.clipPath = 'inset(0 ' + (((1 - pos) * 100).toFixed(1)) + '% 0 0)';
+    }
+
+    compCont.addEventListener('mousedown', function(e) { dragging = true; updateComp(e.clientX); e.preventDefault(); });
+    window.addEventListener('mousemove', function(e) { if (dragging) { updateComp(e.clientX); e.preventDefault(); } });
+    window.addEventListener('mouseup', function() { dragging = false; });
+
+    compCont.addEventListener('touchstart', function(e) { dragging = true; updateComp(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove', function(e) { if (dragging) updateComp(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend', function() { dragging = false; });
+  }
+
+  /* ── Install steps ── */
+  var stepObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('active');
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.step-item').forEach(function(el) { stepObs.observe(el); });
+
+  /* ── FAQ ── */
   window.toggleFaq = function(item) {
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(f) {
+      f.classList.remove('open');
+      f.setAttribute('aria-expanded', 'false');
+    });
+    if (!wasOpen) {
+      item.classList.add('open');
+      item.setAttribute('aria-expanded', 'true');
+    }
   };
 
-  // ===== COPY =====
+  // FAQ keyboard support
+  document.querySelectorAll('.faq-item').forEach(function(item) {
+    item.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleFaq(item);
+      }
+    });
+  });
+
+  /* ── Copy code ── */
   window.copyCode = function(btn, text) {
-    navigator.clipboard.writeText(text).then(() => {
-      btn.classList.add('copied');
-      btn.textContent = 'Copied!';
-      showToast('Copied to clipboard!', 'success');
-      setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy'; }, 2000);
-    }).catch(() => showToast('Failed to copy', 'warn'));
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        btn.classList.add('copied');
+        btn.textContent = 'Copied!';
+        showToast('Copied to clipboard!', 'success');
+        setTimeout(function() { btn.classList.remove('copied'); btn.textContent = 'Copy'; }, 2000);
+      }).catch(function() {
+        fallbackCopy(btn, text);
+      });
+    } else {
+      fallbackCopy(btn, text);
+    }
   };
 
-  // ===== TOAST =====
+  function fallbackCopy(btn, text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try {
+      document.execCommand('copy');
+      btn.classList.add('copied'); btn.textContent = 'Copied!';
+      showToast('Copied to clipboard!', 'success');
+      setTimeout(function() { btn.classList.remove('copied'); btn.textContent = 'Copy'; }, 2000);
+    } catch(e) {
+      showToast('Failed to copy', 'warn');
+    }
+    document.body.removeChild(ta);
+  }
+
+  /* ── Toast ── */
   window.showToast = function(msg, type) {
-    type = type || 'info';
-    const wrap = document.getElementById('toastWrap');
-    const t = document.createElement('div');
-    t.className = 'toast ' + type;
-    const icons = {
-      success: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>',
-      info: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 16v-4m0-4h.01"/></svg>',
-      warn: '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="
+    var c = document.getElementById('toastContainer');
+    var t = document.createElement('div');
+    t.className = 'toast ' + (type || 'info');
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(function() { if (t.parentNode) t.remove(); }, 2600);
+  };
+
+  /* ── Sparkle cursor trail ── */
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lastSparkle = 0;
+  var sparkleColors = ['#FFD54F', '#FF7043', '#26A69A', '#F48FB1', '#CE93D8', '#81D4FA', '#81C784'];
+
+  if (!reducedMotion) {
+    document.addEventListener('mousemove', function(e) {
+      var now = Date.now();
+      if (now - lastSparkle < 55) return;
+      lastSparkle = now;
+      var s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = (e.clientX - 3.5) + 'px';
+      s.style.top = (e.clientY - 3.5) + 'px';
+      s.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+      document.body.appendChild(s);
+      setTimeout(function() { if (s.parentNode) s.remove(); }, 560);
+    });
+  }
+
+  /* ── Confetti on CTA click ── */
+  if (!reducedMotion) {
+    document.querySelectorAll('.confetti-trigger').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var colors = ['#FF7043', '#26A69A', '#FFD54F', '#CE93D8', '#F48FB1', '#81D4FA', '#81C784'];
+
+        for (var i = 0; i < 28; i++) {
+          var piece = document.createElement('div');
+          piece.className = 'confetti-piece';
+          var angle = Math.random() * Math.PI * 2;
+          var dist = 60 + Math.random() * 130;
+          var dx = Math.cos(angle) * dist;
+          var dy = Math.sin(angle) * dist - 60;
+          var rot = Math.random() * 720 - 360;
+          var size = 5 + Math.random() * 6;
+          var isCircle = Math.random() > 0.5;
+
+          piece.style.left = cx + 'px';
+          piece.style.top = cy + 'px';
+          piece.style.width = size + 'px';
+          piece.style.height = (isCircle ? size : size * 1.6) + 'px';
+          piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+          piece.style.borderRadius = isCircle ? '50%' : '2px';
+          piece.style.setProperty('--cx', dx + 'px');
+          piece.style.setProperty('--cy', (dy + 120) + 'px');
+          piece.style.setProperty('--cr', rot + 'deg');
+
+          document.body.appendChild(piece);
+          (function(p) {
+            setTimeout(function() { if (p.parentNode) p.remove(); }, 1050);
+          })(piece);
+        }
+      });
+    });
+  }
+
+  /* ── Mascot ── */
+  var mascot = document.getElementById('mascot');
+  var mascotTip = document.getElementById('mascotTip');
+  var mascotTimer = null;
+  var mascotIdx = 0;
+  var mascotMsgs = [
+    'Hai! Aku mascot-nya',
+    'Scroll ke bawah ya!',
+    'Wallpaper-nya cute banget',
+    'Zero CPU lho!',
+    'Coba dark mode!',
+    'Klik Galeri dong',
+    'CSS-only magic!',
+    'Open source rules!'
+  ];
+
+  function showMascotTip() {
+    mascotTip.textContent = mascotMsgs[mascotIdx % mascotMsgs.length];
+    mascotIdx++;
+    mascotTip.classList.add('show');
+    clearTimeout(mascotTimer);
+    mascotTimer = setTimeout(function() { mascotTip.classList.remove('show'); }, 3000);
+  }
+
+  if (mascot) {
+    mascot.addEventListener('click', function() {
+      mascot.classList.remove('bounce');
+      void mascot.offsetWidth;
+      mascot.classList.add('bounce');
+      showMascotTip();
+    });
+
+    var lastMascotScroll = 0;
+    window.addEventListener('scroll', function() {
+      var y = window.scrollY;
+      if (Math.abs(y - lastMascotScroll) > 250) {
+        lastMascotScroll = y;
+        mascot.classList.remove('bounce');
+        void mascot.offsetWidth;
+        mascot.classList.add('bounce');
+      }
+    }, { passive: true });
+
+    setTimeout(showMascotTip, 2200);
+  }
+
+  /* ── Keyboard shortcuts ── */
+  document.addEventListener('keydown', function(e) {
+    var tag = document.activeElement.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+    if (e.key === 'g') {
+      e.preventDefault();
+      window.location.href = '/project/';
+    }
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.faq-item.open').forEach(function(f) {
+        f.classList.remove('open');
+        f.setAttribute('aria-expanded', 'false');
+      });
+    }
+    if (e.key === 'ArrowLeft' && carouselVisible()) carouselPrev();
+    if (e.key === 'ArrowRight' && carouselVisible()) carouselNext();
+  });
+
+  function carouselVisible() {
+    if (!track) return false;
+    var r = track.getBoundingClientRect();
+    return r.top < window.innerHeight && r.bottom > 0;
+  }
+
+})();
+</script>
