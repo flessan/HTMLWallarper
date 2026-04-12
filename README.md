@@ -31,4 +31,4 @@ In order for this wallpaper to work, you must install the **HTML Wallpaper** plu
 2. namely by looking at the third method
 3. or the last one is that you are very tough. **Clone this deym Repository:**
    ```bash
-   git clone [https://github.com/flessan/HTMLWallarper.git](https://github.com/flessan/htmlwallarper.git)
+   git clone https://github.com/flessan/HTMLWallarper.git
