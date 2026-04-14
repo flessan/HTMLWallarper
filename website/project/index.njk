@@ -48,11 +48,9 @@ permalink: /project/index.html
   a{text-decoration:none;color:inherit}
   :focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:4px}
 
-  /* ===== SCROLL PROGRESS ===== */
   #scrollProgress{position:fixed;top:0;left:0;height:4px;z-index:10001;background:linear-gradient(90deg,var(--primary),var(--accent),var(--secondary),var(--primary));background-size:300% 100%;animation:progressSlide 4s linear infinite;width:0%;border-radius:0 4px 4px 0;transition:width .06s linear}
   @keyframes progressSlide{to{background-position:300% 0}}
 
-  /* ===== SUBPAGE NAV ===== */
   .sub-nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:var(--nav-h);background:var(--bg);border-bottom:2.5px solid var(--card-border);transition:background .4s var(--smooth),border-color .4s,box-shadow .3s}
   .sub-nav.scrolled{box-shadow:0 2px 8px rgba(61,44,30,0.06)}
   .sub-nav-inner{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem}
@@ -70,7 +68,6 @@ permalink: /project/index.html
   [data-theme="dark"] .theme-toggle .sun{opacity:0;transform:scale(.4) rotate(90deg)}
   [data-theme="dark"] .theme-toggle .moon{opacity:1;transform:scale(1) rotate(0)}
 
-  /* ===== DECORATIONS ===== */
   .cartoon-deco{position:absolute;pointer-events:none;z-index:0}
   .deco-star{width:18px;height:18px;background:var(--accent);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:twinkle 3s ease-in-out infinite}
   .deco-heart{width:16px;height:14px;background:var(--pink);transform:rotate(-45deg);border-radius:0 50% 0 50%;animation:floatHeart 4s ease-in-out infinite}
@@ -80,10 +77,8 @@ permalink: /project/index.html
   @keyframes floatHeart{0%,100%{transform:rotate(-45deg) translateY(0) scale(1)}50%{transform:rotate(-45deg) translateY(-7px) scale(1.1)}}
   @keyframes floatBubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-  /* ===== GALLERY ROOT ===== */
   .gallery-root{position:relative;z-index:1;padding:calc(var(--nav-h) + 2rem) 1.25rem 3rem;max-width:1200px;margin:0 auto}
 
-  /* ===== GALLERY HEADER ===== */
   .gallery-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:1.5rem}
   .gallery-header-left{display:flex;align-items:center;gap:.75rem}
   .gallery-header-icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--primary);border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s var(--bounce)}
@@ -95,9 +90,7 @@ permalink: /project/index.html
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
   .count-badge{padding:.3rem .75rem;border-radius:999px;font-size:.7rem;font-weight:800;background:var(--primary-light);border:2px solid var(--primary);color:var(--primary);box-shadow:1px 1px 0 var(--primary);transition:all .4s}
 
-  /* ===== STATS BAR ===== */
   .stats-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:.625rem;margin-bottom:1.5rem}
-  @media(min-width:640px){.stats-bar{grid-template-columns:repeat(4,1fr)}}
   .stat-card{background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-lg);padding:.75rem;display:flex;align-items:center;gap:.625rem;box-shadow:var(--shadow-card);transition:all .3s var(--bounce)}
   .stat-card:hover{transform:translateY(-2px) rotate(-.5deg)}
   .stat-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;border:2px solid;flex-shrink:0;box-shadow:1px 1px 0 currentColor}
@@ -109,7 +102,6 @@ permalink: /project/index.html
   .stat-info-value{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text);line-height:1.2;transition:color .4s}
   .stat-info-value.sv-green{color:var(--green-dark)}
 
-  /* ===== TOOLBAR ===== */
   .toolbar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem;align-items:center}
   .toolbar-search{position:relative;flex:1;min-width:180px}
   .toolbar-search svg{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none;transition:color .4s}
@@ -128,19 +120,14 @@ permalink: /project/index.html
   .view-toggle-btn.active{background:var(--primary-light);color:var(--primary)}
   .view-toggle-btn:hover:not(.active){color:var(--text-muted)}
 
-  /* ===== RESULTS BAR ===== */
   .results-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:.5rem}
   .results-count{font-size:.68rem;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;transition:color .4s}
   .clear-favs-btn{font-size:.68rem;font-weight:700;color:var(--text-light);cursor:pointer;background:none;border:none;font-family:'Nunito',sans-serif;transition:color .2s}
   .clear-favs-btn:hover{color:var(--pink-dark)}
 
-  /* ===== GALLERY GRID ===== */
   .gallery-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
-  @media(min-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(min-width:1024px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}
   .gallery-grid.list-view{grid-template-columns:1fr}
 
-  /* ===== WALLPAPER CARD ===== */
   .wallpaper-card{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .6s var(--bounce),transform .6s var(--bounce)}
   .wallpaper-card.visible{opacity:1;transform:translateY(0) scale(1)}
   .wallpaper-card.hidden-by-filter{display:none}
@@ -148,12 +135,10 @@ permalink: /project/index.html
   .card-inner{background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);transition:border-color .35s var(--smooth),box-shadow .35s var(--smooth),background .4s;position:relative}
   .card-inner:hover{border-color:var(--card-border-hover);box-shadow:var(--shadow-card-hover)}
 
-  /* Preview area */
   .preview-area{position:relative;aspect-ratio:16/9;background:var(--bg-alt);overflow:hidden;border-bottom:2.5px solid var(--card-border);transition:background .4s,border-color .4s}
   .preview-area iframe{position:absolute;left:50%;top:50%;width:1280px;height:720px;margin-left:-640px;margin-top:-360px;transform:scale(.3125);border:none;pointer-events:none;opacity:.75;transition:opacity .5s var(--smooth)}
   .card-inner:hover .preview-area iframe{opacity:1}
 
-  /* Hover overlay */
   .hover-overlay{position:absolute;inset:0;z-index:20;background:color-mix(in srgb, var(--bg) 80%, transparent);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
   .card-inner:hover .hover-overlay{opacity:1}
   .overlay-btn{padding:.5rem 1.25rem;border-radius:999px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;border:2.5px solid;transition:all .25s var(--bounce);transform:translateY(8px);opacity:0}
@@ -165,10 +150,8 @@ permalink: /project/index.html
   .overlay-btn-secondary{background:var(--card);color:var(--text-muted);border-color:var(--card-border);box-shadow:2px 2px 0 var(--card-border)}
   .overlay-btn-secondary:hover{transform:translateY(-1px) !important;box-shadow:3px 3px 0 var(--card-border-hover);border-color:var(--card-border-hover)}
 
-  /* Index badge */
   .index-badge{position:absolute;top:.5rem;left:.5rem;z-index:30;padding:.15rem .5rem;border-radius:999px;font-size:.6rem;font-weight:800;background:var(--card);border:2px solid var(--card-border);color:var(--text-muted);box-shadow:1px 1px 0 var(--card-border);transition:all .4s}
 
-  /* Fav button */
   .fav-btn{position:absolute;top:.5rem;right:.5rem;z-index:30;width:32px;height:32px;border-radius:50%;background:var(--card);border:2.5px solid var(--card-border);box-shadow:1px 1px 0 var(--card-border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s var(--bounce)}
   .fav-btn:hover{transform:scale(1.15);border-color:var(--pink);box-shadow:1px 1px 0 var(--pink)}
   .fav-btn.active{background:var(--pink-light);border-color:var(--pink);box-shadow:1px 1px 0 var(--pink)}
@@ -176,7 +159,6 @@ permalink: /project/index.html
   .fav-btn.bounce{animation:favBounce .4s var(--bounce)}
   @keyframes favBounce{0%{transform:scale(1)}30%{transform:scale(1.35)}60%{transform:scale(.9)}100%{transform:scale(1)}}
 
-  /* Card body */
   .card-body{padding:1rem 1.125rem}
   .card-body-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.625rem;gap:.5rem}
   .card-body h3{font-size:1rem;font-weight:600;color:var(--text);transition:color .4s;text-transform:capitalize}
@@ -185,7 +167,6 @@ permalink: /project/index.html
   .live-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
   .live-tag span{font-size:.55rem;font-weight:800;color:var(--green-dark);letter-spacing:.05em;transition:color .4s}
 
-  /* Path row */
   .path-row{display:flex;align-items:center;font-size:.7rem;font-weight:600;color:var(--text-muted);background:var(--bg-alt);padding:.5rem .625rem;border-radius:var(--radius-sm);border:2px solid var(--card-border);cursor:pointer;transition:all .2s;gap:.375rem}
   .path-row:hover{border-color:var(--primary);background:var(--primary-light)}
   .path-row svg{flex-shrink:0;color:var(--primary);transition:color .4s}
@@ -194,7 +175,6 @@ permalink: /project/index.html
   .path-row:hover .copy-icon{color:var(--primary)}
   .path-row .copy-icon.copied{color:var(--green-dark)}
 
-  /* Card footer */
   .card-footer{margin-top:.75rem;padding-top:.625rem;border-top:2px solid color-mix(in srgb, var(--card-border) 40%, transparent);display:flex;align-items:center;justify-content:space-between;transition:border-color .4s}
   .card-footer-left{display:flex;align-items:center;gap:.375rem}
   .card-footer-left svg{color:var(--text-light);transition:color .4s}
@@ -202,14 +182,11 @@ permalink: /project/index.html
   .card-dl-btn{width:28px;height:28px;border-radius:var(--radius-sm);background:var(--bg-alt);border:2px solid var(--card-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-light);transition:all .25s var(--bounce);box-shadow:1px 1px 0 var(--card-border)}
   .card-dl-btn:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--primary);color:var(--primary);border-color:var(--primary)}
 
-  /* ===== LIST VIEW OVERRIDES ===== */
   .list-view .wallpaper-card{grid-column:1/-1}
   .list-view .card-inner{display:grid;grid-template-columns:320px 1fr}
   .list-view .preview-area{aspect-ratio:auto;height:100%;min-height:200px;border-bottom:none;border-right:2.5px solid var(--card-border)}
   .list-view .card-body{display:flex;flex-direction:column;justify-content:center}
-  @media(max-width:640px){.list-view .card-inner{grid-template-columns:1fr}.list-view .preview-area{aspect-ratio:16/9;height:auto;min-height:0;border-bottom:2.5px solid var(--card-border);border-right:none}}
 
-  /* ===== LIGHTBOX ===== */
   .lightbox-overlay{position:fixed;inset:0;z-index:9000;background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s var(--smooth)}
   .lightbox-overlay.active{opacity:1;pointer-events:auto}
   .lightbox-content{width:90vw;height:75vh;max-width:1400px;border-radius:var(--radius-xl);overflow:hidden;border:3px solid var(--card-border);box-shadow:4px 4px 0 var(--card-border),0 16px 48px rgba(0,0,0,.15);transform:scale(.92);transition:transform .4s var(--bounce),border-color .4s}
@@ -230,14 +207,12 @@ permalink: /project/index.html
   .lightbox-nav.prev{left:1rem}
   .lightbox-nav.next{right:1rem}
 
-  /* ===== EMPTY / NO RESULTS ===== */
   .empty-state{grid-column:1/-1;padding:3rem 1rem;text-align:center;background:var(--card);border:3px dashed var(--card-border);border-radius:var(--radius-xl);transition:all .4s}
   .empty-icon{display:inline-flex;width:64px;height:64px;border-radius:50%;background:var(--bg-alt);border:2.5px solid var(--card-border);align-items:center;justify-content:center;margin-bottom:1rem;animation:emptyBounce 2.5s ease-in-out infinite}
   @keyframes emptyBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
   .empty-state p:first-of-type{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text);margin-bottom:.25rem;transition:color .4s}
   .empty-state p:last-of-type{font-size:.8125rem;color:var(--text-muted);transition:color .4s}
 
-  /* ===== TOAST ===== */
   .toast-container{position:fixed;bottom:4.5rem;right:1.25rem;z-index:99999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
   .toast{pointer-events:auto;padding:.5rem .875rem;border-radius:var(--radius-sm);font-size:.75rem;font-weight:700;border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);animation:toastIn .4s var(--bounce),toastOut .3s ease 2.2s forwards}
   .toast.success{background:var(--green);color:var(--green-dark);border-color:var(--green-dark);box-shadow:2px 2px 0 var(--green-dark)}
@@ -246,33 +221,32 @@ permalink: /project/index.html
   @keyframes toastIn{from{opacity:0;transform:translateY(.75rem) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes toastOut{to{opacity:0;transform:translateY(-.5rem) scale(.9)}}
 
-  /* ===== SPARKLE ===== */
   .sparkle{position:fixed;pointer-events:none;z-index:99997;width:6px;height:6px;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:sparkleFade .5s ease-out forwards}
   @keyframes sparkleFade{0%{opacity:1;transform:scale(1) rotate(0)}100%{opacity:0;transform:scale(0) rotate(70deg)}}
 
-  /* ===== MASCOT ===== */
-  #mascot{position:fixed;bottom:1.25rem;left:1.25rem;z-index:9989;width:48px;height:48px;border-radius:50% 50% 50% 45%;background:var(--primary);border:3px solid var(--text);box-shadow:2px 2px 0 var(--text);cursor:pointer;overflow:hidden;transition:transform .4s var(--bounce),background .4s}
-  #mascot:hover{transform:scale(1.1) rotate(-5deg)}
-  #mascot .eye{position:absolute;width:6px;height:8px;background:var(--text);border-radius:50%;top:15px;transition:background .4s}
-  #mascot .eye.left{left:11px}#mascot .eye.right{right:11px}
-  #mascot .eye::after{content:'';position:absolute;width:2.5px;height:2.5px;background:#fff;border-radius:50%;top:1px;right:0}
-  #mascot .mouth{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:8px;height:4px;border-bottom:2px solid var(--text);border-radius:0 0 50% 50%;transition:border-color .4s}
-  #mascot .blush{position:absolute;width:8px;height:4px;background:var(--pink);border-radius:50%;top:26px;opacity:.4;transition:background .4s}
-  #mascot .blush.left{left:3px}#mascot .blush.right{right:3px}
-  #mascot.bounce{animation:mBounce .4s var(--bounce)}
-  @keyframes mBounce{0%{transform:scale(1)}30%{transform:scale(1.2) rotate(7deg)}60%{transform:scale(.93) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
-  #mascotTip{position:fixed;bottom:3.75rem;left:1.25rem;z-index:9989;background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-sm);padding:.35rem .625rem;font-size:.68rem;font-weight:700;color:var(--text-muted);box-shadow:2px 2px 0 var(--card-border);opacity:0;transform:translateY(5px);pointer-events:none;transition:all .3s var(--bounce);white-space:nowrap}
-  #mascotTip.show{opacity:1;transform:translateY(0)}
-  #mascotTip::after{content:'';position:absolute;bottom:-5px;left:.875rem;width:8px;height:8px;background:var(--card);border-right:2.5px solid var(--card-border);border-bottom:2.5px solid var(--card-border);transform:rotate(45deg)}
-  @media(max-width:768px){#mascot,#mascotTip{display:none}}
+  .gallery-mascot{position:fixed;bottom:1.25rem;left:1.25rem;z-index:9989;width:48px;height:48px;border-radius:50% 50% 50% 45%;background:var(--primary);border:3px solid var(--text);box-shadow:2px 2px 0 var(--text);cursor:pointer;overflow:hidden;transition:transform .4s var(--bounce),background .4s}
+  .gallery-mascot:hover{transform:scale(1.1) rotate(-5deg)}
+  .gallery-mascot .m-eye{position:absolute;width:6px;height:8px;background:var(--text);border-radius:50%;top:15px;transition:background .4s}
+  .gallery-mascot .m-eye.ml{left:11px}
+  .gallery-mascot .m-eye.mr{right:11px}
+  .gallery-mascot .m-eye::after{content:'';position:absolute;width:2.5px;height:2.5px;background:#fff;border-radius:50%;top:1px;right:0}
+  .gallery-mascot .m-mouth{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:8px;height:4px;border-bottom:2px solid var(--text);border-radius:0 0 50% 50%;transition:border-color .4s}
+  .gallery-mascot .m-blush{position:absolute;width:8px;height:4px;background:var(--pink);border-radius:50%;top:26px;opacity:.4;transition:background .4s}
+  .gallery-mascot .m-blush.ml{left:3px}
+  .gallery-mascot .m-blush.mr{right:3px}
+  .gallery-mascot.bounce{animation:gmBounce .4s var(--bounce)}
+  @keyframes gmBounce{0%{transform:scale(1)}30%{transform:scale(1.2) rotate(7deg)}60%{transform:scale(.93) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+  .gallery-mascot-tip{position:fixed;bottom:3.75rem;left:1.25rem;z-index:9989;background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-sm);padding:.35rem .625rem;font-size:.68rem;font-weight:700;color:var(--text-muted);box-shadow:2px 2px 0 var(--card-border);opacity:0;transform:translateY(5px);pointer-events:none;transition:all .3s var(--bounce);white-space:nowrap}
+  .gallery-mascot-tip.show{opacity:1;transform:translateY(0)}
+  .gallery-mascot-tip::after{content:'';position:absolute;bottom:-5px;left:.875rem;width:8px;height:8px;background:var(--card);border-right:2.5px solid var(--card-border);border-bottom:2.5px solid var(--card-border);transform:rotate(45deg)}
+  .gallery-back-top{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9990;width:42px;height:42px;border-radius:50%;background:var(--primary);border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:all .3s var(--bounce),background .4s;opacity:0;transform:translateY(14px) scale(.8);pointer-events:none}
+  .gallery-back-top.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+  .gallery-back-top:hover{transform:translateY(-2px) scale(1.06);box-shadow:3px 3px 0 var(--text)}
+  .gallery-back-top:active{transform:translateY(1px) scale(.95);box-shadow:1px 1px 0 var(--text)}
 
-  /* ===== BACK TO TOP ===== */
-  #backToTop{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9990;width:42px;height:42px;border-radius:50%;background:var(--primary);border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:all .3s var(--bounce),background .4s;opacity:0;transform:translateY(14px) scale(.8);pointer-events:none}
-  #backToTop.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
-  #backToTop:hover{transform:translateY(-2px) scale(1.06);box-shadow:3px 3px 0 var(--text)}
-  #backToTop:active{transform:translateY(1px) scale(.95);box-shadow:1px 1px 0 var(--text)}
-
-  /* ===== RESPONSIVE ===== */
+  @media(min-width:640px){.stats-bar{grid-template-columns:repeat(4,1fr)}}
+  @media(min-width:768px){.gallery-grid:not(.list-view){grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.gallery-grid:not(.list-view){grid-template-columns:repeat(3,1fr)}}
   @media(max-width:640px){
     .gallery-header{flex-direction:column;align-items:flex-start}
     .gallery-header-right{width:100%}
@@ -288,18 +262,16 @@ permalink: /project/index.html
     .lightbox-nav.next{right:.5rem}
     .lightbox-content{width:96vw;height:60vh}
   }
-
-  /* ===== REDUCED MOTION ===== */
+  @media(max-width:768px){
+    .gallery-mascot,
+    .gallery-mascot-tip{display:none}
+  }
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.15ms!important}.sparkle{display:none!important}}
-
-  /* ===== SCROLLBAR ===== */
   ::-webkit-scrollbar{width:7px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--card-border);border-radius:4px;border:2px solid var(--bg)}::-webkit-scrollbar-thumb:hover{background:var(--primary)}
 </style>
 
-<!-- ===== SCROLL PROGRESS ===== -->
 <div id="scrollProgress"></div>
 
-<!-- ===== SUBPAGE NAV ===== -->
 <nav class="sub-nav" id="subNav">
   <div class="sub-nav-inner">
     <div class="sub-nav-left">
@@ -310,7 +282,7 @@ permalink: /project/index.html
         <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
       </div>
       <span class="sub-nav-title">HTMLWallarper</span>
-      <span class="sub-nav-sep">·</span>
+      <span class="sub-nav-sep">/</span>
       <span class="sub-nav-title" style="color:var(--primary)">Gallery</span>
     </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -320,16 +292,13 @@ permalink: /project/index.html
   </div>
 </nav>
 
-<!-- ===== GALLERY ===== -->
 <div class="gallery-root" id="galleryRoot">
 
-  <!-- Decorations -->
   <div class="cartoon-deco deco-star" style="top:calc(var(--nav-h) + .5rem);right:5%;animation-delay:.3s"></div>
   <div class="cartoon-deco deco-heart" style="top:calc(var(--nav-h) + 2rem);left:3%;animation-delay:1.5s"></div>
   <div class="cartoon-deco deco-bubble" style="top:calc(var(--nav-h) + 6rem);right:2%;width:14px;height:14px;animation-delay:1s"></div>
   <div class="cartoon-deco deco-star" style="top:calc(var(--nav-h) + 12rem);left:6%;width:14px;height:14px;background:var(--secondary);animation-delay:2s"></div>
 
-  <!-- Header -->
   <div class="gallery-header">
     <div class="gallery-header-left">
       <div class="gallery-header-icon">
@@ -346,7 +315,6 @@ permalink: /project/index.html
     </div>
   </div>
 
-  <!-- Stats bar -->
   <div class="stats-bar">
     <div class="stat-card">
       <div class="stat-icon si-primary"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
@@ -366,7 +334,6 @@ permalink: /project/index.html
     </div>
   </div>
 
-  <!-- Toolbar -->
   <div class="toolbar">
     <div class="toolbar-search">
       <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -374,8 +341,8 @@ permalink: /project/index.html
     </div>
     <select id="sortSelect" class="toolbar-select">
       <option value="default">Default Order</option>
-      <option value="az">Name A → Z</option>
-      <option value="za">Name Z → A</option>
+      <option value="az">Name A to Z</option>
+      <option value="za">Name Z to A</option>
     </select>
     <button id="filterFavBtn" class="toolbar-btn">
       <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
@@ -391,7 +358,6 @@ permalink: /project/index.html
     </div>
   </div>
 
-  <!-- Results bar -->
   <div class="results-bar">
     <p class="results-count" id="resultsCount">Showing {{ wallpapers | length }} results</p>
     <button id="clearFavsBtn" class="clear-favs-btn" style="display:none">
@@ -400,32 +366,22 @@ permalink: /project/index.html
     </button>
   </div>
 
-  <!-- Gallery grid -->
   <div class="gallery-grid" id="galleryGrid">
     {% for wp in wallpapers %}
     <div class="wallpaper-card" data-name="{{ wp.name | lower }}" data-index="{{ loop.index0 }}">
       <div class="card-inner">
-        <!-- Preview -->
         <div class="preview-area">
           <iframe src="{{ wp.htmlUrl }}" frameborder="0" scrolling="no" loading="lazy"></iframe>
-
-          <!-- Hover overlay -->
           <div class="hover-overlay">
             <button onclick="openLightbox({{ loop.index0 }})" class="overlay-btn overlay-btn-primary">Live Preview</button>
             <a href="{{ wp.htmlUrl }}" target="_blank" class="overlay-btn overlay-btn-secondary">Open Fullscreen</a>
             <a href="{{ wp.url }}" target="_blank" class="overlay-btn overlay-btn-secondary">View Source</a>
           </div>
-
-          <!-- Index badge -->
           <div class="index-badge">#{{ loop.index }}</div>
-
-          <!-- Fav -->
           <button onclick="toggleFav('{{ wp.name }}', this)" class="fav-btn" data-name="{{ wp.name }}">
             <svg class="w-4 h-4" style="color:var(--text-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
           </button>
         </div>
-
-        <!-- Body -->
         <div class="card-body">
           <div class="card-body-header">
             <h3>{{ wp.name }}</h3>
@@ -459,7 +415,6 @@ permalink: /project/index.html
     {% endfor %}
   </div>
 
-  <!-- No results -->
   <div id="noResults" style="display:none">
     <div class="empty-state">
       <div class="empty-icon">
@@ -471,7 +426,6 @@ permalink: /project/index.html
   </div>
 </div>
 
-<!-- ===== LIGHTBOX ===== -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
   <div class="lightbox-bar">
     <div class="lightbox-bar-left">
@@ -479,7 +433,7 @@ permalink: /project/index.html
       <span id="lightboxIndex">#1</span>
     </div>
     <div class="lightbox-bar-right">
-      <a id="lightboxOpenFull" href="#" target="_blank" class="lb-btn">Open Fullscreen ↗</a>
+      <a id="lightboxOpenFull" href="#" target="_blank" class="lb-btn">Open Fullscreen</a>
       <button onclick="closeLightbox()" class="lb-close" aria-label="Close preview">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
@@ -496,28 +450,23 @@ permalink: /project/index.html
   </button>
 </div>
 
-<!-- ===== BACK TO TOP ===== -->
-<button id="backToTop" aria-label="Back to top">
+<button class="gallery-back-top" id="backToTop" aria-label="Back to top">
   <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
 </button>
 
-<!-- ===== MASCOT ===== -->
-<div id="mascot" aria-hidden="true">
-  <div class="eye left"></div><div class="eye right"></div>
-  <div class="mouth"></div>
-  <div class="blush left"></div><div class="blush right"></div>
+<div class="gallery-mascot" id="mascot" aria-hidden="true">
+  <div class="m-eye ml"></div><div class="m-eye mr"></div>
+  <div class="m-mouth"></div>
+  <div class="m-blush ml"></div><div class="m-blush mr"></div>
 </div>
-<div id="mascotTip">Cari wallpaper favoritmu!</div>
+<div class="gallery-mascot-tip" id="mascotTip">Cari wallpaper favoritmu!</div>
 
-<!-- ===== TOAST ===== -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ===== SCRIPTS ===== -->
 <script>
 (function() {
   'use strict';
 
-  /* ── Theme ── */
   var html = document.documentElement;
   var saved = localStorage.getItem('hw-theme');
   if (saved) html.setAttribute('data-theme', saved);
@@ -530,7 +479,6 @@ permalink: /project/index.html
     showToast(next === 'dark' ? 'Dark mode activated!' : 'Light mode activated!', 'info');
   });
 
-  /* ── Scroll progress & nav & back-to-top ── */
   var progressBar = document.getElementById('scrollProgress');
   var subNav = document.getElementById('subNav');
   var backToTopBtn = document.getElementById('backToTop');
@@ -552,7 +500,6 @@ permalink: /project/index.html
   onScroll();
   backToTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-  /* ── Data ── */
   var cards = Array.from(document.querySelectorAll('.wallpaper-card'));
   var totalCards = cards.length;
   var wallpaperData = cards.map(function(card) {
@@ -565,7 +512,6 @@ permalink: /project/index.html
     };
   });
 
-  /* ── Favorites ── */
   var FAV_KEY = 'htmlwallarper_favs';
   var favorites = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
 
@@ -611,17 +557,14 @@ permalink: /project/index.html
     if (favFilterOn) applyFilters();
   });
 
-  /* ── Search ── */
   var searchInput = document.getElementById('searchInput');
   var searchTerm = '';
   searchInput.addEventListener('input', function() { searchTerm = this.value.toLowerCase().trim(); applyFilters(); });
 
-  /* ── Sort ── */
   var sortSelect = document.getElementById('sortSelect');
   var sortMode = 'default';
   sortSelect.addEventListener('change', function() { sortMode = this.value; applyFilters(); });
 
-  /* ── Fav filter ── */
   var favFilterOn = false;
   var filterFavBtn = document.getElementById('filterFavBtn');
   filterFavBtn.addEventListener('click', function() {
@@ -630,10 +573,8 @@ permalink: /project/index.html
     applyFilters();
   });
 
-  /* ── Combined filter & sort ── */
   function applyFilters() {
     var visible = cards.slice();
-
     if (searchTerm) {
       visible = visible.filter(function(c) { return c.dataset.name.indexOf(searchTerm) !== -1; });
     }
@@ -645,22 +586,17 @@ permalink: /project/index.html
     } else if (sortMode === 'za') {
       visible.sort(function(a, b) { return b.dataset.name.localeCompare(a.dataset.name); });
     }
-
     cards.forEach(function(c) { c.classList.add('hidden-by-filter'); });
     visible.forEach(function(c) {
       c.classList.remove('hidden-by-filter');
       document.getElementById('galleryGrid').appendChild(c);
     });
-
     var count = visible.length;
     document.getElementById('resultsCount').textContent =
       count === totalCards ? 'Showing ' + count + ' results' : 'Showing ' + count + ' of ' + totalCards + ' results';
-
-    var noResults = document.getElementById('noResults');
-    noResults.style.display = count > 0 ? 'none' : '';
+    document.getElementById('noResults').style.display = count > 0 ? 'none' : '';
   }
 
-  /* ── View toggle ── */
   var grid = document.getElementById('galleryGrid');
   var viewGridBtn = document.getElementById('viewGrid');
   var viewListBtn = document.getElementById('viewList');
@@ -676,7 +612,6 @@ permalink: /project/index.html
     viewGridBtn.classList.remove('active');
   });
 
-  /* ── Lightbox ── */
   var currentLightboxIndex = -1;
   var lightbox = document.getElementById('lightbox');
   var lightboxFrame = document.getElementById('lightboxFrame');
@@ -735,7 +670,6 @@ permalink: /project/index.html
     if (e.key === 'ArrowRight') lightboxNav(1);
   });
 
-  /* ── Copy path ── */
   window.copyPath = function(path, el) {
     var doCopy = function() {
       var icon = el.querySelector('.copy-icon');
@@ -749,14 +683,9 @@ permalink: /project/index.html
       }
       showToast('Copied: ' + path, 'success');
     };
-
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(path).then(doCopy).catch(function() {
-        fallbackCopy(path); doCopy();
-      });
-    } else {
-      fallbackCopy(path); doCopy();
-    }
+      navigator.clipboard.writeText(path).then(doCopy).catch(function() { fallbackCopy(path); doCopy(); });
+    } else { fallbackCopy(path); doCopy(); }
   };
 
   function fallbackCopy(text) {
@@ -767,7 +696,6 @@ permalink: /project/index.html
     document.body.removeChild(ta);
   }
 
-  /* ── Toast ── */
   window.showToast = function(msg, type) {
     var c = document.getElementById('toastContainer');
     var t = document.createElement('div');
@@ -777,7 +705,6 @@ permalink: /project/index.html
     setTimeout(function() { if (t.parentNode) t.remove(); }, 2600);
   };
 
-  /* ── Entrance animation ── */
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -790,14 +717,12 @@ permalink: /project/index.html
   }, { threshold: 0.03, rootMargin: '0px 0px -30px 0px' });
   cards.forEach(function(c) { observer.observe(c); });
 
-  /* ── Keyboard: / to focus search ── */
   document.addEventListener('keydown', function(e) {
     if (e.key === '/' && document.activeElement !== searchInput && !lightbox.classList.contains('active')) {
       e.preventDefault(); searchInput.focus();
     }
   });
 
-  /* ── Sparkle cursor ── */
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var lastSparkle = 0;
   var sparkleColors = ['#FFD54F','#FF7043','#26A69A','#F48FB1','#CE93D8','#81D4FA','#81C784'];
@@ -817,7 +742,6 @@ permalink: /project/index.html
     });
   }
 
-  /* ── Mascot ── */
   var mascot = document.getElementById('mascot');
   var mascotTip = document.getElementById('mascotTip');
   var mascotTimer = null;
@@ -845,7 +769,6 @@ permalink: /project/index.html
     setTimeout(showMascotTip, 2500);
   }
 
-  /* ── Init ── */
   initFavButtons();
 })();
 </script>
