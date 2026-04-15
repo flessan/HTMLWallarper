@@ -264,7 +264,6 @@ permalink: /project/index.html
   #mascotTip{position:fixed;bottom:3.75rem;left:1.25rem;z-index:9989;background:var(--card);border:2.5px solid var(--card-border);border-radius:var(--radius-sm);padding:.35rem .625rem;font-size:.68rem;font-weight:700;color:var(--text-muted);box-shadow:2px 2px 0 var(--card-border);opacity:0;transform:translateY(5px);pointer-events:none;transition:all .3s var(--bounce);white-space:nowrap}
   #mascotTip.show{opacity:1;transform:translateY(0)}
   #mascotTip::after{content:'';position:absolute;bottom:-5px;left:.875rem;width:8px;height:8px;background:var(--card);border-right:2.5px solid var(--card-border);border-bottom:2.5px solid var(--card-border);transform:rotate(45deg)}
-  @media(max-width:768px){#mascot,#mascotTip{display:none}}
 
   /* ===== BACK TO TOP ===== */
   #backToTop{position:fixed;bottom:1.25rem;right:1.25rem;z-index:9990;width:42px;height:42px;border-radius:50%;background:var(--primary);border:2.5px solid var(--text);box-shadow:2px 2px 0 var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:all .3s var(--bounce),background .4s;opacity:0;transform:translateY(14px) scale(.8);pointer-events:none}
@@ -288,6 +287,9 @@ permalink: /project/index.html
     .lightbox-nav.next{right:.5rem}
     .lightbox-content{width:96vw;height:60vh}
   }
+
+  /* Fix: Added space after { to prevent {# from being interpreted as a Nunjucks comment */
+  @media(max-width:768px){ #mascot,#mascotTip{display:none} }
 
   /* ===== REDUCED MOTION ===== */
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.15ms!important}.sparkle{display:none!important}}
