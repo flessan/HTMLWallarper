@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Live Wallpaper — underwotar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-top: #051e30;
+            --bg-mid: #031220;
+            --bg-bottom: #010810;
+            --accent: #00e5ff;
+            --accent-purple: #7b61ff;
+            --accent-green: #00ffaa;
+            --text: #c8e6f0;
+            --text-dim: rgba(200,230,240,0.28);
+            --text-faint: rgba(200,230,240,0.12);
+            --bar-bg: rgba(0,229,255,0.06);
+            --bar-fill: rgba(0,229,255,0.4);
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html, body {
+            height:100%; overflow:hidden;
+            font-family:'Sora',sans-serif;
+            color:var(--text);
+            cursor:default;
+        }
+        body {
+            background:linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 40%, var(--bg-bottom) 100%);
+        }
+
+        /* Canvas */
+        #ocean { position:fixed; inset:0; z-index:0; }
+
+        /* Arus air */
+        .current {
+            position:fixed; inset:0; z-index:1; pointer-events:none;
+            background:linear-gradient(115deg, transparent 20%, rgba(0,229,255,0.007) 50%, transparent 80%);
+            animation:flow 20s linear infinite;
+        }
+        .current-2 {
+            background:linear-gradient(65deg, transparent 30%, rgba(123,97,255,0.005) 50%, transparent 70%);
+            animation:flow2 28s linear infinite;
+        }
+        @keyframes flow { from{transform:translateX(-100%)} to{transform:translateX(100%)} }
+        @keyframes flow2 { from{transform:translateX(100%)} to{transform:translateX(-100%)} }
+
+        /* Riak permukaan */
+        .surface {
+            position:fixed; top:-30px; left:-15%; right:-15%; height:70px;
+            z-index:2; pointer-events:none;
+            background:linear-gradient(to bottom, rgba(0,229,255,0.045), transparent);
+            filter:blur(12px);
+            animation:surf1 10s ease-in-out infinite;
+        }
+        .surface-2 {
+            animation:surf2 14s ease-in-out infinite;
+            opacity:.45; filter:blur(18px); height:55px; top:-20px;
+        }
+        @keyframes surf1 { 0%,100%{transform:translateX(0) scaleY(1)} 50%{transform:translateX(4%) scaleY(1.4)} }
+        @keyframes surf2 { 0%,100%{transform:translateX(0) scaleY(1)} 50%{transform:translateX(-3%) scaleY(1.25)} }
+
+        /* Rumput laut */
+        .kelp {
+            position:fixed; bottom:0; z-index:3; pointer-events:none;
+            border-radius:40%/100%;
+            transform-origin:bottom center;
+            will-change:transform;
+        }
+        .k1{left:5%;width:5px;height:115px;background:linear-gradient(to top,rgba(0,100,80,0.2),rgba(0,180,120,0.04));animation:sway 7s ease-in-out infinite}
+        .k2{left:9%;width:4px;height:78px;background:linear-gradient(to top,rgba(0,90,70,0.15),rgba(0,160,100,0.03));animation:sway 8.5s ease-in-out infinite .8s}
+        .k3{left:13%;width:6px;height:135px;background:linear-gradient(to top,rgba(0,110,85,0.18),rgba(0,200,130,0.05));animation:sway 6s ease-in-out infinite 1.5s}
+        .k4{right:6%;width:5px;height:98px;background:linear-gradient(to top,rgba(0,100,80,0.16),rgba(0,170,110,0.03));animation:sway 9s ease-in-out infinite .3s}
+        .k5{right:11%;width:4px;height:68px;background:linear-gradient(to top,rgba(0,80,65,0.12),rgba(0,140,90,0.02));animation:sway 7.5s ease-in-out infinite 2s}
+        .k6{right:16%;width:5px;height:120px;background:linear-gradient(to top,rgba(0,105,80,0.17),rgba(0,190,120,0.04));animation:sway 6.5s ease-in-out infinite 1s}
+        @keyframes sway { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)} }
+
+        /* Dasar laut */
+        .seafloor {
+            position:fixed; bottom:0; left:0; right:0; height:65px;
+            z-index:3; pointer-events:none;
+            background:linear-gradient(to top, rgba(0,30,20,0.35), transparent);
+        }
+
+        /* Vignette atmosfer */
+        .atmosphere {
+            position:fixed; inset:0; z-index:4; pointer-events:none;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(0,229,255,0.025) 0%, transparent 45%),
+                linear-gradient(to bottom, rgba(5,30,48,0.35) 0%, transparent 14%),
+                linear-gradient(to top, rgba(1,8,16,0.75) 0%, transparent 22%);
+        }
+
+        /* Glow jam */
+        .clock-glow {
+            position:fixed; top:50%; left:50%;
+            width:520px; height:520px;
+            transform:translate(-50%,-54%);
+            border-radius:50%;
+            background:radial-gradient(circle,
+                rgba(0,229,255,0.035) 0%,
+                rgba(123,97,255,0.018) 28%,
+                transparent 55%);
+            z-index:5; pointer-events:none;
+            animation:gpulse 15s ease-in-out infinite;
+        }
+        @keyframes gpulse {
+            0%,100%{opacity:.45;transform:translate(-50%,-54%) scale(1)}
+            50%{opacity:1;transform:translate(-50%,-54%) scale(1.18)}
+        }
+
+        /* Layout utama */
+        .main {
+            position:fixed; inset:0; z-index:10;
+            display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            padding:1.5rem; pointer-events:none;
+        }
+
+        .greeting {
+            font-size:clamp(.7rem,1.55vw,.94rem);
+            font-weight:300;
+            color:var(--accent);
+            opacity:.4;
+            letter-spacing:.28em;
+            text-transform:uppercase;
+            margin-bottom:.55rem;
+        }
+
+        .clock {
+            font-size:clamp(3.8rem,12.5vw,9.2rem);
+            font-weight:700;
+            letter-spacing:-0.04em;
+            line-height:1;
+            display:flex; align-items:baseline;
+            user-select:none;
+            text-shadow:0 0 80px rgba(0,229,255,0.04);
+        }
+        .clock .seg { display:inline-block; min-width:.62em; text-align:center; }
+        .clock .colon {
+            opacity:.16; font-weight:600;
+            margin:0 -.03em;
+            animation:cblink 2s ease-in-out infinite;
+        }
+        @keyframes cblink { 0%,100%{opacity:.16} 50%{opacity:.03} }
+        .clock .sec {
+            font-size:.26em; font-weight:200;
+            opacity:.16; margin-left:.2em;
+            vertical-align:super;
+        }
+
+        .date {
+            font-size:clamp(.64rem,1.4vw,.88rem);
+            font-weight:300;
+            color:var(--text-dim);
+            margin-top:.95rem;
+            letter-spacing:.2em;
+            text-transform:uppercase;
+        }
+
+        .divider {
+            width:22px; height:1.5px;
+            border-radius:1px;
+            background:var(--accent);
+            opacity:.15;
+            margin:1.25rem 0;
+        }
+
+        .quote-wrap { max-width:320px; text-align:center; }
+        .quote-mark {
+            font-size:1.2rem; font-weight:700;
+            color:var(--accent); opacity:.12;
+            line-height:1; display:block; margin-bottom:.1rem;
+        }
+        .quote {
+            font-size:clamp(.66rem,1.3vw,.82rem);
+            font-weight:300;
+            color:var(--text-dim);
+            line-height:1.8;
+            transition:opacity .6s ease;
+        }
+
+        /* Info bar bawah */
+        .info-bar {
+            position:fixed; bottom:0; left:0; right:0;
+            z-index:10; pointer-events:none;
+            padding:0 2rem 1.5rem;
+            display:flex; align-items:flex-end; justify-content:space-between;
+        }
+        .info-left,.info-right { display:flex; flex-direction:column; gap:.45rem; }
+        .info-right { align-items:flex-end; }
+        .info-label {
+            font-size:.5rem; font-weight:600;
+            letter-spacing:.15em; text-transform:uppercase;
+            color:var(--text-faint);
+        }
+        .info-value {
+            font-size:.7rem; font-weight:400;
+            color:var(--text-dim); letter-spacing:.04em;
+        }
+        .day-progress {
+            width:105px; height:2.5px;
+            border-radius:2px;
+            background:var(--bar-bg);
+            overflow:hidden; margin-top:.12rem;
+        }
+        .day-progress-fill {
+            height:100%; border-radius:2px;
+            background:linear-gradient(90deg, var(--bar-fill), var(--accent-purple));
+            transition:width 1s linear;
+        }
+
+        .info-center {
+            position:fixed; bottom:1.5rem; left:50%;
+            transform:translateX(-50%);
+            z-index:10; pointer-events:none;
+            display:flex; gap:1.8rem; align-items:center;
+        }
+        .info-chip { display:flex; flex-direction:column; align-items:center; gap:.2rem; }
+        .info-chip .info-label { font-size:.48rem; }
+        .info-chip .info-value { font-size:.74rem; font-weight:600; color:var(--text); opacity:.28; }
+
+        /* Responsif */
+        @media(max-width:640px){
+            .info-bar{padding:0 1.2rem 1.1rem}
+            .info-center{gap:1rem;bottom:1.1rem}
+            .day-progress{width:80px}
+            .k1,.k2,.k3{display:none}
+        }
+        @media(max-width:380px){ .info-center{display:none} }
+
+        @media(prefers-reduced-motion:reduce){
+            .current,.current-2,.surface,.surface-2,.kelp,.clock-glow,.clock .colon{
+                animation:none!important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="ocean" aria-hidden="true"></canvas>
+
+    <div class="current" aria-hidden="true"></div>
+    <div class="current current-2" aria-hidden="true"></div>
+    <div class="surface" aria-hidden="true"></div>
+    <div class="surface surface-2" aria-hidden="true"></div>
+
+    <div class="kelp k1" aria-hidden="true"></div>
+    <div class="kelp k2" aria-hidden="true"></div>
+    <div class="kelp k3" aria-hidden="true"></div>
+    <div class="kelp k4" aria-hidden="true"></div>
+    <div class="kelp k5" aria-hidden="true"></div>
+    <div class="kelp k6" aria-hidden="true"></div>
+    <div class="seafloor" aria-hidden="true"></div>
+
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="clock-glow" aria-hidden="true"></div>
+
+    <main class="main" role="main">
+        <div class="greeting" id="greeting"></div>
+        <div class="clock" aria-live="polite">
+            <span class="seg" id="h">00</span><span class="colon">:</span><span class="seg" id="m">00</span><span class="seg sec" id="s">00</span>
+        </div>
+        <div class="date" id="date"></div>
+        <div class="divider" aria-hidden="true"></div>
+        <div class="quote-wrap">
+            <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+            <p class="quote" id="quote"></p>
+        </div>
+    </main>
+
+    <div class="info-bar" aria-hidden="true">
+        <div class="info-left">
+            <div>
+                <div class="info-label">Progres Hari</div>
+                <div class="info-value" id="dayPct">0%</div>
+                <div class="day-progress"><div class="day-progress-fill" id="dayBar"></div></div>
+            </div>
+            <div>
+                <div class="info-label">Minggu ke</div>
+                <div class="info-value" id="weekNum">—</div>
+            </div>
+        </div>
+        <div class="info-right">
+            <div>
+                <div class="info-label">Hari ke</div>
+                <div class="info-value" id="dayOfYear">—</div>
+            </div>
+            <div>
+                <div class="info-label">Sisa Tahun</div>
+                <div class="info-value" id="daysLeft">—</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-center" aria-hidden="true">
+        <div class="info-chip">
+            <span class="info-label">Kuartal</span>
+            <span class="info-value" id="quarter">—</span>
+        </div>
+        <div class="info-chip">
+            <span class="info-label">Zodiak</span>
+            <span class="info-value" id="zodiac">—</span>
+        </div>
+        <div class="info-chip">
+            <span class="info-label">Musim</span>
+            <span class="info-value" id="season">—</span>
+        </div>
+    </div>
+
+    <script>
+    (function(){
+        'use strict';
+
+        /* ============================
+           Canvas — deep ocean scene
+           ============================ */
+        var canvas = document.getElementById('ocean');
+        var ctx = canvas.getContext('2d');
+        var W, H, time = 0;
+
+        /* -- Cahaya menembus permukaan -- */
+        var rays = [];
+        function initRays() {
+            rays = [];
+            for (var i = 0; i < 6; i++) {
+                rays.push({
+                    xRatio: 0.08 + i * 0.17,
+                    topW: 12 + i * 5,
+                    botW: 55 + i * 22,
+                    height: 0.7 + Math.random() * 0.1,
+                    driftSpeed: 0.2 + Math.random() * 0.12,
+                    driftAmp: 35 + Math.random() * 30,
+                    phase: i * 1.4
+                });
+            }
+        }
+
+        function drawRays() {
+            for (var i = 0; i < rays.length; i++) {
+                var r = rays[i];
+                var x = r.xRatio * W + Math.sin(time * r.driftSpeed + r.phase) * r.driftAmp;
+                var tw = r.topW, bw = r.botW + Math.sin(time * 0.12 + i) * 15;
+                var rh = r.height * H;
+                bw = Math.max(tw + 1, bw);
+
+                var g = ctx.createLinearGradient(x, 0, x, rh);
+                g.addColorStop(0, 'rgba(0,229,255,0.028)');
+                g.addColorStop(0.35, 'rgba(0,229,255,0.01)');
+                g.addColorStop(1, 'rgba(0,229,255,0)');
+
+                ctx.beginPath();
+                ctx.moveTo(x - tw, 0);
+                ctx.lineTo(x + tw, 0);
+                ctx.lineTo(x + bw, rh);
+                ctx.lineTo(x - bw, rh);
+                ctx.closePath();
+                ctx.fillStyle = g;
+                ctx.fill();
+            }
+        }
+
+        /* -- Caustic (pola cahaya di air) -- */
+        function drawCaustics() {
+            for (var i = 0; i < 16; i++) {
+                /* Distribusi golden ratio agar merata */
+                var cx = W * 0.08 + W * 0.84 * ((i * 0.618033) % 1) + Math.sin(time * 0.38 + i * 2.1) * 45;
+                var cy = 15 + i * 16 + Math.cos(time * 0.28 + i * 1.6) * 22;
+                var cr = Math.max(8, 32 + Math.sin(time * 0.32 + i * 1.05) * 16);
+
+                var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr);
+                g.addColorStop(0, 'rgba(0,229,255,0.01)');
+                g.addColorStop(1, 'rgba(0,229,255,0)');
+                ctx.fillStyle = g;
+                ctx.fillRect(cx - cr, cy - cr, cr * 2, cr * 2);
+            }
+        }
+
+        /* -- Ubur-ubur -- */
+        var jellies = [
+            { xR:.17, yR:.32, sz:30, bobSp:.28, bobA:22, swA:16, swSp:.18, ph:0 },
+            { xR:.73, yR:.48, sz:38, bobSp:.22, bobA:28, swA:20, swSp:.14, ph:2.2 },
+            { xR:.44, yR:.66, sz:22, bobSp:.34, bobA:16, swA:12, swSp:.24, ph:4.5 },
+            { xR:.88, yR:.28, sz:18, bobSp:.3,  bobA:14, swA:10, swSp:.2,  ph:1.1 }
+        ];
+
+        function drawJelly(j) {
+            var cx = j.xR * W + Math.sin(time * j.swSp + j.ph) * j.swA;
+            var cy = j.yR * H + Math.sin(time * j.bobSp + j.ph) * j.bobA;
+            var sz = j.sz;
+
+            /* Glow luar */
+            var og = ctx.createRadialGradient(cx, cy, sz * 0.4, cx, cy, sz * 2.8);
+            og.addColorStop(0, 'rgba(0,229,255,0.022)');
+            og.addColorStop(1, 'rgba(0,229,255,0)');
+            ctx.fillStyle = og;
+            ctx.fillRect(cx - sz * 2.8, cy - sz * 2.8, sz * 5.6, sz * 5.6);
+
+            /* Kubah */
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, sz, sz * 0.62, 0, Math.PI, 0);
+            var dg = ctx.createRadialGradient(cx, cy - sz * 0.28, 0, cx, cy, sz);
+            dg.addColorStop(0, 'rgba(0,229,255,0.09)');
+            dg.addColorStop(0.45, 'rgba(123,97,255,0.04)');
+            dg.addColorStop(1, 'rgba(0,229,255,0.012)');
+            ctx.fillStyle = dg;
+            ctx.fill();
+
+            /* Tepi kubah */
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, sz, sz * 0.62, 0, Math.PI, 0);
+            ctx.strokeStyle = 'rgba(0,229,255,0.05)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+
+            /* Inti cahaya dalam */
+            var ig = ctx.createRadialGradient(cx, cy - sz * 0.12, 0, cx, cy - sz * 0.12, sz * 0.32);
+            ig.addColorStop(0, 'rgba(123,97,255,0.055)');
+            ig.addColorStop(1, 'rgba(123,97,255,0)');
+            ctx.fillStyle = ig;
+            ctx.beginPath();
+            ctx.arc(cx, cy - sz * 0.12, sz * 0.32, 0, Math.PI * 2);
+            ctx.fill();
+
+            /* Tentakel */
+            for (var t = 0; t < 7; t++) {
+                var tx = cx - sz * 0.65 + t * sz * 0.217;
+                var tLen = sz * (0.9 + 0.45 * Math.sin(time * 0.65 + t * 1.15 + j.ph));
+                ctx.beginPath();
+                ctx.moveTo(tx, cy);
+                ctx.quadraticCurveTo(
+                    tx + Math.sin(time * 0.48 + t * 1.7 + j.ph) * 10,
+                    cy + tLen * 0.5,
+                    tx + Math.sin(time * 0.32 + t * 2 + j.ph) * 14,
+                    cy + tLen
+                );
+                var tAlpha = 0.035 - t * 0.004;
+                ctx.strokeStyle = 'rgba(0,229,255,' + Math.max(0.005, tAlpha).toFixed(4) + ')';
+                ctx.lineWidth = Math.max(0.3, 1.2 - t * 0.12);
+                ctx.stroke();
+            }
+        }
+
+        /* -- Partikel bioluminesen -- */
+        var particles = [];
+        function initParticles() {
+            particles = [];
+            var count = Math.min(70, Math.round(W * H / 20000));
+            for (var i = 0; i < count; i++) {
+                var type = Math.random();
+                var col = type < 0.5 ? [0,229,255] : type < 0.8 ? [123,97,255] : [0,255,170];
+                particles.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    vx: (Math.random() - 0.5) * 0.14,
+                    vy: (Math.random() - 0.5) * 0.14 - 0.015,
+                    r: Math.random() * 2 + 0.7,
+                    speed: Math.random() * 0.01 + 0.004,
+                    offset: Math.random() * Math.PI * 2,
+                    col: col
+                });
+            }
+        }
+
+        function drawParticles() {
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                p.vx += (Math.random() - 0.5) * 0.008;
+                p.vy += (Math.random() - 0.5) * 0.008;
+                p.vx *= 0.994; p.vy *= 0.994;
+                p.x += p.vx; p.y += p.vy;
+
+                if (p.x < -20) p.x = W + 20;
+                if (p.x > W + 20) p.x = -20;
+                if (p.y < -20) p.y = H + 20;
+                if (p.y > H + 20) p.y = -20;
+
+                var pulse = 0.2 + 0.8 * (0.5 + 0.5 * Math.sin(time * p.speed * 60 + p.offset));
+                var r = Math.max(0.5, p.r);
+                var gr = r * 4.5;
+
+                var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, gr);
+                g.addColorStop(0, 'rgba(' + p.col[0] + ',' + p.col[1] + ',' + p.col[2] + ',' + (pulse * 0.35).toFixed(3) + ')');
+                g.addColorStop(0.4, 'rgba(' + p.col[0] + ',' + p.col[1] + ',' + p.col[2] + ',' + (pulse * 0.08).toFixed(3) + ')');
+                g.addColorStop(1, 'rgba(' + p.col[0] + ',' + p.col[1] + ',' + p.col[2] + ',0)');
+                ctx.fillStyle = g;
+                ctx.fillRect(p.x - gr, p.y - gr, gr * 2, gr * 2);
+
+                /* Titik pusat */
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, r * 0.35, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,250,240,' + (pulse * 0.4).toFixed(3) + ')';
+                ctx.fill();
+            }
+        }
+
+        /* -- Gelembung naik -- */
+        var bubbles = [];
+        function initBubbles() {
+            bubbles = [];
+            var count = Math.min(16, Math.round(W / 90));
+            for (var i = 0; i < count; i++) {
+                bubbles.push({
+                    x: Math.random() * W,
+                    y: H + Math.random() * H * 0.5,
+                    r: Math.random() * 2.8 + 1.2,
+                    speed: Math.random() * 0.35 + 0.18,
+                    wobSp: Math.random() * 0.018 + 0.008,
+                    wobA: Math.random() * 12 + 4,
+                    offset: Math.random() * Math.PI * 2,
+                    alpha: Math.random() * 0.25 + 0.08
+                });
+            }
+        }
+
+        function drawBubbles() {
+            for (var i = 0; i < bubbles.length; i++) {
+                var b = bubbles[i];
+                b.y -= b.speed;
+                b.x += Math.sin(time * b.wobSp * 60 + b.offset) * 0.28;
+                if (b.y < -25) { b.y = H + 25; b.x = Math.random() * W; }
+
+                var r = Math.max(0.5, b.r);
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, r, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(0,229,255,' + (b.alpha * 0.3).toFixed(3) + ')';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+
+                /* Highlight kecil */
+                ctx.beginPath();
+                ctx.arc(b.x - r * 0.28, b.y - r * 0.28, r * 0.2, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + (b.alpha * 0.3).toFixed(3) + ')';
+                ctx.fill();
+            }
+        }
+
+        /* -- Debu laut dalam -- */
+        var dust = [];
+        function initDust() {
+            dust = [];
+            var count = Math.min(45, Math.round(W * H / 35000));
+            for (var i = 0; i < count; i++) {
+                dust.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    vx: (Math.random() - 0.5) * 0.06,
+                    vy: (Math.random() - 0.5) * 0.04,
+                    r: Math.random() * 0.7 + 0.2,
+                    alpha: Math.random() * 0.1 + 0.03
+                });
+            }
+        }
+
+        function drawDust() {
+            for (var i = 0; i < dust.length; i++) {
+                var d = dust[i];
+                d.x += d.vx; d.y += d.vy;
+                if (d.x < -10) d.x = W + 10;
+                if (d.x > W + 10) d.x = -10;
+                if (d.y < -10) d.y = H + 10;
+                if (d.y > H + 10) d.y = -10;
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, Math.max(0.2, d.r), 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(200,230,240,' + d.alpha.toFixed(3) + ')';
+                ctx.fill();
+            }
+        }
+
+        /* -- Resize -- */
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+            initRays(); initParticles(); initBubbles(); initDust();
+        }
+        window.addEventListener('resize', resize);
+
+        /* -- Loop render canvas -- */
+        function renderOcean() {
+            ctx.clearRect(0, 0, W, H);
+            drawRays();
+            drawCaustics();
+            drawDust();
+            drawParticles();
+            drawBubbles();
+            for (var i = 0; i < jellies.length; i++) drawJelly(jellies[i]);
+            time += 0.016;
+            requestAnimationFrame(renderOcean);
+        }
+
+        /* ============================
+           Info & jam
+           ============================ */
+        var elGreet = document.getElementById('greeting');
+        var elH = document.getElementById('h');
+        var elM = document.getElementById('m');
+        var elS = document.getElementById('s');
+        var elDate = document.getElementById('date');
+        var elDayPct = document.getElementById('dayPct');
+        var elDayBar = document.getElementById('dayBar');
+        var elWeek = document.getElementById('weekNum');
+        var elDOY = document.getElementById('dayOfYear');
+        var elLeft = document.getElementById('daysLeft');
+        var elQ = document.getElementById('quarter');
+        var elZ = document.getElementById('zodiac');
+        var elSe = document.getElementById('season');
+
+        var namaHari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+        var namaBulan = ['Januari','Februari','Maret','April','Mei','Juni',
+                         'Juli','Agustus','September','Oktober','November','Desember'];
+        var pad = function(n){ return String(n).padStart(2,'0'); };
+
+        function getGreeting(h){
+            if(h<5) return 'Selamat Malam';
+            if(h<11) return 'Selamat Pagi';
+            if(h<15) return 'Selamat Siang';
+            if(h<18) return 'Selamat Sore';
+            return 'Selamat Malam';
+        }
+        function getWeek(d){
+            var t=new Date(d.valueOf()), dn=(d.getDay()+6)%7;
+            t.setDate(t.getDate()-dn+3);
+            var ft=t.valueOf();
+            t.setMonth(0,1);
+            if(t.getDay()!==4) t.setMonth(0,1+((4-t.getDay())+7)%7);
+            return 1+Math.ceil((ft-t)/604800000);
+        }
+        function getDOY(d){
+            var s=new Date(d.getFullYear(),0,0);
+            return Math.floor((d-s)/86400000);
+        }
+        function getZodiac(d){
+            var day=d.getDate(),m=d.getMonth();
+            var s=[[20,'Aquarius'],[19,'Pisces'],[20,'Aries'],[20,'Taurus'],
+                   [21,'Gemini'],[21,'Cancer'],[22,'Leo'],[23,'Virgo'],
+                   [23,'Libra'],[23,'Scorpio'],[22,'Sagittarius'],[22,'Capricorn']];
+            return day<s[m][0]?s[(m+11)%12][1]:s[m][1];
+        }
+        function getSeason(d){
+            var m=d.getMonth();
+            if(m>=2&&m<=4) return 'Kemarau';
+            if(m>=5&&m<=9) return 'Hujan';
+            return 'Peralihan';
+        }
+
+        function tick(){
+            var now=new Date(), h=now.getHours(), m=now.getMinutes(), s=now.getSeconds();
+            elH.textContent=pad(h); elM.textContent=pad(m); elS.textContent=pad(s);
+            elGreet.textContent=getGreeting(h);
+            elDate.textContent=namaHari[now.getDay()]+', '+now.getDate()+' '+namaBulan[now.getMonth()]+' '+now.getFullYear();
+
+            var ds=h*3600+m*60+s, dp=(ds/86400*100);
+            elDayPct.textContent=dp.toFixed(1)+'%';
+            elDayBar.style.width=dp.toFixed(2)+'%';
+
+            var doy=getDOY(now);
+            elWeek.textContent=getWeek(now);
+            elDOY.textContent=doy;
+            var total=(now.getFullYear()%4===0&&(now.getFullYear()%100!==0||now.getFullYear()%400===0))?366:365;
+            elLeft.textContent=(total-doy)+' hari';
+            elQ.textContent='Q'+(Math.floor(now.getMonth()/3)+1);
+            elZ.textContent=getZodiac(now);
+            elSe.textContent=getSeason(now);
+        }
+
+        /* ============================
+           Kutipan laut
+           ============================ */
+        var quotes=[
+            "Lautan tidak pernah lelah membelah ombak.",
+            "Kedalaman bukan berarti gelap — bisa jadi tempat cahaya bermula.",
+            "Setiap tetes air laut pernah menjadi awan.",
+            "Berenang melawan arus bukan berarti salah arah.",
+            "Ketenangan lautan bukan karena tidak ada badai, tapi karena mampu menahannya.",
+            "Ikan tidak tahu ia berada dalam air. Kamu tidak tahu kamu berada dalam kebesaran.",
+            "Gelombang tidak pernah gagal mencapai pantai.",
+            "Kedalaman mengajarkan kesabaran yang permukaan tidak bisa.",
+            "Ada harta karun di tempat yang paling dalam dan gelap.",
+            "Arus membawa kita ke tempat yang tidak direncanakan, dan itu baik.",
+            "Koral tumbuh perlahan, tapi membentuk dunia.",
+            "Langit dan laut bertemu di garis yang tak bisa disentuh, tapi selalu ada."
+        ];
+        var elQuote=document.getElementById('quote'), qi=0;
+        function nextQuote(){
+            elQuote.style.opacity='0';
+            setTimeout(function(){
+                qi=(qi+1)%quotes.length;
+                elQuote.textContent=quotes[qi];
+                elQuote.style.opacity='1';
+            },600);
+        }
+
+        /* ============================
+           Mulai
+           ============================ */
+        resize();
+        tick();
+        elQuote.textContent=quotes[0];
+        setInterval(tick,1000);
+        setInterval(nextQuote,12000);
+        renderOcean();
+    })();
+    </script>
+</body>
+</html>
