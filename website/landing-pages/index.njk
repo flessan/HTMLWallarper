@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
-title: Welcome to HTMLWallarper
-permalink: /landing-pages/index.html
+title: Project Gallery
+permalink: /project/index.html
 ---
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,32 +10,23 @@ permalink: /landing-pages/index.html
 
 {% raw %}
 <style>
-  /* ===== CSS VARIABLES ===== */
+  /* ===== CSS VARIABLES (From Landing Page) ===== */
   :root {
-    /* Palette */
     --bg: #FEF6E8; --bg-alt: #FFF0DB; --bg-dot: #F0D9B5;
     --card: #FFFFFF; --card-border: #E8CFA8; --card-border-hover: #E8A85C;
     --text: #3D2C1E; --text-muted: #8B7355; --text-light: #A89279;
-    
-    /* Brand Colors */
     --primary: #FF7043; --primary-hover: #FF5722; --primary-light: #FFCCBC;
     --secondary: #26A69A; --secondary-light: #B2DFDB;
     --accent: #FFD54F; --accent-light: #FFF8E1; --accent-dark: #F57F17;
     --purple: #CE93D8; --purple-light: #F3E5F5;
-    --pink: #F48FB1; --pink-light: #FCE4EC; --pink-dark: #E91E63;
+    --pink: #F48FB1; --pink-light: #FCE4EC;
     --sky: #81D4FA; --sky-light: #E1F5FE; --sky-dark: #0288D1;
     --green: #81C784; --green-light: #E8F5E9; --green-dark: #2E7D32;
-
-    /* Effects & Spacing */
-    --shadow-sm: 0 4px 12px rgba(61,44,30,0.08);
-    --shadow-card: 0 5px 0 0 var(--card-border), 0 8px 24px rgba(61,44,30,0.08);
-    --shadow-card-hover: 0 5px 0 0 var(--card-border-hover), 0 12px 32px rgba(255,112,67,0.15);
-    --shadow-glass: 0 8px 32px rgba(0,0,0,0.05);
-    
-    --radius-sm: 0.75rem; --radius-md: 1rem; --radius-lg: 1.5rem; --radius-xl: 2rem;
-    --bounce: cubic-bezier(0.68, -0.4, 0.265, 1.4);
-    --smooth: cubic-bezier(0.4, 0, 0.2, 1);
-    --nav-h: 70px;
+    --shadow-card: 0 4px 0 0 var(--card-border), 0 6px 20px rgba(61,44,30,0.07);
+    --shadow-card-hover: 0 4px 0 0 var(--card-border-hover), 0 10px 30px rgba(255,112,67,0.12);
+    --radius-sm: 0.75rem; --radius-md: 1rem; --radius-lg: 1.25rem; --radius-xl: 1.75rem;
+    --bounce: cubic-bezier(0.68, -0.4, 0.265, 1.4); --smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --nav-h: 64px;
   }
 
   [data-theme="dark"] {
@@ -44,15 +35,13 @@ permalink: /landing-pages/index.html
     --text: #F0E6D6; --text-muted: #9E93A8; --text-light: #6E6585;
     --primary: #FF8A65; --primary-hover: #FFAB91; --primary-light: rgba(255,138,101,0.14);
     --secondary: #4DB6AC; --secondary-light: rgba(77,182,172,0.14);
-    --accent: #FFE082; --accent-light: rgba(255,224,130,0.12); --accent-dark: #FFB300;
+    --accent: #FFE082; --accent-light: rgba(255,224,130,0.1); --accent-dark: #FFB300;
     --purple: #CE93D8; --purple-light: rgba(206,147,216,0.12);
-    --pink: #F48FB1; --pink-light: rgba(244,143,177,0.12); --pink-dark: #FF80AB;
+    --pink: #F48FB1; --pink-light: rgba(244,143,177,0.12);
     --sky: #81D4FA; --sky-light: rgba(129,212,250,0.12); --sky-dark: #4FC3F7;
     --green: #81C784; --green-light: rgba(129,199,132,0.12); --green-dark: #66BB6A;
-    --shadow-sm: 0 4px 12px rgba(0,0,0,0.25);
-    --shadow-card: 0 5px 0 0 var(--card-border), 0 8px 24px rgba(0,0,0,0.25);
-    --shadow-card-hover: 0 5px 0 0 var(--card-border-hover), 0 12px 32px rgba(255,138,101,0.12);
-    --shadow-glass: 0 8px 32px rgba(0,0,0,0.25);
+    --shadow-card: 0 4px 0 0 var(--card-border), 0 6px 20px rgba(0,0,0,0.2);
+    --shadow-card-hover: 0 4px 0 0 var(--card-border-hover), 0 10px 30px rgba(255,138,101,0.1);
   }
 
   /* ===== BASE ===== */
@@ -61,16 +50,13 @@ permalink: /landing-pages/index.html
     font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text);
     overflow-x: hidden; transition: background 0.5s var(--smooth), color 0.5s var(--smooth); line-height: 1.6;
   }
-  /* Dot pattern */
   body::before {
     content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background-image: radial-gradient(var(--bg-dot) 1px, transparent 1px);
-    background-size: 24px 24px; opacity: 0.4; transition: opacity 0.5s;
+    background-size: 22px 22px; opacity: 0.45; transition: opacity 0.5s;
   }
   h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; line-height: 1.2; }
   a { text-decoration: none; color: inherit; }
-  img { max-width: 100%; display: block; }
-  code, .code-block code { font-family: 'Courier New', Courier, monospace; }
   :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
 
   /* ===== SCROLL PROGRESS ===== */
@@ -82,1351 +68,742 @@ permalink: /landing-pages/index.html
   }
   @keyframes progressSlide { to { background-position: 300% 0; } }
 
-  /* ===== NAVIGATION ===== */
+  /* ===== NAVIGATION (From Landing) ===== */
   #mainNav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-    height: var(--nav-h); background: rgba(var(--bg), 0.85);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-bottom: 2px solid var(--card-border);
-    transition: background 0.4s, border-color 0.4s, box-shadow 0.3s;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10000; height: var(--nav-h);
+    background: var(--bg); border-bottom: 2.5px solid var(--card-border);
+    transition: background 0.4s var(--smooth), border-color 0.4s, box-shadow 0.3s;
   }
-  #mainNav.scrolled { background: var(--bg); box-shadow: var(--shadow-sm); }
+  #mainNav.scrolled { background: var(--bg); box-shadow: 0 2px 8px rgba(61,44,30,0.06); }
   .nav-inner {
-    max-width: 1100px; margin: 0 auto; height: 100%; display: flex;
-    align-items: center; justify-content: space-between; padding: 0 1.5rem;
+    max-width: 1080px; margin: 0 auto; height: 100%; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 1.25rem;
   }
   .nav-logo {
-    display: flex; align-items: center; gap: 0.75rem;
-    font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.1rem;
-    color: var(--text); transition: color 0.4s;
+    display: flex; align-items: center; gap: 0.6rem; font-family: 'Fredoka', sans-serif;
+    font-weight: 700; font-size: 1.05rem; color: var(--text); transition: color 0.4s;
   }
   .nav-logo-icon {
-    width: 36px; height: 36px; border-radius: var(--radius-sm);
-    background: var(--primary); border: 2px solid var(--text);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 2px 2px 0 var(--text);
-    transition: transform 0.3s var(--bounce);
+    width: 34px; height: 34px; border-radius: var(--radius-sm); background: var(--primary);
+    border: 2.5px solid var(--text); display: flex; align-items: center; justify-content: center;
+    box-shadow: 2px 2px 0 var(--text); transition: transform 0.3s var(--bounce), background 0.4s;
   }
-  .nav-logo:hover .nav-logo-icon { transform: rotate(-10deg) scale(1.1); }
-  .nav-links { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-logo:hover .nav-logo-icon { transform: rotate(-8deg) scale(1.08); }
+  .nav-links { display: flex; align-items: center; gap: 0.2rem; }
   .nav-links a {
-    padding: 0.5rem 0.9rem; border-radius: var(--radius-sm);
-    font-size: 0.85rem; font-weight: 700; color: var(--text-muted);
-    transition: all 0.2s; border: 2px solid transparent;
+    padding: 0.45rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 700;
+    color: var(--text-muted); transition: all 0.2s var(--smooth); border: 2px solid transparent;
   }
   .nav-links a:hover { color: var(--primary); background: var(--primary-light); }
   .nav-cta {
-    padding: 0.5rem 1.2rem !important; background: var(--primary) !important; color: #fff !important;
+    padding: 0.45rem 1rem !important; background: var(--primary) !important; color: #fff !important;
     border: 2.5px solid var(--text) !important; border-radius: var(--radius-sm) !important;
     box-shadow: 2px 2px 0 var(--text); transition: all 0.25s var(--bounce) !important;
   }
-  .nav-cta:hover {
-    background: var(--primary-hover) !important; transform: translate(-2px, -2px);
-    box-shadow: 4px 4px 0 var(--text) !important;
-  }
+  .nav-cta:hover { background: var(--primary-hover) !important; transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--text) !important; }
   
   /* Theme Toggle */
   .theme-toggle {
-    width: 40px; height: 40px; border-radius: 50%; background: var(--accent-light);
-    border: 2px solid var(--card-border); cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s var(--bounce); position: relative; overflow: hidden;
-    flex-shrink: 0;
+    width: 38px; height: 38px; border-radius: 50%; background: var(--accent-light);
+    border: 2.5px solid var(--card-border); cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: all 0.3s var(--bounce); position: relative; overflow: hidden; flex-shrink: 0;
   }
-  .theme-toggle:hover { transform: scale(1.1) rotate(15deg); border-color: var(--accent-dark); }
-  .theme-toggle .sun { opacity: 1; transform: scale(1) rotate(0deg); position: absolute; transition: all 0.4s; }
-  .theme-toggle .moon { opacity: 0; transform: scale(0.4) rotate(-90deg); position: absolute; transition: all 0.4s; }
+  .theme-toggle:hover { transform: scale(1.12) rotate(15deg); border-color: var(--accent-dark); }
+  .theme-toggle .sun, .theme-toggle .moon { position: absolute; transition: all 0.45s var(--bounce); }
+  .theme-toggle .sun { opacity: 1; transform: scale(1) rotate(0deg); }
+  .theme-toggle .moon { opacity: 0; transform: scale(0.4) rotate(-90deg); }
   [data-theme="dark"] .theme-toggle .sun { opacity: 0; transform: scale(0.4) rotate(90deg); }
   [data-theme="dark"] .theme-toggle .moon { opacity: 1; transform: scale(1) rotate(0deg); }
 
-  /* Hamburger & Mobile Menu */
-  .hamburger {
-    display: none; width: 40px; height: 40px; border-radius: var(--radius-sm);
-    background: var(--card); border: 2px solid var(--card-border); cursor: pointer;
-    flex-direction: column; align-items: center; justify-content: center; gap: 5px; flex-shrink: 0;
-  }
-  .hamburger span { display: block; width: 20px; height: 2.5px; background: var(--text); border-radius: 2px; transition: all 0.3s; transform-origin: center; }
-  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-  
-  .mobile-menu {
-    display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
-    background: var(--bg); border-bottom: 3px solid var(--card-border);
-    padding: 1rem; z-index: 9999; box-shadow: var(--shadow-glass);
-    transform: translateY(-10px); opacity: 0; pointer-events: none;
-    transition: all 0.3s var(--bounce);
-  }
-  .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-  .mobile-menu a {
-    display: block; padding: 0.8rem 1rem; border-radius: var(--radius-sm);
-    font-weight: 700; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;
-    transition: all 0.2s;
-  }
-  .mobile-menu a:hover { background: var(--primary-light); color: var(--primary); }
-
-  @media (max-width: 768px) {
-    .nav-links { display: none !important; }
-    .hamburger { display: flex; }
-    .mobile-menu { display: block; }
-  }
-
   /* ===== DECORATIONS ===== */
   .cartoon-deco { position: absolute; pointer-events: none; z-index: 0; }
-  .deco-cloud {
-    width: 80px; height: 40px; background: var(--card); border-radius: 40px;
-    border: 2.5px solid var(--card-border); box-shadow: 3px 3px 0 var(--card-border);
-    animation: floatCloud 9s ease-in-out infinite; transition: background 0.4s, border-color 0.4s;
-  }
-  .deco-cloud::before {
-    content: ''; position: absolute; width: 36px; height: 36px; background: var(--card);
-    border-radius: 50%; border: 2.5px solid var(--card-border); border-bottom-color: transparent;
-    top: -20px; left: 14px;
-  }
-  .deco-cloud::after {
-    content: ''; position: absolute; width: 24px; height: 24px; background: var(--card);
-    border-radius: 50%; border: 2.5px solid var(--card-border); border-bottom-color: transparent;
-    top: -12px; left: 42px;
-  }
-  @keyframes floatCloud {
-    0%, 100% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(-12px) translateX(8px); }
-  }
-
   .deco-star {
-    width: 18px; height: 18px; background: var(--accent);
+    width: 20px; height: 20px; background: var(--accent);
     clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
     animation: twinkle 3s ease-in-out infinite;
   }
-  @keyframes twinkle {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
-    50% { transform: scale(1.3) rotate(15deg); opacity: 1; }
-  }
+  @keyframes twinkle { 0%,100% { transform: scale(1) rotate(0deg); opacity: 0.75; } 50% { transform: scale(1.25) rotate(12deg); opacity: 1; } }
   .deco-heart {
-    width: 16px; height: 14px; background: var(--pink); transform: rotate(-45deg);
+    width: 18px; height: 16px; background: var(--pink); transform: rotate(-45deg);
     border-radius: 0 50% 0 50%; animation: floatHeart 4s ease-in-out infinite;
   }
-  .deco-heart::before {
-    content: ''; position: absolute; width: 16px; height: 14px; background: var(--pink);
-    border-radius: 50% 50% 0 0; top: -7px; left: 0;
+  .deco-heart::before { content: ''; position: absolute; width: 18px; height: 16px; background: var(--pink); border-radius: 50% 50% 0 0; top: -8px; left: 0; }
+  @keyframes floatHeart { 0%,100% { transform: rotate(-45deg) translateY(0) scale(1); } 50% { transform: rotate(-45deg) translateY(-8px) scale(1.12); } }
+  .deco-cloud {
+    width: 72px; height: 36px; background: var(--card); border-radius: 36px;
+    border: 2.5px solid var(--card-border); box-shadow: 2px 2px 0 var(--card-border);
+    animation: floatCloud 8s ease-in-out infinite; transition: background 0.4s, border-color 0.4s;
   }
-  @keyframes floatHeart {
-    0%, 100% { transform: rotate(-45deg) translateY(0) scale(1); }
-    50% { transform: rotate(-45deg) translateY(-8px) scale(1.1); }
+  .deco-cloud::before {
+    content: ''; position: absolute; width: 32px; height: 32px; background: var(--card);
+    border-radius: 50%; border: 2.5px solid var(--card-border); border-bottom-color: transparent; top: -18px; left: 12px;
   }
+  .deco-cloud::after {
+    content: ''; position: absolute; width: 22px; height: 22px; background: var(--card);
+    border-radius: 50%; border: 2.5px solid var(--card-border); border-bottom-color: transparent; top: -10px; left: 38px;
+  }
+  @keyframes floatCloud { 0%,100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-10px) translateX(6px); } }
 
-  /* ===== REVEAL ANIMATION ===== */
-  .reveal {
-    opacity: 0; transform: translateY(30px) scale(0.95);
-    transition: opacity 0.7s var(--bounce), transform 0.7s var(--bounce);
+  /* ===== GALLERY HERO & STATS ===== */
+  .gallery-hero {
+    position: relative; padding: calc(var(--nav-h) + 3rem) 1.25rem 3rem; text-align: center;
+    max-width: 800px; margin: 0 auto; z-index: 1;
   }
-  .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
-  .d-1 { transition-delay: 0.1s; }
-  .d-2 { transition-delay: 0.2s; }
-  .d-3 { transition-delay: 0.3s; }
-  .d-4 { transition-delay: 0.4s; }
-  .d-5 { transition-delay: 0.5s; }
-
-  /* ===== HERO ===== */
-  .hero-section {
-    position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: calc(var(--nav-h) + 2rem) 1.25rem 5rem; overflow: hidden;
-  }
-  /* Background Blobs */
-  .hero-bg-blob {
-    position: absolute; border-radius: 50%; pointer-events: none; filter: blur(90px); opacity: 0.25;
-    transition: background 0.6s;
-  }
-  .blob-1 { width: 500px; height: 500px; background: var(--primary); top: -10%; right: -10%; }
-  .blob-2 { width: 400px; height: 400px; background: var(--secondary); bottom: -5%; left: -5%; }
-  .blob-3 { width: 250px; height: 250px; background: var(--accent); top: 40%; left: 50%; margin-left: -125px; opacity: 0.15; }
-
-  .hero-content { position: relative; z-index: 2; text-align: center; max-width: 700px; margin: 0 auto; }
   .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.9rem;
     border-radius: 999px; background: var(--card); border: 2.5px solid var(--card-border);
-    box-shadow: 3px 3px 0 var(--card-border); font-size: 0.75rem; font-weight: 700;
-    color: var(--text-muted); margin-bottom: 2rem; transition: all 0.4s;
+    box-shadow: 2px 2px 0 var(--card-border); font-size: 0.72rem; font-weight: 700;
+    color: var(--text-muted); margin-bottom: 1.5rem; transition: all 0.4s;
   }
-  .dot-live {
-    width: 8px; height: 8px; border-radius: 50%; background: var(--green);
-    border: 2px solid var(--text); animation: pulse 2s ease-in-out infinite; flex-shrink: 0;
-  }
+  .dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--green); border: 2px solid var(--text); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
   @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
-  .hero-title {
-    font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 700; color: var(--text);
-    margin-bottom: 1rem; line-height: 1.1; transition: color 0.4s;
-  }
-  .hero-title-accent {
-    color: var(--primary); position: relative; display: inline-block;
-    transition: color 0.4s; text-shadow: 0 0 20px var(--primary-light);
-  }
-  .hero-sub {
-    font-size: clamp(1rem, 2.2vw, 1.15rem); color: var(--text-muted);
-    line-height: 1.7; max-width: 550px; margin: 0 auto 2.5rem; transition: color 0.4s;
-  }
-
-  /* Buttons */
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.75rem;
-    border-radius: var(--radius-md); font-family: 'Fredoka', sans-serif; font-weight: 600;
-    font-size: 1rem; cursor: pointer; border: 2.5px solid var(--text);
-    transition: all 0.25s var(--bounce); text-decoration: none; position: relative; overflow: hidden;
-  }
-  .btn:active { transform: scale(0.95) !important; }
-  .btn-primary {
-    background: var(--primary); color: #fff; box-shadow: 4px 4px 0 var(--text);
-  }
-  .btn-primary:hover { background: var(--primary-hover); transform: translateY(-3px); box-shadow: 6px 6px 0 var(--text); }
-  .btn-secondary {
-    background: var(--card); color: var(--text); box-shadow: 4px 4px 0 var(--card-border);
-    transition: all 0.25s var(--bounce), background 0.4s, color 0.4s;
-  }
-  .btn-secondary:hover {
-    transform: translateY(-3px); box-shadow: 6px 6px 0 var(--card-border-hover);
-    border-color: var(--primary); color: var(--primary);
-  }
-
-  .hero-hint {
-    margin-top: 1.5rem; font-size: 0.75rem; color: var(--text-light);
-    font-weight: 600; transition: color 0.4s;
-  }
-  .hero-hint kbd {
-    display: inline-block; padding: 0.1rem 0.5rem; background: var(--card);
-    border: 2px solid var(--card-border); border-radius: 0.3rem; font-family: 'Nunito', sans-serif;
-    font-size: 0.7rem; box-shadow: 1px 1px 0 var(--card-border); color: var(--text-muted);
-  }
-
-  /* Scroll Indicator */
-  .scroll-indicator {
-    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-    animation: scrollBounce 2.5s ease-in-out infinite;
-  }
-  .scroll-indicator span {
-    font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
-    letter-spacing: 0.15em; color: var(--text-light);
-  }
-  @keyframes scrollBounce {
-    0%,100% { transform: translateX(-50%) translateY(0); opacity: 1; }
-    50% { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
-  }
-
-  /* ===== PREVIEW FLOAT WINDOWS ===== */
-  .preview-float {
-    position: absolute; border-radius: var(--radius-md); overflow: hidden;
-    border: 3px solid var(--card-border); box-shadow: 6px 6px 0 var(--card-border);
-    transition: transform 0.5s var(--bounce), border-color 0.4s;
-    backdrop-filter: blur(4px);
-  }
-  /* Positioning Utilities */
-  .pos-1 { top: 8%; right: 4%; transform: rotate(3deg); }
-  .pos-2 { bottom: 15%; left: 3%; transform: rotate(-4deg); }
-  .pos-3 { top: 20%; left: 8%; transform: rotate(5deg); opacity: 0.6; }
   
-  .pw-bar {
-    height: 24px; background: rgba(0,0,0,0.05); border-bottom: 2px solid var(--card-border);
-    display: flex; align-items: center; padding: 0 8px; gap: 5px;
+  .gallery-hero h1 {
+    font-size: clamp(2.2rem, 5.5vw, 3.25rem); font-weight: 700; color: var(--text);
+    margin-bottom: 0.875rem; transition: color 0.4s;
   }
-  .pw-dot { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--text); flex-shrink: 0; }
-  .pw-dot.r { background: #EF5350; }
-  .pw-dot.y { background: #FFC107; }
-  .pw-dot.g { background: #66BB6A; }
-  .pw-body { transition: background 0.4s; }
+  .gallery-hero p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--text-muted); line-height: 1.7;
+    max-width: 540px; margin: 0 auto 2rem; transition: color 0.4s;
+  }
 
-  /* ===== CAROUSEL ===== */
-  .carousel-wrap {
-    position: relative; border-radius: var(--radius-xl); overflow: hidden;
-    border: 3px solid var(--card-border); box-shadow: 6px 6px 0 var(--card-border);
-    background: var(--card); transition: all 0.4s;
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2rem;
   }
-  .carousel-area {
-    overflow: hidden; position: relative; aspect-ratio: 16/9;
-    background: var(--bg-alt); transition: background 0.4s;
+  @media(min-width: 640px) { .stats-bar { grid-template-columns: repeat(4, 1fr); } }
+  .stat-card-lg {
+    background: var(--card); border: 2.5px solid var(--card-border); border-radius: var(--radius-lg);
+    padding: 1rem; text-align: center; box-shadow: var(--shadow-card);
+    transition: transform 0.3s var(--bounce), border-color 0.3s;
   }
-  .carousel-track {
-    display: flex; height: 100%; transition: transform 0.6s var(--bounce);
+  .stat-card-lg:hover { transform: translateY(-3px) rotate(-1deg); border-color: var(--card-border-hover); }
+  .stat-val { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.75rem; color: var(--primary); line-height: 1.2; transition: color 0.4s; }
+  .stat-lbl { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light); margin-top: 0.25rem; }
+
+  /* ===== GALLERY TOOLBAR ===== */
+  .toolbar-wrap {
+    max-width: 1200px; margin: 0 auto 2rem; padding: 0 1.25rem; position: relative; z-index: 2;
   }
-  .carousel-slide { min-width: 100%; height: 100%; position: relative; }
-  .carousel-slide iframe {
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+    background: var(--card); border: 2.5px solid var(--card-border); border-radius: var(--radius-lg);
+    padding: 0.75rem; box-shadow: var(--shadow-card); transition: border-color 0.3s;
+  }
+  .toolbar:hover { border-color: var(--card-border-hover); }
+  
+  .toolbar-search { position: relative; flex: 1; min-width: 200px; }
+  .toolbar-search svg { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-light); width: 18px; height: 18px; pointer-events: none; }
+  .toolbar-search input {
+    width: 100%; background: var(--bg-alt); border: 2px solid var(--card-border); border-radius: var(--radius-md);
+    padding: 0.65rem 1rem 0.65rem 2.6rem; font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+    font-weight: 700; color: var(--text); outline: none; transition: all 0.2s var(--bounce);
+  }
+  .toolbar-search input:focus { border-color: var(--primary); box-shadow: 2px 2px 0 var(--primary); transform: translate(-1px, -1px); }
+  .toolbar-search input::placeholder { color: var(--text-light); }
+
+  .toolbar-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem; background: var(--bg-alt);
+    border: 2px solid var(--card-border); border-radius: var(--radius-md); padding: 0.6rem 1rem;
+    font-family: 'Fredoka', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--text-muted);
+    cursor: pointer; box-shadow: 2px 2px 0 var(--card-border); transition: all 0.2s var(--bounce);
+  }
+  .toolbar-btn:hover { transform: translate(-1px, -1px); border-color: var(--primary); color: var(--primary); box-shadow: 3px 3px 0 var(--primary); }
+  .toolbar-btn.active { background: var(--pink-light); border-color: var(--pink); color: var(--pink); box-shadow: 2px 2px 0 var(--pink); }
+
+  .view-toggle { display: flex; border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--card-border); }
+  .view-btn { background: var(--bg-alt); padding: 0.5rem 0.75rem; border: none; border-right: 1px solid var(--card-border); cursor: pointer; transition: background 0.2s; color: var(--text-light); }
+  .view-btn:last-child { border-right: none; }
+  .view-btn.active { background: var(--primary); color: #fff; }
+  .view-btn:hover:not(.active) { background: var(--bg); }
+
+  /* ===== GALLERY GRID ===== */
+  .gallery-root { position: relative; z-index: 1; padding-bottom: 4rem; }
+  .gallery-grid {
+    max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; display: grid;
+    grid-template-columns: 1fr; gap: 1.5rem;
+  }
+  @media(min-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+  
+  .gallery-grid.list-view { grid-template-columns: 1fr; }
+  .list-view .wallpaper-card { grid-column: 1 / -1; }
+  .list-view .card-inner { display: grid; grid-template-columns: 300px 1fr; }
+  .list-view .preview-area { border-bottom: none; border-right: 2.5px solid var(--card-border); aspect-ratio: auto; min-height: 200px; }
+  @media(max-width: 640px) { .list-view .card-inner { grid-template-columns: 1fr; } .list-view .preview-area { aspect-ratio: 16/9; border-bottom: 2.5px solid var(--card-border); border-right: none; } }
+
+  /* ===== WALLPAPER CARD ===== */
+  .wallpaper-card { opacity: 0; transform: translateY(20px) scale(0.98); transition: opacity 0.6s var(--bounce), transform 0.6s var(--bounce); }
+  .wallpaper-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .wallpaper-card.hidden-by-filter { display: none; }
+
+  .card-inner {
+    background: var(--card); border: 2.5px solid var(--card-border); border-radius: var(--radius-lg);
+    overflow: hidden; box-shadow: var(--shadow-card); transition: all 0.3s var(--bounce);
+    position: relative; display: flex; flex-direction: column;
+  }
+  .card-inner:hover { border-color: var(--card-border-hover); box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+
+  .preview-area {
+    position: relative; aspect-ratio: 16/9; background: var(--bg-alt); overflow: hidden;
+    border-bottom: 2.5px solid var(--card-border); transition: background 0.4s;
+  }
+  .preview-area iframe {
     position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px;
-    margin-left: -640px; margin-top: -360px; transform: scale(0.3125);
-    transform-origin: center center; border: none; pointer-events: none;
+    margin-left: -640px; margin-top: -360px; transform: scale(0.3125); border: none;
+    pointer-events: none; transition: opacity 0.5s var(--smooth); opacity: 0.8;
   }
-  .carousel-controls {
-    position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem;
-    display: flex; align-items: center; justify-content: space-between; z-index: 5;
-  }
-  .carousel-controls::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent); pointer-events: none; z-index: -1;
-  }
-  .carousel-btn {
-    width: 36px; height: 36px; border-radius: 50%; background: var(--card);
-    border: 2.5px solid var(--text); box-shadow: 2px 2px 0 var(--text);
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    color: var(--text); transition: all 0.2s var(--bounce); flex-shrink: 0;
-  }
-  .carousel-btn:hover { transform: scale(1.1); box-shadow: 3px 3px 0 var(--text); }
-  .carousel-dots { display: flex; gap: 6px; }
-  .carousel-dot {
-    width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.2);
-    border: 2px solid rgba(255,255,255,0.5); cursor: pointer;
-    transition: all 0.3s var(--bounce);
-  }
-  .carousel-dot.active { background: var(--primary); border-color: #fff; transform: scale(1.25); }
-  .carousel-dot:hover { transform: scale(1.15); }
+  .card-inner:hover .preview-area iframe { opacity: 1; }
 
-  /* ===== FEATURES ===== */
-  .feature-card {
-    background: var(--card); border: 2.5px solid var(--card-border);
-    border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-card);
-    transition: all 0.4s; position: relative; overflow: hidden; cursor: default;
+  /* Card Actions Overlay */
+  .hover-overlay {
+    position: absolute; inset: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
   }
-  .feature-card:hover {
-    border-color: var(--card-border-hover); box-shadow: var(--shadow-card-hover); transform: translateY(-4px);
+  .card-inner:hover .hover-overlay { opacity: 1; }
+  .overlay-btn {
+    padding: 0.5rem 1.25rem; border-radius: 999px; font-family: 'Fredoka', sans-serif;
+    font-weight: 600; font-size: 0.8rem; cursor: pointer; border: 2.5px solid;
+    transition: all 0.25s var(--bounce); transform: translateY(8px); opacity: 0; color: #fff;
   }
-  .feature-icon {
-    width: 56px; height: 56px; border-radius: var(--radius-md); display: flex;
-    align-items: center; justify-content: center; border: 2.5px solid;
-    margin-bottom: 1.25rem; box-shadow: 3px 3px 0 currentColor; flex-shrink: 0;
-    transition: background 0.4s, border-color 0.4s;
-  }
-  /* Feature Colors */
-  .fc-primary { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
-  .fc-secondary { background: var(--secondary-light); border-color: var(--secondary); color: var(--secondary); }
-  .fc-purple { background: var(--purple-light); border-color: var(--purple); color: var(--purple); }
-  .fc-accent { background: var(--accent-light); border-color: var(--accent-dark); color: var(--accent-dark); }
-  .fc-pink { background: var(--pink-light); border-color: var(--pink); color: var(--pink); }
-  .fc-sky { background: var(--sky-light); border-color: var(--sky-dark); color: var(--sky-dark); }
+  .card-inner:hover .overlay-btn { transform: translateY(0); opacity: 1; }
+  .card-inner:hover .overlay-btn:nth-child(2) { transition-delay: 0.05s; }
+  .overlay-btn-primary { background: var(--primary); border-color: var(--text); box-shadow: 2px 2px 0 var(--text); }
+  .overlay-btn-primary:hover { transform: translateY(-2px) !important; background: var(--primary-hover); box-shadow: 3px 3px 0 var(--text); }
+  .overlay-btn-secondary { background: var(--card); color: var(--text); border-color: var(--card-border); box-shadow: 2px 2px 0 var(--card-border); }
+  .overlay-btn-secondary:hover { transform: translateY(-2px) !important; border-color: var(--primary); color: var(--primary); }
 
-  .feature-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); transition: color 0.4s; }
-  .feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; transition: color 0.4s; }
+  /* Card Header/Body */
+  .card-index {
+    position: absolute; top: 0.75rem; left: 0.75rem; z-index: 30; padding: 0.2rem 0.6rem;
+    border-radius: 999px; font-size: 0.6rem; font-weight: 800; background: var(--card);
+    border: 2px solid var(--card-border); color: var(--text-muted); box-shadow: 1px 1px 0 var(--card-border);
+  }
+  .fav-btn {
+    position: absolute; top: 0.75rem; right: 0.75rem; z-index: 30; width: 32px; height: 32px;
+    border-radius: 50%; background: var(--card); border: 2.5px solid var(--card-border);
+    box-shadow: 1px 1px 0 var(--card-border); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.3s var(--bounce);
+  }
+  .fav-btn:hover { transform: scale(1.15); border-color: var(--pink); box-shadow: 1px 1px 0 var(--pink); }
+  .fav-btn.active { background: var(--pink-light); border-color: var(--pink); box-shadow: 1px 1px 0 var(--pink); }
+  .fav-btn.active svg { fill: var(--pink); color: var(--pink); }
+  .fav-btn.bounce { animation: favBounce 0.4s var(--bounce); }
+  @keyframes favBounce { 0% { transform: scale(1); } 30% { transform: scale(1.35); } 60% { transform: scale(0.9); } 100% { transform: scale(1); } }
 
-  /* ===== STATS ===== */
-  .stats-section {
-    border-top: 3px solid var(--card-border); border-bottom: 3px solid var(--card-border);
-    background: var(--bg-alt); position: relative; overflow: hidden; transition: background 0.4s;
-  }
-  .stat-card {
-    text-align: center; padding: 1.5rem 1rem; background: var(--card);
-    border: 2.5px solid var(--card-border); border-radius: var(--radius-lg);
-    box-shadow: 4px 4px 0 var(--card-border); transition: transform 0.3s var(--bounce);
-  }
-  .stat-card:hover { transform: translateY(-4px) rotate(-1deg); }
-  .stat-value {
-    font-family: 'Fredoka', sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
-    color: var(--primary); transition: color 0.4s; font-variant-numeric: tabular-nums;
-  }
-  .stat-label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-top: 0.3rem; }
+  .card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+  .card-head h3 { font-size: 1.05rem; font-weight: 600; color: var(--text); transition: color 0.4s; text-transform: capitalize; }
+  .card-inner:hover .card-head h3 { color: var(--primary); }
+  .live-tag { display: flex; align-items: center; gap: 0.25rem; }
+  .live-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  .live-tag span { font-size: 0.55rem; font-weight: 800; color: var(--green); letter-spacing: 0.05em; }
 
-  /* ===== COMPARISON ===== */
-  .comparison-container {
-    position: relative; overflow: hidden; border-radius: var(--radius-xl);
-    border: 3px solid var(--card-border); box-shadow: 6px 6px 0 var(--card-border);
-    cursor: col-resize; user-select: none; aspect-ratio: 16/9; transition: border-color 0.4s;
+  .path-row {
+    display: flex; align-items: center; font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+    background: var(--bg-alt); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm);
+    border: 2px solid var(--card-border); cursor: pointer; transition: all 0.2s; gap: 0.5rem; margin-top: auto;
   }
-  .comp-layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .comp-slider-line {
-    position: absolute; top: 0; bottom: 0; width: 4px; background: var(--primary);
-    z-index: 10; box-shadow: 0 0 0 2px var(--text); transition: background 0.4s;
-  }
-  .comp-handle {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 40px; height: 40px; border-radius: 50%; background: var(--primary);
-    border: 3px solid var(--text); box-shadow: 3px 3px 0 var(--text);
-    display: flex; align-items: center; justify-content: center; color: #fff; transition: background 0.4s;
-  }
-  .comp-label {
-    position: absolute; top: 1rem; padding: 0.3rem 0.8rem; border-radius: 999px;
-    font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
-    border: 2px solid var(--text); box-shadow: 2px 2px 0 var(--text); z-index: 5; transition: background 0.4s;
-  }
-  .comp-label-before { left: 1rem; background: var(--bg-alt); color: var(--text-muted); }
-  .comp-label-after { right: 1rem; background: var(--primary); color: #fff; }
+  .path-row:hover { border-color: var(--primary); background: var(--primary-light); }
+  .path-row svg { flex-shrink: 0; color: var(--primary); transition: color 0.4s; width: 16px; height: 16px; }
+  .path-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'Courier New', monospace; }
+  .copy-icon { flex-shrink: 0; color: var(--text-light); width: 16px; height: 16px; }
+  .copy-icon.copied { color: var(--green); }
 
-  /* ===== INSTALL STEPS ===== */
-  .step-connector {
-    width: 4px; height: 3rem; margin: 0.5rem auto; background: var(--card-border);
-    border-radius: 4px; position: relative; overflow: hidden; transition: background 0.4s;
+  /* ===== LIGHTBOX ===== */
+  .lightbox-overlay {
+    position: fixed; inset: 0; z-index: 9000; background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.35s var(--smooth);
   }
-  .step-connector-fill {
-    position: absolute; inset: 0; background: var(--primary); border-radius: 4px;
-    transform: scaleY(0); transform-origin: top; transition: transform 0.8s var(--smooth);
+  .lightbox-overlay.active { opacity: 1; pointer-events: auto; }
+  .lightbox-content {
+    width: 90vw; height: 75vh; max-width: 1400px; border-radius: var(--radius-xl); overflow: hidden;
+    border: 3px solid var(--card-border); box-shadow: 4px 4px 0 var(--card-border), 0 16px 48px rgba(0,0,0,.15);
+    transform: scale(0.92); transition: transform 0.4s var(--bounce); position: relative;
   }
-  .step-item.completed .step-connector-fill { transform: scaleY(1); }
+  .lightbox-overlay.active .lightbox-content { transform: scale(1); }
+  .lightbox-content iframe { width: 100%; height: 100%; border: none; }
+  .lightbox-bar {
+    position: absolute; top: 0; left: 0; right: 0; padding: 0.75rem 1rem; display: flex; align-items: center;
+    justify-content: space-between; background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 85%, transparent), transparent);
+    z-index: 5;
+  }
+  .lb-nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px;
+    border-radius: 50%; background: var(--card); border: 2.5px solid var(--text);
+    box-shadow: 2px 2px 0 var(--text); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text); transition: all 0.25s var(--bounce); z-index: 5;
+  }
+  .lb-nav-btn:hover { transform: translateY(-50%) translate(-1px, -1px); box-shadow: 3px 3px 0 var(--text); }
+  .lb-nav-btn.prev { left: 1rem; }
+  .lb-nav-btn.next { right: 1rem; }
+  .lb-close {
+    width: 32px; height: 32px; border-radius: var(--radius-sm); background: var(--card);
+    border: 2.5px solid var(--card-border); box-shadow: 1px 1px 0 var(--card-border);
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted);
+    transition: all 0.25s var(--bounce);
+  }
+  .lb-close:hover { color: var(--pink); border-color: var(--pink); box-shadow: 1px 1px 0 var(--pink); }
 
-  .step-number {
-    width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.2rem;
-    background: var(--card); border: 3px solid var(--card-border); color: var(--text-muted);
-    box-shadow: 3px 3px 0 var(--card-border); transition: all 0.4s var(--bounce); flex-shrink: 0;
-  }
-  .step-item.active .step-number {
-    background: var(--primary); border-color: var(--text); color: #fff;
-    box-shadow: 3px 3px 0 var(--text); transform: scale(1.1) rotate(5deg);
-  }
-  .step-item.completed .step-number {
-    background: var(--green); border-color: var(--text); color: #fff;
-    box-shadow: 3px 3px 0 var(--text);
-  }
-
-  .code-block {
-    background: #1e1e1e; border: 2.5px solid var(--card-border); border-radius: var(--radius-sm);
-    padding: 0.8rem 1rem; font-size: 0.8rem; color: #a5d6ff;
-    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
-    box-shadow: 3px 3px 0 var(--card-border); transition: border-color 0.3s; overflow-x: auto;
-  }
-  .code-block:hover { border-color: var(--primary); }
-  .code-ck { color: #ff79c6; font-weight: 700; }
-  .code-cf { color: #8be9fd; }
-  .code-cp { color: #f1fa8c; }
-  
-  .copy-btn {
-    padding: 0.4rem 0.7rem; border-radius: var(--radius-sm); background: var(--card);
-    border: 2px solid var(--card-border); color: var(--text-muted); font-size: 0.7rem;
-    font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer;
-    transition: all 0.2s var(--bounce); box-shadow: 1px 1px 0 var(--card-border); white-space: nowrap;
-  }
-  .copy-btn:hover { border-color: var(--primary); color: var(--primary); transform: translate(-1px,-1px); }
-  .copy-btn:active { transform: translate(1px,1px); }
-  .copy-btn.copied { background: var(--green-light); border-color: var(--green); color: var(--green-dark); }
-
-  /* ===== FAQ ===== */
-  .faq-item {
-    border: 2.5px solid var(--card-border); border-radius: var(--radius-lg);
-    overflow: hidden; background: var(--card); box-shadow: 4px 4px 0 var(--card-border);
-    transition: all 0.3s var(--bounce); cursor: pointer;
-  }
-  .faq-item.open { border-color: var(--primary); box-shadow: 4px 4px 0 var(--primary); }
-  .faq-question {
-    padding: 1.2rem 1.25rem; cursor: pointer; display: flex; align-items: center;
-    justify-content: space-between; font-family: 'Fredoka', sans-serif; font-weight: 600;
-    font-size: 1rem; color: var(--text); transition: color 0.3s; gap: 1rem;
-  }
-  .faq-item.open .faq-question { color: var(--primary); }
-  .faq-chevron { transition: transform 0.4s var(--bounce); color: var(--text-light); flex-shrink: 0; }
-  .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--primary); }
-  .faq-answer {
-    max-height: 0; overflow: hidden; transition: max-height 0.5s var(--smooth), padding 0.3s;
-    padding: 0 1.25rem; cursor: default;
-  }
-  .faq-item.open .faq-answer { max-height: 300px; padding: 0 1.25rem 1.25rem; }
-  .faq-answer p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
-  .faq-answer code {
-    background: var(--primary-light); color: var(--primary); padding: 0.15rem 0.4rem;
-    border-radius: 0.3rem; font-size: 0.8rem; font-weight: 700; border: 1.5px solid var(--primary);
-  }
-  .faq-answer strong { color: var(--text); }
-
-  /* ===== CTA SECTION ===== */
-  .cta-section {
-    position: relative; overflow: hidden; padding: 5rem 1.25rem; background: var(--bg-alt);
-    border-top: 3px solid var(--card-border); transition: background 0.4s, border-color 0.4s;
-  }
-  .cta-inner { position: relative; z-index: 2; text-align: center; max-width: 600px; margin: 0 auto; }
-  .cta-section h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--text); margin-bottom: 1rem; }
-  .cta-section p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
-
-  /* ===== FOOTER ===== */
-  .site-footer {
-    border-top: 3px solid var(--card-border); padding: 2rem 1.25rem; background: var(--bg);
-    transition: background 0.4s, border-color 0.4s;
-  }
-  .footer-inner {
-    max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center;
-    justify-content: space-between; gap: 1rem;
-  }
-  .footer-logo { display: flex; align-items: center; gap: 0.6rem; }
-  .footer-logo-icon {
-    width: 30px; height: 30px; border-radius: 0.5rem; background: var(--primary);
-    border: 2px solid var(--text); display: flex; align-items: center; justify-content: center;
-    box-shadow: 1px 1px 0 var(--text);
-  }
-  .footer-logo span { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
-  .footer-links { display: flex; gap: 1.5rem; }
-  .footer-links a { font-size: 0.85rem; font-weight: 700; color: var(--text-light); transition: color 0.2s; }
-  .footer-links a:hover { color: var(--primary); }
-  .footer-copy { font-size: 0.8rem; font-weight: 700; color: var(--text-light); }
-
-  /* ===== BACK TO TOP ===== */
-  #backToTop {
-    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9990; width: 48px; height: 48px;
-    border-radius: 50%; background: var(--primary); border: 2.5px solid var(--text);
-    box-shadow: 3px 3px 0 var(--text); cursor: pointer; display: flex; align-items: center;
-    justify-content: center; color: #fff; transition: all 0.3s var(--bounce), background 0.4s;
-    opacity: 0; transform: translateY(20px) scale(0.8); pointer-events: none;
-  }
-  #backToTop.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-  #backToTop:hover { transform: translateY(-3px) scale(1.1); box-shadow: 4px 4px 0 var(--text); }
-
-  /* ===== TOAST ===== */
-  .toast-container {
-    position: fixed; bottom: 5rem; right: 1.5rem; z-index: 99999;
-    display: flex; flex-direction: column; gap: 0.6rem; pointer-events: none;
-  }
-  .toast {
-    pointer-events: auto; padding: 0.75rem 1.1rem; border-radius: var(--radius-sm);
-    font-size: 0.85rem; font-weight: 700; border: 2.5px solid var(--text);
-    box-shadow: 3px 3px 0 var(--text); animation: toastIn 0.4s var(--bounce), toastOut 0.3s ease 2.2s forwards;
-  }
-  .toast.success { background: var(--green); color: var(--green-dark); border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--green-dark); }
-  .toast.info { background: var(--sky); color: var(--sky-dark); border-color: var(--sky-dark); box-shadow: 3px 3px 0 var(--sky-dark); }
-  @keyframes toastIn { from { opacity:0; transform: translateY(1rem) scale(0.9); } to { opacity:1; transform: translateY(0) scale(1); } }
-  @keyframes toastOut { to { opacity:0; transform: translateY(-0.5rem) scale(0.9); } }
-
-  /* ===== SPARKLE ===== */
-  .sparkle {
-    position: fixed; pointer-events: none; z-index: 99997; width: 8px; height: 8px;
-    clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-    animation: sparkleFade 0.6s ease-out forwards;
-  }
-  @keyframes sparkleFade { 0% { opacity:1; transform:scale(1) rotate(0); } 100% { opacity:0; transform:scale(0) rotate(90deg); } }
-
-  /* ===== CONFETTI ===== */
-  @keyframes confettiBurst {
-    0% { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
-    100% { opacity: 0; transform: translate(var(--cx), var(--cy)) rotate(var(--cr)) scale(0.15); }
-  }
-  .confetti-piece {
-    position: fixed; pointer-events: none; z-index: 99998;
-    animation: confettiBurst 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-
-  /* ===== MASCOT ===== */
+  /* ===== MASCOT & TOAST ===== */
   #mascot {
-    position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9989; width: 56px; height: 56px;
+    position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 9989; width: 52px; height: 52px;
     border-radius: 50% 50% 50% 45%; background: var(--primary); border: 3px solid var(--text);
-    box-shadow: 3px 3px 0 var(--text); cursor: pointer; overflow: hidden;
+    box-shadow: 2px 2px 0 var(--text); cursor: pointer; overflow: hidden;
     transition: transform 0.4s var(--bounce), background 0.4s;
   }
-  #mascot:hover { transform: scale(1.15) rotate(-5deg); }
-  #mascot .eye { position: absolute; width: 8px; height: 10px; background: var(--text); border-radius: 50%; top: 18px; }
-  #mascot .eye.left { left: 14px; } #mascot .eye.right { right: 14px; }
+  #mascot:hover { transform: scale(1.12) rotate(-5deg); }
+  #mascot .eye { position: absolute; width: 7px; height: 9px; background: var(--text); border-radius: 50%; top: 17px; }
+  #mascot .eye.left { left: 13px; } #mascot .eye.right { right: 13px; }
   #mascot .eye::after { content: ''; position: absolute; width: 3px; height: 3px; background: #fff; border-radius: 50%; top: 1px; right: 0; }
-  #mascot .mouth {
-    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); width: 10px; height: 5px;
-    border-bottom: 2.5px solid var(--text); border-radius: 0 0 50% 50%;
-  }
-  #mascot .blush { position: absolute; width: 10px; height: 5px; background: var(--pink); border-radius: 50%; top: 32px; opacity: 0.5; }
-  #mascot .blush.left { left: 5px; } #mascot .blush.right { right: 5px; }
-  #mascot.bounce { animation: mascotBounce 0.5s var(--bounce); }
-  @keyframes mascotBounce {
-    0% { transform: scale(1); } 30% { transform: scale(1.3) rotate(10deg); } 60% { transform: scale(0.9) rotate(-5deg); } 100% { transform: scale(1) rotate(0); }
-  }
+  #mascot .mouth { position: absolute; bottom: 13px; left: 50%; transform: translateX(-50%); width: 10px; height: 5px; border-bottom: 2.5px solid var(--text); border-radius: 0 0 50% 50%; }
+  #mascot .blush { position: absolute; width: 9px; height: 5px; background: var(--pink); border-radius: 50%; top: 29px; opacity: 0.45; }
+  #mascot .blush.left { left: 4px; } #mascot .blush.right { right: 4px; }
+  #mascot.bounce { animation: mascotBounce 0.45s var(--bounce); }
+  @keyframes mascotBounce { 0% { transform: scale(1); } 30% { transform: scale(1.25) rotate(8deg); } 60% { transform: scale(0.92) rotate(-4deg); } 100% { transform: scale(1) rotate(0deg); } }
 
   #mascotTip {
-    position: fixed; bottom: 4.5rem; left: 1.5rem; z-index: 9989; background: var(--card);
-    border: 2.5px solid var(--card-border); border-radius: var(--radius-sm); padding: 0.5rem 0.9rem;
-    font-size: 0.75rem; font-weight: 700; color: var(--text-muted); box-shadow: 3px 3px 0 var(--card-border);
-    opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.3s var(--bounce);
-    white-space: nowrap;
+    position: fixed; bottom: 4.5rem; left: 1.25rem; z-index: 9989; background: var(--card);
+    border: 2.5px solid var(--card-border); border-radius: var(--radius-sm); padding: 0.4rem 0.75rem;
+    font-size: 0.72rem; font-weight: 700; color: var(--text-muted); box-shadow: 2px 2px 0 var(--card-border);
+    opacity: 0; transform: translateY(6px); pointer-events: none; transition: all 0.3s var(--bounce);
   }
   #mascotTip.show { opacity: 1; transform: translateY(0); }
-  #mascotTip::after {
-    content: ''; position: absolute; bottom: -6px; left: 1.2rem; width: 10px; height: 10px;
-    background: var(--card); border-right: 2.5px solid var(--card-border); border-bottom: 2.5px solid var(--card-border); transform: rotate(45deg);
-  }
+  #mascotTip::after { content: ''; position: absolute; bottom: -5px; left: 1rem; width: 9px; height: 9px; background: var(--card); border-right: 2.5px solid var(--card-border); border-bottom: 2.5px solid var(--card-border); transform: rotate(45deg); }
 
-  /* ===== UTILITIES ===== */
-  .section-label {
-    display: inline-block; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.7rem; font-weight: 800;
-    letter-spacing: 0.1em; text-transform: uppercase; border: 2px solid; margin-bottom: 1rem;
-    transition: background 0.4s, color 0.4s, border-color 0.4s;
+  .toast-container { position: fixed; bottom: 4.5rem; right: 1.25rem; z-index: 99999; display: flex; flex-direction: column; gap: 0.5rem; pointer-events: none; }
+  .toast {
+    pointer-events: auto; padding: 0.6rem 1rem; border-radius: var(--radius-sm); font-size: 0.78rem;
+    font-weight: 700; border: 2.5px solid var(--text); box-shadow: 2px 2px 0 var(--text);
+    animation: toastIn 0.4s var(--bounce), toastOut 0.3s ease 2.2s forwards;
   }
-  .label-primary { color: var(--primary); background: var(--primary-light); border-color: var(--primary); }
-  .label-secondary { color: var(--secondary); background: var(--secondary-light); border-color: var(--secondary); }
-  .label-purple { color: var(--purple); background: var(--purple-light); border-color: var(--purple); }
-  .label-pink { color: var(--pink); background: var(--pink-light); border-color: var(--pink); }
-  .label-accent { color: var(--accent-dark); background: var(--accent-light); border-color: var(--accent); }
+  .toast.success { background: var(--green); color: var(--green-dark); border-color: var(--green-dark); }
+  .toast.info { background: var(--sky); color: var(--sky-dark); border-color: var(--sky-dark); }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(0.75rem) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes toastOut { to { opacity: 0; transform: translateY(-0.5rem) scale(0.9); } }
+
+  /* ===== UTILS ===== */
+  .reveal { opacity: 0; transform: translateY(28px) scale(0.97); transition: opacity 0.65s var(--bounce), transform 0.65s var(--bounce); }
+  .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  .empty-state {
+    grid-column: 1/-1; padding: 3rem 1rem; text-align: center; background: var(--card);
+    border: 3px dashed var(--card-border); border-radius: var(--radius-xl); color: var(--text-muted);
+  }
 
   /* ===== RESPONSIVE ===== */
-  @media (max-width: 640px) {
-    .preview-float { display: none !important; }
-    .hero-buttons { flex-direction: column; align-items: center; }
-    .btn { width: 100%; max-width: 280px; justify-content: center; }
-    #mascot, #mascotTip { display: none; }
-  }
-  @media (min-width: 641px) and (max-width: 768px) {
-    #mascot, #mascotTip { display: none; }
-  }
-
-  /* ===== REDUCED MOTION ===== */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
-      transition-duration: 0.15ms !important;
-    }
-    .sparkle, .confetti-piece { display: none !important; }
-  }
-
-  /* ===== SCROLLBAR ===== */
-  ::-webkit-scrollbar { width: 8px; }
+  @media (max-width: 768px) { .nav-links { display: none; } #mascot, #mascotTip { display: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.15ms !important; } }
+  ::-webkit-scrollbar { width: 7px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; border: 2px solid var(--bg); }
-  ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 </style>
 {% endraw %}
 
-<!-- ===== SCROLL PROGRESS ===== -->
+<!-- SCROLL PROGRESS -->
 <div id="scrollProgress"></div>
 
-<!-- ===== NAV ===== -->
+<!-- NAV -->
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
       <div class="nav-logo-icon">
-        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
       </div>
       <span>HTMLWallarper</span>
     </a>
     <div class="nav-links">
-      <a href="#features">Fitur</a>
-      <a href="#preview">Preview</a>
-      <a href="#install">Install</a>
-      <a href="#faq">FAQ</a>
-      <a href="/project/" class="nav-cta">Buka Galeri</a>
+      <a href="/">Home</a>
+      <a href="/project/" class="nav-cta">Gallery</a>
     </div>
-    <div style="display:flex;align-items:center;gap:0.6rem;">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
-        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-      </button>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+      <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
   </div>
 </nav>
 
-<!-- ===== MOBILE MENU ===== -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#features">Fitur</a>
-  <a href="#preview">Preview</a>
-  <a href="#install">Install</a>
-  <a href="#faq">FAQ</a>
-  <a href="/project/" style="color:var(--primary);font-weight:800;">Buka Galeri →</a>
+<!-- HERO SECTION -->
+<section class="gallery-hero">
+  <!-- Decorations -->
+  <div class="cartoon-deco deco-cloud" style="top:12%;left:3%;"></div>
+  <div class="cartoon-deco deco-star" style="top:18%;right:6%;animation-delay:0.5s;"></div>
+  <div class="cartoon-deco deco-heart" style="top:65%;right:8%;animation-delay:1.5s;"></div>
+
+  <div class="reveal hero-badge">
+    <span class="dot-live"></span> ON-THE-LINE • KDE COMPATIBLE
+  </div>
+  <h1 class="reveal reveal-delay-1">Project Gallery</h1>
+  <p class="reveal reveal-delay-2">Explore the collection of lightweight, animated, and zero-CPU HTML wallpapers for your desktop.</p>
+
+  <div class="reveal reveal-delay-2 stats-bar">
+    <div class="stat-card-lg">
+      <div class="stat-val">{{ wallpapers | length }}</div>
+      <div class="stat-lbl">Wallpapers</div>
+    </div>
+    <div class="stat-card-lg">
+      <div class="stat-val" id="favCount">0</div>
+      <div class="stat-lbl">Favorites</div>
+    </div>
+    <div class="stat-card-lg">
+      <div class="stat-val" style="color:var(--green)">0%</div>
+      <div class="stat-lbl">CPU Load</div>
+    </div>
+    <div class="stat-card-lg">
+      <div class="stat-val" style="color:var(--sky)">100%</div>
+      <div class="stat-lbl">Open Source</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLBAR -->
+<div class="toolbar-wrap reveal reveal-delay-2">
+  <div class="toolbar">
+    <div class="toolbar-search">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input type="text" id="searchInput" placeholder="Search wallpapers...">
+    </div>
+    <button id="filterFavBtn" class="toolbar-btn">
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      Favorites
+    </button>
+    <div class="view-toggle">
+      <button id="viewGrid" class="view-btn active" aria-label="Grid View">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      </button>
+      <button id="viewList" class="view-btn" aria-label="List View">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
 </div>
 
-<!-- ===== HERO ===== -->
-<section class="hero-section" id="hero">
-  <div class="hero-bg-blob blob-1"></div>
-  <div class="hero-bg-blob blob-2"></div>
-  <div class="hero-bg-blob blob-3"></div>
+<!-- GALLERY GRID -->
+<div class="gallery-root">
+  <div class="gallery-grid" id="galleryGrid">
+    {% for wp in wallpapers %}
+    <div class="wallpaper-card" data-name="{{ wp.name | lower }}" data-index="{{ loop.index0 }}">
+      <div class="card-inner">
+        <div class="preview-area">
+          <iframe src="{{ wp.htmlUrl }}" frameborder="0" scrolling="no" loading="lazy"></iframe>
 
-  <!-- Decorations -->
-  <div class="cartoon-deco deco-cloud" style="top:12%;left:4%;"></div>
-  <div class="cartoon-deco deco-cloud" style="top:22%;right:3%;width:60px;height:30px;animation-delay:2s;opacity:0.5;"></div>
-  <div class="cartoon-deco deco-star" style="top:16%;left:16%;animation-delay:0.5s;"></div>
-  <div class="cartoon-deco deco-star" style="top:30%;right:12%;width:14px;height:14px;background:var(--pink);animation-delay:1.8s;"></div>
-  <div class="cartoon-deco deco-star" style="bottom:20%;left:8%;width:16px;height:16px;background:var(--secondary);animation-delay:2.5s;"></div>
-  <div class="cartoon-deco deco-heart" style="top:26%;right:18%;animation-delay:1s;"></div>
-  <div class="cartoon-deco deco-heart" style="bottom:26%;right:5%;animation-delay:3s;"></div>
-  <div class="cartoon-deco deco-bubble" style="top:14%;right:24%;width:16px;height:16px;animation-delay:0.8s;"></div>
-  <div class="cartoon-deco deco-bubble" style="bottom:16%;left:18%;width:12px;height:12px;animation-delay:2.2s;"></div>
-  <div class="cartoon-deco deco-bubble" style="top:54%;left:3%;width:14px;height:14px;animation-delay:1.5s;"></div>
-
-  <!-- Preview Windows -->
-  <div class="preview-float pos-1" style="width:240px;height:135px;">
-    <div class="pw-bar"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
-    <div class="pw-body" style="width:100%;height:calc(100% - 24px);background:linear-gradient(135deg,var(--primary-light),var(--secondary-light));display:flex;align-items:center;justify-content:center;">
-      <div style="width:40px;height:40px;border-radius:50%;border:3px solid var(--primary);animation:ping 2s infinite;opacity:0.4;"></div>
-    </div>
-  </div>
-  <div class="preview-float pos-2" style="width:180px;height:101px;">
-    <div class="pw-bar"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
-    <div class="pw-body" style="width:100%;height:calc(100% - 24px);background:linear-gradient(135deg,var(--purple-light),var(--pink-light));display:flex;align-items:center;justify-content:center;">
-      <div style="display:flex;flex-direction:column;gap:3px;">
-        <div style="width:40px;height:4px;background:var(--purple);border-radius:2px;opacity:0.3;"></div>
-        <div style="width:28px;height:4px;background:var(--purple);border-radius:2px;opacity:0.2;"></div>
-        <div style="width:50px;height:4px;background:var(--purple);border-radius:2px;opacity:0.25;"></div>
-      </div>
-    </div>
-  </div>
-  <div class="preview-float pos-3" style="width:140px;height:79px;">
-    <div class="pw-bar"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
-    <div class="pw-body" style="width:100%;height:calc(100% - 24px);background:linear-gradient(135deg,var(--green-light),var(--sky-light));"></div>
-  </div>
-
-  <div class="hero-content">
-    <div class="reveal hero-badge">
-      <span class="dot-live"></span> Open Source &bull; KDE Plasma 6 Compatible
-    </div>
-    <h1 class="reveal d-1 hero-title">
-      Ubah Desktopmu<br><span class="hero-title-accent">Menjadi Hidup</span>
-    </h1>
-    <p class="reveal d-2 hero-sub">
-      Koleksi wallpaper HTML statis yang ringan, animatif, dan cantik — dibuat khusus untuk KDE Plasma. Tanpa daemon, tanpa beban CPU.
-    </p>
-    <div class="reveal d-3 hero-buttons">
-      <a href="/project/" class="btn btn-primary confetti-trigger">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        Lihat Galeri
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-      </a>
-      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="btn btn-secondary">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
-    </div>
-    <p class="reveal d-4 hero-hint">Tekan <kbd>G</kbd> untuk buka galeri</p>
-  </div>
-
-  <div class="scroll-indicator">
-    <span>Scroll</span>
-    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-  </div>
-</section>
-
-<!-- ===== PREVIEW CAROUSEL ===== -->
-<section class="py-20 px-4 relative" id="preview" style="z-index:1;">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-12">
-      <span class="reveal section-label label-primary">Live Preview</span>
-      <h2 class="reveal d-1" style="font-size:clamp(1.8rem, 4vw, 2.5rem);font-weight:700;color:var(--text);">Jangan Hanya Dengar, Lihat Sendiri</h2>
-      <p class="reveal d-2" style="color:var(--text-muted);margin-top:0.5rem;max-width:480px;margin-left:auto;margin-right:auto;font-size:1rem;">Setiap wallpaper adalah file HTML murni — langsung render di browser tanpa server.</p>
-    </div>
-    <div class="reveal d-2">
-      <div class="carousel-wrap">
-        <div class="carousel-area">
-          <div class="carousel-track" id="carouselTrack">
-            {% for wp in wallpapers %}
-            <div class="carousel-slide">
-              <iframe src="{{ wp.htmlUrl }}" frameborder="0" scrolling="no" loading="lazy"></iframe>
-            </div>
-            {% else %}
-            <div class="carousel-slide">
-              <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--primary-light),var(--secondary-light));display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;">
-                  <div style="width:60px;height:60px;border-radius:var(--radius-sm);background:var(--primary-light);border:3px solid var(--primary);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;box-shadow:3px 3px 0 var(--primary);">
-                    <svg class="w-7 h-7" style="color:var(--primary)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                  </div>
-                  <p style="color:var(--text-muted);font-weight:700;font-size:1rem;">Wallpaper akan muncul di sini</p>
-                  <a href="/project/" style="color:var(--primary);font-weight:700;font-size:0.9rem;margin-top:0.5rem;display:inline-block;">Kunjungi Galeri →</a>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
+          <div class="hover-overlay">
+            <button onclick="openLightbox({{ loop.index0 }})" class="overlay-btn overlay-btn-primary">Live Preview</button>
+            <a href="{{ wp.htmlUrl }}" target="_blank" class="overlay-btn overlay-btn-secondary">Fullscreen</a>
+            <a href="{{ wp.url }}" target="_blank" class="overlay-btn overlay-btn-secondary">Source</a>
           </div>
-        </div>
-        <div class="carousel-controls">
-          <div style="display:flex;gap:0.5rem;">
-            <button class="carousel-btn" onclick="carouselPrev()" aria-label="Previous slide">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            <button class="carousel-btn" onclick="carouselNext()" aria-label="Next slide">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </button>
-          </div>
-          <div class="carousel-dots" id="carouselDots"></div>
-          <button class="carousel-btn" id="carouselPlayBtn" onclick="toggleCarouselAutoplay()" aria-label="Toggle autoplay">
-            <svg class="w-4 h-4" id="playIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+
+          <div class="card-index">#{{ loop.index }}</div>
+          <button onclick="toggleFav('{{ wp.name }}', this)" class="fav-btn" data-name="{{ wp.name }}">
+            <svg class="w-4 h-4" style="color:var(--text-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
           </button>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ===== FEATURES ===== -->
-<section class="py-20 px-4 relative" id="features" style="z-index:1;">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="feature-card fc-primary reveal" data-tilt>
-      <div class="feature-icon fc-primary"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
-      <h3>Zero CPU Overhead</h3>
-      <p>HTML statis murni — tidak ada JavaScript runtime, tidak ada daemon. CPU-mu bebas untuk hal penting.</p>
-    </div>
-    <div class="feature-card fc-secondary reveal d-1" data-tilt>
-      <div class="feature-icon fc-secondary"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg></div>
-      <h3>Fully Customizable</h3>
-      <p>Edit warna, kecepatan animasi, dan layout langsung di file HTML. CSS murni, tanpa build step.</p>
-    </div>
-    <div class="feature-card fc-purple reveal d-2" data-tilt>
-      <div class="feature-icon fc-purple"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg></div>
-      <h3>CSS-Only Animations</h3>
-      <p>Smooth 60fps animation menggunakan CSS keyframes. Hardware-accelerated dan hemat resource.</p>
-    </div>
-    <div class="feature-card fc-accent reveal d-3" data-tilt>
-      <div class="feature-icon fc-accent"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
-      <h3>No Tracking, No Ads</h3>
-      <p>100% open source. Tidak ada telemetry, tidak ada analytics, tidak ada iklan. Privasi dijamin.</p>
-    </div>
-    <div class="feature-card fc-pink reveal d-4" data-tilt>
-      <div class="feature-icon fc-pink"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg></div>
-      <h3>Plug & Play</h3>
-      <p>Copy folder, set path di KDE Wallpaper Settings, selesai. Tidak perlu instal dependensi apapun.</p>
-    </div>
-    <div class="feature-card fc-sky reveal d-5" data-tilt>
-      <div class="feature-icon fc-sky"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></div>
-      <h3>Community Driven</h3>
-      <p>Kontribusi wallpaper baru via Pull Request. Semua orang bisa menambah koleksi untuk dinikmati bersama.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== STATS ===== -->
-<section class="stats-section py-16 px-4">
-  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="stat-card reveal"><p class="stat-value" data-target="{{ wallpapers | length }}">0</p><p class="stat-label">Wallpapers</p></div>
-    <div class="stat-card reveal d-1"><p class="stat-value" data-target="0" data-suffix=" KB">0</p><p class="stat-label">Avg. File Size</p></div>
-    <div class="stat-card reveal d-2"><p class="stat-value" data-target="0" data-suffix="%">0</p><p class="stat-label">CPU Usage</p></div>
-    <div class="stat-card reveal d-3"><p class="stat-value" data-target="100" data-suffix="%">0</p><p class="stat-label">Open Source</p></div>
-  </div>
-</section>
-
-<!-- ===== COMPARISON ===== -->
-<section class="py-20 px-4 relative" id="comparison" style="z-index:1;">
-  <div class="max-w-4xl mx-auto">
-    <div class="text-center mb-12">
-      <span class="reveal section-label label-purple">Perbandingan</span>
-      <h2 class="reveal d-1" style="font-size:clamp(1.8rem, 4vw, 2.5rem);font-weight:700;color:var(--text);">Statis vs Hidup</h2>
-      <p class="reveal d-2" style="color:var(--text-muted);font-size:1rem;">Geser slider untuk melihat perbedaan.</p>
-    </div>
-    <div class="reveal d-2 comparison-container" id="compContainer">
-      <div class="comp-layer" id="compBefore" style="clip-path:inset(0 50% 0 0);background:linear-gradient(135deg,var(--bg-alt),var(--bg));">
-        <div style="text-align:center;">
-          <svg style="width:60px;height:60px;color:var(--text-light);margin:0 auto 0.6rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <p style="font-weight:700;color:var(--text-light);font-size:1rem;">Wallpaper Statis</p>
-          <p style="font-size:0.85rem;color:var(--text-light);margin-top:0.2rem;">Membosankan...</p>
-        </div>
-      </div>
-      <div class="comp-layer" id="compAfter" style="background:linear-gradient(135deg,var(--primary-light),var(--secondary-light));overflow:hidden;">
-        <div style="position:relative;">
-          <div style="width:60px;height:60px;border-radius:50%;border:3px solid var(--primary);position:absolute;animation:ping 2s infinite;opacity:0.4;"></div>
-          <div style="width:60px;height:60px;border-radius:50%;border:3px solid var(--secondary);position:absolute;animation:spin 3s linear infinite;opacity:0.4;"></div>
-          <div style="width:28px;height:28px;border-radius:var(--radius-sm);background:var(--primary);opacity:0.3;position:relative;z-index:1;"></div>
-        </div>
-        <div style="position:absolute;bottom:1.5rem;left:0;right:0;text-align:center;">
-          <p style="font-weight:700;color:var(--primary);font-size:1rem;">HTMLWallarper</p>
-          <p style="font-size:0.85rem;color:var(--secondary);margin-top:0.2rem;">Animasi CSS 60fps</p>
-        </div>
-      </div>
-      <div class="comp-slider-line" id="compSlider" style="left:50%;"><div class="comp-handle"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg></div></div>
-      <span class="comp-label comp-label-before">Before</span>
-      <span class="comp-label comp-label-after">After</span>
-    </div>
-  </div>
-</section>
-
-<!-- ===== INSTALLATION ===== -->
-<section class="py-20 px-4 relative" id="install" style="z-index:1;">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-12">
-      <span class="reveal section-label label-accent">Instalasi</span>
-      <h2 class="reveal d-1" style="font-size:clamp(1.8rem, 4vw, 2.5rem);font-weight:700;color:var(--text);">3 Langkah, 30 Detik</h2>
-      <p class="reveal d-2" style="color:var(--text-muted);font-size:1rem;">Semudah copy-paste. Tidak perlu terminal, tidak perlu compile.</p>
-    </div>
-    <div>
-      <div class="step-item reveal" data-step="1">
-        <div style="display:flex;align-items:flex-start;gap:1.25rem;">
-          <div style="display:flex;flex-direction:column;align-items:center;">
-            <div class="step-number">1</div>
-            <div class="step-connector"><div class="step-connector-fill"></div></div>
+        <div class="card-body">
+          <div class="card-head">
+            <h3>{{ wp.name }}</h3>
+            <span class="live-tag"><span class="live-tag-dot"></span><span>LIVE</span></span>
           </div>
-          <div style="flex:1;padding-bottom:2rem;">
-            <h3 style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text);margin-bottom:0.25rem;">Download Repository</h3>
-            <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.75rem;">Clone atau download ZIP dari GitHub.</p>
-            <div class="code-block"><code class="code-ck">git</code> clone <span class="code-cp">https://github.com/flessan/HTMLWallarper.git</span></code><button class="copy-btn" onclick="copyCode(this,'git clone https://github.com/flessan/HTMLWallarper.git')">Copy</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="step-item reveal d-1" data-step="2">
-        <div style="display:flex;align-items:flex-start;gap:1.25rem;">
-          <div style="display:flex;flex-direction:column;align-items:center;">
-            <div class="step-number">2</div>
-            <div class="step-connector"><div class="step-connector-fill"></div></div>
-          </div>
-          <div style="flex:1;padding-bottom:2rem;">
-            <h3 style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text);margin-bottom:0.25rem;">Buka KDE Wallpaper Settings</h3>
-            <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.75rem;">Klik kanan di desktop → Configure Desktop and Wallpaper → Wallpaper.</p>
-            <div class="code-block"><code>Desktop <span class="code-cf">→</span> Configure Wallpaper <span class="code-cf">→</span> Type: <span class="code-cp">HTML Wallpaper</span></code><button class="copy-btn" style="pointer-events:none;opacity:0.5;cursor:default;">Info</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="step-item reveal d-2" data-step="3">
-        <div style="display:flex;align-items:flex-start;gap:1.25rem;">
-          <div style="display:flex;flex-direction:column;align-items:center;">
-            <div class="step-number">3</div>
-          </div>
-          <div style="flex:1;">
-            <h3 style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text);margin-bottom:0.25rem;">Set Wallpaper Folder Path</h3>
-            <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.75rem;">Arahkan ke folder wallpaper yang kamu inginkan.</p>
-            <div class="code-block"><code class="code-ck">/path/to/HTMLWallarper/wallpapers/</code><span class="code-cp">nama-wallpaper</span>/</code><button class="copy-btn" onclick="copyCode(this,'/path/to/HTMLWallarper/wallpapers/nama-wallpaper/')">Copy</button></div>
+          <div class="path-row" onclick="copyPath('/wallpapers/{{ wp.folderName }}', this)">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+            <span class="path-text">/wallpapers/{{ wp.folderName }}</span>
+            <svg class="copy-icon w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
           </div>
         </div>
       </div>
     </div>
-    <div class="reveal d-3" style="text-align:center;margin-top:2.5rem;">
-      <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" class="btn btn-primary confetti-trigger" style="padding:1rem 2.25rem;font-size:1.1rem;">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-        Download ZIP Langsung
-      </a>
+    {% else %}
+    <div class="empty-state">
+      <p>No wallpapers found. Make sure the `wallpapers` folder is populated.</p>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div id="noResults" style="display:none">
+    <div class="empty-state">
+      <p>No wallpapers match your search.</p>
+      <button onclick="clearFilters()" class="toolbar-btn" style="margin:1rem auto;">Clear Filters</button>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ===== FAQ ===== -->
-<section class="py-20 px-4 relative" id="faq" style="z-index:1;">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-12">
-      <span class="reveal section-label label-pink">FAQ</span>
-      <h2 class="reveal d-1" style="font-size:clamp(1.8rem, 4vw, 2.5rem);font-weight:700;color:var(--text);">Pertanyaan Umum</h2>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:0.75rem;">
-      <div class="faq-item reveal" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-        <div class="faq-question"><span>Apakah kompatibel dengan KDE Plasma 6?</span><svg class="faq-chevron w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
-        <div class="faq-answer"><p>Ya! Semua wallpaper menggunakan HTML statis murni yang didukung oleh KDE Plasma Wallpaper plugin sejak Plasma 5. Karena tidak ada JS runtime, semakin tinggi versi Plasma semakin ringan.</p></div>
-      </div>
-      <div class="faq-item reveal d-1" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-        <div class="faq-question"><span>Berapa CPU/RAM yang dipakai?</span><svg class="faq-chevron w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
-        <div class="faq-answer"><p>Hampir <strong>0% CPU</strong> saat idle. Karena animasi menggunakan CSS keyframes yang di-offload ke GPU, beban CPU minimal. RAM usage sekitar 5-15MB per wallpaper (sama seperti wallpaper gambar statis).</p></div>
-      </div>
-      <div class="faq-item reveal d-2" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-        <div class="faq-question"><span>Bisa buat wallpaper sendiri?</span><svg class="faq-chevron w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
-        <div class="faq-answer"><p>Tentu! Cukup buat folder baru di <code>wallpapers/</code>, buat file <code>index.html</code>, dan gunakan CSS animation. Lihat wallpaper yang ada sebagai referensi. Pull Request sangat welcome!</p></div>
-      </div>
-      <div class="faq-item reveal d-3" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-        <div class="faq-question"><span>Kenapa tidak pakai JavaScript?</span><svg class="faq-chevron w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div>
-        <div class="faq-answer"><p>Keputusan desain. CSS keyframes sudah cukup powerful untuk membuat animasi yang indah — gradient shifts, morphing shapes, particle-like effects — tanpa overhead JavaScript engine. Ini menjadikan wallpaper benar-benar "set and forget".</p></div>
-      </div>
-    </div>
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
+  <div class="lightbox-bar">
+    <span id="lightboxTitle" style="font-family:'Fredoka';font-weight:600;color:var(--text);">Preview</span>
+    <button class="lb-close" onclick="closeLightbox()" aria-label="Close">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
   </div>
-</section>
-
-<!-- ===== FINAL CTA ===== -->
-<section class="cta-section">
-  <div class="cartoon-deco deco-star" style="top:12%;left:6%;animation-delay:0.2s;"></div>
-  <div class="cartoon-deco deco-star" style="top:20%;right:8%;width:14px;height:14px;background:var(--pink);animation-delay:1s;"></div>
-  <div class="cartoon-deco deco-heart" style="bottom:16%;right:10%;animation-delay:2s;"></div>
-  <div class="cartoon-deco deco-bubble" style="top:50%;left:4%;width:16px;height:16px;animation-delay:0.6s;"></div>
-  <div class="cartoon-deco deco-cloud" style="top:6%;right:5%;width:50px;height:25px;animation-delay:1.5s;opacity:0.3;"></div>
-
-  <div class="cta-inner">
-    <div class="reveal">
-      <div style="display:inline-flex;width:56px;height:56px;border-radius:50%;background:var(--primary-light);border:3px solid var(--primary);align-items:center;justify-content:center;margin-bottom:1.5rem;box-shadow:3px 3px 0 var(--primary);">
-        <svg class="w-7 h-7" style="color:var(--primary)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09L18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
-      </div>
-    </div>
-    <h2 class="reveal d-1">Desktopmu Layak<br>Dapat Lebih Baik</h2>
-    <p class="reveal d-2">Gratis, open source, dan siap pakai. Upgrade tampilan KDE Plasma-mu sekarang.</p>
-    <div class="reveal d-3 hero-buttons">
-      <a href="/project/" class="btn btn-primary confetti-trigger" style="padding:1rem 2.25rem;font-size:1.1rem;">
-        Mulai Sekarang
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-      </a>
-      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" class="btn btn-secondary" style="padding:1rem 2rem;">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        Star di GitHub
-      </a>
-    </div>
+  <button class="lb-nav-btn prev" onclick="lightboxNav(-1)" aria-label="Previous">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <div class="lightbox-content">
+    <iframe id="lightboxFrame" src="" frameborder="0" scrolling="no"></iframe>
   </div>
-</section>
+  <button class="lb-nav-btn next" onclick="lightboxNav(1)" aria-label="Next">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  </button>
+</div>
 
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-logo">
-      <div class="footer-logo-icon"><svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
-      <span>HTMLWallarper — Open Source KDE Plasma Wallpapers</span>
-    </div>
-    <div class="footer-links">
-      <a href="/project/">Gallery</a>
-      <a href="https://github.com/flessan/HTMLWallarper" target="_blank">GitHub</a>
-      <span class="footer-copy">© 2025</span>
-    </div>
-  </div>
-</footer>
-
-<!-- ===== BACK TO TOP ===== -->
-<button id="backToTop" aria-label="Back to top">
-  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
-</button>
-
-<!-- ===== MASCOT ===== -->
+<!-- MASCOT -->
 <div id="mascot" aria-hidden="true">
   <div class="eye left"></div><div class="eye right"></div>
   <div class="mouth"></div>
   <div class="blush left"></div><div class="blush right"></div>
 </div>
-<div id="mascotTip">Hai! Aku mascot-nya</div>
+<div id="mascotTip">Cari wallpaper favoritmu!</div>
 
-<!-- ===== TOAST ===== -->
+<!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ===== SCRIPTS ===== -->
 {% raw %}
 <script>
 (function() {
   'use strict';
 
   /* ── Theme ── */
-  const html = document.documentElement;
-  const saved = localStorage.getItem('hw-theme');
-  if (saved) { html.setAttribute('data-theme', saved); }
-  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { html.setAttribute('data-theme', 'dark'); }
+  var html = document.documentElement;
+  var saved = localStorage.getItem('hw-theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
 
   document.getElementById('themeToggle').addEventListener('click', function() {
-    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('hw-theme', next);
-    showToast(next === 'dark' ? 'Dark mode activated!' : 'Light mode activated!', 'info');
+    showToast(next === 'dark' ? 'Dark mode!' : 'Light mode!', 'info');
   });
 
-  /* ── Mobile menu ── */
-  const hamburger = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  let mobileOpen = false;
-
-  function setMobile(open) {
-    mobileOpen = open;
-    hamburger.classList.toggle('open', open);
-    mobileMenu.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-
-  hamburger.addEventListener('click', () => setMobile(!mobileOpen));
-  
-  // Close on outside click or link click
-  document.addEventListener('click', (e) => {
-    if (mobileOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-      setMobile(false);
-    }
-    if (mobileOpen && e.target.tagName === 'A' && mobileMenu.contains(e.target)) {
-      setMobile(false);
-    }
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileOpen) setMobile(false);
-  });
-
-  /* ── Scroll ── */
-  const progressBar = document.getElementById('scrollProgress');
-  const mainNav = document.getElementById('mainNav');
-  const backToTopBtn = document.getElementById('backToTop');
-  let ticking = false;
-
+  /* ── Scroll Progress & Nav ── */
+  var progressBar = document.getElementById('scrollProgress');
+  var mainNav = document.getElementById('mainNav');
+  var ticking = false;
   function onScroll() {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(() => {
-      const st = window.scrollY;
-      const dh = document.documentElement.scrollHeight - window.innerHeight;
+    requestAnimationFrame(function() {
+      var st = window.scrollY;
+      var dh = document.documentElement.scrollHeight - window.innerHeight;
       progressBar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
-      mainNav.classList.toggle('scrolled', st > 60);
-      backToTopBtn.classList.toggle('visible', st > 500);
+      mainNav.classList.toggle('scrolled', st > 50);
       ticking = false;
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 
-  backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  /* ── Data & Cards ── */
+  var cards = Array.from(document.querySelectorAll('.wallpaper-card'));
+  var wallpaperData = cards.map(function(card) {
+    var iframe = card.querySelector('.preview-area iframe');
+    var name = card.dataset.name;
+    return {
+      url: iframe ? iframe.src : '',
+      name: name,
+      fullName: card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : name
+    };
   });
 
-  /* ── Anchor Smooth Scroll ── */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function(e) {
-      const t = document.querySelector(this.getAttribute('href'));
-      if (t) {
-        e.preventDefault();
-        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
+  /* ── Favorites ── */
+  var FAV_KEY = 'hw_gallery_favs';
+  var favorites = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
 
-  /* ── Reveal Animation ── */
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  function saveFavs() {
+    localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
+    document.getElementById('favCount').textContent = favorites.length;
+  }
+  function isFav(name) { return favorites.indexOf(name) !== -1; }
 
-  /* ── 3D Tilt Cards ── */
-  document.querySelectorAll('[data-tilt]').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `translateY(-4px) perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+  function initFavs() {
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      if (isFav(btn.dataset.name)) btn.classList.add('active');
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-
-  /* ── Animated Counters ── */
-  const counterObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const el = e.target;
-        const target = parseInt(el.dataset.target, 10);
-        const suffix = el.dataset.suffix || '';
-        const start = performance.now();
-        const dur = 2000;
-        const tick = (now) => {
-          const p = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(eased * target) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        tick(start);
-        counterObs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.stat-value').forEach(el => counterObs.observe(el));
-
-  /* ── Carousel ── */
-  const track = document.getElementById('carouselTrack');
-  const dotsBox = document.getElementById('carouselDots');
-  let curSlide = 0;
-  const totalSlides = track ? track.children.length : 0;
-  let autoInterval = null;
-  let isAuto = true;
-
-  if (dotsBox && totalSlides > 0) {
-    for (let i = 0; i < totalSlides; i++) {
-      const d = document.createElement('div');
-      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      d.addEventListener('click', () => goSlide(i));
-      dotsBox.appendChild(d);
-    }
+    saveFavs();
   }
 
-  function goSlide(idx) {
-    if (!track || !totalSlides) return;
-    curSlide = ((idx % totalSlides) + totalSlides) % totalSlides;
-    track.style.transform = `translateX(-${curSlide * 100}%)`;
-    const dots = dotsBox.querySelectorAll('.carousel-dot');
-    for (let j = 0; j < dots.length; j++) {
-      dots[j].classList.toggle('active', j === curSlide);
-    }
-  }
-  window.carouselNext = () => goSlide(curSlide + 1);
-  window.carouselPrev = () => goSlide(curSlide - 1);
-
-  function startAuto() { stopAuto(); if (totalSlides > 1) autoInterval = setInterval(carouselNext, 4000); }
-  function stopAuto() { if (autoInterval) { clearInterval(autoInterval); autoInterval = null; } }
-
-  window.toggleCarouselAutoplay = () => {
-    isAuto = !isAuto;
-    const icon = document.getElementById('playIcon');
-    if (isAuto) {
-      startAuto();
-      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+  window.toggleFav = function(name, btn) {
+    if (isFav(name)) {
+      favorites = favorites.filter(function(f) { return f !== name; });
+      btn.classList.remove('active');
+      showToast('Removed from favorites', 'info');
     } else {
-      stopAuto();
-      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+      favorites.push(name);
+      btn.classList.add('active');
+      showToast('Added to favorites', 'success');
     }
+    btn.classList.remove('bounce');
+    void btn.offsetWidth;
+    btn.classList.add('bounce');
+    saveFavs();
+    if (favFilterOn) applyFilters();
   };
-  if (totalSlides > 0) startAuto();
 
-  /* ── Comparison Slider ── */
-  const compCont = document.getElementById('compContainer');
-  const compSlider = document.getElementById('compSlider');
-  const compBefore = document.getElementById('compBefore');
+  /* ── Filters ── */
+  var searchTerm = '';
+  var favFilterOn = false;
+  
+  document.getElementById('searchInput').addEventListener('input', function() {
+    searchTerm = this.value.toLowerCase().trim();
+    applyFilters();
+  });
+  
+  document.getElementById('filterFavBtn').addEventListener('click', function() {
+    favFilterOn = !favFilterOn;
+    this.classList.toggle('active', favFilterOn);
+    applyFilters();
+  });
 
-  if (compCont && compSlider && compBefore) {
-    let dragging = false;
+  window.clearFilters = function() {
+    document.getElementById('searchInput').value = '';
+    searchTerm = '';
+    favFilterOn = false;
+    document.getElementById('filterFavBtn').classList.remove('active');
+    applyFilters();
+  };
 
-    function updateComp(clientX) {
-      const r = compCont.getBoundingClientRect();
-      const pos = Math.max(0.05, Math.min(0.95, (clientX - r.left) / r.width));
-      compSlider.style.left = (pos * 100) + '%';
-      compBefore.style.clipPath = `inset(0 ${((1 - pos) * 100).toFixed(1))}% 0 0)`;
-    }
+  function applyFilters() {
+    var visible = cards.filter(function(c) {
+      var matchSearch = c.dataset.name.indexOf(searchTerm) !== -1;
+      var matchFav = !favFilterOn || isFav(c.dataset.name);
+      return matchSearch && matchFav;
+    });
 
-    compCont.addEventListener('mousedown', (e) => { dragging = true; updateComp(e.clientX); e.preventDefault(); });
-    window.addEventListener('mousemove', (e) => { if (dragging) { updateComp(e.clientX); e.preventDefault(); } });
-    window.addEventListener('mouseup', () => { dragging = false; });
+    cards.forEach(function(c) { c.classList.add('hidden-by-filter'); });
+    visible.forEach(function(c) { c.classList.remove('hidden-by-filter'); });
 
-    compCont.addEventListener('touchstart', (e) => { dragging = true; updateComp(e.touches[0].clientX); }, { passive: true });
-    window.addEventListener('touchmove', (e) => { if (dragging) { updateComp(e.touches[0].clientX); } }, { passive: true });
-    window.addEventListener('touchend', () => { dragging = false; });
+    var noResults = document.getElementById('noResults');
+    noResults.style.display = visible.length > 0 ? 'none' : 'block';
   }
 
-  /* ── Install Steps ── */
-  const stepObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('active');
-    });
-  }, { threshold: 0.4 });
-  document.querySelectorAll('.step-item').forEach(el => stepObs.observe(el));
+  /* ── View Toggle ── */
+  var grid = document.getElementById('galleryGrid');
+  document.getElementById('viewGrid').addEventListener('click', function() {
+    grid.classList.remove('list-view');
+    this.classList.add('active');
+    document.getElementById('viewList').classList.remove('active');
+  });
+  document.getElementById('viewList').addEventListener('click', function() {
+    grid.classList.add('list-view');
+    this.classList.add('active');
+    document.getElementById('viewGrid').classList.remove('active');
+  });
 
-  /* ── FAQ ── */
-  window.toggleFaq = function(item) {
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(f => {
-      f.classList.remove('open');
-      f.setAttribute('aria-expanded', 'false');
-    });
-    if (!wasOpen) {
-      item.classList.add('open');
-      item.setAttribute('aria-expanded', 'true');
-    }
+  /* ── Lightbox ── */
+  var currentIdx = -1;
+  var lightbox = document.getElementById('lightbox');
+  var frame = document.getElementById('lightboxFrame');
+  var title = document.getElementById('lightboxTitle');
+
+  function getVisibleCards() {
+    return Array.from(document.querySelectorAll('.wallpaper-card:not(.hidden-by-filter)'));
+  }
+
+  window.openLightbox = function(idx) {
+    var visible = getVisibleCards();
+    var target = visible.find(function(c) { return parseInt(c.dataset.index, 10) === idx; });
+    if (!target) return;
+    var vIdx = visible.indexOf(target);
+    showLightbox(vIdx, visible);
   };
 
-  /* ── Copy Code ── */
-  window.copyCode = function(btn, text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => {
-        btn.classList.add('copied');
-        btn.textContent = 'Copied!';
-        showToast('Copied to clipboard!', 'success');
-        setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy'; }, 2000);
-      }).catch(() => {
-        fallbackCopy(btn, text);
+  function showLightbox(vIdx, visibleArr) {
+    currentIdx = vIdx;
+    var card = visibleArr[vIdx];
+    var idx = parseInt(card.dataset.index, 10);
+    frame.src = wallpaperData[idx].url;
+    title.textContent = wallpaperData[idx].fullName;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  window.lightboxNav = function(dir) {
+    var visible = getVisibleCards();
+    if (visible.length === 0) return;
+    var next = currentIdx + dir;
+    if (next < 0) next = visible.length - 1;
+    if (next >= visible.length) next = 0;
+    showLightbox(next, visible);
+  };
+
+  window.closeLightbox = function() {
+    lightbox.classList.remove('active');
+    frame.src = '';
+    document.body.style.overflow = '';
+  };
+
+  window.closeLightboxOnBg = function(e) {
+    if (e.target === lightbox) closeLightbox();
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+  });
+
+  /* ── Copy Path ── */
+  window.copyPath = function(path, el) {
+    var doSuccess = function() {
+      var icon = el.querySelector('.copy-icon');
+      icon.style.color = 'var(--green)';
+      showToast('Copied: ' + path, 'success');
+      setTimeout(function() { icon.style.color = ''; }, 1500);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(path).then(doSuccess).catch(function() {
+        var ta = document.createElement('textarea'); ta.value = path;
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); doSuccess();
       });
-    } else {
-      fallbackCopy(btn, text);
     }
   };
-
-  function fallbackCopy(btn, text) {
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    try {
-      document.execCommand('copy');
-      btn.classList.add('copied'); btn.textContent = 'Copied!';
-      showToast('Copied to clipboard!', 'success');
-      setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy'; }, 2000);
-    } catch(e) {
-      showToast('Failed to copy', 'warn');
-    }
-    document.body.removeChild(ta);
-  }
 
   /* ── Toast ── */
   window.showToast = function(msg, type) {
-    const c = document.getElementById('toastContainer');
-    const t = document.createElement('div');
+    var c = document.getElementById('toastContainer');
+    var t = document.createElement('div');
     t.className = 'toast ' + (type || 'info');
     t.textContent = msg;
     c.appendChild(t);
-    setTimeout(() => { if (t.parentNode) t.remove(); }, 2800);
+    setTimeout(function() { if (t.parentNode) t.remove(); }, 2600);
   };
 
-  /* ── Sparkle Cursor ── */
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const sparkleColors = ['#FFD54F', '#FF7043', '#26A69A', '#F48FB1', '#CE93D8', '#81D4FA', '#81C784'];
-
-  if (!reducedMotion) {
-    let lastSparkle = 0;
-    document.addEventListener('mousemove', (e) => {
-      const now = Date.now();
-      if (now - lastSparkle < 50) return;
-      lastSparkle = now;
-      const s = document.createElement('div');
-      s.className = 'sparkle';
-      s.style.left = (e.clientX - 4) + 'px';
-      s.style.top = (e.clientY - 4) + 'px';
-      s.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
-      document.body.appendChild(s);
-      setTimeout(() => { if (s.parentNode) s.remove(); }, 600);
+  /* ── Reveal Animation ── */
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
     });
-  }
-
-  /* ── Confetti ── */
-  if (!reducedMotion) {
-    document.querySelectorAll('.confetti-trigger').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const colors = ['#FF7043', '#26A69A', '#FFD54F', '#CE93D8', '#F48FB1', '#81D4FA', '#81C784'];
-        for (let i = 0; i < 32; i++) {
-          const piece = document.createElement('div');
-          piece.className = 'confetti-piece';
-          const angle = Math.random() * Math.PI * 2;
-          const dist = 80 + Math.random() * 140;
-          const dx = Math.cos(angle) * dist;
-          const dy = Math.sin(angle) * dist - 80;
-          const rot = Math.random() * 720 - 360;
-          const size = 6 + Math.random() * 6;
-          const isCircle = Math.random() > 0.5;
-          piece.style.left = cx + 'px';
-          piece.style.top = cy + 'px';
-          piece.style.width = size + 'px';
-          piece.style.height = (isCircle ? size : size * 1.6) + 'px';
-          piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-          piece.style.borderRadius = isCircle ? '50%' : '2px';
-          piece.style.setProperty('--cx', dx + 'px');
-          piece.style.setProperty('--cy', (dy + 140) + 'px');
-          piece.style.setProperty('--cr', rot + 'deg');
-          document.body.appendChild(piece);
-          setTimeout(() => { if (piece.parentNode) piece.remove(); }, 1100);
-        }
-      });
-    });
-  }
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .wallpaper-card').forEach(function(el) { obs.observe(el); });
 
   /* ── Mascot ── */
-  const mascot = document.getElementById('mascot');
-  const mascotTip = document.getElementById('mascotTip');
-  const mascotMsgs = [
-    'Hai! Aku mascot-nya',
-    'Scroll ke bawah ya!',
-    'Wallpaper-nya cute banget',
-    'Zero CPU lho!',
-    'Coba dark mode!',
-    'Klik Galeri dong',
-    'CSS-only magic!',
-    'Open source rules!'
-  ];
-  let mascotIdx = 0;
+  var mascot = document.getElementById('mascot');
+  var tip = document.getElementById('mascotTip');
+  var msgs = ['Cari wallpaper favoritmu!','Klik hati ya!','Zero CPU lho!','Coba dark mode!'];
+  var mIdx = 0;
 
-  function showMascotTip() {
-    mascotTip.textContent = mascotMsgs[mascotIdx % mascotMsgs.length];
-    mascotIdx++;
-    mascotTip.classList.add('show');
-    setTimeout(() => mascotTip.classList.remove('show'), 3200);
+  function showTip() {
+    tip.textContent = msgs[mIdx % msgs.length]; mIdx++;
+    tip.classList.add('show');
+    setTimeout(function() { tip.classList.remove('show'); }, 3000);
   }
 
   if (mascot) {
-    mascot.addEventListener('click', () => {
-      mascot.classList.remove('bounce');
-      void mascot.offsetWidth;
-      mascot.classList.add('bounce');
-      showMascotTip();
+    mascot.addEventListener('click', function() {
+      mascot.classList.remove('bounce'); void mascot.offsetWidth; mascot.classList.add('bounce');
+      showTip();
     });
-    let lastMS = 0;
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (Math.abs(y - lastMS) > 200) {
-        lastMS = y;
-        mascot.classList.remove('bounce');
-        void mascot.offsetWidth;
-        mascot.classList.add('bounce');
-      }
-    }, { passive: true });
-    setTimeout(showMascotTip, 2000);
+    setTimeout(showTip, 2000);
   }
 
-  /* ── Keyboard Shortcuts ── */
-  document.addEventListener('keydown', (e) => {
-    const tag = document.activeElement.tagName;
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-    if (e.key === 'g' || e.key === 'G') {
-      e.preventDefault();
-      window.location.href = '/project/';
-    }
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.faq-item.open').forEach(f => {
-        f.classList.remove('open');
-        f.setAttribute('aria-expanded', 'false');
-      });
-    }
-  });
-
+  initFavs();
 })();
 </script>
 {% endraw %}
