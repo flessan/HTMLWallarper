@@ -8,6 +8,7 @@ permalink: /project/index.html
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+{% raw %}
 <style>
   :root {
     --bg: #FEF6E8; --bg-alt: #FFF0DB; --bg-dot: #F0D9B5;
@@ -288,7 +289,7 @@ permalink: /project/index.html
     .lightbox-content{width:96vw;height:60vh}
   }
 
-  /* FIX: Space added after { to break {# */
+  /* Fix: Space added after { to break {# */
   @media(max-width:768px){ #mascot,#mascotTip{display:none} }
 
   /* ===== REDUCED MOTION ===== */
@@ -297,6 +298,7 @@ permalink: /project/index.html
   /* ===== SCROLLBAR ===== */
   ::-webkit-scrollbar{width:7px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--card-border);border-radius:4px;border:2px solid var(--bg)}::-webkit-scrollbar-thumb:hover{background:var(--primary)}
 </style>
+{% endraw %}
 
 <!-- ===== SCROLL PROGRESS ===== -->
 <div id="scrollProgress"></div>
@@ -514,6 +516,7 @@ permalink: /project/index.html
 <!-- ===== TOAST ===== -->
 <div class="toast-container" id="toastContainer"></div>
 
+{% raw %}
 <!-- ===== SCRIPTS ===== -->
 <script>
 (function() {
@@ -851,3 +854,4 @@ permalink: /project/index.html
   initFavButtons();
 })();
 </script>
+{% endraw %}
