@@ -10,7 +10,7 @@ permalink: /project/index.html
 
 {% raw %}
 <style>
-  /* ===== CSS VARIABLES (From Landing Page) ===== */
+  /* ===== CSS VARIABLES ===== */
   :root {
     --bg: #FEF6E8; --bg-alt: #FFF0DB; --bg-dot: #F0D9B5;
     --card: #FFFFFF; --card-border: #E8CFA8; --card-border-hover: #E8A85C;
@@ -68,7 +68,7 @@ permalink: /project/index.html
   }
   @keyframes progressSlide { to { background-position: 300% 0; } }
 
-  /* ===== NAVIGATION (From Landing) ===== */
+  /* ===== NAVIGATION ===== */
   #mainNav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 10000; height: var(--nav-h);
     background: var(--bg); border-bottom: 2.5px solid var(--card-border);
@@ -485,7 +485,8 @@ permalink: /project/index.html
 <div class="gallery-root">
   <div class="gallery-grid" id="galleryGrid">
     {% for wp in wallpapers %}
-    <div class="wallpaper-card" data-name="{{ wp.name | lower }}" data-index="{{ loop.index0 }}">
+    {%- assign wp_lower = wp.name | downcase -%}
+    <div class="wallpaper-card" data-name="{{ wp_lower }}" data-index="{{ loop.index0 }}">
       <div class="card-inner">
         <div class="preview-area">
           <iframe src="{{ wp.htmlUrl }}" frameborder="0" scrolling="no" loading="lazy"></iframe>
@@ -497,7 +498,7 @@ permalink: /project/index.html
           </div>
 
           <div class="card-index">#{{ loop.index }}</div>
-          <button onclick="toggleFav('{{ wp.name }}', this)" class="fav-btn" data-name="{{ wp.name }}">
+          <button onclick="toggleFav('{{ wp_lower | escape }}', this)" class="fav-btn" data-name="{{ wp_lower }}">
             <svg class="w-4 h-4" style="color:var(--text-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
           </button>
         </div>
@@ -517,7 +518,7 @@ permalink: /project/index.html
     </div>
     {% else %}
     <div class="empty-state">
-      <p>No wallpapers found. Make sure the `wallpapers` folder is populated.</p>
+      <p>No wallpapers found. Make sure the `wallpapers` collection is available in your template data.</p>
     </div>
     {% endfor %}
   </div>
@@ -597,13 +598,14 @@ permalink: /project/index.html
 
   /* ── Data & Cards ── */
   var cards = Array.from(document.querySelectorAll('.wallpaper-card'));
+  // Pre-populate data array based on DOM order
   var wallpaperData = cards.map(function(card) {
     var iframe = card.querySelector('.preview-area iframe');
-    var name = card.dataset.name;
+    var nameEl = card.querySelector('h3');
     return {
       url: iframe ? iframe.src : '',
-      name: name,
-      fullName: card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : name
+      name: card.dataset.name,
+      fullName: nameEl ? nameEl.textContent.trim() : card.dataset.name
     };
   });
 
@@ -615,7 +617,10 @@ permalink: /project/index.html
     localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
     document.getElementById('favCount').textContent = favorites.length;
   }
-  function isFav(name) { return favorites.indexOf(name) !== -1; }
+  // Normalize check to lowercase
+  function isFav(name) { 
+    return favorites.indexOf(name.toLowerCase()) !== -1; 
+  }
 
   function initFavs() {
     document.querySelectorAll('.fav-btn').forEach(function(btn) {
@@ -625,6 +630,7 @@ permalink: /project/index.html
   }
 
   window.toggleFav = function(name, btn) {
+    name = name.toLowerCase(); // Ensure lowercase consistency
     if (isFav(name)) {
       favorites = favorites.filter(function(f) { return f !== name; });
       btn.classList.remove('active');
@@ -635,7 +641,7 @@ permalink: /project/index.html
       showToast('Added to favorites', 'success');
     }
     btn.classList.remove('bounce');
-    void btn.offsetWidth;
+    void btn.offsetWidth; // Trigger reflow
     btn.classList.add('bounce');
     saveFavs();
     if (favFilterOn) applyFilters();
@@ -703,8 +709,15 @@ permalink: /project/index.html
 
   window.openLightbox = function(idx) {
     var visible = getVisibleCards();
+    // Find the card that has the data-index matching idx
     var target = visible.find(function(c) { return parseInt(c.dataset.index, 10) === idx; });
-    if (!target) return;
+    
+    // If not found (maybe filtered out?), default to the first visible or return
+    if (!target) {
+       if(visible.length > 0) target = visible[0];
+       else return;
+    }
+    
     var vIdx = visible.indexOf(target);
     showLightbox(vIdx, visible);
   };
@@ -712,7 +725,9 @@ permalink: /project/index.html
   function showLightbox(vIdx, visibleArr) {
     currentIdx = vIdx;
     var card = visibleArr[vIdx];
-    var idx = parseInt(card.dataset.index, 10);
+    var idx = parseInt(card.dataset.index, 10); // Retrieve original index
+    
+    // Use original index to get data from the master list
     frame.src = wallpaperData[idx].url;
     title.textContent = wallpaperData[idx].fullName;
     lightbox.classList.add('active');
@@ -749,9 +764,9 @@ permalink: /project/index.html
   window.copyPath = function(path, el) {
     var doSuccess = function() {
       var icon = el.querySelector('.copy-icon');
-      icon.style.color = 'var(--green)';
+      if(icon) icon.style.color = 'var(--green)';
       showToast('Copied: ' + path, 'success');
-      setTimeout(function() { icon.style.color = ''; }, 1500);
+      setTimeout(function() { if(icon) icon.style.color = ''; }, 1500);
     };
     if (navigator.clipboard) {
       navigator.clipboard.writeText(path).then(doSuccess).catch(function() {
@@ -759,6 +774,11 @@ permalink: /project/index.html
         document.body.appendChild(ta); ta.select(); document.execCommand('copy');
         document.body.removeChild(ta); doSuccess();
       });
+    } else {
+        // Fallback for older browsers
+        var ta = document.createElement('textarea'); ta.value = path;
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); doSuccess();
     }
   };
 
