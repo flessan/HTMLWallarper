@@ -15,27 +15,23 @@ permalink: landing-pages/index.html
      CSS CUSTOM PROPERTIES - Design Tokens
      ═══════════════════════════════════════════════════════════════ */
   :root {
-    /* Base Palette */
     --bg: #FEF8F0;
     --bg-alt: #FFF5E6;
     --bg-warm: #FFECD2;
     --bg-dot: #F5E1C8;
     
-    /* Card System */
     --card: #FFFFFF;
     --card-alt: #FFFCF7;
     --card-border: #E8D5B8;
     --card-border-hover: #E8A85C;
     --card-shadow: rgba(61, 44, 30, 0.06);
     
-    /* Text Hierarchy */
     --text: #2D1810;
     --text-soft: #4A3228;
     --text-muted: #7A5D4A;
     --text-light: #A08570;
     --text-faint: #C4A88A;
     
-    /* Brand Colors - Warm Sunset Palette */
     --primary: #FF6B35;
     --primary-hover: #E85A24;
     --primary-light: rgba(255, 107, 53, 0.12);
@@ -52,7 +48,6 @@ permalink: landing-pages/index.html
     --accent-light: rgba(255, 179, 0, 0.12);
     --accent-dark: #E65100;
     
-    /* Extended Palette */
     --coral: #FF7043;
     --coral-light: rgba(255, 112, 67, 0.12);
     --mint: #4DB6AC;
@@ -68,7 +63,6 @@ permalink: landing-pages/index.html
     --amber: #FFCA28;
     --amber-light: rgba(255, 202, 40, 0.12);
     
-    /* Semantic Colors */
     --success: #66BB6A;
     --success-light: rgba(102, 187, 106, 0.12);
     --warning: #FFA726;
@@ -76,28 +70,16 @@ permalink: landing-pages/index.html
     --info: #29B6F6;
     --info-light: rgba(41, 182, 246, 0.12);
     
-    /* Shadows */
     --shadow-xs: 0 2px 6px var(--card-shadow);
     --shadow-sm: 0 4px 12px var(--card-shadow);
     --shadow-md: 0 6px 20px var(--card-shadow);
     --shadow-lg: 0 12px 40px var(--card-shadow);
     --shadow-xl: 0 20px 60px var(--card-shadow);
     
-    --shadow-card: 
-      0 4px 0 0 var(--card-border),
-      0 6px 20px var(--card-shadow);
-    --shadow-card-hover:
-      0 4px 0 0 var(--card-border-hover),
-      0 10px 30px rgba(255, 107, 53, 0.12);
-    --shadow-button:
-      0 3px 0 0 var(--text),
-      0 4px 12px var(--card-shadow);
-    --shadow-button-hover:
-      0 4px 0 0 var(--text),
-      0 6px 20px rgba(255, 107, 53, 0.15);
-    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 4px 0 0 var(--card-border), 0 6px 20px var(--card-shadow);
+    --shadow-card-hover: 0 4px 0 0 var(--card-border-hover), 0 10px 30px rgba(255, 107, 53, 0.12);
+    --shadow-button: 0 3px 0 0 var(--text), 0 4px 12px var(--card-shadow);
     
-    /* Border Radius */
     --radius-xs: 0.375rem;
     --radius-sm: 0.625rem;
     --radius-md: 0.875rem;
@@ -106,7 +88,6 @@ permalink: landing-pages/index.html
     --radius-2xl: 2.25rem;
     --radius-full: 9999px;
     
-    /* Spacing */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
@@ -116,12 +97,10 @@ permalink: landing-pages/index.html
     --space-3xl: 4rem;
     --space-4xl: 6rem;
     
-    /* Typography */
     --font-display: 'Fredoka', sans-serif;
     --font-body: 'Nunito', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     
-    /* Animation */
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -132,13 +111,11 @@ permalink: landing-pages/index.html
     --duration-slow: 400ms;
     --duration-slower: 600ms;
     
-    /* Layout */
     --nav-height: 72px;
     --container-max: 1200px;
     --container-narrow: 800px;
   }
 
-  /* Dark Theme */
   [data-theme="dark"] {
     --bg: #0F0D12;
     --bg-alt: #161318;
@@ -168,12 +145,8 @@ permalink: landing-pages/index.html
     --tertiary: #B388FF;
     --tertiary-light: rgba(179, 136, 255, 0.14);
     
-    --shadow-card: 
-      0 4px 0 0 var(--card-border),
-      0 6px 24px var(--card-shadow);
-    --shadow-card-hover:
-      0 4px 0 0 var(--card-border-hover),
-      0 10px 35px rgba(255, 138, 101, 0.14);
+    --shadow-card: 0 4px 0 0 var(--card-border), 0 6px 24px var(--card-shadow);
+    --shadow-card-hover: 0 4px 0 0 var(--card-border-hover), 0 10px 35px rgba(255, 138, 101, 0.14);
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -198,12 +171,9 @@ permalink: landing-pages/index.html
     background: var(--bg);
     color: var(--text);
     overflow-x: hidden;
-    transition: 
-      background-color var(--duration-slow) var(--ease-in-out),
-      color var(--duration-slow) var(--ease-in-out);
+    transition: background-color var(--duration-slow) var(--ease-in-out), color var(--duration-slow) var(--ease-in-out);
   }
 
-  /* Dot Pattern Background */
   body::before {
     content: '';
     position: fixed;
@@ -268,7 +238,6 @@ permalink: landing-pages/index.html
     border-radius: var(--radius-xs);
   }
 
-  /* Skip Link */
   .skip-link {
     position: fixed;
     top: -100px;
@@ -314,29 +283,15 @@ permalink: landing-pages/index.html
   .gap-lg { gap: var(--space-lg); }
 
   .grid { display: grid; }
-  .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 
-  @media (max-width: 768px) {
-    .grid-cols-2, .grid-cols-3, .grid-cols-4 {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Section Spacing */
   .section {
     position: relative;
     padding: var(--space-4xl) 0;
     z-index: 1;
   }
 
-  .section-sm {
-    padding: var(--space-2xl) 0;
-  }
-
   /* ═══════════════════════════════════════════════════════════════
-     SCROLL PROGRESS INDICATOR
+     SCROLL PROGRESS
      ═══════════════════════════════════════════════════════════════ */
   #scrollProgress {
     position: fixed;
@@ -344,14 +299,7 @@ permalink: landing-pages/index.html
     left: 0;
     height: 4px;
     z-index: 10001;
-    background: linear-gradient(
-      90deg,
-      var(--primary),
-      var(--secondary),
-      var(--tertiary),
-      var(--accent),
-      var(--primary)
-    );
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary), var(--accent), var(--primary));
     background-size: 400% 100%;
     animation: progressGradient 6s linear infinite;
     width: 0%;
@@ -376,10 +324,7 @@ permalink: landing-pages/index.html
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 2px solid var(--card-border);
-    transition: 
-      background-color var(--duration-normal),
-      border-color var(--duration-normal),
-      box-shadow var(--duration-normal);
+    transition: background-color var(--duration-normal), border-color var(--duration-normal), box-shadow var(--duration-normal);
   }
 
   [data-theme="dark"] #mainNav {
@@ -456,12 +401,6 @@ permalink: landing-pages/index.html
     background: var(--primary-light);
   }
 
-  .nav-links a.active {
-    color: var(--primary);
-    background: var(--primary-light);
-    border-color: var(--primary);
-  }
-
   .nav-cta {
     padding: var(--space-sm) var(--space-lg) !important;
     background: var(--primary) !important;
@@ -478,12 +417,6 @@ permalink: landing-pages/index.html
     box-shadow: 5px 5px 0 var(--text) !important;
   }
 
-  .nav-cta:active {
-    transform: translate(1px, 1px);
-    box-shadow: 2px 2px 0 var(--text) !important;
-  }
-
-  /* Theme Toggle */
   .theme-toggle {
     width: 44px;
     height: 44px;
@@ -503,7 +436,6 @@ permalink: landing-pages/index.html
   .theme-toggle:hover {
     transform: scale(1.08) rotate(8deg);
     border-color: var(--accent);
-    box-shadow: var(--shadow-sm);
   }
 
   .theme-toggle .icon-sun,
@@ -534,7 +466,6 @@ permalink: landing-pages/index.html
     transform: scale(1) rotate(0deg);
   }
 
-  /* Hamburger Menu */
   .hamburger {
     display: none;
     width: 44px;
@@ -578,7 +509,6 @@ permalink: landing-pages/index.html
     transform: rotate(-45deg) translate(5px, -5px);
   }
 
-  /* Mobile Menu */
   .mobile-menu {
     display: none;
     position: fixed;
@@ -640,7 +570,6 @@ permalink: landing-pages/index.html
     z-index: 0;
   }
 
-  /* Floating Clouds */
   .deco-cloud {
     width: 90px;
     height: 45px;
@@ -682,16 +611,11 @@ permalink: landing-pages/index.html
     50% { transform: translateY(-15px) translateX(10px); }
   }
 
-  /* Stars */
   .deco-star {
     width: 20px;
     height: 20px;
     background: var(--accent);
-    clip-path: polygon(
-      50% 0%, 61% 35%, 98% 35%, 68% 57%,
-      79% 91%, 50% 70%, 21% 91%, 32% 57%,
-      2% 35%, 39% 35%
-    );
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     animation: twinkle 3.5s ease-in-out infinite;
   }
 
@@ -700,7 +624,6 @@ permalink: landing-pages/index.html
     50% { transform: scale(1.25) rotate(12deg); opacity: 1; }
   }
 
-  /* Hearts */
   .deco-heart {
     width: 18px;
     height: 16px;
@@ -730,7 +653,6 @@ permalink: landing-pages/index.html
     50% { transform: rotate(-45deg) translateY(-10px) scale(1.12); }
   }
 
-  /* Bubbles */
   .deco-bubble {
     border-radius: 50%;
     border: 2px solid var(--card-border);
@@ -743,16 +665,11 @@ permalink: landing-pages/index.html
     50% { transform: translateY(-20px) scale(1.05); }
   }
 
-  /* Sparkle Burst */
   .deco-sparkle {
     width: 14px;
     height: 14px;
     background: var(--accent);
-    clip-path: polygon(
-      50% 0%, 55% 40%, 100% 50%,
-      55% 60%, 50% 100%, 45% 60%,
-      0% 50%, 45% 40%
-    );
+    clip-path: polygon(50% 0%, 55% 40%, 100% 50%, 55% 60%, 50% 100%, 45% 60%, 0% 50%, 45% 40%);
     animation: sparklePulse 2s ease-in-out infinite;
   }
 
@@ -761,7 +678,6 @@ permalink: landing-pages/index.html
     50% { transform: scale(1.4) rotate(45deg); }
   }
 
-  /* Geometric Shapes */
   .deco-triangle {
     width: 0;
     height: 0;
@@ -795,9 +711,7 @@ permalink: landing-pages/index.html
   .reveal {
     opacity: 0;
     transform: translateY(35px) scale(0.96);
-    transition: 
-      opacity var(--duration-slower) var(--ease-out),
-      transform var(--duration-slower) var(--ease-out);
+    transition: opacity var(--duration-slower) var(--ease-out), transform var(--duration-slower) var(--ease-out);
   }
 
   .reveal.visible {
@@ -835,19 +749,6 @@ permalink: landing-pages/index.html
     white-space: nowrap;
   }
 
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-    opacity: 0;
-    transition: opacity var(--duration-fast);
-  }
-
-  .btn:hover::before {
-    opacity: 1;
-  }
-
   .btn:active {
     transform: scale(0.96) !important;
   }
@@ -878,17 +779,6 @@ permalink: landing-pages/index.html
     color: var(--primary);
   }
 
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    border-color: transparent;
-  }
-
-  .btn-ghost:hover {
-    background: var(--primary-light);
-    color: var(--primary);
-  }
-
   .btn-sm {
     padding: var(--space-sm) var(--space-md);
     font-size: 0.875rem;
@@ -897,14 +787,6 @@ permalink: landing-pages/index.html
   .btn-lg {
     padding: var(--space-lg) var(--space-2xl);
     font-size: 1.125rem;
-  }
-
-  /* Icon Only Button */
-  .btn-icon {
-    width: 48px;
-    height: 48px;
-    padding: 0;
-    border-radius: var(--radius-sm);
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -960,13 +842,6 @@ permalink: landing-pages/index.html
     border-color: var(--mint);
   }
 
-  .badge-lavender {
-    color: var(--lavender);
-    background: var(--lavender-light);
-    border-color: var(--lavender);
-  }
-
-  /* Section Label */
   .section-label {
     display: inline-flex;
     align-items: center;
@@ -982,7 +857,6 @@ permalink: landing-pages/index.html
     transition: all var(--duration-slow);
   }
 
-  /* Live Dot */
   .live-dot {
     width: 8px;
     height: 8px;
@@ -1011,7 +885,6 @@ permalink: landing-pages/index.html
     overflow: hidden;
   }
 
-  /* Background Blobs */
   .hero-blob {
     position: absolute;
     border-radius: 50%;
@@ -1145,7 +1018,6 @@ permalink: landing-pages/index.html
     margin: 0 0.15rem;
   }
 
-  /* Floating Preview Windows */
   .preview-window {
     position: absolute;
     border-radius: var(--radius-md);
@@ -1192,7 +1064,6 @@ permalink: landing-pages/index.html
     transition: background var(--duration-slow);
   }
 
-  /* Scroll Indicator */
   .scroll-indicator {
     position: absolute;
     bottom: var(--space-2xl);
@@ -1250,20 +1121,9 @@ permalink: landing-pages/index.html
     min-width: 100%;
     height: 100%;
     position: relative;
-  }
-
-  .carousel-slide iframe {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 1280px;
-    height: 720px;
-    margin-left: -640px;
-    margin-top: -360px;
-    transform: scale(0.3125);
-    transform-origin: center center;
-    border: none;
-    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .carousel-controls {
@@ -1351,26 +1211,10 @@ permalink: landing-pages/index.html
     cursor: default;
   }
 
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--card-border), transparent);
-    opacity: 0;
-    transition: opacity var(--duration-fast);
-  }
-
   .feature-card:hover {
     border-color: var(--card-border-hover);
     box-shadow: var(--shadow-card-hover);
     transform: translateY(-5px);
-  }
-
-  .feature-card:hover::before {
-    opacity: 1;
   }
 
   .feature-icon {
@@ -1459,67 +1303,85 @@ permalink: landing-pages/index.html
   /* ═══════════════════════════════════════════════════════════════
      STATS SECTION
      ═══════════════════════════════════════════════════════════════ */
-  .stats-section {
-    border-top: 3px solid var(--card-border);
-    border-bottom: 3px solid var(--card-border);
-    background: var(--bg-alt);
-    position: relative;
-    overflow: hidden;
-    transition: background var(--duration-slow);
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
   }
 
-  .stats-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(var(--bg-dot) 1px, transparent 1px);
-    background-size: 20px 20px;
-    opacity: 0.4;
-    pointer-events: none;
+  @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
-  .stat-card {
+  .stat-item {
     text-align: center;
-    padding: var(--space-lg) var(--space-md);
+    padding: var(--space-md);
     background: var(--card);
-    border: 2.5px solid var(--card-border);
-    border-radius: var(--radius-lg);
-    box-shadow: 4px 4px 0 var(--card-border);
-    transition: transform var(--duration-normal) var(--bounce);
-    position: relative;
-    z-index: 1;
+    border: 2px solid var(--card-border);
+    border-radius: var(--radius-md);
+    transition: all var(--duration-normal);
   }
 
-  .stat-card:hover {
-    transform: translateY(-5px) rotate(-1deg);
-  }
-
-  .stat-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--space-sm);
+  .stat-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--card-border-hover);
   }
 
   .stat-value {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary);
-    transition: color var(--duration-slow);
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
   }
 
   .stat-label {
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: 0.85rem;
     color: var(--text-muted);
-    margin-top: var(--space-xs);
-    transition: color var(--duration-slow);
+    font-weight: 600;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CATEGORY CARDS
+     ═══════════════════════════════════════════════════════════════ */
+  .category-card {
+    background: var(--card);
+    border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: all var(--duration-normal);
+    cursor: pointer;
+  }
+
+  .category-card:hover {
+    border-color: var(--card-border-hover);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-5px);
+  }
+
+  .category-preview {
+    aspect-ratio: 16/10;
+    background: var(--bg-alt);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-info {
+    padding: var(--space-lg);
+  }
+
+  .category-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .category-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1612,29 +1474,8 @@ permalink: landing-pages/index.html
     position: relative;
   }
 
-  .step-connector {
-    width: 4px;
-    height: 40px;
-    margin: var(--space-xs) auto;
-    background: var(--card-border);
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-    transition: background var(--duration-slow);
-  }
-
-  .step-connector-fill {
-    position: absolute;
-    inset: 0;
-    background: var(--primary);
-    border-radius: 4px;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 1s var(--ease-out);
-  }
-
-  .step-item.completed .step-connector-fill {
-    transform: scaleY(1);
+  .step-item {
+    margin-bottom: var(--space-md);
   }
 
   .step-number {
@@ -1660,19 +1501,6 @@ permalink: landing-pages/index.html
     border-color: var(--text);
     color: #fff;
     box-shadow: 4px 4px 0 var(--text);
-    transform: scale(1.1) rotate(5deg);
-  }
-
-  .step-item.completed .step-number {
-    background: var(--success);
-    border-color: var(--text);
-    color: #fff;
-    box-shadow: 4px 4px 0 var(--text);
-  }
-
-  .step-content {
-    flex: 1;
-    padding-bottom: var(--space-xl);
   }
 
   .step-title {
@@ -1691,7 +1519,6 @@ permalink: landing-pages/index.html
     transition: color var(--duration-slow);
   }
 
-  /* Code Block */
   .code-block {
     background: #1A1A2E;
     border: 2.5px solid var(--card-border);
@@ -1720,7 +1547,6 @@ permalink: landing-pages/index.html
   .code-string { color: #F1FA8C; }
   .code-func { color: #8BE9FD; }
   .code-comment { color: #6272A4; font-style: italic; }
-  .code-number { color: #BD93F9; }
 
   .copy-btn {
     padding: var(--space-xs) var(--space-md);
@@ -1744,10 +1570,6 @@ permalink: landing-pages/index.html
     transform: translate(-1px, -1px);
   }
 
-  .copy-btn:active {
-    transform: translate(1px, 1px);
-  }
-
   .copy-btn.copied {
     background: var(--success-light);
     border-color: var(--success);
@@ -1765,6 +1587,7 @@ permalink: landing-pages/index.html
     box-shadow: 4px 4px 0 var(--card-border);
     transition: all var(--duration-normal) var(--bounce);
     cursor: pointer;
+    margin-bottom: var(--space-md);
   }
 
   .faq-item:hover {
@@ -1832,10 +1655,6 @@ permalink: landing-pages/index.html
     font-size: 0.85rem;
     font-weight: 600;
     border: 1.5px solid var(--primary);
-  }
-
-  .faq-answer strong {
-    color: var(--text);
   }
 
   .faq-answer ul {
@@ -2040,72 +1859,13 @@ permalink: landing-pages/index.html
     box-shadow: 3px 3px 0 #0288D1;
   }
 
-  .toast.warning {
-    background: var(--warning);
-    color: var(--text);
-    border-color: #EF6C00;
-    box-shadow: 3px 3px 0 #EF6C00;
-  }
-
   @keyframes toastIn {
-    from {
-      opacity: 0;
-      transform: translateY(1rem) scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(1rem) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   @keyframes toastOut {
-    to {
-      opacity: 0;
-      transform: translateY(-0.5rem) scale(0.9);
-    }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     CURSOR SPARKLE EFFECT
-     ═══════════════════════════════════════════════════════════════ */
-  .sparkle {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99997;
-    width: 10px;
-    height: 10px;
-    clip-path: polygon(
-      50% 0%, 61% 35%, 98% 35%, 68% 57%,
-      79% 91%, 50% 70%, 21% 91%, 32% 57%,
-      2% 35%, 39% 35%
-    );
-    animation: sparkleFade 0.6s ease-out forwards;
-  }
-
-  @keyframes sparkleFade {
-    0% { opacity: 1; transform: scale(1) rotate(0); }
-    100% { opacity: 0; transform: scale(0) rotate(90deg); }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     CONFETTI EFFECT
-     ═══════════════════════════════════════════════════════════════ */
-  @keyframes confettiBurst {
-    0% {
-      opacity: 1;
-      transform: translate(0, 0) rotate(0) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(var(--cx), var(--cy)) rotate(var(--cr)) scale(0.15);
-    }
-  }
-
-  .confetti-piece {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99998;
-    animation: confettiBurst 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    to { opacity: 0; transform: translateY(-0.5rem) scale(0.9); }
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -2207,7 +1967,6 @@ permalink: landing-pages/index.html
     pointer-events: none;
     transition: all var(--duration-normal) var(--bounce);
     white-space: nowrap;
-    transition: background var(--duration-slow), border-color var(--duration-slow);
   }
 
   #mascotTip.show {
@@ -2237,12 +1996,8 @@ permalink: landing-pages/index.html
     .btn { width: 100%; max-width: 300px; justify-content: center; }
     #mascot, #mascotTip { display: none; }
     
-    .stat-card {
-      padding: var(--space-md);
-    }
-    
-    .feature-card {
-      padding: var(--space-lg);
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -2259,7 +2014,6 @@ permalink: landing-pages/index.html
       animation-iteration-count: 1 !important;
       transition-duration: 0.15ms !important;
     }
-    .sparkle, .confetti-piece { display: none !important; }
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -2283,152 +2037,15 @@ permalink: landing-pages/index.html
     background: var(--primary);
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     CATEGORY CARDS
-     ═══════════════════════════════════════════════════════════════ */
-  .category-card {
-    background: var(--card);
-    border: 2.5px solid var(--card-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
-    transition: all var(--duration-normal);
-    cursor: pointer;
+  /* Utility for spin animation */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
-  .category-card:hover {
-    border-color: var(--card-border-hover);
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-5px);
-  }
-
-  .category-preview {
-    aspect-ratio: 16/10;
-    background: var(--bg-alt);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .category-info {
-    padding: var(--space-lg);
-  }
-
-  .category-title {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text);
-    margin-bottom: var(--space-xs);
-  }
-
-  .category-count {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     TESTIMONIAL CARDS
-     ═══════════════════════════════════════════════════════════════ */
-  .testimonial-card {
-    background: var(--card);
-    border: 2.5px solid var(--card-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
-    box-shadow: var(--shadow-card);
-    transition: all var(--duration-normal);
-  }
-
-  .testimonial-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  .testimonial-quote {
-    font-size: 1rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: var(--space-lg);
-    font-style: italic;
-  }
-
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-
-  .testimonial-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--primary-light);
-    border: 2px solid var(--card-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 1rem;
-  }
-
-  .testimonial-name {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--text);
-  }
-
-  .testimonial-role {
-    font-size: 0.85rem;
-    color: var(--text-light);
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     SYSTEM REQUIREMENTS TABLE
-     ═══════════════════════════════════════════════════════════════ */
-  .requirements-table {
-    background: var(--card);
-    border: 2.5px solid var(--card-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
-  }
-
-  .requirements-row {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    border-bottom: 2px solid var(--card-border);
-    transition: background var(--duration-fast);
-  }
-
-  .requirements-row:last-child {
-    border-bottom: none;
-  }
-
-  .requirements-row:hover {
-    background: var(--bg-alt);
-  }
-
-  .requirements-label {
-    padding: var(--space-md) var(--space-lg);
-    font-weight: 700;
-    color: var(--text-soft);
-    background: var(--bg-alt);
-    border-right: 2px solid var(--card-border);
-  }
-
-  .requirements-value {
-    padding: var(--space-md) var(--space-lg);
-    color: var(--text-muted);
-  }
-
-  @media (max-width: 640px) {
-    .requirements-row {
-      grid-template-columns: 1fr;
-    }
-    .requirements-label {
-      border-right: none;
-      border-bottom: 2px solid var(--card-border);
-    }
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.5); opacity: 0.2; }
+    100% { transform: scale(1); opacity: 0.4; }
   }
 </style>
 {% endraw %}
@@ -2491,12 +2108,31 @@ permalink: landing-pages/index.html
   <a href="/project/" class="mobile-cta">Browse Gallery</a>
 </div>
 
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Mascot -->
+<div id="mascot" role="button" aria-label="Show tip" tabindex="0">
+  <div class="eye left"></div>
+  <div class="eye right"></div>
+  <div class="mouth"></div>
+  <div class="blush left"></div>
+  <div class="blush right"></div>
+</div>
+<div id="mascotTip">Click me for a surprise!</div>
+
+<!-- Back to Top -->
+<button id="backToTop" aria-label="Back to top">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
 <main id="main">
   <!-- ═══════════════════════════════════════════════════════════════
        HERO SECTION
        ═══════════════════════════════════════════════════════════════ -->
   <section class="hero-section" id="hero">
-    <!-- Background Blobs -->
     <div class="hero-blob hero-blob-1"></div>
     <div class="hero-blob hero-blob-2"></div>
     <div class="hero-blob hero-blob-3"></div>
@@ -2504,14 +2140,10 @@ permalink: landing-pages/index.html
 
     <!-- Decorative Elements -->
     <div class="deco deco-cloud" style="top: 12%; left: 3%;"></div>
-    <div class="deco deco-cloud" style="top: 25%; right: 2%; width: 70px; height: 35px; animation-delay: 2.5s; opacity: 0.5;"></div>
     <div class="deco deco-star" style="top: 15%; left: 18%; animation-delay: 0.3s;"></div>
     <div class="deco deco-star" style="top: 32%; right: 14%; width: 16px; height: 16px; background: var(--rose); animation-delay: 1.8s;"></div>
-    <div class="deco deco-star" style="bottom: 22%; left: 6%; width: 18px; height: 18px; background: var(--secondary); animation-delay: 2.8s;"></div>
     <div class="deco deco-heart" style="top: 28%; right: 20%; animation-delay: 1.2s;"></div>
-    <div class="deco deco-heart" style="bottom: 28%; right: 4%; animation-delay: 3.5s;"></div>
     <div class="deco deco-bubble" style="top: 18%; right: 26%; width: 18px; height: 18px; animation-delay: 0.9s;"></div>
-    <div class="deco deco-bubble" style="bottom: 18%; left: 20%; width: 14px; height: 14px; animation-delay: 2.4s;"></div>
     <div class="deco deco-triangle" style="top: 60%; left: 2%; animation-delay: 1.6s;"></div>
     <div class="deco deco-diamond" style="top: 45%; right: 8%; animation-delay: 2.1s;"></div>
     <div class="deco deco-sparkle" style="top: 8%; left: 50%; animation-delay: 0.6s;"></div>
@@ -2525,7 +2157,6 @@ permalink: landing-pages/index.html
       </div>
       <div class="pw-content" style="width: 100%; height: calc(100% - 26px); background: linear-gradient(135deg, var(--primary-light), var(--secondary-light)); display: flex; align-items: center; justify-content: center;">
         <div style="width: 50px; height: 50px; border-radius: 50%; border: 3px solid var(--primary); animation: ping 2s ease-in-out infinite; opacity: 0.4;"></div>
-        <div style="width: 50px; height: 50px; border-radius: 50%; border: 3px solid var(--secondary); position: absolute; animation: spin 4s linear infinite; opacity: 0.3;"></div>
       </div>
     </div>
 
@@ -2539,25 +2170,15 @@ permalink: landing-pages/index.html
         <div style="display: flex; flex-direction: column; gap: 4px;">
           <div style="width: 50px; height: 5px; background: var(--tertiary); border-radius: 3px; opacity: 0.4;"></div>
           <div style="width: 35px; height: 5px; background: var(--tertiary); border-radius: 3px; opacity: 0.3;"></div>
-          <div style="width: 60px; height: 5px; background: var(--tertiary); border-radius: 3px; opacity: 0.35;"></div>
         </div>
       </div>
-    </div>
-
-    <div class="preview-window" style="top: 22%; left: 5%; width: 160px; height: 90px; transform: rotate(6deg); opacity: 0.55;">
-      <div class="pw-titlebar">
-        <span class="pw-dot close"></span>
-        <span class="pw-dot minimize"></span>
-        <span class="pw-dot maximize"></span>
-      </div>
-      <div class="pw-content" style="width: 100%; height: calc(100% - 26px); background: linear-gradient(135deg, var(--mint-light), var(--sky-light));"></div>
     </div>
 
     <!-- Hero Content -->
     <div class="hero-content">
       <div class="reveal hero-badge">
         <span class="live-dot"></span>
-        Open Source &bull; KDE Plasma 6 Ready &bull; Zero CPU
+        Open Source · KDE Plasma 6 Ready · Zero CPU
       </div>
       
       <h1 class="reveal d-1 hero-title">
@@ -2572,7 +2193,7 @@ permalink: landing-pages/index.html
       </p>
       
       <div class="reveal d-3 hero-buttons">
-        <a href="/project/" class="btn btn-primary btn-lg confetti-trigger">
+        <a href="/project/" class="btn btn-primary btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
             <circle cx="8.5" cy="8.5" r="1.5"/>
@@ -2596,7 +2217,6 @@ permalink: landing-pages/index.html
       </p>
     </div>
 
-    <!-- Scroll Indicator -->
     <div class="scroll-indicator">
       <span>Scroll Down</span>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2619,7 +2239,7 @@ permalink: landing-pages/index.html
         </span>
         <h2 class="reveal d-1">See It In Action</h2>
         <p class="reveal d-2" style="max-width: 500px; margin: var(--space-sm) auto 0;">
-          Each wallpaper is a standalone HTML file that renders directly in your desktop. 
+          Each wallpaper is a standalone HTML file that renders directly on your desktop. 
           No server, no build process, just pure CSS magic.
         </p>
       </div>
@@ -2628,29 +2248,27 @@ permalink: landing-pages/index.html
         <div class="carousel-wrapper">
           <div class="carousel-viewport">
             <div class="carousel-track" id="carouselTrack">
-              {% for wp in wallpapers %}
-              <div class="carousel-slide">
-                <iframe src="{{ wp.htmlUrl }}" loading="lazy"></iframe>
+              <div class="carousel-slide" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); animation: ping 3s ease-in-out infinite;"></div>
+                <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); animation: spin 8s linear infinite;"></div>
               </div>
-              {% else %}
-              <div class="carousel-slide">
-                <div style="position: absolute; inset: 0; background: linear-gradient(135deg, var(--primary-light), var(--secondary-light)); display: flex; align-items: center; justify-content: center;">
-                  <div style="text-align: center;">
-                    <div style="width: 70px; height: 70px; border-radius: var(--radius-md); background: var(--primary-light); border: 3px solid var(--primary); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); box-shadow: 4px 4px 0 var(--primary);">
-                      <svg width="28" height="28" style="color: var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                      </svg>
-                    </div>
-                    <p style="font-weight: 700; font-size: 1.1rem;">Wallpaper previews will appear here</p>
-                    <a href="/project/" style="color: var(--primary); font-weight: 700; font-size: 1rem; margin-top: var(--space-sm); display: inline-block;">
-                      Visit Gallery
-                    </a>
-                  </div>
+              <div class="carousel-slide" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                <div style="display: flex; gap: 20px;">
+                  <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: 50%; animation: floatBubble 3s ease-in-out infinite;"></div>
+                  <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; animation: floatBubble 4s ease-in-out infinite 0.5s;"></div>
+                  <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: floatBubble 3.5s ease-in-out infinite 1s;"></div>
                 </div>
               </div>
-              {% endfor %}
+              <div class="carousel-slide" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); transform: rotate(45deg); animation: floatDiamond 4s ease-in-out infinite;"></div>
+              </div>
+              <div class="carousel-slide" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                <div style="position: absolute; inset: 0; display: flex; flex-wrap: wrap; gap: 30px; align-items: center; justify-content: center; padding: 40px;">
+                  <div style="width: 20px; height: 20px; background: rgba(255,255,255,0.4); border-radius: 50%; animation: twinkle 2s ease-in-out infinite;"></div>
+                  <div style="width: 15px; height: 15px; background: rgba(255,255,255,0.3); border-radius: 50%; animation: twinkle 2.5s ease-in-out infinite 0.3s;"></div>
+                  <div style="width: 25px; height: 25px; background: rgba(255,255,255,0.35); border-radius: 50%; animation: twinkle 3s ease-in-out infinite 0.6s;"></div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="carousel-controls">
@@ -2667,7 +2285,7 @@ permalink: landing-pages/index.html
               </button>
             </div>
             <div class="carousel-dots" id="carouselDots"></div>
-            <button class="carousel-btn" id="carouselPlayBtn" onclick="toggleCarouselAutoplay()" aria-label="Toggle autoplay">
+            <button class="carousel-btn" onclick="toggleCarouselAutoplay()" aria-label="Toggle autoplay">
               <svg width="18" height="18" id="playIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="9"/>
                 <path d="M10 8l6 4-6 4V8z"/>
@@ -2677,23 +2295,23 @@ permalink: landing-pages/index.html
         </div>
       </div>
 
-      <!-- Quick Stats Under Carousel -->
-      <div class="reveal d-3 grid grid-cols-4 gap-md" style="margin-top: var(--space-xl);">
-        <div style="text-align: center; padding: var(--space-md); background: var(--card); border: 2px solid var(--card-border); border-radius: var(--radius-md);">
-          <div style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary);">{{ wallpapers | length }}</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Wallpapers</div>
+      <!-- Quick Stats -->
+      <div class="reveal d-3 stats-grid" style="margin-top: var(--space-xl);">
+        <div class="stat-item">
+          <div class="stat-value" style="color: var(--primary);">12+</div>
+          <div class="stat-label">Wallpapers</div>
         </div>
-        <div style="text-align: center; padding: var(--space-md); background: var(--card); border: 2px solid var(--card-border); border-radius: var(--radius-md);">
-          <div style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--secondary);">0%</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">CPU Usage</div>
+        <div class="stat-item">
+          <div class="stat-value" style="color: var(--secondary);">0%</div>
+          <div class="stat-label">CPU Usage</div>
         </div>
-        <div style="text-align: center; padding: var(--space-md); background: var(--card); border: 2px solid var(--card-border); border-radius: var(--radius-md);">
-          <div style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--tertiary);">~15KB</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Avg Size</div>
+        <div class="stat-item">
+          <div class="stat-value" style="color: var(--tertiary);">~15KB</div>
+          <div class="stat-label">Avg Size</div>
         </div>
-        <div style="text-align: center; padding: var(--space-md); background: var(--card); border: 2px solid var(--card-border); border-radius: var(--radius-md);">
-          <div style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--accent-dark);">100%</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Open Source</div>
+        <div class="stat-item">
+          <div class="stat-value" style="color: var(--accent-dark);">100%</div>
+          <div class="stat-label">Open Source</div>
         </div>
       </div>
     </div>
@@ -2713,36 +2331,32 @@ permalink: landing-pages/index.html
         </span>
         <h2 class="reveal d-1">Why HTMLWallarper?</h2>
         <p class="reveal d-2" style="max-width: 550px; margin: var(--space-sm) auto 0;">
-          Built from the ground up for performance, simplicity, and customization. 
-          No compromises, no bloat, just beautiful animated wallpapers.
+          Built from the ground up for performance, simplicity, and customization.
         </p>
       </div>
 
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg);">
-        <!-- Feature 1 -->
-        <div class="feature-card fc-primary reveal" data-tilt>
+        <div class="feature-card fc-primary reveal">
           <div class="feature-icon fc-primary">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
             </svg>
           </div>
           <h3>Zero CPU Overhead</h3>
-          <p>Pure static HTML with CSS animations offloaded to GPU. Your CPU stays free for what matters. Most wallpapers consume 0% CPU at idle.</p>
+          <p>Pure static HTML with CSS animations offloaded to GPU. Your CPU stays free for what matters.</p>
         </div>
 
-        <!-- Feature 2 -->
-        <div class="feature-card fc-secondary reveal d-1" data-tilt>
+        <div class="feature-card fc-secondary reveal d-1">
           <div class="feature-icon fc-secondary">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
             </svg>
           </div>
           <h3>Fully Customizable</h3>
-          <p>Change colors, speeds, and layouts directly in the HTML file. No build tools, no compilation. Just edit and refresh. It's that simple.</p>
+          <p>Change colors, speeds, and layouts directly in the HTML file. No build tools required.</p>
         </div>
 
-        <!-- Feature 3 -->
-        <div class="feature-card fc-tertiary reveal d-2" data-tilt>
+        <div class="feature-card fc-tertiary reveal d-2">
           <div class="feature-icon fc-tertiary">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
@@ -2750,11 +2364,10 @@ permalink: landing-pages/index.html
             </svg>
           </div>
           <h3>CSS-Only Animations</h3>
-          <p>Smooth 60fps animations using modern CSS keyframes and transforms. Hardware accelerated, battery friendly, and infinitely loopable.</p>
+          <p>Smooth 60fps animations using modern CSS keyframes. Hardware accelerated and battery friendly.</p>
         </div>
 
-        <!-- Feature 4 -->
-        <div class="feature-card fc-accent reveal d-3" data-tilt>
+        <div class="feature-card fc-accent reveal d-3">
           <div class="feature-icon fc-accent">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -2762,22 +2375,20 @@ permalink: landing-pages/index.html
             </svg>
           </div>
           <h3>No Tracking, No Ads</h3>
-          <p>100% open source with zero telemetry, analytics, or ads. Your desktop is personal. We respect that. MIT licensed forever.</p>
+          <p>100% open source with zero telemetry. Your desktop is personal. MIT licensed forever.</p>
         </div>
 
-        <!-- Feature 5 -->
-        <div class="feature-card fc-rose reveal d-4" data-tilt>
+        <div class="feature-card fc-rose reveal d-4">
           <div class="feature-icon fc-rose">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
             </svg>
           </div>
           <h3>Plug & Play</h3>
-          <p>Download, extract, point KDE to the folder. Done. No dependencies, no installation scripts, no package managers required.</p>
+          <p>Download, extract, point KDE to the folder. No dependencies or package managers required.</p>
         </div>
 
-        <!-- Feature 6 -->
-        <div class="feature-card fc-sky reveal d-5" data-tilt>
+        <div class="feature-card fc-sky reveal d-5">
           <div class="feature-icon fc-sky">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -2786,53 +2397,14 @@ permalink: landing-pages/index.html
             </svg>
           </div>
           <h3>Community Driven</h3>
-          <p>Contribute your own wallpapers via Pull Request. Join a growing community of Linux enthusiasts making desktops beautiful together.</p>
-        </div>
-
-        <!-- Feature 7 -->
-        <div class="feature-card fc-mint reveal d-6" data-tilt>
-          <div class="feature-icon fc-mint">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7"/>
-              <rect x="14" y="3" width="7" height="7"/>
-              <rect x="14" y="14" width="7" height="7"/>
-              <rect x="3" y="14" width="7" height="7"/>
-            </svg>
-          </div>
-          <h3>Multi-Monitor Support</h3>
-          <p>Works seamlessly across multiple monitors. Each display can have its own wallpaper or span a single one across all screens.</p>
-        </div>
-
-        <!-- Feature 8 -->
-        <div class="feature-card fc-lavender reveal d-7" data-tilt>
-          <div class="feature-icon fc-lavender">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
-          </div>
-          <h3>Instant Updates</h3>
-          <p>Changes reflect immediately. Edit a color value, save, and see your desktop transform in real-time. No reload needed.</p>
-        </div>
-
-        <!-- Feature 9 -->
-        <div class="feature-card fc-lime reveal d-8" data-tilt>
-          <div class="feature-icon fc-lime">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-              <line x1="12" y1="22.08" x2="12" y2="12"/>
-            </svg>
-          </div>
-          <h3>Tiny File Sizes</h3>
-          <p>Most wallpapers are under 15KB. That's smaller than a typical JPEG. Download the entire collection in seconds, store it anywhere.</p>
+          <p>Contribute your own wallpapers via Pull Request. Join a growing community of Linux enthusiasts.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       CATEGORY SHOWCASE
+       CATEGORIES
        ═══════════════════════════════════════════════════════════════ -->
   <section class="section" id="categories">
     <div class="container">
@@ -2848,15 +2420,13 @@ permalink: landing-pages/index.html
         </span>
         <h2 class="reveal d-1">Find Your Style</h2>
         <p class="reveal d-2" style="max-width: 500px; margin: var(--space-sm) auto 0;">
-          From minimal gradients to mesmerizing particle systems, there's something for every taste.
+          From minimal gradients to mesmerizing particle systems.
         </p>
       </div>
 
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg);">
         <div class="category-card reveal" onclick="window.location.href='/project/?category=gradient'">
-          <div class="category-preview" style="background: linear-gradient(135deg, #FF6B35, #F7931E, #FFD54F);">
-            <div style="position: absolute; inset: 0; background: inherit; filter: blur(20px); opacity: 0.5;"></div>
-          </div>
+          <div class="category-preview" style="background: linear-gradient(135deg, #FF6B35, #F7931E, #FFD54F);"></div>
           <div class="category-info">
             <h3 class="category-title">Gradients</h3>
             <p class="category-count">Smooth color transitions that flow endlessly</p>
@@ -2869,7 +2439,6 @@ permalink: landing-pages/index.html
               <div style="width: 4px; height: 4px; background: #fff; border-radius: 50%; animation: floatBubble 2s ease-in-out infinite;"></div>
               <div style="width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: floatBubble 2.5s ease-in-out infinite 0.3s;"></div>
               <div style="width: 5px; height: 5px; background: #fff; border-radius: 50%; animation: floatBubble 3s ease-in-out infinite 0.6s;"></div>
-              <div style="width: 4px; height: 4px; background: #fff; border-radius: 50%; animation: floatBubble 2.2s ease-in-out infinite 0.9s;"></div>
             </div>
           </div>
           <div class="category-info">
@@ -2951,10 +2520,9 @@ permalink: landing-pages/index.html
       </div>
 
       <div class="reveal d-2 comparison-container" id="compContainer">
-        <!-- Before: Static -->
         <div class="comp-layer" id="compBefore" style="clip-path: inset(0 50% 0 0); background: linear-gradient(135deg, var(--bg-warm), var(--bg));">
           <div style="text-align: center;">
-            <svg style="width: 80px; height: 80px; color: var(--text-light); margin: 0 auto var(--space-md); opacity: 0.4;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg style="width: 80px; height: 80px; color: var(--text-light); margin: 0 auto var(--space-md); opacity: 0.4;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
               <circle cx="8.5" cy="8.5" r="1.5"/>
               <polyline points="21 15 16 10 5 21"/>
@@ -2964,9 +2532,7 @@ permalink: landing-pages/index.html
           </div>
         </div>
 
-        <!-- After: Animated -->
         <div class="comp-layer" id="compAfter" style="background: linear-gradient(135deg, var(--primary-light), var(--secondary-light)); overflow: hidden;">
-          <!-- Animated elements -->
           <div style="position: absolute; width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--primary); opacity: 0.3; animation: ping 3s ease-in-out infinite;"></div>
           <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--secondary); animation: spin 10s linear infinite;"></div>
           <div style="position: absolute; width: 60px; height: 60px; background: var(--tertiary); opacity: 0.2; border-radius: var(--radius-sm); transform: rotate(45deg); animation: floatDiamond 5s ease-in-out infinite;"></div>
@@ -2977,7 +2543,6 @@ permalink: landing-pages/index.html
           </div>
         </div>
 
-        <!-- Slider -->
         <div class="comp-slider-line" id="compSlider" style="left: 50%;">
           <div class="comp-handle">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -2993,85 +2558,9 @@ permalink: landing-pages/index.html
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       HOW IT WORKS
-       ═══════════════════════════════════════════════════════════════ -->
-  <section class="section" id="how-it-works">
-    <div class="container container-narrow">
-      <div class="text-center" style="margin-bottom: var(--space-2xl);">
-        <span class="reveal section-label badge-mint">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 16v-4M12 8h.01"/>
-          </svg>
-          How It Works
-        </span>
-        <h2 class="reveal d-1">The Magic Behind</h2>
-        <p class="reveal d-2" style="max-width: 500px; margin: var(--space-sm) auto 0;">
-          HTMLWallarper leverages the HTML Wallpaper plugin built into KDE Plasma to render web content as your desktop background.
-        </p>
-      </div>
-
-      <div class="reveal" style="background: var(--card); border: 2.5px solid var(--card-border); border-radius: var(--radius-lg); padding: var(--space-xl); box-shadow: var(--shadow-card);">
-        <div style="display: flex; align-items: flex-start; gap: var(--space-lg); margin-bottom: var(--space-lg);">
-          <div style="flex-shrink: 0; width: 48px; height: 48px; background: var(--primary-light); border: 2px solid var(--primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;">
-            <span style="font-weight: 700; color: var(--primary);">1</span>
-          </div>
-          <div>
-            <h4 style="margin-bottom: var(--space-xs); color: var(--text);">HTML File</h4>
-            <p style="font-size: 0.95rem;">Each wallpaper is a single <code style="background: var(--primary-light); padding: 0.1rem 0.4rem; border-radius: var(--radius-xs); font-size: 0.85rem;">index.html</code> file with embedded CSS animations.</p>
-          </div>
-        </div>
-
-        <div style="display: flex; align-items: flex-start; gap: var(--space-lg); margin-bottom: var(--space-lg);">
-          <div style="flex-shrink: 0; width: 48px; height: 48px; background: var(--secondary-light); border: 2px solid var(--secondary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;">
-            <span style="font-weight: 700; color: var(--secondary);">2</span>
-          </div>
-          <div>
-            <h4 style="margin-bottom: var(--space-xs); color: var(--text);">KDE Rendering</h4>
-            <p style="font-size: 0.95rem;">KDE Plasma's built-in HTML Wallpaper plugin renders the file using WebEngine (Chromium-based).</p>
-          </div>
-        </div>
-
-        <div style="display: flex; align-items: flex-start; gap: var(--space-lg);">
-          <div style="flex-shrink: 0; width: 48px; height: 48px; background: var(--tertiary-light); border: 2px solid var(--tertiary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;">
-            <span style="font-weight: 700; color: var(--tertiary);">3</span>
-          </div>
-          <div>
-            <h4 style="margin-bottom: var(--space-xs); color: var(--text);">GPU Acceleration</h4>
-            <p style="font-size: 0.95rem;">CSS animations are hardware-accelerated, meaning smooth 60fps with minimal CPU usage.</p>
-          </div>
-        </div>
-
-        <div style="margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 2px solid var(--card-border);">
-          <div style="display: flex; flex-wrap: wrap; gap: var(--space-md);">
-            <div style="display: flex; align-items: center; gap: var(--space-sm);">
-              <svg width="18" height="18" style="color: var(--success);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5"/>
-              </svg>
-              <span style="font-size: 0.9rem; color: var(--text-muted);">No JavaScript runtime</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-sm);">
-              <svg width="18" height="18" style="color: var(--success);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5"/>
-              </svg>
-              <span style="font-size: 0.9rem; color: var(--text-muted);">No external dependencies</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: var(--space-sm);">
-              <svg width="18" height="18" style="color: var(--success);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5"/>
-              </svg>
-              <span style="font-size: 0.9rem; color: var(--text-muted);">No network requests</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════════
        INSTALLATION SECTION
        ═══════════════════════════════════════════════════════════════ -->
-  <section class="section" id="install" style="background: var(--bg-alt);">
+  <section class="section" id="install">
     <div class="container container-narrow">
       <div class="text-center" style="margin-bottom: var(--space-2xl);">
         <span class="reveal section-label badge-rose">
@@ -3082,21 +2571,17 @@ permalink: landing-pages/index.html
         </span>
         <h2 class="reveal d-1">Get Started in 30 Seconds</h2>
         <p class="reveal d-2" style="max-width: 450px; margin: var(--space-sm) auto 0;">
-          No package managers, no dependencies, no configuration files. Just download and go.
+          No package managers, no dependencies, no configuration files.
         </p>
       </div>
 
       <div class="steps-container">
-        <!-- Step 1 -->
-        <div class="step-item reveal" data-step="1">
+        <div class="step-item reveal active">
           <div class="flex" style="gap: var(--space-lg);">
-            <div class="flex flex-col items-center">
-              <div class="step-number">1</div>
-              <div class="step-connector"><div class="step-connector-fill"></div></div>
-            </div>
-            <div class="step-content">
+            <div class="step-number">1</div>
+            <div style="flex: 1;">
               <h3 class="step-title">Download the Collection</h3>
-              <p class="step-desc">Clone the repository or download the ZIP file. Either works.</p>
+              <p class="step-desc">Clone the repository or download the ZIP file.</p>
               <div class="code-block">
                 <code><span class="code-keyword">git</span> clone <span class="code-string">https://github.com/flessan/HTMLWallarper.git</span></code>
                 <button class="copy-btn" onclick="copyCode(this, 'git clone https://github.com/flessan/HTMLWallarper.git')">Copy</button>
@@ -3105,16 +2590,12 @@ permalink: landing-pages/index.html
           </div>
         </div>
 
-        <!-- Step 2 -->
-        <div class="step-item reveal d-1" data-step="2">
+        <div class="step-item reveal d-1">
           <div class="flex" style="gap: var(--space-lg);">
-            <div class="flex flex-col items-center">
-              <div class="step-number">2</div>
-              <div class="step-connector"><div class="step-connector-fill"></div></div>
-            </div>
-            <div class="step-content">
+            <div class="step-number">2</div>
+            <div style="flex: 1;">
               <h3 class="step-title">Open Desktop Settings</h3>
-              <p class="step-desc">Right-click on your desktop and select "Configure Desktop and Wallpaper" or open System Settings.</p>
+              <p class="step-desc">Right-click on your desktop and select "Configure Desktop and Wallpaper".</p>
               <div class="code-block">
                 <code><span class="code-comment"># Or via command line:</span> systemsettings5 kde-desktop</code>
                 <button class="copy-btn" onclick="copyCode(this, 'systemsettings5 kde-desktop')">Copy</button>
@@ -3123,36 +2604,28 @@ permalink: landing-pages/index.html
           </div>
         </div>
 
-        <!-- Step 3 -->
-        <div class="step-item reveal d-2" data-step="3">
+        <div class="step-item reveal d-2">
           <div class="flex" style="gap: var(--space-lg);">
-            <div class="flex flex-col items-center">
-              <div class="step-number">3</div>
-              <div class="step-connector"><div class="step-connector-fill"></div></div>
-            </div>
-            <div class="step-content">
+            <div class="step-number">3</div>
+            <div style="flex: 1;">
               <h3 class="step-title">Select HTML Wallpaper</h3>
-              <p class="step-desc">Change the wallpaper type to "HTML Wallpaper" and browse to the wallpaper folder.</p>
+              <p class="step-desc">Change the wallpaper type to "HTML Wallpaper" and browse to the folder.</p>
               <div class="code-block">
                 <code>Wallpaper Type <span class="code-func">→</span> <span class="code-string">"HTML Wallpaper"</span></code>
-                <button class="copy-btn" style="pointer-events: none; opacity: 0.5;">Info</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Step 4 -->
-        <div class="step-item reveal d-3" data-step="4">
+        <div class="step-item reveal d-3">
           <div class="flex" style="gap: var(--space-lg);">
-            <div class="flex flex-col items-center">
-              <div class="step-number">4</div>
-            </div>
-            <div class="step-content" style="padding-bottom: 0;">
+            <div class="step-number">4</div>
+            <div style="flex: 1;">
               <h3 class="step-title">Point to Wallpaper Folder</h3>
-              <p class="step-desc">Navigate to the specific wallpaper folder you want to use. Each wallpaper has its own directory.</p>
+              <p class="step-desc">Navigate to the specific wallpaper folder you want to use.</p>
               <div class="code-block">
                 <code><span class="code-string">/path/to/HTMLWallarper/wallpapers/</span><span class="code-keyword">your-choice</span>/</code>
-                <button class="copy-btn" onclick="copyCode(this, '/path/to/HTMLWallarper/wallpapers/your-choice/')">Copy</button>
+                <button class="copy-btn" onclick="copyCode(this, '/path/to/HTMLWallarper/wallpapers/')">Copy</button>
               </div>
             </div>
           </div>
@@ -3160,10 +2633,507 @@ permalink: landing-pages/index.html
       </div>
 
       <div class="text-center" style="margin-top: var(--space-2xl);">
-        <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" class="reveal btn btn-primary btn-lg confetti-trigger">
+        <a href="https://github.com/flessan/HTMLWallarper/archive/refs/heads/main.zip" class="reveal btn btn-primary btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
           </svg>
-          Download ZIP (Direct)
+          Download ZIP
         </a>
-        <p style="margin-top: var(--space-md); font
+        <p style="margin-top: var(--space-md); font-size: 0.85rem; color: var(--text-light); font-weight: 600;">
+          Free forever · No account needed · MIT License
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FAQ SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="section" id="faq" style="background: var(--bg-alt);">
+    <div class="container container-narrow">
+      <div class="text-center" style="margin-bottom: var(--space-2xl);">
+        <span class="reveal section-label badge-mint">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/>
+          </svg>
+          FAQ
+        </span>
+        <h2 class="reveal d-1">Frequently Asked Questions</h2>
+        <p class="reveal d-2" style="max-width: 450px; margin: var(--space-sm) auto 0;">
+          Everything you need to know about HTMLWallarper.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Does this work with other desktop environments?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Currently, HTMLWallarper is designed specifically for <strong>KDE Plasma</strong> which has built-in HTML wallpaper support. Other desktop environments may require additional tools or plugins to render HTML wallpapers.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Will this drain my battery on a laptop?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Our wallpapers use <strong>CSS-only animations</strong> that are GPU-accelerated. This means minimal CPU usage and negligible battery impact. Most wallpapers consume 0% CPU at idle.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Can I create my own wallpapers?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely! Each wallpaper is just a single <code>index.html</code> file. You can copy an existing wallpaper and modify it, or create one from scratch. We welcome contributions via Pull Request!</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>How do I customize colors and animations?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Open the <code>index.html</code> file in any text editor. Look for CSS custom properties (variables) at the top of the <code>&lt;style&gt;</code> block. Change colors, speeds, and other values, then save and refresh.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Is this really free and open source?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! HTMLWallarper is released under the <strong>MIT License</strong>. You can use it, modify it, distribute it, and even use it commercially. No attribution required, though it's appreciated!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CTA SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <div class="reveal cta-icon">
+        <svg width="28" height="28" style="color: var(--primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </div>
+      <h2 class="reveal d-1">Ready to Transform Your Desktop?</h2>
+      <p class="reveal d-2">
+        Join thousands of Linux users who have already made their desktops beautiful. 
+        It's free, it's fast, and it's just a few clicks away.
+      </p>
+      <div class="reveal d-3 flex justify-center gap-md" style="flex-wrap: wrap;">
+        <a href="/project/" class="btn btn-primary btn-lg">
+          Browse Gallery
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+        <a href="https://github.com/flessan/HTMLWallarper" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+          Contribute on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </div>
+      <span>HTMLWallarper</span>
+    </div>
+    <div class="footer-links">
+      <a href="/project/">Gallery</a>
+      <a href="https://github.com/flessan/HTMLWallarper" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-copy">Made with care for the Linux community</div>
+  </div>
+</footer>
+
+{% raw %}
+<script>
+  // ═══════════════════════════════════════════════════════════════
+  // THEME MANAGEMENT
+  // ═══════════════════════════════════════════════════════════════
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  
+  // Check for saved theme or system preference
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+  } else if (systemPrefersDark) {
+    html.setAttribute('data-theme', 'dark');
+  }
+  
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    showToast(`Switched to ${newTheme} mode`, 'info');
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // MOBILE MENU
+  // ═══════════════════════════════════════════════════════════════
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = hamburgerBtn.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    mobileMenu.setAttribute('aria-hidden', !isOpen);
+  });
+  
+  // Close mobile menu when clicking a link
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // SCROLL EFFECTS
+  // ═══════════════════════════════════════════════════════════════
+  const nav = document.getElementById('mainNav');
+  const scrollProgress = document.getElementById('scrollProgress');
+  const backToTop = document.getElementById('backToTop');
+  
+  let ticking = false;
+  
+  function updateScrollEffects() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    // Scroll progress
+    scrollProgress.style.width = scrollPercent + '%';
+    
+    // Nav background
+    if (scrollTop > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+    
+    // Back to top button
+    if (scrollTop > 500) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+    
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateScrollEffects);
+      ticking = true;
+    }
+  });
+  
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // REVEAL ON SCROLL
+  // ═══════════════════════════════════════════════════════════════
+  const revealElements = document.querySelectorAll('.reveal');
+  
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+  
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // ═══════════════════════════════════════════════════════════════
+  // CAROUSEL
+  // ═══════════════════════════════════════════════════════════════
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+  const playIcon = document.getElementById('playIcon');
+  
+  let currentSlide = 0;
+  let autoplayInterval = null;
+  let isAutoplay = false;
+  const totalSlides = track.children.length;
+  
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+  
+  const dots = dotsContainer.querySelectorAll('.carousel-dot');
+  
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+  
+  function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+  }
+  
+  window.carouselNext = function() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  };
+  
+  window.carouselPrev = function() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  };
+  
+  window.toggleCarouselAutoplay = function() {
+    isAutoplay = !isAutoplay;
+    if (isAutoplay) {
+      autoplayInterval = setInterval(carouselNext, 4000);
+      playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    } else {
+      clearInterval(autoplayInterval);
+      playIcon.innerHTML = '<circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4V8z"/>';
+    }
+  };
+
+  // ═══════════════════════════════════════════════════════════════
+  // COMPARISON SLIDER
+  // ═══════════════════════════════════════════════════════════════
+  const compContainer = document.getElementById('compContainer');
+  const compBefore = document.getElementById('compBefore');
+  const compSlider = document.getElementById('compSlider');
+  
+  let isDragging = false;
+  
+  function updateComparison(x) {
+    const rect = compContainer.getBoundingClientRect();
+    let percent = ((x - rect.left) / rect.width) * 100;
+    percent = Math.max(0, Math.min(100, percent));
+    
+    compBefore.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+    compSlider.style.left = percent + '%';
+  }
+  
+  compContainer.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    updateComparison(e.clientX);
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      updateComparison(e.clientX);
+    }
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+  
+  // Touch support
+  compContainer.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    updateComparison(e.touches[0].clientX);
+  });
+  
+  document.addEventListener('touchmove', (e) => {
+    if (isDragging) {
+      updateComparison(e.touches[0].clientX);
+    }
+  });
+  
+  document.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // FAQ ACCORDION
+  // ═══════════════════════════════════════════════════════════════
+  window.toggleFaq = function(item) {
+    const isOpen = item.classList.contains('open');
+    
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(faq => {
+      faq.classList.remove('open');
+    });
+    
+    // Open clicked if wasn't open
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  };
+
+  // ═══════════════════════════════════════════════════════════════
+  // COPY CODE
+  // ═══════════════════════════════════════════════════════════════
+  window.copyCode = function(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.classList.remove('copied');
+      }, 2000);
+      
+      showToast('Copied to clipboard!', 'success');
+    });
+  };
+
+  // ═══════════════════════════════════════════════════════════════
+  // TOAST NOTIFICATIONS
+  // ═══════════════════════════════════════════════════════════════
+  const toastContainer = document.getElementById('toastContainer');
+  
+  function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    toastContainer.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // MASCOT INTERACTION
+  // ═══════════════════════════════════════════════════════════════
+  const mascot = document.getElementById('mascot');
+  const mascotTip = document.getElementById('mascotTip');
+  
+  const tips = [
+    'Press G to open the gallery!',
+    'Try pressing T to toggle the theme!',
+    'These wallpapers use 0% CPU!',
+    'Each wallpaper is under 15KB!',
+    'You can customize any wallpaper!',
+    'Contributions are welcome!'
+  ];
+  
+  let tipIndex = 0;
+  
+  mascot.addEventListener('click', () => {
+    mascot.classList.add('bounce');
+    mascotTip.textContent = tips[tipIndex];
+    mascotTip.classList.add('show');
+    
+    tipIndex = (tipIndex + 1) % tips.length;
+    
+    setTimeout(() => {
+      mascot.classList.remove('bounce');
+    }, 600);
+    
+    setTimeout(() => {
+      mascotTip.classList.remove('show');
+    }, 3000);
+  });
+  
+  // Show initial tip after delay
+  setTimeout(() => {
+    mascotTip.classList.add('show');
+    setTimeout(() => mascotTip.classList.remove('show'), 4000);
+  }, 3000);
+
+  // ═══════════════════════════════════════════════════════════════
+  // KEYBOARD SHORTCUTS
+  // ═══════════════════════════════════════════════════════════════
+  document.addEventListener('keydown', (e) => {
+    // Ignore if typing in input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    switch(e.key.toLowerCase()) {
+      case 'g':
+        window.location.href = '/project/';
+        break;
+      case 't':
+        themeToggle.click();
+        break;
+    }
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // SMOOTH SCROLL FOR ANCHOR LINKS
+  // ═══════════════════════════════════════════════════════════════
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const navHeight = nav.offsetHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // INITIAL CALLS
+  // ═══════════════════════════════════════════════════════════════
+  updateScrollEffects();
+</script>
+{% endraw %}
