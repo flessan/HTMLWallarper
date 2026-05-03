@@ -485,7 +485,7 @@ permalink: /project/index.html
 <div class="gallery-root">
   <div class="gallery-grid" id="galleryGrid">
     {% for wp in wallpapers %}
-    {%- assign wp_lower = wp.name | downcase -%}
+    {%- set wp_lower = wp.name | lower -%} <!-- FIXED LINE -->
     <div class="wallpaper-card" data-name="{{ wp_lower }}" data-index="{{ loop.index0 }}">
       <div class="card-inner">
         <div class="preview-area">
@@ -498,6 +498,8 @@ permalink: /project/index.html
           </div>
 
           <div class="card-index">#{{ loop.index }}</div>
+          <!-- Note: You might need to update the toggleFav call if you rely on strict casing, 
+               but usually passing the variable is safer. -->
           <button onclick="toggleFav('{{ wp_lower | escape }}', this)" class="fav-btn" data-name="{{ wp_lower }}">
             <svg class="w-4 h-4" style="color:var(--text-light)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
           </button>
